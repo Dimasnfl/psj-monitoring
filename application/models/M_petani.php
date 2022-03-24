@@ -9,7 +9,21 @@ class M_petani extends CI_Model {
 
 		return $data->result();
 	}
-
+	public function login($nik, $password){
+		$md5Password = md5($password);
+		$sql = "SELECT * FROM petani WHERE password = '".$md5Password."' AND NIK = '".$nik."'";
+		$data = $this->db->query($sql);
+		return $data->result();
+	}
+	public function set_access_token($id,$access_token){
+		$sql = "UPDATE petani set access_token = '".$access_token."' WHERE id = ".$id."";
+		$this->db->query($sql);
+	}
+	public function get_user_by_access_token($access_token){
+		$sql = "SELECT * FROM petani WHERE access_token = '".$access_token."'";
+		$data = $this->db->query($sql);
+		return $data->result();
+	}
 	public function select_all() {
 		$sql = " SELECT petani.NIK AS NIK, petani.nama AS petani, petani.telp AS telp, desa.nama AS desa, petani.jenis_sayuran AS jenis_sayuran, petani.luas_lahan AS luas_lahan, petani.foto AS foto 
 		FROM petani, desa

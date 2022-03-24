@@ -11,7 +11,7 @@ class M_sayuran extends CI_Model {
 	}
 
 	public function select_all() {
-		$sql = " SELECT sayuran.id AS id, sayuran.NIK AS NIK, sayuran.foto_sayuran AS foto_sayuran, sayuran.jenis_sayuran AS jenis_sayuran, sayuran.tgl_tanam AS tanam, sayuran.tgl_panen AS panen, sayuran.berat_panen AS berat, harga.harga AS hrg 
+		$sql = " SELECT sayuran.id AS id, sayuran.alamat, sayuran.NIK AS NIK, sayuran.foto_sayuran AS foto_sayuran, sayuran.jenis_sayuran AS jenis_sayuran, sayuran.tgl_tanam AS tanam, sayuran.tgl_panen AS panen, sayuran.berat_panen AS berat, harga.harga AS hrg 
 		FROM sayuran, harga, petani WHERE sayuran.id_harga = harga.id AND sayuran.jenis_sayuran = petani.jenis_sayuran AND sayuran.NIK = petani.NIK";
 
 		$data = $this->db->query($sql);

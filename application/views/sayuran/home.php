@@ -24,8 +24,9 @@
           <th>Jenis Sayuran</th>
           <th>Tanggal Tanam</th>
           <th>Tanggal Panen</th>
-          <th>Berat Panen</th>
           <th>Harga</th>
+          <th>Berat Panen</th>
+          <th>Alamat</th>
           <th style="text-align: center;">Action</th>
         </tr>
       </thead>

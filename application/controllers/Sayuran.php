@@ -13,10 +13,10 @@ class Sayuran extends AUTH_Controller {
 		$data['userdata'] = $this->userdata;
 		$data['dataSayuran'] = $this->M_sayuran->select_all();
 		$data['dataHarga'] = $this->M_harga->select_all();
-
 		$data['page'] = "sayuran";
 		$data['judul'] = "Data Sayuran";
 		$data['deskripsi'] = "Manage Data Sayuran";
+		$data["alamat"] = "Alamat";
 
 		// $data['modal_tambah_sayuran'] = show_my_modal('modals/modal_tambah_sayuran', 'tambah-sayuran', $data);
 
