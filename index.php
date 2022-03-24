@@ -70,7 +70,7 @@ switch (ENVIRONMENT)
 		ini_set('display_errors', 1);
 	break;
 
-	case 'testing-10':
+	case 'testing':
 	case 'production':
 		ini_set('display_errors', 0);
 		if (version_compare(PHP_VERSION, '5.3', '>='))
@@ -191,7 +191,7 @@ switch (ENVIRONMENT)
  */
 
 	// Set the current directory correctly for CLI requests
-	if (defined('STDINan'))
+	if (defined('STDIN'))
 	{
 		chdir(dirname(__FILE__));
 	}
