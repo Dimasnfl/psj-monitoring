@@ -7,11 +7,8 @@
     <!-- <div class="col-md-6">
         <button class="form-control btn btn-primary" data-toggle="modal" data-target="#tambah-desa"><i class="glyphicon glyphicon-plus-sign"></i> Tambah Data</button>
     </div> -->
-    <div class="col-md-6">
+    <div class="col-md-18">
         <a href="<?php echo base_url('Desa/export'); ?>" class="form-control btn btn-default"><i class="glyphicon glyphicon glyphicon-floppy-save"></i> Export Data Excel</a>
-    </div>
-    <div class="col-md-6">
-        <button class="form-control btn btn-default" data-toggle="modal" data-target="#import-desa"><i class="glyphicon glyphicon glyphicon-floppy-open"></i> Import Data Excel</button>
     </div>
   </div>
   <!-- /.box-header -->

@@ -25,28 +25,6 @@
           <span>Home</span>
         </a>
       </li>
-      
-      <!-- <li <?php if ($page == 'pegawai') {echo 'class="active"';} ?>>
-        <a href="<?php echo base_url('Pegawai'); ?>">
-          <i class="fa fa-user"></i>
-          <span>Data Pegawai</span>
-        </a>
-      </li>
-
-      <li <?php if ($page == 'posisi') {echo 'class="active"';} ?>>
-        <a href="<?php echo base_url('Posisi'); ?>">
-          <i class="fa fa-briefcase"></i>
-          <span>Data Posisi</span>
-        </a>
-      </li>
-      
-      <li <?php if ($page == 'kota') {echo 'class="active"';} ?>>
-        <a href="<?php echo base_url('Kota'); ?>">
-          <i class="fa fa-location-arrow"></i>
-          <span>Data Kota</span>
-        </a>
-      </li> -->
-      
     <br>
       <li class="header">PETANI SEJAHTERA</li>
 	  <li <?php if ($page == 'petani') {echo 'class="active"';} ?>>

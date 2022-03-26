@@ -11,7 +11,7 @@
         <a href="<?php echo base_url('Harga/export'); ?>" class="form-control btn btn-default"><i class="glyphicon glyphicon glyphicon-floppy-save"></i> Export Data Excel</a>
     </div>
     <div class="col-md-6">
-        <button class="form-control btn btn-default" data-toggle="modal" data-target="#import-harga"><i class="glyphicon glyphicon glyphicon-floppy-open"></i> Import Data Excel</button>
+        <a href="<?php echo base_url('Harga/export'); ?>" class="form-control btn btn-default"><i class="input"></i> Tambah Data Sayuran</a>
     </div>
   </div>
   <!-- /.box-header -->
