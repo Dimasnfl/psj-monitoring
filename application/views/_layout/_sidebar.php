@@ -54,7 +54,20 @@
           <span>Data Desa</span>
         </a>
       </li>
-      
+     
+      <li <?php if ($page == '') {echo 'class="active"';} ?>>
+        <a href="<?php echo base_url(''); ?>">
+          <i class="fa fa-location-arrow"></i>
+          <span>Data Kurir</span>
+        </a>
+      </li>
+     
+      <li <?php if ($page == '') {echo 'class="active"';} ?>>
+        <a href="<?php echo base_url(''); ?>">
+          <i class="fa fa-cart-plus"></i>
+          <span>Data Transaksi</span>
+        </a>
+      </li> 
     </ul>
     <!-- /.sidebar-menu -->
   </section>

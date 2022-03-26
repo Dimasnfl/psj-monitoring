@@ -51,7 +51,7 @@ class Desa extends AUTH_Controller {
 		$data['userdata'] 	= $this->userdata;
 
 		$id 				= trim($_POST['id']);
-		$data['dataDesa'] 	= $this->M_desa->select_by_id($id);
+		$data['dataDesa'] 	= $this->M_desa->select_by_id($id_desa);
 
 		echo show_my_modal('modals/modal_update_desa', 'update-desa', $data);
 	}
@@ -80,7 +80,7 @@ class Desa extends AUTH_Controller {
 
 	public function delete() {
 		$id = $_POST['id'];
-		$result = $this->M_desa->delete($id);
+		$result = $this->M_desa->delete($id_desa);
 		
 		if ($result > 0) {
 			echo show_succ_msg('Data desa Berhasil dihapus', '20px');
@@ -92,10 +92,10 @@ class Desa extends AUTH_Controller {
 	public function detail() {
 		$data['userdata'] 	= $this->userdata;
 
-		$id 				= trim($_POST['id']);
-		$data['desa'] = $this->M_desa->select_by_id($id);
+		$id_desa 				= trim($_POST['id']);
+		$data['desa'] = $this->M_desa->select_by_id($id_desa);
 		$data['jumlahDesa'] = $this->M_desa->total_rows();
-		$data['dataDesa'] = $this->M_desa->select_by_petani($id);
+		$data['dataDesa'] = $this->M_desa->select_by_petani($id_desa);
 
 		echo show_my_modal('modals/modal_detail_desa', 'detail-desa', $data, 'lg');
 	}

@@ -11,7 +11,7 @@
         <a href="<?php echo base_url('Harga/export'); ?>" class="form-control btn btn-default"><i class="glyphicon glyphicon glyphicon-floppy-save"></i> Export Data Excel</a>
     </div>
     <div class="col-md-6">
-        <a href="<?php echo base_url('Harga/export'); ?>" class="form-control btn btn-default"><i class="input"></i> Tambah Data Sayuran</a>
+        <a href="<?php echo base_url('Desa/export'); ?>" class="form-control btn btn-default"><i class="glyphicon glyphicon-plus-sign"></i> Tambah Data Harga Sayuran</a>
     </div>
   </div>
   <!-- /.box-header -->
