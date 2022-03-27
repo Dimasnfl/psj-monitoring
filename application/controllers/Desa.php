@@ -51,7 +51,7 @@ class Desa extends AUTH_Controller {
 		$data['userdata'] 	= $this->userdata;
 
 		$id 				= trim($_POST['id']);
-		$data['dataDesa'] 	= $this->M_desa->select_by_id($id_desa);
+		$data['dataDesa'] 	= $this->M_desa->select_by_id($id);
 
 		echo show_my_modal('modals/modal_update_desa', 'update-desa', $data);
 	}
