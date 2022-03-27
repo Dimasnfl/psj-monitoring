@@ -8,7 +8,7 @@
         <button class="form-control btn btn-primary" data-toggle="modal" data-target="#tambah-sayuran"><i class="glyphicon glyphicon-plus-sign"></i> Tambah Data</button>
     </div> -->
     <div class="col-md-18">
-        <a href="<?php echo base_url('Sayuran/export'); ?>" class="form-control btn btn-default"><i class="glyphicon glyphicon glyphicon-floppy-save"></i> Export Data Excel</a>
+        <a href="<?php echo base_url('Sayuran/export'); ?>" class="form-control btn btn-default"><i class="glyphicon glyphicon glyphicon-floppy-open"></i> Export Data Excel</a>
     </div>
   </div>
   <!-- /.box-header -->

@@ -1,6 +1,6 @@
 <div class="col-md-12 well">
   <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-  <h3 style="display:block; text-align:center;"><i class="fa fa-briefcase"></i> List Petani Yang Menjual Sayuran: <b><?php echo $harga->jenis_sayuran; ?></b></h3>
+  <h3 style="display:block; text-align:center;"><i class="fa fa-cart-plus"></i> List Petani Yang Menjual Sayuran: <b><?php echo $harga->jenis_sayuran; ?></b></h3>
 
   <div class="box box-body">
       <table id="tabel-detail" class="table table-bordered table-striped">

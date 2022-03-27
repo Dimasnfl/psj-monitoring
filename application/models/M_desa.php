@@ -29,23 +29,6 @@ class M_desa extends CI_Model {
 
 		return $data->result();
 	}
-	// public function select_by_id($id) {
-	// 	$sql = "SELECT * FROM kota WHERE id = '{$id}'";
-
-	// 	$data = $this->db->query($sql);
-
-	// 	return $data->row();
-	// }
-
-	// public function select_by_pegawai($id) {
-	// 	$sql = " SELECT pegawai.id AS id, pegawai.nama AS pegawai, pegawai.telp AS telp, kota.nama AS kota, kelamin.nama AS kelamin, posisi.nama AS posisi 
-	// 	FROM pegawai, kota, kelamin, posisi 
-	// 	WHERE pegawai.id_kelamin = kelamin.id AND pegawai.id_posisi = posisi.id AND pegawai.id_kota = kota.id AND pegawai.id_kota={$id}";
-
-	// 	$data = $this->db->query($sql);
-
-	// 	return $data->result();
-	// }
 
 	public function insert($data) {
 		$sql = "INSERT INTO desa VALUES('','" .$data['desa'] ."')";

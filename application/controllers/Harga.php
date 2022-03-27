@@ -12,7 +12,7 @@ class Harga extends AUTH_Controller {
 		$data['dataHarga'] = $this->M_harga->select_all();
 
 		$data['page'] 		= "harga";
-		$data['judul'] 		= "Data Harga";
+		$data['judul'] 		= "Data Harga Sayuran";
 		$data['deskripsi'] 	= "Manage Data Harga";
 
 		$data['modal_tambah_harga'] = show_my_modal('modals/modal_tambah_harga', 'tambah-harga', $data);
@@ -28,6 +28,8 @@ class Harga extends AUTH_Controller {
 	public function prosesTambah() {
 		$this->form_validation->set_rules('jenis_sayuran', 'jenis_sayuran', 'trim|required');
 		$this->form_validation->set_rules('harga', 'harga', 'trim|required');
+		$this->form_validation->set_rules('tanggal', 'tanggal', 'trim|required');
+
 
 
 		$data 	= $this->input->post();
@@ -61,6 +63,7 @@ class Harga extends AUTH_Controller {
 	public function prosesUpdate() {
 		$this->form_validation->set_rules('jenis_sayuran', 'jenis_sayuran', 'trim|required');
 		$this->form_validation->set_rules('harga', 'harga', 'trim|required');
+		
 
 
 		$data 	= $this->input->post();

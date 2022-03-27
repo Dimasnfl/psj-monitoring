@@ -6,9 +6,9 @@
   <form id="form-tambah-desa" method="POST">
     <div class="input-group form-group">
       <span class="input-group-addon" id="sizing-addon2">
-        <i class="glyphicon glyphicon-user"></i>
+        <i class="glyphicon glyphicon-home"></i>
       </span>
-      <input type="text" class="form-control" placeholder="Nama Desa" name="desa" aria-describedby="sizing-addon2">
+      <input type="text" class="form-control" placeholder="Masukkan Nama Desa" name="desa" aria-describedby="sizing-addon2">
     </div>
     <div class="form-group">
       <div class="col-md-12">

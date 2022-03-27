@@ -36,14 +36,14 @@
 	  
 	  <li <?php if ($page == 'sayuran') {echo 'class="active"';} ?>>
           <a href="<?php echo base_url('sayuran'); ?>">
-          <i class="fa fa-reorder"></i>
+          <i class="fa fa-leaf"></i>
           <span>Data Sayuran</span>
         </a>
       </li>
 	  
 	  <li <?php if ($page == 'harga') {echo 'class="active"';} ?>>
           <a href="<?php echo base_url('harga'); ?>">
-          <i class="fa fa-cart-plus"></i>
+          <i class="fa fa-shopping-cart"></i>
           <span>Data Harga Sayuran</span>
         </a>
       </li>
@@ -57,7 +57,7 @@
      
       <li <?php if ($page == '') {echo 'class="active"';} ?>>
         <a href="<?php echo base_url(''); ?>">
-          <i class="fa fa-location-arrow"></i>
+          <i class="fa fa-car"></i>
           <span>Data Kurir</span>
         </a>
       </li>

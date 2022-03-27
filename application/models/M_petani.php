@@ -44,13 +44,6 @@ class M_petani extends CI_Model {
 		return $data->row();
 	}
 
-	// public function select_by_posisi($id) {
-	// 	$sql = "SELECT COUNT(*) AS jml FROM pegawai WHERE id_posisi = {$id}";
-
-	// 	$data = $this->db->query($sql);
-
-	// 	return $data->row();
-	// }
 
 	public function select_by_desa($id) {
 		$sql = "SELECT COUNT(*) AS jml FROM petani WHERE id_desa = {$id}";
@@ -61,7 +54,7 @@ class M_petani extends CI_Model {
 	}
 
 	// public function update($data) {
-	// 	$sql = "UPDATE pegawai SET nama='" .$data['nama'] ."', tgl_lahir='" .$data['tgl_lahir'] ."', jenis_sayuran=" .$data['jenis_sayuran'] .", luas_lahan=" .$data['luas_lahan'] .", foto=" .$data['foto'] ." WHERE NIK='" .$data['NIK'] ."'";
+	// 	$sql = "UPDATE petani SET nama='" .$data['nama'] ."', tgl_lahir='" .$data['tgl_lahir'] ."', jenis_sayuran=" .$data['jenis_sayuran'] .", luas_lahan=" .$data['luas_lahan'] .", foto=" .$data['foto'] ." WHERE NIK='" .$data['NIK'] ."'";
 
 	// 	$this->db->query($sql);
 
@@ -69,7 +62,7 @@ class M_petani extends CI_Model {
 	// }
 
 	 public function delete($id) {
-	 	$sql = "DELETE FROM petani WHERE id='" .$id ."'";
+	 	$sql = "DELETE FROM petani WHERE NIK='" .$id ."'";
 
 	 	$this->db->query($sql);
 

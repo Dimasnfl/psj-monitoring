@@ -80,7 +80,7 @@ class Desa extends AUTH_Controller {
 
 	public function delete() {
 		$id = $_POST['id'];
-		$result = $this->M_desa->delete($id_desa);
+		$result = $this->M_desa->delete($id);
 		
 		if ($result > 0) {
 			echo show_succ_msg('Data desa Berhasil dihapus', '20px');

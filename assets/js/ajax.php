@@ -10,8 +10,8 @@
 
 	window.onload = function() {
 		tampilPetani();
-		tampilDesa();
 		tampilSayuran();
+		tampilDesa();
 		tampilHarga();
 		<?php
 			if ($this->session->flashdata('msg') != '') {
@@ -139,6 +139,112 @@
 	  $('.form-msg').html('');
 	})
 
+	
+
+	//sayuran
+	function tampilSayuran() {
+		$.get('<?php echo base_url('Sayuran/tampil'); ?>', function(data) {
+			MyTable.fnDestroy();
+			$('#data-sayuran').html(data);
+			refresh();
+		});
+	}
+
+	var id_sayuran;
+	$(document).on("click", ".konfirmasiHapus-sayuran", function() {
+		id_sayuran = $(this).attr("data-id");
+	})
+	$(document).on("click", ".hapus-dataSayuran", function() {
+		var id = id_sayuran;
+		
+		$.ajax({
+			method: "POST",
+			url: "<?php echo base_url('Sayuran/delete'); ?>",
+			data: "id=" +id
+		})
+		.done(function(data) {
+			$('#konfirmasiHapus').modal('hide');
+			tampilSayuran();
+			$('.msg').html(data);
+			effect_msg();
+		})
+	})
+
+	$(document).on("click", ".update-dataSayuran", function() {
+		var id = $(this).attr("data-id");
+		
+		$.ajax({
+			method: "POST",
+			url: "<?php echo base_url('Sayuran/update'); ?>",
+			data: "id=" +id
+		})
+		.done(function(data) {
+			$('#tempat-modal').html(data);
+			$('#update-sayuran').modal('show');
+		})
+	})
+
+	$('#form-tambah-sayuran').submit(function(e) {
+		var data = $(this).serialize();
+
+		$.ajax({
+			method: 'POST',
+			url: '<?php echo base_url('Sayuran/prosesTambah'); ?>',
+			data: data
+		})
+		.done(function(data) {
+			var out = jQuery.parseJSON(data);
+
+			tampilSayuran();
+			if (out.status == 'form') {
+				$('.form-msg').html(out.msg);
+				effect_msg_form();
+			} else {
+				document.getElementById("form-tambah-sayuran").reset();
+				$('#tambah-sayuran').modal('hide');
+				$('.msg').html(out.msg);
+				effect_msg();
+			}
+		})
+		
+		e.preventDefault();
+	});
+
+	$(document).on('submit', '#form-update-sayuran', function(e){
+		var data = $(this).serialize();
+
+		$.ajax({
+			method: 'POST',
+			url: '<?php echo base_url('Sayuran/prosesUpdate'); ?>',
+			data: data
+		})
+		.done(function(data) {
+			var out = jQuery.parseJSON(data);
+
+			tampilSayuran();
+			if (out.status == 'form') {
+				$('.form-msg').html(out.msg);
+				effect_msg_form();
+			} else {
+				document.getElementById("form-update-sayuran").reset();
+				$('#update-sayuran').modal('hide');
+				$('.msg').html(out.msg);
+				effect_msg();
+			}
+		})
+		
+		e.preventDefault();
+	});
+
+	$('#tambah-sayuran').on('hidden.bs.modal', function () {
+	  $('.form-msg').html('');
+	})
+
+	$('#update-sayuran').on('hidden.bs.modal', function () {
+	  $('.form-msg').html('');
+	})
+
+
 	//Desa
 	function tampilDesa() {
 		$.get('<?php echo base_url('Desa/tampil'); ?>', function(data) {
@@ -265,110 +371,6 @@
 	})
 
 
-	//sayuran
-	function tampilSayuran() {
-		$.get('<?php echo base_url('Sayuran/tampil'); ?>', function(data) {
-			MyTable.fnDestroy();
-			$('#data-sayuran').html(data);
-			refresh();
-		});
-	}
-
-	var id_sayuran;
-	$(document).on("click", ".konfirmasiHapus-sayuran", function() {
-		id_sayuran = $(this).attr("data-id");
-	})
-	$(document).on("click", ".hapus-dataSayuran", function() {
-		var id = id_sayuran;
-		
-		$.ajax({
-			method: "POST",
-			url: "<?php echo base_url('Sayuran/delete'); ?>",
-			data: "id=" +id
-		})
-		.done(function(data) {
-			$('#konfirmasiHapus').modal('hide');
-			tampilSayuran();
-			$('.msg').html(data);
-			effect_msg();
-		})
-	})
-
-	$(document).on("click", ".update-dataSayuran", function() {
-		var id = $(this).attr("data-id");
-		
-		$.ajax({
-			method: "POST",
-			url: "<?php echo base_url('Sayuran/update'); ?>",
-			data: "id=" +id
-		})
-		.done(function(data) {
-			$('#tempat-modal').html(data);
-			$('#update-sayuran').modal('show');
-		})
-	})
-
-	$('#form-tambah-sayuran').submit(function(e) {
-		var data = $(this).serialize();
-
-		$.ajax({
-			method: 'POST',
-			url: '<?php echo base_url('Sayuran/prosesTambah'); ?>',
-			data: data
-		})
-		.done(function(data) {
-			var out = jQuery.parseJSON(data);
-
-			tampilSayuran();
-			if (out.status == 'form') {
-				$('.form-msg').html(out.msg);
-				effect_msg_form();
-			} else {
-				document.getElementById("form-tambah-sayuran").reset();
-				$('#tambah-sayuran').modal('hide');
-				$('.msg').html(out.msg);
-				effect_msg();
-			}
-		})
-		
-		e.preventDefault();
-	});
-
-	$(document).on('submit', '#form-update-sayuran', function(e){
-		var data = $(this).serialize();
-
-		$.ajax({
-			method: 'POST',
-			url: '<?php echo base_url('Sayuran/prosesUpdate'); ?>',
-			data: data
-		})
-		.done(function(data) {
-			var out = jQuery.parseJSON(data);
-
-			tampilSayuran();
-			if (out.status == 'form') {
-				$('.form-msg').html(out.msg);
-				effect_msg_form();
-			} else {
-				document.getElementById("form-update-sayuran").reset();
-				$('#update-sayuran').modal('hide');
-				$('.msg').html(out.msg);
-				effect_msg();
-			}
-		})
-		
-		e.preventDefault();
-	});
-
-	$('#tambah-sayuran').on('hidden.bs.modal', function () {
-	  $('.form-msg').html('');
-	})
-
-	$('#update-sayuran').on('hidden.bs.modal', function () {
-	  $('.form-msg').html('');
-	})
-
-
 
 	//Harga
 	function tampilHarga() {
@@ -435,8 +437,8 @@
 		})
 	})
 
-	$('#form-tambah-harga').submit(function(e) {
-		var data = $(this).serialize();
+$('#form-tambah-harga').submit(function(e) {
+	var data = $(this).serialize();
 
 		$.ajax({
 			method: 'POST',
@@ -459,7 +461,7 @@
 		})
 		
 		e.preventDefault();
-	});
+});
 
 	$(document).on('submit', '#form-update-harga', function(e){
 		var data = $(this).serialize();

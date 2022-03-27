@@ -36,14 +36,6 @@ class M_sayuran extends CI_Model {
 		return $data->row();
 	}
 
-	// public function update($data) {
-	// 	$sql = "UPDATE pegawai SET nama='" .$data['nama'] ."', tgl_lahir='" .$data['tgl_lahir'] ."', jenis_sayuran=" .$data['jenis_sayuran'] .", luas_lahan=" .$data['luas_lahan'] .", foto=" .$data['foto'] ." WHERE NIK='" .$data['NIK'] ."'";
-
-	// 	$this->db->query($sql);
-
-	// 	return $this->db->affected_rows();
-	// }
-
 	public function delete($id) {
 		$sql = "DELETE FROM sayuran WHERE id='" .$id ."'";
 
@@ -51,10 +43,6 @@ class M_sayuran extends CI_Model {
 
 		return $this->db->affected_rows();
 	}
-
-
-
-
 
 
 	public function insert($data) {

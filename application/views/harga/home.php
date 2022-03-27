@@ -4,14 +4,11 @@
 
 <div class="box">
   <div class="box-header">
-    <!-- <div class="col-md-6">
-        <button class="form-control btn btn-primary" data-toggle="modal" data-target="#tambah-harga"><i class="glyphicon glyphicon-plus-sign"></i> Tambah Data</button>
-    </div> -->
-    <div class="col-md-6">
-        <a href="<?php echo base_url('Harga/export'); ?>" class="form-control btn btn-default"><i class="glyphicon glyphicon glyphicon-floppy-save"></i> Export Data Excel</a>
+    <div class="col-md-6" style="padding: 0;">
+      <button class="form-control btn btn-primary" data-toggle="modal" data-target="#tambah-harga"><i class="glyphicon glyphicon-plus-sign"></i> Tambah Data</button>
     </div>
     <div class="col-md-6">
-        <a href="<?php echo base_url('Desa/export'); ?>" class="form-control btn btn-default"><i class="glyphicon glyphicon-plus-sign"></i> Tambah Data Harga Sayuran</a>
+        <a href="<?php echo base_url('Harga/export'); ?>" class="form-control btn btn-default"><i class="glyphicon glyphicon glyphicon-floppy-open"></i> Export Data Excel</a>
     </div>
   </div>
   <!-- /.box-header -->
@@ -22,6 +19,8 @@
           <th>No</th>
           <th>Jenis Sayuran</th>
           <th>Harga</th>
+          <th>Tanggal Harga Ditetapkan</th>
+
           <th style="text-align: center;">Action</th>
         </tr>
       </thead>
@@ -32,8 +31,7 @@
   </div>
 </div>
 
-<!-- <?php echo $modal_tambah_harga; ?> -->
-
+<?php echo $modal_tambah_harga; ?>
 <div id="tempat-modal"></div>
 
 <?php show_my_confirm('konfirmasiHapus', 'hapus-dataHarga', 'Hapus Data Ini?', 'Ya, Hapus Data Ini'); ?>

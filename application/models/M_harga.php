@@ -29,7 +29,7 @@ class M_harga extends CI_Model {
 	}
 
 	public function insert($data) {
-		$sql = "INSERT INTO harga VALUES('','" .$data['harga'] ."')";
+		$sql = "INSERT INTO harga VALUES('','" .$data['jenis_sayuran'] ."','" .$data['harga'] ."','" .$data['tanggal'] ."')";
 
 		$this->db->query($sql);
 
