@@ -20,8 +20,6 @@
           <th>Nama</th>
           <th>No Telp</th>
           <th>Asal Desa</th>
-          <th>Jenis Sayuran</th>
-          <th>Luas Lahan</th>
           <th>Foto</th>
           <th style="text-align: center;">Action</th>
         </tr>

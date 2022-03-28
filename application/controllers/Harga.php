@@ -4,14 +4,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Harga extends AUTH_Controller {
 	public function __construct() {
 		parent::__construct();
-		$this->load->model('M_harga');
+		$this->load->model('M_tipe_produk');
 	}
 
 	public function index() {
 		$data['userdata'] 	= $this->userdata;
-		$data['dataHarga'] = $this->M_harga->select_all();
+		$data['datatipe_produk'] = $this->M_tipe_produk->select_all();
 
-		$data['page'] 		= "harga";
+		$data['page'] 		= "Harga";
 		$data['judul'] 		= "Data Harga Sayuran";
 		$data['deskripsi'] 	= "Manage Data Harga";
 
@@ -21,27 +21,27 @@ class Harga extends AUTH_Controller {
 	}
 
 	public function tampil() {
-		$data['dataHarga'] = $this->M_harga->select_all();
+		$data['datatipe_produk'] = $this->M_tipe_produk->select_all();
 		$this->load->view('harga/list_data', $data);
 	}
 
 	public function prosesTambah() {
 		$this->form_validation->set_rules('jenis_sayuran', 'jenis_sayuran', 'trim|required');
-		$this->form_validation->set_rules('harga', 'harga', 'trim|required');
+		$this->form_validation->set_rules('tipe_produk', 'tipe_produk', 'trim|required');
 		$this->form_validation->set_rules('tanggal', 'tanggal', 'trim|required');
 
 
 
 		$data 	= $this->input->post();
 		if ($this->form_validation->run() == TRUE) {
-			$result = $this->M_harga->insert($data);
+			$result = $this->M_tipe_produk->insert($data);
 
 			if ($result > 0) {
 				$out['status'] = '';
-				$out['msg'] = show_succ_msg('Data Harga Berhasil ditambahkan', '20px');
+				$out['msg'] = show_succ_msg('Data tipe_produk Berhasil ditambahkan', '20px');
 			} else {
 				$out['status'] = '';
-				$out['msg'] = show_err_msg('Data Harga Gagal ditambahkan', '20px');
+				$out['msg'] = show_err_msg('Data tipe_produk Gagal ditambahkan', '20px');
 			}
 		} else {
 			$out['status'] = 'form';
@@ -55,27 +55,27 @@ class Harga extends AUTH_Controller {
 		$data['userdata'] 	= $this->userdata;
 
 		$id 				= trim($_POST['id']);
-		$data['dataHarga'] = $this->M_harga->select_by_id($id);
+		$data['datatipe_produk'] = $this->M_tipe_produk->select_by_id($id);
 
-		echo show_my_modal('modals/modal_update_harga', 'update-harga', $data);
+		echo show_my_modal('modals/modal_update_tipe_produk', 'update-tipe_produk', $data);
 	}
 
 	public function prosesUpdate() {
 		$this->form_validation->set_rules('jenis_sayuran', 'jenis_sayuran', 'trim|required');
-		$this->form_validation->set_rules('harga', 'harga', 'trim|required');
+		$this->form_validation->set_rules('tipe_produk', 'tipe_produk', 'trim|required');
 		
 
 
 		$data 	= $this->input->post();
 		if ($this->form_validation->run() == TRUE) {
-			$result = $this->M_harga->update($data);
+			$result = $this->M_tipe_produk->update($data);
 
 			if ($result > 0) {
 				$out['status'] = '';
-				$out['msg'] = show_succ_msg('Data Harga Berhasil diupdate', '20px');
+				$out['msg'] = show_succ_msg('Data tipe_produk Berhasil diupdate', '20px');
 			} else {
 				$out['status'] = '';
-				$out['msg'] = show_succ_msg('Data Harga Gagal diupdate', '20px');
+				$out['msg'] = show_succ_msg('Data tipe_produk Gagal diupdate', '20px');
 			}
 		} else {
 			$out['status'] = 'form';
@@ -87,12 +87,12 @@ class Harga extends AUTH_Controller {
 
 	public function delete() {
 		$id = $_POST['id'];
-		$result = $this->M_harga->delete($id);
+		$result = $this->M_tipe_produk->delete($id);
 		
 		if ($result > 0) {
-			echo show_succ_msg('Data Harga Berhasil dihapus', '20px');
+			echo show_succ_msg('Data tipe_produk Berhasil dihapus', '20px');
 		} else {
-			echo show_err_msg('Data Harga Gagal dihapus', '20px');
+			echo show_err_msg('Data tipe_produk Gagal dihapus', '20px');
 		}
 	}
 
@@ -100,10 +100,10 @@ class Harga extends AUTH_Controller {
 		$data['userdata'] 	= $this->userdata;
 
 		$id 				= trim($_POST['id']);
-		$data['harga'] = $this->M_harga->select_by_id($id);
-		$data['dataHarga'] = $this->M_harga->select_by_sayuran($id);
+		$data['tipe_produk'] = $this->M_tipe_produk->select_by_id($id);
+		$data['datatipe_produk'] = $this->M_tipe_produk->select_by_sayuran($id);
 
-		echo show_my_modal('modals/modal_detail_harga', 'detail-harga', $data, 'lg');
+		echo show_my_modal('modals/modal_detail_tipe_produk', 'detail-tipe_produk', $data, 'lg');
 	}
 
 	public function export() {
@@ -112,7 +112,7 @@ class Harga extends AUTH_Controller {
 		include_once './assets/phpexcel/Classes/PHPExcel.php';
 		$objPHPExcel = new PHPExcel();
 
-		$data = $this->M_harga->select_all();
+		$data = $this->M_tipe_produk->select_all();
 
 		$objPHPExcel = new PHPExcel(); 
 		$objPHPExcel->setActiveSheetIndex(0); 
@@ -120,23 +120,23 @@ class Harga extends AUTH_Controller {
 
 		$objPHPExcel->getActiveSheet()->SetCellValue('A'.$rowCount, "ID"); 
 		$objPHPExcel->getActiveSheet()->SetCellValue('B'.$rowCount, "Jenis Sayuran");
-		$objPHPExcel->getActiveSheet()->SetCellValue('C'.$rowCount, "Harga Per Ton");
+		$objPHPExcel->getActiveSheet()->SetCellValue('C'.$rowCount, "tipe_produk Per Ton");
 		$objPHPExcel->getActiveSheet()->SetCellValue('D'.$rowCount, "Tanggal Update");
 		$rowCount++;
 
 		foreach($data as $value){
 		    $objPHPExcel->getActiveSheet()->SetCellValue('A'.$rowCount, $value->id); 
 		    $objPHPExcel->getActiveSheet()->SetCellValue('B'.$rowCount, $value->jenis_sayuran);
-			$objPHPExcel->getActiveSheet()->SetCellValue('C'.$rowCount, $value->harga);  
+			$objPHPExcel->getActiveSheet()->SetCellValue('C'.$rowCount, $value->tipe_produk);  
 			$objPHPExcel->getActiveSheet()->SetCellValue('D'.$rowCount, $value->tanggal);  
 		    $rowCount++; 
 		} 
 
 		$objWriter = new PHPExcel_Writer_Excel2007($objPHPExcel); 
-		$objWriter->save('./assets/excel/Data Harga.xlsx'); 
+		$objWriter->save('./assets/excel/Data tipe_produk.xlsx'); 
 
 		$this->load->helper('download');
-		force_download('./assets/excel/Data Harga.xlsx', NULL);
+		force_download('./assets/excel/Data tipe_produk.xlsx', NULL);
 	}
 
 	public function import() {
@@ -168,7 +168,7 @@ class Harga extends AUTH_Controller {
 				$index = 0;
 				foreach ($sheetData as $key => $value) {
 					if ($key != 1) {
-						$check = $this->M_harga->check_jenis_sayuran($value['B']);
+						$check = $this->M_tipe_produk->check_jenis_sayuran($value['B']);
 
 						if ($check != 1) {
 							$resultData[$index]['jenis_sayuran'] = ucwords($value['B']);
@@ -180,14 +180,14 @@ class Harga extends AUTH_Controller {
 				unlink('./assets/excel/' .$data['file_name']);
 
 				if (count($resultData) != 0) {
-					$result = $this->M_harga->insert_batch($resultData);
+					$result = $this->M_tipe_produk->insert_batch($resultData);
 					if ($result > 0) {
-						$this->session->set_flashdata('msg', show_succ_msg('Data Harga Berhasil diimport ke database'));
-						redirect('Harga');
+						$this->session->set_flashdata('msg', show_succ_msg('Data tipe_produk Berhasil diimport ke database'));
+						redirect('tipe_produk');
 					}
 				} else {
-					$this->session->set_flashdata('msg', show_msg('Data Harga Gagal diimport ke database (Data Sudah terupdate)', 'warning', 'fa-warning'));
-					redirect('Harga');
+					$this->session->set_flashdata('msg', show_msg('Data tipe_produk Gagal diimport ke database (Data Sudah terupdate)', 'warning', 'fa-warning'));
+					redirect('tipe_produk');
 				}
 
 			}
@@ -195,5 +195,5 @@ class Harga extends AUTH_Controller {
 	}
 }
 
-/* End of file Harga.php */
-/* Location: ./application/controllers/Harga.php */
+/* End of file tipe_produk.php */
+/* Location: ./application/controllers/tipe_produk.php */

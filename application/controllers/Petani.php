@@ -4,16 +4,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Petani extends AUTH_Controller {
 	public function __construct() {
 		parent::__construct();
-		$this->load->model('M_petani');
+		$this->load->model('M_user');
 		$this->load->model('M_desa');
 	}
-
 	public function index() {
 		$data['userdata'] = $this->userdata;
-		$data['dataPetani'] = $this->M_petani->select_all();
+		$data['dataPetani'] = $this->M_user->select_all();
 		$data['dataDesa'] = $this->M_desa->select_all();
 
-		$data['page'] = "petani";
+		$data['page'] = "Petani";
 		$data['judul'] = "Data Petani";
 		$data['deskripsi'] = "Manage Data Petani";
 
@@ -22,19 +21,19 @@ class Petani extends AUTH_Controller {
 	}
 
 	public function tampil() {
-		$data['dataPetani'] = $this->M_petani->select_all();
+		$data['dataPetani'] = $this->M_user->select_all();
 		$this->load->view('petani/list_data', $data);
 	}
 
 
 	public function delete() {
 	$id = $_POST['id'];
-	$result = $this->M_petani->delete($id);
+	$result = $this->M_user->delete($id);
 
 	if ($result > 0) {
-	 		echo show_succ_msg('Data Petani Berhasil dihapus', '20px');
+	 		echo show_succ_msg('Data user Berhasil dihapus', '20px');
 	 	} else {
-	 		echo show_err_msg('Data Petani Gagal dihapus', '20px');
+	 		echo show_err_msg('Data user Gagal dihapus', '20px');
 	 	}
 	 }
 
@@ -44,7 +43,7 @@ class Petani extends AUTH_Controller {
 		include_once './assets/phpexcel/Classes/PHPExcel.php';
 		$objPHPExcel = new PHPExcel();
 
-		$data = $this->M_petani->select_all_petani();
+		$data = $this->M_user->select_all_user();
 
 		$objPHPExcel = new PHPExcel(); 
 		$objPHPExcel->setActiveSheetIndex(0); 
@@ -71,10 +70,10 @@ class Petani extends AUTH_Controller {
 		} 
 
 		$objWriter = new PHPExcel_Writer_Excel2007($objPHPExcel); 
-		$objWriter->save('./assets/excel/Data Petani.xlsx'); 
+		$objWriter->save('./assets/excel/Data user.xlsx'); 
 
 		$this->load->helper('download');
-		force_download('./assets/excel/Data Petani.xlsx', NULL);
+		force_download('./assets/excel/Data user.xlsx', NULL);
 	}
 
 	public function import() {
@@ -107,7 +106,7 @@ class Petani extends AUTH_Controller {
 				foreach ($sheetData as $key => $value) {
 					if ($key != 1) {
 						$NIK = md5(DATE('ymdhms').rand());
-						$check = $this->M_petani->check_nama($value['B']);
+						$check = $this->M_user->check_nama($value['B']);
 
 						if ($check != 1) {
 							$resultData[$index]['NIK'] = $NIK;
@@ -125,14 +124,14 @@ class Petani extends AUTH_Controller {
 				unlink('./assets/excel/' .$data['file_name']);
 
 				if (count($resultData) != 0) {
-					$result = $this->M_petani->insert_batch($resultData);
+					$result = $this->M_user->insert_batch($resultData);
 					if ($result > 0) {
-						$this->session->set_flashdata('msg', show_succ_msg('Data Petani Berhasil diimport ke database'));
-						redirect('Petani');
+						$this->session->set_flashdata('msg', show_succ_msg('Data user Berhasil diimport ke database'));
+						redirect('user');
 					}
 				} else {
-					$this->session->set_flashdata('msg', show_msg('Data Petani Gagal diimport ke database (Data Sudah terupdate)', 'warning', 'fa-warning'));
-					redirect('Petani');
+					$this->session->set_flashdata('msg', show_msg('Data user Gagal diimport ke database (Data Sudah terupdate)', 'warning', 'fa-warning'));
+					redirect('user');
 				}
 
 			}
@@ -140,5 +139,5 @@ class Petani extends AUTH_Controller {
 	}
 }
 
-/* End of file Petani.php */
-/* Location: ./application/controllers/Petani.php */
+/* End of file user.php */
+/* Location: ./application/controllers/user.php */

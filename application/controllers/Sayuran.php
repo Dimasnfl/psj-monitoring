@@ -4,16 +4,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Sayuran extends AUTH_Controller {
 	public function __construct() {
 		parent::__construct();
-		$this->load->model('M_sayuran');
-		$this->load->model('M_harga');
-
+		$this->load->model('M_produk');
+		$this->load->model('M_tipe_produk');
 	}
 
 	public function index() {
 		$data['userdata'] = $this->userdata;
-		$data['dataSayuran'] = $this->M_sayuran->select_all();
-		$data['dataHarga'] = $this->M_harga->select_all();
-		$data['page'] = "sayuran";
+		$data['data_sayuran'] = $this->M_produk->select_all();
+		$data['datatipe_sayuran'] = $this->M_tipe_produk->select_all();
+		$data['page'] = "Sayuran";
 		$data['judul'] = "Data Sayuran";
 		$data['deskripsi'] = "Manage Data Sayuran";
 		$data["alamat"] = "Alamat";
@@ -22,14 +21,14 @@ class Sayuran extends AUTH_Controller {
 	}
 
 	public function tampil() {
-		$data['dataSayuran'] = $this->M_sayuran->select_all();
+		$data['dataSayuran'] = $this->M_produk->select_all();
 		$this->load->view('sayuran/list_data', $data);
 	}
 
 
 	public function delete() {
 		$id = $_POST['id'];
-		$result = $this->M_sayuran->delete($id);
+		$result = $this->M_produk->delete($id);
 
 		if ($result > 0) {
 			echo show_succ_msg('Data Sayuran Berhasil dihapus', '20px');
@@ -44,7 +43,7 @@ class Sayuran extends AUTH_Controller {
 		include_once './assets/phpexcel/Classes/PHPExcel.php';
 		$objPHPExcel = new PHPExcel();
 
-		$data = $this->M_sayuran->select_all_sayuran();
+		$data = $this->M_produk->select_all_produk();
 
 		$objPHPExcel = new PHPExcel(); 
 		$objPHPExcel->setActiveSheetIndex(0); 
@@ -52,31 +51,31 @@ class Sayuran extends AUTH_Controller {
 
 		$objPHPExcel->getActiveSheet()->SetCellValue('A'.$rowCount, "ID");
 		$objPHPExcel->getActiveSheet()->SetCellValue('B'.$rowCount, "NIK");
-		$objPHPExcel->getActiveSheet()->SetCellValue('C'.$rowCount, "Foto Sayuran");
-		$objPHPExcel->getActiveSheet()->SetCellValue('D'.$rowCount, "Jenis Sayuran");
+		$objPHPExcel->getActiveSheet()->SetCellValue('C'.$rowCount, "Foto produk");
+		$objPHPExcel->getActiveSheet()->SetCellValue('D'.$rowCount, "Jenis produk");
 		$objPHPExcel->getActiveSheet()->SetCellValue('E'.$rowCount, "Tanggal Tanam");
 		$objPHPExcel->getActiveSheet()->SetCellValue('F'.$rowCount, "Tanggal Panen");
 		$objPHPExcel->getActiveSheet()->SetCellValue('G'.$rowCount, "Berat Panen");
-		$objPHPExcel->getActiveSheet()->SetCellValue('H'.$rowCount, "ID Harga");
+		$objPHPExcel->getActiveSheet()->SetCellValue('H'.$rowCount, "ID tipe_produk");
 		$rowCount++;
 
 		foreach($data as $value){
 		    $objPHPExcel->getActiveSheet()->SetCellValue('A'.$rowCount, $value->id); 
 		    $objPHPExcel->getActiveSheet()->SetCellValue('B'.$rowCount, $value->NIK); 
-			$objPHPExcel->getActiveSheet()->SetCellValue('C'.$rowCount, $value->foto_sayuran); 
-		    $objPHPExcel->getActiveSheet()->SetCellValue('D'.$rowCount, $value->jenis_sayuran); 
+			$objPHPExcel->getActiveSheet()->SetCellValue('C'.$rowCount, $value->foto_produk); 
+		    $objPHPExcel->getActiveSheet()->SetCellValue('D'.$rowCount, $value->jenis_produk); 
 		    $objPHPExcel->getActiveSheet()->SetCellValue('E'.$rowCount, $value->tgl_tanam); 
 		    $objPHPExcel->getActiveSheet()->SetCellValue('F'.$rowCount, $value->tgl_panen); 
 		    $objPHPExcel->getActiveSheet()->SetCellValue('G'.$rowCount, $value->berat_panen); 
-			$objPHPExcel->getActiveSheet()->SetCellValue('H'.$rowCount, $value->id_harga); 
+			$objPHPExcel->getActiveSheet()->SetCellValue('H'.$rowCount, $value->id_tipe_produk); 
 		    $rowCount++; 
 		} 
 
 		$objWriter = new PHPExcel_Writer_Excel2007($objPHPExcel); 
-		$objWriter->save('./assets/excel/Data Sayuran.xlsx'); 
+		$objWriter->save('./assets/excel/Data produk.xlsx'); 
 
 		$this->load->helper('download');
-		force_download('./assets/excel/Data Sayuran.xlsx', NULL);
+		force_download('./assets/excel/Data produk.xlsx', NULL);
 	}
 
 	public function import() {
@@ -109,17 +108,17 @@ class Sayuran extends AUTH_Controller {
 				foreach ($sheetData as $key => $value) {
 					if ($key != 1) {
 						$id = md5(DATE('ymdhms').rand());
-						$check = $this->M_sayuran->check_NIK($value['B']);
+						$check = $this->M_produk->check_NIK($value['B']);
 
 						if ($check != 1) {
 							$resultData[$index]['id'] = $id;
 							$resultData[$index]['NIK'] = ucwords($value['B']);
-							$resultData[$index]['foto_sayuran'] = $value['C'];
-							$resultData[$index]['jenis_sayuran'] = $value['D'];
+							$resultData[$index]['foto_produk'] = $value['C'];
+							$resultData[$index]['jenis_produk'] = $value['D'];
 							$resultData[$index]['tgl_tanam'] = $value['E'];
 							$resultData[$index]['tgl_panen'] = $value['F'];
 							$resultData[$index]['berat_bersih'] = $value['G'];
-							$resultData[$index]['id_harga'] = $value['H'];
+							$resultData[$index]['id_tipe_produk'] = $value['H'];
 						}
 					}
 					$index++;
@@ -128,14 +127,14 @@ class Sayuran extends AUTH_Controller {
 				unlink('./assets/excel/' .$data['file_name']);
 
 				if (count($resultData) != 0) {
-					$result = $this->M_sayuran->insert_batch($resultData);
+					$result = $this->M_produk->insert_batch($resultData);
 					if ($result > 0) {
-						$this->session->set_flashdata('msg', show_succ_msg('Data Sayuran Berhasil diimport ke database'));
-						redirect('Sayuran');
+						$this->session->set_flashdata('msg', show_succ_msg('Data produk Berhasil diimport ke database'));
+						redirect('produk');
 					}
 				} else {
-					$this->session->set_flashdata('msg', show_msg('Data Sayuran Gagal diimport ke database (Data Sudah terupdate)', 'warning', 'fa-warning'));
-					redirect('Sayuran');
+					$this->session->set_flashdata('msg', show_msg('Data produk Gagal diimport ke database (Data Sudah terupdate)', 'warning', 'fa-warning'));
+					redirect('produk');
 				}
 
 			}
@@ -143,5 +142,5 @@ class Sayuran extends AUTH_Controller {
 	}
 }
 
-/* End of file Sayuran.php */
-/* Location: ./application/controllers/Sayuran.php */
+/* End of file produk.php */
+/* Location: ./application/controllers/produk.php */

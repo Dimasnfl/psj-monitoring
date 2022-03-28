@@ -4,16 +4,16 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Home extends AUTH_Controller {
 	public function __construct() {
 		parent::__construct();
-		$this->load->model('M_petani');
-		$this->load->model('M_sayuran');
+		$this->load->model('M_user');
+		$this->load->model('M_produk');
 		$this->load->model('M_desa');
-		$this->load->model('M_harga');
+		$this->load->model('M_tipe_produk');
 	}
 
 	public function index() {
-		$data['jml_petani'] 	= $this->M_petani->total_rows();
-		$data['jml_sayuran'] 	= $this->M_sayuran->total_rows();
-		$data['jml_harga'] 	= $this->M_harga->total_rows();
+		$data['jml_user'] 	= $this->M_user->total_rows();
+		$data['jml_produk'] 	= $this->M_produk->total_rows();
+		$data['jml_tipe_produk'] 	= $this->M_tipe_produk->total_rows();
 		$data['jml_desa'] 	= $this->M_desa->total_rows();
 		$data['userdata'] 		= $this->userdata;
 
@@ -27,9 +27,9 @@ class Home extends AUTH_Controller {
 		foreach ($desa as $value) {
 		    $color = '#'.$rand[rand(0,15)].$rand[rand(0,15)].$rand[rand(0,15)].$rand[rand(0,15)].$rand[rand(0,15)].$rand[rand(0,15)];
 
-			$petani_by_desa = $this->M_petani->select_by_desa($value->id);
+			$user_by_desa = $this->M_user->select_by_desa($value->id);
 
-			$data_desa[$index]['value'] = $petani_by_desa->jml;
+			$data_desa[$index]['value'] = $user_by_desa->jml;
 			$data_desa[$index]['color'] = $color;
 			$data_desa[$index]['highlight'] = $color;
 			$data_desa[$index]['label'] = $value->nama;
@@ -37,24 +37,24 @@ class Home extends AUTH_Controller {
 			$index++;
 		}
 
-		//diagram harga
-		$harga 				= $this->M_harga->select_all();
+		//diagram tipe_produk
+		$tipe_produk 				= $this->M_tipe_produk->select_all();
 		$index = 0;
-		foreach ($harga as $value) {
+		foreach ($tipe_produk as $value) {
 		    $color = '#'.$rand[rand(0,15)].$rand[rand(0,15)].$rand[rand(0,15)].$rand[rand(0,15)].$rand[rand(0,15)].$rand[rand(0,15)];
 
-			$sayuran_by_harga = $this->M_sayuran->select_by_harga($value->id);
+			$produk_by_tipe_produk = $this->M_produk->select_by_tipe_produk($value->id);
 
-			$data_harga[$index]['value'] = $sayuran_by_harga->jml;
-			$data_harga[$index]['color'] = $color;
-			$data_harga[$index]['highlight'] = $color;
-			$data_harga[$index]['label'] = $value->jenis_sayuran;
+			$data_tipe_produk[$index]['value'] = $produk_by_tipe_produk->jml;
+			$data_tipe_produk[$index]['color'] = $color;
+			$data_tipe_produk[$index]['highlight'] = $color;
+			$data_tipe_produk[$index]['label'] = $value->jenis_produk;
 			
 			$index++;
 		}
 
 		$data['data_desa'] = json_encode($data_desa);
-		$data['data_harga'] = json_encode($data_harga);
+		$data['data_tipe_produk'] = json_encode($data_tipe_produk);
 
 		$data['page'] 			= "home";
 		$data['judul'] 			= "Beranda";
