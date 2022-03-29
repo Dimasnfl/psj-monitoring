@@ -31,7 +31,7 @@ class Sayuran extends AUTH_Controller {
 		$result = $this->M_produk->delete($id);
 
 		if ($result > 0) {
-			echo show_succ_msg('Data Sayuran Berhasil dihapus', '20px');
+			echo show_succ_msg('Data produk Berhasil dihapus', '20px');
 		} else {
 			echo show_err_msg('Data Sayuran Gagal dihapus', '20px');
 		}

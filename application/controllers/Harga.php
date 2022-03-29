@@ -21,13 +21,12 @@ class Harga extends AUTH_Controller {
 	}
 
 	public function tampil() {
-		$data['datatipe_produk'] = $this->M_tipe_produk->select_all();
+		$data['dataHarga'] = $this->M_tipe_produk->select_all();
 		$this->load->view('harga/list_data', $data);
 	}
 
 	public function prosesTambah() {
 		$this->form_validation->set_rules('jenis_sayuran', 'jenis_sayuran', 'trim|required');
-		$this->form_validation->set_rules('tipe_produk', 'tipe_produk', 'trim|required');
 		$this->form_validation->set_rules('tanggal', 'tanggal', 'trim|required');
 
 
@@ -55,14 +54,14 @@ class Harga extends AUTH_Controller {
 		$data['userdata'] 	= $this->userdata;
 
 		$id 				= trim($_POST['id']);
-		$data['datatipe_produk'] = $this->M_tipe_produk->select_by_id($id);
+		$data['dataHarga'] = $this->M_tipe_produk->select_by_id($id);
 
-		echo show_my_modal('modals/modal_update_tipe_produk', 'update-tipe_produk', $data);
+		echo show_my_modal('modals/modal_update_harga', 'update-harga', $data);
 	}
 
 	public function prosesUpdate() {
-		$this->form_validation->set_rules('jenis_sayuran', 'jenis_sayuran', 'trim|required');
-		$this->form_validation->set_rules('tipe_produk', 'tipe_produk', 'trim|required');
+		$this->form_validation->set_rules('nama', 'nama', 'trim|required');
+		$this->form_validation->set_rules('harga', 'harga', 'trim|required');
 		
 
 
@@ -100,10 +99,10 @@ class Harga extends AUTH_Controller {
 		$data['userdata'] 	= $this->userdata;
 
 		$id 				= trim($_POST['id']);
-		$data['tipe_produk'] = $this->M_tipe_produk->select_by_id($id);
-		$data['datatipe_produk'] = $this->M_tipe_produk->select_by_sayuran($id);
+		$data['harga'] = $this->M_tipe_produk->select_by_id($id);
+		$data['dataHarga'] = $this->M_tipe_produk->select_by_sayuran($id);
 
-		echo show_my_modal('modals/modal_detail_tipe_produk', 'detail-tipe_produk', $data, 'lg');
+		echo show_my_modal('modals/modal_detail_harga', 'detail-harga', $data, 'lg');
 	}
 
 	public function export() {

@@ -9,7 +9,7 @@
       <span class="input-group-addon" id="sizing-addon2">
         <i class="glyphicon glyphicon-grain"></i>
       </span>
-      <input type="text" class="form-control" placeholder="Nama Sayuran" name="jenis_sayuran" aria-describedby="sizing-addon2" value="<?php echo $dataHarga->jenis_sayuran; ?>">
+      <input type="text" class="form-control" placeholder="Nama Sayuran" name="nama" aria-describedby="sizing-addon2" value="<?php echo $dataHarga->nama; ?>">
     </div>
     <div class="input-group form-group">
       <span class="input-group-addon" id="sizing-addon2">

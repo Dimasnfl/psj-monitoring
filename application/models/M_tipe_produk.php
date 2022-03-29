@@ -5,7 +5,6 @@ class M_tipe_produk extends CI_Model {
 	public function select_all() {
 		$this->db->select('*');
 		$this->db->from('tipe_produk');
-
 		$data = $this->db->get();
 
 		return $data->result();
@@ -29,7 +28,7 @@ class M_tipe_produk extends CI_Model {
 	}
 
 	public function insert($data) {
-		$sql = "INSERT INTO tipe_produk VALUES('','" .$data['jenis_produk'] ."','" .$data['tipe_produk'] ."','" .$data['tanggal'] ."')";
+		$sql = "INSERT INTO tipe_produk VALUES('','" .$data['jenis_sayuran'] ."','" .$data['harga'] ."','" .$data['tanggal'] ."')";
 
 		$this->db->query($sql);
 
@@ -43,7 +42,7 @@ class M_tipe_produk extends CI_Model {
 	}
 
 	public function update($data) {
-		$sql = "UPDATE tipe_produk SET jenis_produk='" .$data['jenis_produk'] ."',tipe_produk='" .$data['tipe_produk'] ."' WHERE id='" .$data['id'] ."'";
+		$sql = "UPDATE tipe_produk SET nama='" .$data['nama'] ."',harga='" .$data['harga'] ."' WHERE id='" .$data['id'] ."'";
 
 		$this->db->query($sql);
 

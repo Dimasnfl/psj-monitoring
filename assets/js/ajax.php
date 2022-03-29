@@ -143,7 +143,7 @@
 
 	//sayuran
 	function tampilSayuran() {
-		$.get('<?php echo base_url('Sayuran/tampil'); ?>', function(data) {
+		$.get('<?php echo base_url('sayuran/tampil'); ?>', function(data) {
 			MyTable.fnDestroy();
 			$('#data-sayuran').html(data);
 			refresh();
@@ -189,7 +189,7 @@
 
 		$.ajax({
 			method: 'POST',
-			url: '<?php echo base_url('Sayuran/prosesTambah'); ?>',
+			url: '<?php echo base_url('Harga/prosesTambah'); ?>',
 			data: data
 		})
 		.done(function(data) {

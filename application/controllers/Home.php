@@ -48,7 +48,7 @@ class Home extends AUTH_Controller {
 			$data_tipe_produk[$index]['value'] = $produk_by_tipe_produk->jml;
 			$data_tipe_produk[$index]['color'] = $color;
 			$data_tipe_produk[$index]['highlight'] = $color;
-			$data_tipe_produk[$index]['label'] = $value->jenis_produk;
+			$data_tipe_produk[$index]['label'] = $value->nama;
 			
 			$index++;
 		}
