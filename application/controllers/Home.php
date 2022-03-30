@@ -54,7 +54,7 @@ class Home extends AUTH_Controller {
 		}
 
 		$data['data_desa'] = json_encode($data_desa);
-		$data['data_tipe_produk'] = json_encode($data_tipe_produk);
+		$data['data_harga'] = json_encode($data_tipe_produk);
 
 		$data['page'] 			= "home";
 		$data['judul'] 			= "Beranda";
