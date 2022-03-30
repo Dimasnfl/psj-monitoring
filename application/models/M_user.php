@@ -20,7 +20,7 @@ class M_user extends CI_Model {
 		$this->db->query($sql);
 	}
 	public function get_user_by_access_token($access_token){
-		$sql = "SELECT * FROM petuserani WHERE access_token = '".$access_token."'";
+		$sql = "SELECT * FROM user WHERE access_token = '".$access_token."'";
 		$data = $this->db->query($sql);
 		return $data->result();
 	}
@@ -81,6 +81,15 @@ class M_user extends CI_Model {
 		$this->db->query($sql);
 
 		return $this->db->affected_rows();
+	}
+	public function insert_data($data){
+		$this->db->insert('user',$data);
+		
+		if($this->db->affected_rows()){
+			return $this->db->insert_id();
+		}else{
+			return false;
+		}
 	}
 
 	public function insert_batch($data) {

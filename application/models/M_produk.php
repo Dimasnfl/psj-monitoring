@@ -28,6 +28,16 @@ class M_produk extends CI_Model {
 		return $data->row();
 	}
 
+	public function select_by_user_id($id){
+		$this->db->select("tipe_produk.nama,user.telp, produk.tgl_panen, produk.tgl_tanam, tipe_produk.harga, status_produk.nama AS status,status_produk.id AS status_id, produk.luas_lahan, produk.berat_panen, produk.created_at, produk.updated_at" );
+		$this->db->from('produk');
+		$this->db->join('user','user.id = produk.id_user');
+		$this->db->join('tipe_produk','tipe_produk.id = produk.id_tipe_produk');
+		$this->db->join('status_produk', 'produk.id_status_produk = status_produk.id');
+		$query = $this->db->get();
+		return $query->result();
+	}
+
 	public function select_by_tipe_produk($id) {
 		$sql = "SELECT COUNT(*) AS jml FROM produk WHERE id_tipe_produk = {$id}";
 
@@ -43,14 +53,21 @@ class M_produk extends CI_Model {
 
 		return $this->db->affected_rows();
 	}
-
+	public function insert_data($data){
+		$this->db->insert('produk', $data);
+		if($this->db->affected_rows()){
+			return $this->db->insert_id();
+		}else{
+			return false;
+		}
+	}
 
 	public function insert($data) {
 		$id = md5(DATE('ymdhms').rand());
 		$sql = "INSERT INTO produk VALUES('{$id}','" .$data['NIK'] ."','" .$data['foto_produk'] ."'," .$data['jenis_produk'] ."," .$data['tgl_tanam'] ."," .$data['tgl_panen'] ."," .$data['berat_panen'] ."," .$data['id_tipe_produk'] .",1)";
 
 		$this->db->query($sql);
-
+		
 		return $this->db->affected_rows();
 	}
 
