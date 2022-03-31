@@ -4,7 +4,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Api extends CI_Controller {
     public $token;
     public $user;
-    private $uploaddir = 'C:\xampp\htdocs\monitoring\assets\app_photo\\';
+    //GANTI DENGAN ABSOLUTE LOCATION
+    private $uploaddir = '/home/afandiyu/domains/afandiyusuf.com/public_html/siduda-monitoring/assets/app_photo/';
 	public function __construct() {
 		parent::__construct();
         $this->load->model('M_tipe_produk');
@@ -142,13 +143,13 @@ class Api extends CI_Controller {
     //2.4 create produk
     public function create_produk(){
         if(!$this->validateAccessToken())return;
-        
-        
-        $foto = $this->process_foto($this->user->id);
+    
+        // $foto = $this->process_foto($this->user->id);
         $insert_data = $this->input->post();
-        $insert_data['foto'] = $filename;
+        // $insert_data['foto'] = $foto;
         $insert_data['id_status_produk'] = 1;
         $insert_data['id_user'] = $this->user->id;
+        unset($insert_data['access_token']);
         $success = $this->M_produk->insert_data($insert_data);
         if($success){
             $insert_data['id'] = $success;
