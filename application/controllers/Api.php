@@ -144,9 +144,9 @@ class Api extends CI_Controller {
     public function create_produk(){
         if(!$this->validateAccessToken())return;
     
-        $foto = $this->process_foto($this->user->id);
+        // $foto = $this->process_foto($this->user->id);
         $insert_data = $this->input->post();
-        $insert_data['foto'] = $foto;
+        // $insert_data['foto'] = $foto;
         $insert_data['id_status_produk'] = 1;
         $insert_data['id_user'] = $this->user->id;
         unset($insert_data['access_token']);
