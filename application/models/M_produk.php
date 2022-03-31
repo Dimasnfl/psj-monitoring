@@ -3,7 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class M_produk extends CI_Model {
 	public function select_all_produk() {
-		$sql = "SELECT * FROM produk";
+		$sql = "SELECT * FROM produk ORDER BY created_at DESC" ;
 
 		$data = $this->db->query($sql);
 
@@ -11,8 +11,11 @@ class M_produk extends CI_Model {
 	}
 
 	public function select_all() {
-		$sql = " SELECT produk.id AS id_petani, produk.alamat, user.nik AS NIK,  produk.id_tipe_produk AS jenis, produk.tgl_tanam AS tanam, produk.tgl_panen AS panen, produk.berat_panen AS berat, tipe_produk.harga AS hrg 
-		FROM produk, tipe_produk, user WHERE produk.id_tipe_produk = tipe_produk.id AND produk.id_user = user.id";
+		$sql = " SELECT produk.id AS id_petani, produk.alamat, user.nik AS NIK,  produk.id_tipe_produk AS jenis, produk.tgl_tanam AS tanam, produk.tgl_panen AS panen, produk.berat_panen AS berat, produk.luas_lahan AS luas_lahan, tipe_produk.harga AS hrg 
+		FROM produk, tipe_produk, user 
+		WHERE produk.id_tipe_produk = tipe_produk.id AND produk.id_user = user.id
+		ORDER BY created_at DESC"
+		;
 
 		$data = $this->db->query($sql);
 

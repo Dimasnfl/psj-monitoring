@@ -4,6 +4,7 @@
     ?>
     <tr>
       <td><?php echo $no; ?></td>
+      <td><?php echo $harga->foto; ?></td>      
       <td><?php echo $harga->nama; ?></td>
       <td><h>Rp.<?php echo $harga->harga; ?>/kg</h></td>
       <td><?php echo $harga->tanggal; ?></td>

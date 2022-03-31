@@ -17,12 +17,12 @@
       <thead>
         <tr>
           <th>NIK Petani</th>
-          <th>Foto Sayuran</th>
           <th>Jenis Sayuran</th>
           <th>Tanggal Tanam</th>
           <th>Tanggal Panen</th>
           <th>Harga</th>
           <th>Berat Panen</th>
+          <th>Luas Lahan</th>
           <th>Alamat</th>
           <th style="text-align: center;">Action</th>
         </tr>

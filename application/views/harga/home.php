@@ -17,6 +17,7 @@
       <thead>
         <tr>
           <th>No</th>
+          <th>Foto Sayuran</th>
           <th>Jenis Sayuran</th>
           <th>Harga</th>
           <th>Tanggal Harga Ditetapkan</th>
