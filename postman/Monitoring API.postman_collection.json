@@ -139,7 +139,7 @@
 						"method": "POST",
 						"header": [
 							{
-								"key": "access_token",
+								"key": "Authorization",
 								"value": "{{access_token}}",
 								"type": "text"
 							}
@@ -158,6 +158,11 @@
 									"value": "123456",
 									"type": "text",
 									"disabled": true
+								},
+								{
+									"key": "access_token",
+									"value": "{{access_token}}",
+									"type": "text"
 								}
 							]
 						},
@@ -176,11 +181,8 @@
 				},
 				{
 					"name": "2.2 Get Produk",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
 					"request": {
-						"method": "GET",
+						"method": "POST",
 						"header": [
 							{
 								"key": "access_token",
@@ -190,7 +192,13 @@
 						],
 						"body": {
 							"mode": "formdata",
-							"formdata": []
+							"formdata": [
+								{
+									"key": "access_token",
+									"value": "{{access_token}}",
+									"type": "text"
+								}
+							]
 						},
 						"url": {
 							"raw": "{{url}}/api/produk",
@@ -208,7 +216,7 @@
 				{
 					"name": "2.3 Get all status",
 					"request": {
-						"method": "GET",
+						"method": "POST",
 						"header": [
 							{
 								"key": "access_token",
@@ -216,6 +224,16 @@
 								"type": "text"
 							}
 						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "access_token",
+									"value": "{{access_token}}",
+									"type": "text"
+								}
+							]
+						},
 						"url": {
 							"raw": "{{url}}/api/status_produk",
 							"host": [
@@ -274,6 +292,11 @@
 									"type": "text"
 								},
 								{
+									"key": "access_token",
+									"value": "{{access_token}}",
+									"type": "text"
+								},
+								{
 									"key": "foto",
 									"type": "file",
 									"src": "2.png"
@@ -293,6 +316,29 @@
 					},
 					"response": []
 				}
+			],
+			"auth": {
+				"type": "noauth"
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
 			]
 		},
 		{
@@ -301,7 +347,7 @@
 				{
 					"name": "3.1 Get Profile",
 					"request": {
-						"method": "GET",
+						"method": "POST",
 						"header": [
 							{
 								"key": "access_token",
@@ -309,6 +355,16 @@
 								"type": "text"
 							}
 						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "access_token",
+									"value": "{{access_token}}",
+									"type": "text"
+								}
+							]
+						},
 						"url": {
 							"raw": "{{url}}/api/user",
 							"host": [
