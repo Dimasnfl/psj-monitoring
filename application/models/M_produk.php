@@ -11,7 +11,7 @@ class M_produk extends CI_Model {
 	}
 
 	public function select_all() {
-		$sql = " SELECT produk.id AS id_petani, produk.alamat, user.nik AS NIK, produk.foto AS foto, produk.id_tipe_produk AS jenis, produk.tgl_tanam AS tanam, produk.tgl_panen AS panen, produk.berat_panen AS berat, tipe_produk.harga AS hrg 
+		$sql = " SELECT produk.id AS id_petani, produk.alamat, user.nik AS NIK,  produk.id_tipe_produk AS jenis, produk.tgl_tanam AS tanam, produk.tgl_panen AS panen, produk.berat_panen AS berat, tipe_produk.harga AS hrg 
 		FROM produk, tipe_produk, user WHERE produk.id_tipe_produk = tipe_produk.id AND produk.id_user = user.id";
 
 		$data = $this->db->query($sql);
@@ -20,7 +20,7 @@ class M_produk extends CI_Model {
 	}
 
 	public function select_by_id($id) {
-		$sql = "SELECT produk.id AS id_petani, user.nik AS NIK_petani, produk.foto_produk AS foto, produk.id_tipe_produk AS jenis_produk, produk.id_tipe_produk, produk.tgl_tanam AS tgl_tanam, produk.tgl_panen AS tgl_panen, produk.berat_panen AS berat_panen, tipe_produk.nama AS hrg 
+		$sql = "SELECT produk.id AS id_petani, user.nik AS NIK_petani,  produk.id_tipe_produk AS jenis_produk, produk.id_tipe_produk, produk.tgl_tanam AS tgl_tanam, produk.tgl_panen AS tgl_panen, produk.berat_panen AS berat_panen, tipe_produk.nama AS hrg 
 		FROM produk, tipe_produk, user WHERE produk.id_tipe_produk = tipe_produk.id AND produk.id_user = petani.id AND produk.id = '{$id}'";
 
 		$data = $this->db->query($sql);
@@ -29,7 +29,7 @@ class M_produk extends CI_Model {
 	}
 
 	public function select_by_user_id($id){
-		$this->db->select("tipe_produk.nama,user.telp, produk.tgl_panen, produk.tgl_tanam, tipe_produk.harga, status_produk.nama AS status,status_produk.id AS status_id, produk.luas_lahan, produk.berat_panen, produk.created_at, produk.updated_at" );
+		$this->db->select("produk.id, tipe_produk.nama,user.telp, produk.tgl_panen, produk.tgl_tanam, tipe_produk.harga, status_produk.nama AS status,status_produk.id AS status_id, produk.luas_lahan, produk.berat_panen, produk.created_at, produk.updated_at" );
 		$this->db->from('produk');
 		$this->db->join('user','user.id = produk.id_user');
 		$this->db->join('tipe_produk','tipe_produk.id = produk.id_tipe_produk');
