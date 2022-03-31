@@ -26,7 +26,8 @@ class Harga extends AUTH_Controller {
 	}
 
 	public function prosesTambah() {
-		$this->form_validation->set_rules('jenis_sayuran', 'jenis_sayuran', 'trim|required');
+		$this->form_validation->set_rules('nama', 'nama', 'trim|required');
+		$this->form_validation->set_rules('harga', 'harga', 'trim|required');
 		$this->form_validation->set_rules('tanggal', 'tanggal', 'trim|required');
 
 
@@ -95,15 +96,15 @@ class Harga extends AUTH_Controller {
 		}
 	}
 
-	public function detail() {
-		$data['userdata'] 	= $this->userdata;
+	// public function detail() {
+	// 	$data['userdata'] 	= $this->userdata;
 
-		$id 				= trim($_POST['id']);
-		$data['harga'] = $this->M_tipe_produk->select_by_id($id);
-		$data['dataHarga'] = $this->M_tipe_produk->select_by_sayuran($id);
+	// 	$id 				= trim($_POST['id']);
+	// 	$data['harga'] = $this->M_tipe_produk->select_by_id($id);
+	// 	$data['dataHarga'] = $this->M_tipe_produk->select_by_sayuran($id);
 
-		echo show_my_modal('modals/modal_detail_harga', 'detail-harga', $data, 'lg');
-	}
+	// 	echo show_my_modal('modals/modal_detail_harga', 'detail-harga', $data, 'lg');
+	// }
 
 	public function export() {
 		error_reporting(E_ALL);

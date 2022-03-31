@@ -24,6 +24,7 @@
           <th>Berat Panen</th>
           <th>Luas Lahan</th>
           <th>Alamat</th>
+          <th>Created_at</th>
           <th style="text-align: center;">Action</th>
         </tr>
       </thead>

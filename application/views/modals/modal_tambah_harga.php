@@ -8,7 +8,7 @@
       <span class="input-group-addon" id="sizing-addon2">
         <i class="glyphicon glyphicon-grain"></i>
       </span>
-      <input type="text" class="form-control" placeholder="Masukkan Jenis Sayuran" name="jenis_sayuran" aria-describedby="sizing-addon2">
+      <input type="text" class="form-control" placeholder="Masukkan Nama Sayuran" name="nama" aria-describedby="sizing-addon2">
     </div>
 
     <div class="input-group form-group">

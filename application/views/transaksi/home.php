@@ -4,10 +4,10 @@
 
 <div class="box">
   <div class="box-header">
-    <div class="col-md-6" style="padding: 0;">
+    <!-- <div class="col-md-6" style="padding: 0;">
         <button class="form-control btn btn-primary" data-toggle="modal" data-target="#tambah-transaksi"><i class="glyphicon glyphicon-plus-sign"></i> Tambah Data</button>
-    </div>
-    <div class="col-md-6">
+    </div> -->
+    <div class="col-md-12">
         <a href="<?php echo base_url('Transaksi/export'); ?>" class="form-control btn btn-default"><i class="glyphicon glyphicon glyphicon-floppy-open"></i> Export Data Excel</a>
     </div>
  </div>
@@ -20,9 +20,9 @@
           <th>Nomor Resi</th>
           <th>Tanggal Pengambilan</th>
           <th>Tanggal Diambil</th>
-          <th>ID Kurir</th>
-          <th>ID User</th>
-          <th>ID Produk</th>
+          <th>id Kurir</th>
+          <th>id Petani</th>
+          <th>id Sayuran</th>
           <th>Tanggal Sampai</th>
           <th>Biaya Angkut</th>
           <th>Status</th>

@@ -28,7 +28,7 @@ class M_tipe_produk extends CI_Model {
 	}
 
 	public function insert($data) {
-		$sql = "INSERT INTO tipe_produk VALUES('','" .$data['jenis_sayuran'] ."','" .$data['harga'] ."','" .$data['tanggal'] ."')";
+		$sql = "INSERT INTO tipe_produk VALUES('','" .$data['nama'] ."','" .$data['harga'] ."','" .$data['tanggal'] ."')";
 
 		$this->db->query($sql);
 

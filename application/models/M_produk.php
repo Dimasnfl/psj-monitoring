@@ -11,7 +11,7 @@ class M_produk extends CI_Model {
 	}
 
 	public function select_all() {
-		$sql = " SELECT produk.id AS id_petani, produk.alamat, user.nik AS NIK,  produk.id_tipe_produk AS jenis, produk.tgl_tanam AS tanam, produk.tgl_panen AS panen, produk.berat_panen AS berat, produk.luas_lahan AS luas_lahan, tipe_produk.harga AS hrg 
+		$sql = " SELECT produk.id AS id_petani, produk.alamat, user.nik AS NIK,  tipe_produk.nama AS jenis, produk.tgl_tanam AS tanam, produk.tgl_panen AS panen, produk.berat_panen AS berat, produk.luas_lahan AS luas_lahan, tipe_produk.harga AS hrg, produk.created_at AS created_at 
 		FROM produk, tipe_produk, user 
 		WHERE produk.id_tipe_produk = tipe_produk.id AND produk.id_user = user.id
 		ORDER BY created_at DESC"

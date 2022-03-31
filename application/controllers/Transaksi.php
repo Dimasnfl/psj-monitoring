@@ -5,11 +5,20 @@ class Transaksi extends AUTH_Controller {
 	public function __construct() {
 		parent::__construct();
 		$this->load->model('M_transaksi');
+		$this->load->model('M_kurir');
+		$this->load->model('M_user');
+		$this->load->model('M_produk');
+		$this->load->model('M_status_transaksi');
+
 	}
 
 	public function index() {
 		$data['userdata'] 	= $this->userdata;
 		$data['dataTransaksi'] 	= $this->M_transaksi->select_all();
+		$data['dataKurir'] 	= $this->M_kurir->select_all();
+		$data['dataUser'] 	= $this->M_user->select_all();
+		$data['dataProduk'] 	= $this->M_produk->select_all();
+		$data['dataStatus_transaksi'] 	= $this->M_status_transaksi->select_all();
 
 		$data['page'] 		= "transaksi";
 		$data['judul'] 		= "Data transaksi";
@@ -62,8 +71,12 @@ class Transaksi extends AUTH_Controller {
 		$this->form_validation->set_rules('no_resi', 'no_resi', 'trim|required');
 		$this->form_validation->set_rules('tanggal_pengambilan', 'tanggal_pengambilan', 'trim|required');
 		$this->form_validation->set_rules('tanggal_diambil', 'tanggal_diambil', 'trim|required');
+		$this->form_validation->set_rules('id_kurir', 'id_kurir', 'trim|required');		
+		$this->form_validation->set_rules('id_user', 'id_user', 'trim|required');	
+		$this->form_validation->set_rules('id_produk', 'id_produk', 'trim|required');	
+		$this->form_validation->set_rules('tanggal_sampai', 'tanggal_sampai', 'trim|required');
 		$this->form_validation->set_rules('biaya_angkut', 'biaya_angkut', 'trim|required');
-		$this->form_validation->set_rules('updated_at', 'updated_at', 'trim|required');
+		$this->form_validation->set_rules('id_status_transaksi', 'id_status_transaksi', 'trim|required');
 
 		$data 	= $this->input->post();
 		if ($this->form_validation->run() == TRUE) {
