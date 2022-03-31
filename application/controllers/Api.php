@@ -17,7 +17,7 @@ class Api extends CI_Controller {
     * this function will validate access_token at header, and assign it to $user variable and $token variable
     */
     public function validateAccessToken(){
-        if(!isset($this->input->request_headers()['access_token'])){
+        if($this->input->post('access_token') == null){
             $data = array(
                 "status"=> 'error',
                 "code" => 500,
@@ -26,7 +26,7 @@ class Api extends CI_Controller {
             echo json_encode($data);
             return false;
         }
-        $this->token = $this->input->request_headers()['access_token'];
+        $this->token = $this->input->post('access_token');
         $this->user = $this->M_user->get_user_by_access_token($this->token);
         if($this->user){
             $this->user = $this->user[0];
