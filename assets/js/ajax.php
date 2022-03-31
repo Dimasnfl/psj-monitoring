@@ -13,6 +13,8 @@
 		tampilSayuran();
 		tampilDesa();
 		tampilHarga();
+		tampilKurir();
+		tampilTransaksi();
 		<?php
 			if ($this->session->flashdata('msg') != '') {
 				echo "effect_msg();";
@@ -496,4 +498,256 @@ $('#form-tambah-harga').submit(function(e) {
 	$('#update-harga').on('hidden.bs.modal', function () {
 	  $('.form-msg').html('');
 	})
+
+//Kurir
+function tampilKurir() {
+		$.get('<?php echo base_url('Kurir/tampil'); ?>', function(data) {
+			MyTable.fnDestroy();
+			$('#data-kurir').html(data);
+			refresh();
+		});
+	}
+
+	var id_kurir;
+	$(document).on("click", ".konfirmasiHapus-kurir", function() {
+		id_kurir = $(this).attr("data-id");
+	})
+	$(document).on("click", ".hapus-dataKurir", function() {
+		var id = id_kurir;
+		
+		$.ajax({
+			method: "POST",
+			url: "<?php echo base_url('Kurir/delete'); ?>",
+			data: "id=" +id
+		})
+		.done(function(data) {
+			$('#konfirmasiHapus').modal('hide');
+			tampilKurir();
+			$('.msg').html(data);
+			effect_msg();
+		})
+	})
+
+	$(document).on("click", ".update-dataKurir", function() {
+		var id = $(this).attr("data-id");
+		
+		$.ajax({
+			method: "POST",
+			url: "<?php echo base_url('Kurir/update'); ?>",
+			data: "id=" +id
+		})
+		.done(function(data) {
+			$('#tempat-modal').html(data);
+			$('#update-kurir').modal('show');
+		})
+	})
+
+	$(document).on("click", ".detail-dataKurir", function() {
+		var id = $(this).attr("data-id");
+		
+		$.ajax({
+			method: "POST",
+			url: "<?php echo base_url('Kurir/detail'); ?>",
+			data: "id=" +id
+		})
+		.done(function(data) {
+			$('#tempat-modal').html(data);
+			$('#tabel-detail').dataTable({
+				  "paging": true,
+				  "lengthChange": false,
+				  "searching": true,
+				  "ordering": true,
+				  "info": true,
+				  "autoWidth": false
+				});
+			$('#detail-kurir').modal('show');
+		})
+	})
+
+	$('#form-tambah-kurir').submit(function(e) {
+		var data = $(this).serialize();
+
+		$.ajax({
+			method: 'POST',
+			url: '<?php echo base_url('Kurir/prosesTambah'); ?>',
+			data: data
+		})
+		.done(function(data) {
+			var out = jQuery.parseJSON(data);
+
+			tampilKurir();
+			if (out.status == 'form') {
+				$('.form-msg').html(out.msg);
+				effect_msg_form();
+			} else {
+				document.getElementById("form-tambah-kurir").reset();
+				$('#tambah-kurir').modal('hide');
+				$('.msg').html(out.msg);
+				effect_msg();
+			}
+		})
+		
+		e.preventDefault();
+	});
+
+	$(document).on('submit', '#form-update-kurir', function(e){
+		var data = $(this).serialize();
+
+		$.ajax({
+			method: 'POST',
+			url: '<?php echo base_url('Kurir/prosesUpdate'); ?>',
+			data: data
+		})
+		.done(function(data) {
+			var out = jQuery.parseJSON(data);
+
+			tampilKurir();
+			if (out.status == 'form') {
+				$('.form-msg').html(out.msg);
+				effect_msg_form();
+			} else {
+				document.getElementById("form-update-kurir").reset();
+				$('#update-kurir').modal('hide');
+				$('.msg').html(out.msg);
+				effect_msg();
+			}
+		})
+		
+		e.preventDefault();
+	});
+
+	$('#tambah-kurir').on('hidden.bs.modal', function () {
+	  $('.form-msg').html('');
+	})
+
+	$('#update-kurir').on('hidden.bs.modal', function () {
+	  $('.form-msg').html('');
+	})
+
+//Transaksi
+function tampilTransaksi() {
+		$.get('<?php echo base_url('Transaksi/tampil'); ?>', function(data) {
+			MyTable.fnDestroy();
+			$('#data-transaksi').html(data);
+			refresh();
+		});
+	}
+
+	var id_transaksi;
+	$(document).on("click", ".konfirmasiHapus-transaksi", function() {
+		id_transaksi = $(this).attr("data-id");
+	})
+	$(document).on("click", ".hapus-dataTransaksi", function() {
+		var id = id_transaksi;
+		
+		$.ajax({
+			method: "POST",
+			url: "<?php echo base_url('Transaksi/delete'); ?>",
+			data: "id=" +id
+		})
+		.done(function(data) {
+			$('#konfirmasiHapus').modal('hide');
+			tampilTransaksi();
+			$('.msg').html(data);
+			effect_msg();
+		})
+	})
+
+	$(document).on("click", ".update-dataTransaksi", function() {
+		var id = $(this).attr("data-id");
+		
+		$.ajax({
+			method: "POST",
+			url: "<?php echo base_url('Transaksi/update'); ?>",
+			data: "id=" +id
+		})
+		.done(function(data) {
+			$('#tempat-modal').html(data);
+			$('#update-transaksi').modal('show');
+		})
+	})
+
+	$(document).on("click", ".detail-dataTransaksi", function() {
+		var id = $(this).attr("data-id");
+		
+		$.ajax({
+			method: "POST",
+			url: "<?php echo base_url('Transaksi/detail'); ?>",
+			data: "id=" +id
+		})
+		.done(function(data) {
+			$('#tempat-modal').html(data);
+			$('#tabel-detail').dataTable({
+				  "paging": true,
+				  "lengthChange": false,
+				  "searching": true,
+				  "ordering": true,
+				  "info": true,
+				  "autoWidth": false
+				});
+			$('#detail-transaksi').modal('show');
+		})
+	})
+
+	$('#form-tambah-transaski').submit(function(e) {
+		var data = $(this).serialize();
+
+		$.ajax({
+			method: 'POST',
+			url: '<?php echo base_url('Transaksi/prosesTambah'); ?>',
+			data: data
+		})
+		.done(function(data) {
+			var out = jQuery.parseJSON(data);
+
+			tampilTransaksi();
+			if (out.status == 'form') {
+				$('.form-msg').html(out.msg);
+				effect_msg_form();
+			} else {
+				document.getElementById("form-tambah-transaksi").reset();
+				$('#tambah-transaksi').modal('hide');
+				$('.msg').html(out.msg);
+				effect_msg();
+			}
+		})
+		
+		e.preventDefault();
+	});
+
+	$(document).on('submit', '#form-update-transaksi', function(e){
+		var data = $(this).serialize();
+
+		$.ajax({
+			method: 'POST',
+			url: '<?php echo base_url('Transaksi/prosesUpdate'); ?>',
+			data: data
+		})
+		.done(function(data) {
+			var out = jQuery.parseJSON(data);
+
+			tampilTransaksi();
+			if (out.status == 'form') {
+				$('.form-msg').html(out.msg);
+				effect_msg_form();
+			} else {
+				document.getElementById("form-update-transaksi").reset();
+				$('#update-transaksi').modal('hide');
+				$('.msg').html(out.msg);
+				effect_msg();
+			}
+		})
+		
+		e.preventDefault();
+	});
+
+	$('#tambah-transaksi').on('hidden.bs.modal', function () {
+	  $('.form-msg').html('');
+	})
+
+	$('#update-transaksi').on('hidden.bs.modal', function () {
+	  $('.form-msg').html('');
+	})
+
+
 </script>

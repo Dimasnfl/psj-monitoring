@@ -55,15 +55,15 @@
         </a>
       </li>
      
-      <li <?php if ($page == '') {echo 'class="active"';} ?>>
-        <a href="<?php echo base_url(''); ?>">
+      <li <?php if ($page == 'kurir') {echo 'class="active"';} ?>>
+        <a href="<?php echo base_url('kurir'); ?>">
           <i class="fa fa-car"></i>
           <span>Data Kurir</span>
         </a>
       </li>
      
       <li <?php if ($page == '') {echo 'class="active"';} ?>>
-        <a href="<?php echo base_url(''); ?>">
+        <a href="<?php echo base_url('transaksi'); ?>">
           <i class="fa fa-cart-plus"></i>
           <span>Data Transaksi</span>
         </a>

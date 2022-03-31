@@ -3,7 +3,7 @@
     ?>
     <tr>
       <td><?php echo $sayuran->NIK; ?></td>
-      <td><?php echo $sayuran->foto; ?></td>
+      <td><img src="<?php echo base_url('afandiyusuf.com/siduda-monitoring/assets/app_photo'); ?><?php echo $sayuran->foto; ?>" class="img-circle" alt="User Image" width="40px" height="40px"></td> 
       <td><?php echo $sayuran->jenis; ?></td>
       <td><?php echo $sayuran->tanam; ?></td>
       <td><?php echo $sayuran->panen; ?></td>

@@ -8,6 +8,8 @@ class Home extends AUTH_Controller {
 		$this->load->model('M_produk');
 		$this->load->model('M_desa');
 		$this->load->model('M_tipe_produk');
+		$this->load->model('M_kurir');
+		$this->load->model('M_transaksi');
 	}
 
 	public function index() {
@@ -15,6 +17,8 @@ class Home extends AUTH_Controller {
 		$data['jml_produk'] 	= $this->M_produk->total_rows();
 		$data['jml_tipe_produk'] 	= $this->M_tipe_produk->total_rows();
 		$data['jml_desa'] 	= $this->M_desa->total_rows();
+		$data['jml_kurir'] 	= $this->M_desa->total_rows();
+		$data['jml_transaksi'] 	= $this->M_desa->total_rows();
 		$data['userdata'] 		= $this->userdata;
 
 		$rand = array('0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f', 'f', 'g', 'h');
