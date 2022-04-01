@@ -4,7 +4,7 @@
     ?>
     <tr>
       <td><?php echo $no; ?></td>
-      <td><?php echo $harga->foto; ?></td>      
+      <td><img src="https://www.afandiyusuf.com/siduda-monitoring/assets/thumbnail/<?php echo $harga->foto; ?>" width=100 height=100></td>      
       <td><?php echo $harga->nama; ?></td>
       <td><h>Rp.<?php echo $harga->harga; ?>/kg</h></td>
       <td><?php echo $harga->tanggal; ?></td>
