@@ -89,9 +89,9 @@ class Kurir extends AUTH_Controller {
 		$result = $this->M_kurir->delete($id);
 		
 		if ($result > 0) {
-			echo show_succ_msg('Data kurir Berhasil dihapus', '20px');
+			echo show_succ_msg('Data Kurir Berhasil dihapus', '20px');
 		} else {
-			echo show_err_msg('Data kurir Gagal dihapus', '20px');
+			echo show_err_msg('Data Kurir Gagal dihapus', '20px');
 		}
 	}
 

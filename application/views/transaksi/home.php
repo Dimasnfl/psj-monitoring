@@ -20,9 +20,9 @@
           <th>Nomor Resi</th>
           <th>Tanggal Pengambilan</th>
           <th>Tanggal Diambil</th>
-          <th>id Kurir</th>
-          <th>id Petani</th>
-          <th>id Sayuran</th>
+          <th>Nama Kurir</th>
+          <th>Nama Petani</th>
+          <th>ID Produk</th>
           <th>Tanggal Sampai</th>
           <th>Biaya Angkut</th>
           <th>Status</th>
@@ -30,6 +30,9 @@
         </tr>
       </thead>
       <tbody id="data-transaksi">
+
+
+
 
 
 

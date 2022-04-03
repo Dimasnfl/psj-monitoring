@@ -4,20 +4,17 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class M_transaksi extends CI_Model {
 
 
-		public function select_all() {
-			$this->db->select('*');
-			$this->db->from('transaksi');
-	
-			$data = $this->db->get();
-	
-			return $data->result();
-	return $data->result();
+	public function select_all() {
+		 $this->db->select('transaksi.*, kurir.nama as kurir_nama, user.nama as user_nama, status_transaksi.nama as status_transaksi_nama');
+		 $this->db->from('transaksi');
+		 $this->db->order_by('id', 'desc');
+		 $this->db->join('kurir', 'kurir.id = transaksi.id_kurir');
+		 $this->db->join('user', 'user.id = transaksi.id_user');
+		 $this->db->join('produk', 'produk.id = transaksi.id_produk');
+		 $this->db->join('status_transaksi', 'status_transaksi.id = transaksi.id_status_transaksi');		
+		$query = $this->db->get();
+		return $query->result();
 	}
-
-	//SELECT * transaksi.id AS id_transaksi, transaksi.no_resi AS resi, transaksi.tanggal_pengambilan AS pengambilan, transaksi.tanggal_diambil AS diambil, kurir.nama AS kurir, user.nama AS user, produk.nama AS produk, transaksi.tanggal_sampai AS sampai, transaksi.biaya_angkut AS biaya_angkut, status_transaksi.nama AS status
-	//FROM transaksi, user, produk, kurir, status_transaksi
-	//WHERE transaksi.id_kurir=kurir.id AND transaksi.id_user=user.id AND transaksi.id_produk=produk.id AND 		transaksi.id_status_transaksi=status_transaksi.id;
-
 
 
 	public function select_by_id($id) {

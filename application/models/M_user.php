@@ -3,12 +3,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class M_user extends CI_Model {
 	public function select_all_user() {
-		$sql = "SELECT * FROM user";
-
-		$data = $this->db->query($sql);
-
-		return $data->result();
+		$this->db->from('user');
+		$query = $this->db->get();
+		return $query->result();
 	}
+
 	public function login($nik, $password){
 		$md5Password = md5($password);
 		$sql = "SELECT * FROM user WHERE password = '".$md5Password."' AND nik = '".$nik."'";
@@ -24,14 +23,15 @@ class M_user extends CI_Model {
 		$data = $this->db->query($sql);
 		return $data->result();
 	}
+
+	
 	public function select_all() {
-		$sql = " SELECT user.nik AS nik, user.nama AS nama, user.telp AS telp, desa.nama AS desa, user.foto AS foto 
-		FROM user, desa
-		WHERE user.id_desa = desa.id";
-
-		$data = $this->db->query($sql);
-
-		return $data->result();
+		$this->db->select('user.*, desa.nama as desa_nama');
+		$this->db->from('user');
+		$this->db->order_by('id', 'desc');
+		$this->db->join('desa', 'desa.id = user.id_desa');
+		$query = $this->db->get();
+		return $query->result();
 	}
 
 	public function select_by_id($id) {
@@ -53,24 +53,14 @@ class M_user extends CI_Model {
 		return $data->row();
 	}
 
-	// public function update($data) {
-	// 	$sql = "UPDATE user SET nama='" .$data['nama'] ."', tgl_lahir='" .$data['tgl_lahir'] ."', jenis_produk=" .$data['jenis_produk'] .", luas_lahan=" .$data['luas_lahan'] .", foto=" .$data['foto'] ." WHERE NIK='" .$data['NIK'] ."'";
-
-	// 	$this->db->query($sql);
-
-	// 	return $this->db->affected_rows();
-	// }
 
 	 public function delete($id) {
-	 	$sql = "DELETE FROM user WHERE nik='" .$id ."'";
+		$sql = "DELETE FROM user WHERE id ='" .$id ."'";
 
-	 	$this->db->query($sql);
+		$this->db->query($sql);
 
-	 	return $this->db->affected_rows();
-	 }
-
-
-
+		return $this->db->affected_rows();
+	}
 
 
 

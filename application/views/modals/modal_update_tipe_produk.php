@@ -1,21 +1,21 @@
 <div class="col-md-offset-1 col-md-10 col-md-offset-1 well">
   <div class="form-msg"></div>
   <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-  <h3 style="display:block; text-align:center;">Update Data Harga Sayuran</h3>
+  <h3 style="display:block; text-align:center;">Update Data Harga Produk</h3>
 
-  <form id="form-update-harga" method="POST">
-    <input type="hidden" name="id" value="<?php echo $dataHarga->id; ?>">
+  <form id="form-update-tipe_produk" method="POST">
+    <input type="hidden" name="id" value="<?php echo $dataTipe_produk->id; ?>">
     <div class="input-group form-group">
       <span class="input-group-addon" id="sizing-addon2">
         <i class="glyphicon glyphicon-grain"></i>
       </span>
-      <input type="text" class="form-control" placeholder="Nama Sayuran" name="nama" aria-describedby="sizing-addon2" value="<?php echo $dataHarga->nama; ?>">
+      <input type="text" class="form-control" placeholder="Nama Sayuran" name="nama" aria-describedby="sizing-addon2" value="<?php echo $dataTipe_produk->nama; ?>">
     </div>
     <div class="input-group form-group">
       <span class="input-group-addon" id="sizing-addon2">
         <i class="glyphicon glyphicon-shopping-cart"></i>
       </span>
-      <input type="text" class="form-control" placeholder="Masukkan Harga per Ton" name="harga" aria-describedby="sizing-addon2" value="<?php echo $dataHarga->harga; ?>">
+      <input type="text" class="form-control" placeholder="Masukkan Harga per Ton" name="harga" aria-describedby="sizing-addon2" value="<?php echo $dataTipe_produk->harga; ?>">
     </div>
     <div class="form-group">
       <div class="col-md-12">

@@ -3,11 +3,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class M_tipe_produk extends CI_Model {
 	public function select_all() {
-		$this->db->select('*');
+		$this->db->select('tipe_produk.*');
 		$this->db->from('tipe_produk');
-		$data = $this->db->get();
-
-		return $data->result();
+		$this->db->order_by('id', 'desc');
+		$query = $this->db->get();
+		return $query->result();
 	}
 
 	public function select_by_id($id) {
@@ -57,8 +57,8 @@ class M_tipe_produk extends CI_Model {
 		return $this->db->affected_rows();
 	}
 
-	public function check_jenis_produk($jenis_produk) {
-		$this->db->where('jenis_produk', $jenis_produk);
+	public function check_nama($nama) {
+		$this->db->where('nama', $nama);
 		$data = $this->db->get('tipe_produk');
 
 		return $data->num_rows();

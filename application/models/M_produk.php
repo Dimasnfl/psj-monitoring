@@ -3,23 +3,20 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class M_produk extends CI_Model {
 	public function select_all_produk() {
-		$sql = "SELECT * FROM produk ORDER BY created_at DESC" ;
-
-		$data = $this->db->query($sql);
-
-		return $data->result();
+		$this->db->from('produk');
+		$query = $this->db->get();
+		return $query->result();
 	}
 
 	public function select_all() {
-		$sql = " SELECT produk.id AS id_petani, produk.alamat, user.nik AS NIK,  tipe_produk.nama AS jenis, produk.tgl_tanam AS tanam, produk.tgl_panen AS panen, produk.berat_panen AS berat, produk.luas_lahan AS luas_lahan, tipe_produk.harga AS hrg, produk.created_at AS created_at 
-		FROM produk, tipe_produk, user 
-		WHERE produk.id_tipe_produk = tipe_produk.id AND produk.id_user = user.id
-		ORDER BY created_at DESC"
-		;
-
-		$data = $this->db->query($sql);
-
-		return $data->result();
+		$this->db->select('produk.*, user.nama as user_nama, tipe_produk.nama as tipe_produk_nama, tipe_produk.harga as tipe_produk_harga, status_produk.nama as status_produk_nama');
+		$this->db->from('produk');
+		$this->db->order_by('id', 'desc');
+		$this->db->join('user', 'user.id = produk.id_user');
+		$this->db->join('tipe_produk', 'tipe_produk.id = produk.id_tipe_produk');
+		$this->db->join('status_produk', 'status_produk.id = produk.id_status_produk');
+		$query = $this->db->get();
+		return $query->result();
 	}
 
 	public function select_by_id($id) {
@@ -56,6 +53,7 @@ class M_produk extends CI_Model {
 
 		return $this->db->affected_rows();
 	}
+	
 	public function insert_data($data){
 		$this->db->insert('produk', $data);
 		if($this->db->affected_rows()){

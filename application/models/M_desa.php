@@ -3,12 +3,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class M_desa extends CI_Model {
 	public function select_all() {
-		$this->db->select('*');
+		$this->db->select('desa.*');
 		$this->db->from('desa');
-
-		$data = $this->db->get();
-
-		return $data->result();
+		$this->db->order_by('id', 'desc');
+		$query = $this->db->get();
+		return $query->result();
 	}
 
 

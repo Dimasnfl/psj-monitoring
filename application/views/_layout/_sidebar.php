@@ -27,43 +27,43 @@
       </li>
     <br>
       <li class="header">PETANI SEJAHTERA</li>
-	  <li <?php if ($page == 'petani') {echo 'class="active"';} ?>>
-          <a href="<?php echo base_url('petani'); ?>">
+	  <li <?php if ($page == 'User') {echo 'class="active"';} ?>>
+          <a href="<?php echo base_url('User'); ?>">
           <i class="fa fa-user"></i>
           <span>Data Petani</span>
         </a>
       </li>
 	  
-	  <li <?php if ($page == 'sayuran') {echo 'class="active"';} ?>>
-          <a href="<?php echo base_url('sayuran'); ?>">
+	  <li <?php if ($page == 'Produk') {echo 'class="active"';} ?>>
+          <a href="<?php echo base_url('Produk'); ?>">
           <i class="fa fa-leaf"></i>
-          <span>Data Sayuran</span>
+          <span>Data Commodity</span>
         </a>
       </li>
 	  
-	  <li <?php if ($page == 'harga') {echo 'class="active"';} ?>>
-          <a href="<?php echo base_url('harga'); ?>">
+	  <li <?php if ($page == 'Tipe_produk') {echo 'class="active"';} ?>>
+          <a href="<?php echo base_url('Tipe_produk'); ?>">
           <i class="fa fa-shopping-cart"></i>
-          <span>Data Harga Sayuran</span>
+          <span>Data Harga Produk</span>
         </a>
       </li>
 	  
-	  <li <?php if ($page == 'desa') {echo 'class="active"';} ?>>
+	  <li <?php if ($page == 'Desa') {echo 'class="active"';} ?>>
         <a href="<?php echo base_url('desa'); ?>">
           <i class="fa fa-location-arrow"></i>
-          <span>Data Desa</span>
+          <span>Data Dusun</span>
         </a>
       </li>
      
-      <li <?php if ($page == 'kurir') {echo 'class="active"';} ?>>
-        <a href="<?php echo base_url('kurir'); ?>">
+      <li <?php if ($page == 'Kurir') {echo 'class="active"';} ?>>
+        <a href="<?php echo base_url('Kurir'); ?>">
           <i class="fa fa-car"></i>
           <span>Data Kurir</span>
         </a>
       </li>
      
-      <li <?php if ($page == '') {echo 'class="active"';} ?>>
-        <a href="<?php echo base_url('transaksi'); ?>">
+      <li <?php if ($page == 'Transaksi') {echo 'class="active"';} ?>>
+        <a href="<?php echo base_url('Transaksi'); ?>">
           <i class="fa fa-cart-plus"></i>
           <span>Data Transaksi</span>
         </a>

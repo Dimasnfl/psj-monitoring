@@ -4,12 +4,12 @@
     <div class="small-box bg-aqua">
       <div class="inner">
         <h3><?php echo $jml_user; ?></h3>
-        <p>Jumlah Petani</p>
+        <p>Data Petani</p>
       </div>
       <div class="icon">
         <i class="ion ion-ios-contact"></i>
       </div>
-      <a href="<?php echo base_url('user') ?>" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+      <a href="<?php echo base_url('user') ?>" class="small-box-footer">List Data <i class="fa fa-arrow-circle-right"></i></a>
     </div>
   </div>
   
@@ -17,12 +17,12 @@
     <div class="small-box bg-green">
       <div class="inner">
         <h3><?php echo $jml_produk; ?></h3>
-        <p>Data Sayuran Terdaftar</p>
+        <p>Data Commodity</p>
       </div>
       <div class="icon">
         <i class="ion ion-ios-folder"></i>
       </div>
-      <a href="<?php echo base_url('sayuran') ?>" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+      <a href="<?php echo base_url('produk') ?>" class="small-box-footer">List Data <i class="fa fa-arrow-circle-right"></i></a>
     </div>
   </div>
   
@@ -30,12 +30,12 @@
     <div class="small-box bg-yellow">
       <div class="inner">
         <h3><?php echo $jml_tipe_produk; ?></h3>
-        <p>Data Harga Sayuran</p>
+        <p>Data Harga Produk</p>
       </div>
       <div class="icon">
         <i class="ion ion-ios-cart"></i>
       </div>
-      <a href="<?php echo base_url('harga') ?>" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+      <a href="<?php echo base_url('tipe_produk') ?>" class="small-box-footer">List Data <i class="fa fa-arrow-circle-right"></i></a>
     </div>
  </div>
 
@@ -43,12 +43,12 @@
     <div class="small-box bg-blue">
       <div class="inner">
         <h3><?php echo $jml_desa; ?></h3>
-        <p>Data Desa</p>
+        <p>Data Dusun</p>
       </div>
       <div class="icon">
         <i class="ion ion-ios-navigate"></i>
       </div>
-      <a href="<?php echo base_url('desa') ?>" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+      <a href="<?php echo base_url('desa') ?>" class="small-box-footer">List Data <i class="fa fa-arrow-circle-right"></i></a>
     </div>
  </div>
   
@@ -71,12 +71,12 @@
     </div>
   </div>
 
-  <!-- diagram sayuran -->
+  <!-- diagram produk -->
   <div class="col-lg-6 col-xs-12">
     <div class="box box-primary">
       <div class="box-header with-border">
         <i class="fa fa-briefcase"></i>
-        <h3 class="box-title">Statistik <small>Data Sayuran</small></h3>
+        <h3 class="box-title">Statistik <small>Data Commodity</small></h3>
 
         <div class="box-tools pull-right">
           <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
@@ -85,7 +85,7 @@
         </div>
       </div>
       <div class="box-body">
-        <canvas id="data-harga" style="height:250px"></canvas>
+        <canvas id="data-tipe_produk" style="height:250px"></canvas>
       </div>
     </div>
   </div>
@@ -118,10 +118,10 @@
   pieChart.Doughnut(PieData, pieOptions);
 
 
-  //data harga
-  var pieChartCanvas = $("#data-harga").get(0).getContext("2d");
+  //data tipe produk
+  var pieChartCanvas = $("#data-tipe_produk").get(0).getContext("2d");
   var pieChart = new Chart(pieChartCanvas);
-  var PieData = <?php echo $data_harga; ?>;
+  var PieData = <?php echo $data_tipe_produk; ?>;
 
   var pieOptions = {
     segmentShowStroke: true,

@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Harga extends AUTH_Controller {
+class Tipe_produk extends AUTH_Controller {
 	public function __construct() {
 		parent::__construct();
 		$this->load->model('M_tipe_produk');
@@ -9,20 +9,20 @@ class Harga extends AUTH_Controller {
 
 	public function index() {
 		$data['userdata'] 	= $this->userdata;
-		$data['datatipe_produk'] = $this->M_tipe_produk->select_all();
+		$data['dataTipe_produk'] = $this->M_tipe_produk->select_all();
 
-		$data['page'] 		= "Harga";
-		$data['judul'] 		= "Data Harga Sayuran";
-		$data['deskripsi'] 	= "Manage Data Harga";
+		$data['page'] 		= "Tipe Produk";
+		$data['judul'] 		= "Data Harga Produk";
+		$data['deskripsi'] 	= "Manage Data Harga Produk";
 
-		$data['modal_tambah_harga'] = show_my_modal('modals/modal_tambah_harga', 'tambah-harga', $data);
+		$data['modal_tambah_tipe_produk'] = show_my_modal('modals/modal_tambah_tipe_produk', 'tambah-tipe_produk', $data);
 
-		$this->template->views('harga/home', $data);
+		$this->template->views('tipe_produk/home', $data);
 	}
 
 	public function tampil() {
-		$data['dataHarga'] = $this->M_tipe_produk->select_all();
-		$this->load->view('harga/list_data', $data);
+		$data['dataTipe_produk'] = $this->M_tipe_produk->select_all();
+		$this->load->view('tipe_produk/list_data', $data);
 	}
 
 	public function prosesTambah() {
@@ -38,10 +38,10 @@ class Harga extends AUTH_Controller {
 
 			if ($result > 0) {
 				$out['status'] = '';
-				$out['msg'] = show_succ_msg('Data tipe_produk Berhasil ditambahkan', '20px');
+				$out['msg'] = show_succ_msg('Data Tipe Produk Berhasil ditambahkan', '20px');
 			} else {
 				$out['status'] = '';
-				$out['msg'] = show_err_msg('Data tipe_produk Gagal ditambahkan', '20px');
+				$out['msg'] = show_err_msg('Data Tipe Produk Gagal ditambahkan', '20px');
 			}
 		} else {
 			$out['status'] = 'form';
@@ -55,9 +55,9 @@ class Harga extends AUTH_Controller {
 		$data['userdata'] 	= $this->userdata;
 
 		$id 				= trim($_POST['id']);
-		$data['dataHarga'] = $this->M_tipe_produk->select_by_id($id);
+		$data['dataTipe_produk'] = $this->M_tipe_produk->select_by_id($id);
 
-		echo show_my_modal('modals/modal_update_harga', 'update-harga', $data);
+		echo show_my_modal('modals/modal_update_tipe_produk', 'update-tipe_produk', $data);
 	}
 
 	public function prosesUpdate() {
@@ -72,10 +72,10 @@ class Harga extends AUTH_Controller {
 
 			if ($result > 0) {
 				$out['status'] = '';
-				$out['msg'] = show_succ_msg('Data tipe_produk Berhasil diupdate', '20px');
+				$out['msg'] = show_succ_msg('Data Tipe Produk Berhasil diupdate', '20px');
 			} else {
 				$out['status'] = '';
-				$out['msg'] = show_succ_msg('Data tipe_produk Gagal diupdate', '20px');
+				$out['msg'] = show_succ_msg('Data Tipe Produk Gagal diupdate', '20px');
 			}
 		} else {
 			$out['status'] = 'form';
@@ -90,9 +90,9 @@ class Harga extends AUTH_Controller {
 		$result = $this->M_tipe_produk->delete($id);
 		
 		if ($result > 0) {
-			echo show_succ_msg('Data tipe_produk Berhasil dihapus', '20px');
+			echo show_succ_msg('Data Tipe Produk Berhasil dihapus', '20px');
 		} else {
-			echo show_err_msg('Data tipe_produk Gagal dihapus', '20px');
+			echo show_err_msg('Data Tipe Produk Gagal dihapus', '20px');
 		}
 	}
 
@@ -100,10 +100,10 @@ class Harga extends AUTH_Controller {
 	// 	$data['userdata'] 	= $this->userdata;
 
 	// 	$id 				= trim($_POST['id']);
-	// 	$data['harga'] = $this->M_tipe_produk->select_by_id($id);
-	// 	$data['dataHarga'] = $this->M_tipe_produk->select_by_sayuran($id);
+	// 	$data['tipe_produk'] = $this->M_tipe_produk->select_by_id($id);
+	// 	$data['dataTipe_produk'] = $this->M_tipe_produk->select_by_sayuran($id);
 
-	// 	echo show_my_modal('modals/modal_detail_harga', 'detail-harga', $data, 'lg');
+	// 	echo show_my_modal('modals/modal_detail_tipe_produk', 'detail-tipe_produk', $data, 'lg');
 	// }
 
 	public function export() {
@@ -195,5 +195,5 @@ class Harga extends AUTH_Controller {
 	}
 }
 
-/* End of file tipe_produk.php */
-/* Location: ./application/controllers/tipe_produk.php */
+/* End of file Tipe_produk.php */
+/* Location: ./application/controllers/Tipe_produk.php */

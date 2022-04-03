@@ -5,7 +5,7 @@ class M_kurir extends CI_Model {
 	public function select_all() {
 		$this->db->select('*');
 		$this->db->from('kurir');
-
+		$this->db->order_by('id', 'desc');
 		$data = $this->db->get();
 
 		return $data->result();
@@ -20,15 +20,6 @@ class M_kurir extends CI_Model {
 		return $data->row();
 	}
 
-	// public function select_by_petani($id) {
-	// 	$sql = " SELECT petani.id AS id, petani.NIK AS NIK, petani.nama AS petani, petani.telp AS telp, kurir.nama AS kurir, petani.luas_lahan AS luas_lahan
-	// 	FROM petani, kurir 
-	// 	WHERE petani.id_kurir = kurir.id AND petani.id_kurir={$id}";
-
-	// 	$data = $this->db->query($sql);
-
-	// 	return $data->result();
-	// }
 
 	public function insert($data) {
 		$sql = "INSERT INTO kurir VALUES('','" .$data['nama'] ."','" .$data['layanan'] ."','" .$data['jenis_kendaraan'] ."','" .$data['plat_no'] ."','" .$data['no_telp'] ."','" .$data['created_at'] ."')";
@@ -51,6 +42,7 @@ class M_kurir extends CI_Model {
 
 		return $this->db->affected_rows();
 	}
+
 
 	public function delete($id) {
 		$sql = "DELETE FROM kurir WHERE id='" .$id ."'";

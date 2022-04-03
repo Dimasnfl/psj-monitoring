@@ -9,10 +9,10 @@
 		});
 
 	window.onload = function() {
-		tampilPetani();
-		tampilSayuran();
+		tampilUser();
+		tampilProduk();
 		tampilDesa();
-		tampilHarga();
+		tampilTipe_produk();
 		tampilKurir();
 		tampilTransaksi();
 		<?php
@@ -38,67 +38,67 @@
 		setTimeout(function() { $('.msg').fadeOut(1000); }, 3000);
 	}
 
-	//petani
-	function tampilPetani() {
-		$.get('<?php echo base_url('Petani/tampil'); ?>', function(data) {
+//User
+function tampilUser() {
+		$.get('<?php echo base_url('User/tampil'); ?>', function(data) {
 			MyTable.fnDestroy();
-			$('#data-petani').html(data);
+			$('#data-user').html(data);
 			refresh();
 		});
 	}
 
-	var id_petani;
-	$(document).on("click", ".konfirmasiHapus-petani", function() {
-		id_petani = $(this).attr("data-id");
+	var id_user;
+	$(document).on("click", ".konfirmasiHapus-user", function() {
+		id_user = $(this).attr("data-id");
 	})
-	$(document).on("click", ".hapus-dataPetani", function() {
-		var id = id_petani;
+	$(document).on("click", ".hapus-dataUser", function() {
+		var id = id_user;
 		
 		$.ajax({
 			method: "POST",
-			url: "<?php echo base_url('Petani/delete'); ?>",
+			url: "<?php echo base_url('User/delete'); ?>",
 			data: "id=" +id
 		})
 		.done(function(data) {
 			$('#konfirmasiHapus').modal('hide');
-			tampilPetani();
+			tampilUser();
 			$('.msg').html(data);
 			effect_msg();
 		})
 	})
 
-	$(document).on("click", ".update-dataPetani", function() {
+	$(document).on("click", ".update-dataUser", function() {
 		var id = $(this).attr("data-id");
 		
 		$.ajax({
 			method: "POST",
-			url: "<?php echo base_url('Petani/update'); ?>",
+			url: "<?php echo base_url('User/update'); ?>",
 			data: "id=" +id
 		})
 		.done(function(data) {
 			$('#tempat-modal').html(data);
-			$('#update-petani').modal('show');
+			$('#update-user').modal('show');
 		})
 	})
 
-	$('#form-tambah-petani').submit(function(e) {
+	$('#form-tambah-user').submit(function(e) {
 		var data = $(this).serialize();
 
 		$.ajax({
 			method: 'POST',
-			url: '<?php echo base_url('Petani/prosesTambah'); ?>',
+			url: '<?php echo base_url('User/prosesTambah'); ?>',
 			data: data
 		})
 		.done(function(data) {
 			var out = jQuery.parseJSON(data);
 
-			tampilPetani();
+			tampilUser();
 			if (out.status == 'form') {
 				$('.form-msg').html(out.msg);
 				effect_msg_form();
 			} else {
-				document.getElementById("form-tambah-petani").reset();
-				$('#tambah-petani').modal('hide');
+				document.getElementById("form-tambah-user").reset();
+				$('#tambah-user').modal('hide');
 				$('.msg').html(out.msg);
 				effect_msg();
 			}
@@ -107,24 +107,24 @@
 		e.preventDefault();
 	});
 
-	$(document).on('submit', '#form-update-petani', function(e){
+	$(document).on('submit', '#form-update-user', function(e){
 		var data = $(this).serialize();
 
 		$.ajax({
 			method: 'POST',
-			url: '<?php echo base_url('Petani/prosesUpdate'); ?>',
+			url: '<?php echo base_url('User/prosesUpdate'); ?>',
 			data: data
 		})
 		.done(function(data) {
 			var out = jQuery.parseJSON(data);
 
-			tampilPetani();
+			tampilUser();
 			if (out.status == 'form') {
 				$('.form-msg').html(out.msg);
 				effect_msg_form();
 			} else {
-				document.getElementById("form-update-petani").reset();
-				$('#update-petani').modal('hide');
+				document.getElementById("form-update-user").reset();
+				$('#update-user').modal('hide');
 				$('.msg').html(out.msg);
 				effect_msg();
 			}
@@ -133,77 +133,79 @@
 		e.preventDefault();
 	});
 
-	$('#tambah-petani').on('hidden.bs.modal', function () {
+	$('#tambah-user').on('hidden.bs.modal', function () {
 	  $('.form-msg').html('');
 	})
 
-	$('#update-petani').on('hidden.bs.modal', function () {
+	$('#update-user').on('hidden.bs.modal', function () {
 	  $('.form-msg').html('');
 	})
+
+
 
 	
 
-	//sayuran
-	function tampilSayuran() {
-		$.get('<?php echo base_url('sayuran/tampil'); ?>', function(data) {
+	//produk
+	function tampilProduk() {
+		$.get('<?php echo base_url('produk/tampil'); ?>', function(data) {
 			MyTable.fnDestroy();
-			$('#data-sayuran').html(data);
+			$('#data-produk').html(data);
 			refresh();
 		});
 	}
 
-	var id_sayuran;
-	$(document).on("click", ".konfirmasiHapus-sayuran", function() {
-		id_sayuran = $(this).attr("data-id");
+	var id_produk;
+	$(document).on("click", ".konfirmasiHapus-produk", function() {
+		id_produk = $(this).attr("data-id");
 	})
-	$(document).on("click", ".hapus-dataSayuran", function() {
-		var id = id_sayuran;
+	$(document).on("click", ".hapus-dataProduk", function() {
+		var id = id_produk;
 		
 		$.ajax({
 			method: "POST",
-			url: "<?php echo base_url('Sayuran/delete'); ?>",
+			url: "<?php echo base_url('Produk/delete'); ?>",
 			data: "id=" +id
 		})
 		.done(function(data) {
 			$('#konfirmasiHapus').modal('hide');
-			tampilSayuran();
+			tampilProduk();
 			$('.msg').html(data);
 			effect_msg();
 		})
 	})
 
-	$(document).on("click", ".update-dataSayuran", function() {
+	$(document).on("click", ".update-dataProduk", function() {
 		var id = $(this).attr("data-id");
 		
 		$.ajax({
 			method: "POST",
-			url: "<?php echo base_url('Sayuran/update'); ?>",
+			url: "<?php echo base_url('Produk/update'); ?>",
 			data: "id=" +id
 		})
 		.done(function(data) {
 			$('#tempat-modal').html(data);
-			$('#update-sayuran').modal('show');
+			$('#update-produk').modal('show');
 		})
 	})
 
-	$('#form-tambah-sayuran').submit(function(e) {
+	$('#form-tambah-produk').submit(function(e) {
 		var data = $(this).serialize();
 
 		$.ajax({
 			method: 'POST',
-			url: '<?php echo base_url('Harga/prosesTambah'); ?>',
+			url: '<?php echo base_url('Produk/prosesTambah'); ?>',
 			data: data
 		})
 		.done(function(data) {
 			var out = jQuery.parseJSON(data);
 
-			tampilSayuran();
+			tampilProduk();
 			if (out.status == 'form') {
 				$('.form-msg').html(out.msg);
 				effect_msg_form();
 			} else {
-				document.getElementById("form-tambah-sayuran").reset();
-				$('#tambah-sayuran').modal('hide');
+				document.getElementById("form-tambah-produk").reset();
+				$('#tambah-produk').modal('hide');
 				$('.msg').html(out.msg);
 				effect_msg();
 			}
@@ -212,24 +214,24 @@
 		e.preventDefault();
 	});
 
-	$(document).on('submit', '#form-update-sayuran', function(e){
+	$(document).on('submit', '#form-update-produk', function(e){
 		var data = $(this).serialize();
 
 		$.ajax({
 			method: 'POST',
-			url: '<?php echo base_url('Sayuran/prosesUpdate'); ?>',
+			url: '<?php echo base_url('Produk/prosesUpdate'); ?>',
 			data: data
 		})
 		.done(function(data) {
 			var out = jQuery.parseJSON(data);
 
-			tampilSayuran();
+			tampilProduk();
 			if (out.status == 'form') {
 				$('.form-msg').html(out.msg);
 				effect_msg_form();
 			} else {
-				document.getElementById("form-update-sayuran").reset();
-				$('#update-sayuran').modal('hide');
+				document.getElementById("form-update-produk").reset();
+				$('#update-produk').modal('hide');
 				$('.msg').html(out.msg);
 				effect_msg();
 			}
@@ -238,11 +240,11 @@
 		e.preventDefault();
 	});
 
-	$('#tambah-sayuran').on('hidden.bs.modal', function () {
+	$('#tambah-produk').on('hidden.bs.modal', function () {
 	  $('.form-msg').html('');
 	})
 
-	$('#update-sayuran').on('hidden.bs.modal', function () {
+	$('#update-produk').on('hidden.bs.modal', function () {
 	  $('.form-msg').html('');
 	})
 
@@ -372,57 +374,55 @@
 	  $('.form-msg').html('');
 	})
 
-
-
-	//Harga
-	function tampilHarga() {
-		$.get('<?php echo base_url('Harga/tampil'); ?>', function(data) {
+	//Tipe_produk
+	function tampilTipe_produk() {
+		$.get('<?php echo base_url('Tipe_produk/tampil'); ?>', function(data) {
 			MyTable.fnDestroy();
-			$('#data-harga').html(data);
+			$('#data-tipe_produk').html(data);
 			refresh();
 		});
 	}
 
-	var id_harga;
-	$(document).on("click", ".konfirmasiHapus-harga", function() {
-		id_harga = $(this).attr("data-id");
+	var id_tipe_produk;
+	$(document).on("click", ".konfirmasiHapus-tipe_produk", function() {
+		id_tipe_produk = $(this).attr("data-id");
 	})
-	$(document).on("click", ".hapus-dataHarga", function() {
-		var id = id_harga;
+	$(document).on("click", ".hapus-dataTipe_produk", function() {
+		var id = id_tipe_produk;
 		
 		$.ajax({
 			method: "POST",
-			url: "<?php echo base_url('Harga/delete'); ?>",
+			url: "<?php echo base_url('Tipe_produk/delete'); ?>",
 			data: "id=" +id
 		})
 		.done(function(data) {
 			$('#konfirmasiHapus').modal('hide');
-			tampilHarga();
+			tampilTipe_produk();
 			$('.msg').html(data);
 			effect_msg();
 		})
 	})
 
-	$(document).on("click", ".update-dataHarga", function() {
+	$(document).on("click", ".update-dataTipe_produk", function() {
 		var id = $(this).attr("data-id");
 		
 		$.ajax({
 			method: "POST",
-			url: "<?php echo base_url('Harga/update'); ?>",
+			url: "<?php echo base_url('Tipe_produk/update'); ?>",
 			data: "id=" +id
 		})
 		.done(function(data) {
 			$('#tempat-modal').html(data);
-			$('#update-harga').modal('show');
+			$('#update-tipe_produk').modal('show');
 		})
 	})
 
-	$(document).on("click", ".detail-dataHarga", function() {
+	$(document).on("click", ".detail-dataTipe_produk", function() {
 		var id = $(this).attr("data-id");
 		
 		$.ajax({
 			method: "POST",
-			url: "<?php echo base_url('Harga/detail'); ?>",
+			url: "<?php echo base_url('Tipe_produk/detail'); ?>",
 			data: "id=" +id
 		})
 		.done(function(data) {
@@ -435,54 +435,28 @@
 				  "info": true,
 				  "autoWidth": false
 				});
-			$('#detail-harga').modal('show');
+			$('#detail-tipe_produk').modal('show');
 		})
 	})
 
-$('#form-tambah-harga').submit(function(e) {
-	var data = $(this).serialize();
-
-		$.ajax({
-			method: 'POST',
-			url: '<?php echo base_url('Harga/prosesTambah'); ?>',
-			data: data
-		})
-		.done(function(data) {
-			var out = jQuery.parseJSON(data);
-
-			tampilHarga();
-			if (out.status == 'form') {
-				$('.form-msg').html(out.msg);
-				effect_msg_form();
-			} else {
-				document.getElementById("form-tambah-harga").reset();
-				$('#tambah-harga').modal('hide');
-				$('.msg').html(out.msg);
-				effect_msg();
-			}
-		})
-		
-		e.preventDefault();
-});
-
-	$(document).on('submit', '#form-update-harga', function(e){
+	$('#form-tambah-tipe_produk').submit(function(e) {
 		var data = $(this).serialize();
 
 		$.ajax({
 			method: 'POST',
-			url: '<?php echo base_url('Harga/prosesUpdate'); ?>',
+			url: '<?php echo base_url('Tipe_produk/prosesTambah'); ?>',
 			data: data
 		})
 		.done(function(data) {
 			var out = jQuery.parseJSON(data);
 
-			tampilHarga();
+			tampilTipe_produk();
 			if (out.status == 'form') {
 				$('.form-msg').html(out.msg);
 				effect_msg_form();
 			} else {
-				document.getElementById("form-update-harga").reset();
-				$('#update-harga').modal('hide');
+				document.getElementById("form-tambah-tipe_produk").reset();
+				$('#tambah-tipe_produk').modal('hide');
 				$('.msg').html(out.msg);
 				effect_msg();
 			}
@@ -491,13 +465,43 @@ $('#form-tambah-harga').submit(function(e) {
 		e.preventDefault();
 	});
 
-	$('#tambah-harga').on('hidden.bs.modal', function () {
+	$(document).on('submit', '#form-update-tipe_produk', function(e){
+		var data = $(this).serialize();
+
+		$.ajax({
+			method: 'POST',
+			url: '<?php echo base_url('Tipe_produk/prosesUpdate'); ?>',
+			data: data
+		})
+		.done(function(data) {
+			var out = jQuery.parseJSON(data);
+
+			tampilTipe_produk();
+			if (out.status == 'form') {
+				$('.form-msg').html(out.msg);
+				effect_msg_form();
+			} else {
+				document.getElementById("form-update-tipe_produk").reset();
+				$('#update-tipe_produk').modal('hide');
+				$('.msg').html(out.msg);
+				effect_msg();
+			}
+		})
+		
+		e.preventDefault();
+	});
+
+	$('#tambah-tipe_produk').on('hidden.bs.modal', function () {
 	  $('.form-msg').html('');
 	})
 
-	$('#update-harga').on('hidden.bs.modal', function () {
+	$('#update-tipe_produk').on('hidden.bs.modal', function () {
 	  $('.form-msg').html('');
 	})
+
+
+
+
 
 //Kurir
 function tampilKurir() {

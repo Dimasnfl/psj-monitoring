@@ -1,41 +1,39 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Petani extends AUTH_Controller {
+class User extends AUTH_Controller {
 	public function __construct() {
 		parent::__construct();
 		$this->load->model('M_user');
-		$this->load->model('M_desa');
 	}
+
 	public function index() {
 		$data['userdata'] = $this->userdata;
-		$data['dataPetani'] = $this->M_user->select_all();
-		$data['dataDesa'] = $this->M_desa->select_all();
-
-		$data['page'] = "Petani";
-		$data['judul'] = "Data Petani";
-		$data['deskripsi'] = "Manage Data Petani";
+		$data['dataUser'] = $this->M_user->select_all();
+		$data['page'] = "User";
+		$data['judul'] = "Data User";
+		$data['deskripsi'] = "Manage Data User";
 
 
-		$this->template->views('petani/home', $data);
+		$this->template->views('user/home', $data);
 	}
 
 	public function tampil() {
-		$data['dataPetani'] = $this->M_user->select_all();
-		$this->load->view('petani/list_data', $data);
+		$data['dataUser'] = $this->M_user->select_all();
+		$this->load->view('user/list_data', $data);
 	}
 
 
 	public function delete() {
-	$id = $_POST['id'];
-	$result = $this->M_user->delete($id);
+		$id = $_POST['id'];
+		$result = $this->M_user->delete($id);
 
-	if ($result > 0) {
-	 		echo show_succ_msg('Data user Berhasil dihapus', '20px');
-	 	} else {
-	 		echo show_err_msg('Data user Gagal dihapus', '20px');
-	 	}
-	 }
+		if ($result > 0) {
+			echo show_succ_msg('Data User Berhasil dihapus', '20px');
+		} else {
+			echo show_err_msg('Data User Gagal dihapus', '20px');
+		}
+	}
 
 	public function export() {
 		error_reporting(E_ALL);
@@ -139,5 +137,5 @@ class Petani extends AUTH_Controller {
 	}
 }
 
-/* End of file user.php */
-/* Location: ./application/controllers/user.php */
+/* End of file User.php */
+/* Location: ./application/controllers/User.php */

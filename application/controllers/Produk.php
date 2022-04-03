@@ -1,28 +1,26 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Sayuran extends AUTH_Controller {
+class Produk extends AUTH_Controller {
 	public function __construct() {
 		parent::__construct();
 		$this->load->model('M_produk');
-		$this->load->model('M_tipe_produk');
 	}
 
 	public function index() {
 		$data['userdata'] = $this->userdata;
-		$data['data_sayuran'] = $this->M_produk->select_all();
-		$data['datatipe_sayuran'] = $this->M_tipe_produk->select_all();
-		$data['page'] = "Sayuran";
-		$data['judul'] = "Data Sayuran";
-		$data['deskripsi'] = "Manage Data Sayuran";
+		$data['dataProduk'] = $this->M_produk->select_all();
+		$data['page'] = "Produk";
+		$data['judul'] = "Data Produk";
+		$data['deskripsi'] = "Manage Data Produk";
 		$data["alamat"] = "Alamat";
 
-		$this->template->views('sayuran/home', $data);
+		$this->template->views('produk/home', $data);
 	}
 
 	public function tampil() {
-		$data['dataSayuran'] = $this->M_produk->select_all();
-		$this->load->view('sayuran/list_data', $data);
+		$data['dataProduk'] = $this->M_produk->select_all();
+		$this->load->view('produk/list_data', $data);
 	}
 
 
@@ -31,9 +29,9 @@ class Sayuran extends AUTH_Controller {
 		$result = $this->M_produk->delete($id);
 
 		if ($result > 0) {
-			echo show_succ_msg('Data produk Berhasil dihapus', '20px');
+			echo show_succ_msg('Data Produk Berhasil dihapus', '20px');
 		} else {
-			echo show_err_msg('Data Sayuran Gagal dihapus', '20px');
+			echo show_err_msg('Data Produk Gagal dihapus', '20px');
 		}
 	}
 

@@ -20,7 +20,7 @@
           <th>Nama Kurir</th>
           <th>Layanan</th>
           <th>Jenis Kendaraan</th>
-          <th>Plat No.</th>
+          <th>Plat Nomor</th>
           <th>No. Telp</th>
           <th style="text-align: center;">Action</th>
         </tr>
