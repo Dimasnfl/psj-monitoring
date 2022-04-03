@@ -43,7 +43,7 @@
 	  
 	  <li <?php if ($page == 'Tipe_produk') {echo 'class="active"';} ?>>
           <a href="<?php echo base_url('Tipe_produk'); ?>">
-          <i class="fa fa-shopping-cart"></i>
+          <i class="fa fa-tags"></i>
           <span>Data Harga Produk</span>
         </a>
       </li>
@@ -64,7 +64,7 @@
      
       <li <?php if ($page == 'Transaksi') {echo 'class="active"';} ?>>
         <a href="<?php echo base_url('Transaksi'); ?>">
-          <i class="fa fa-cart-plus"></i>
+          <i class="fa fa-shopping-cart"></i>
           <span>Data Transaksi</span>
         </a>
       </li> 

@@ -17,8 +17,8 @@ class Home extends AUTH_Controller {
 		$data['jml_produk'] 	= $this->M_produk->total_rows();
 		$data['jml_tipe_produk'] 	= $this->M_tipe_produk->total_rows();
 		$data['jml_desa'] 	= $this->M_desa->total_rows();
-		$data['jml_kurir'] 	= $this->M_desa->total_rows();
-		$data['jml_transaksi'] 	= $this->M_desa->total_rows();
+		$data['jml_kurir'] 	= $this->M_kurir->total_rows();
+		$data['jml_transaksi'] 	= $this->M_transaksi->total_rows();
 		$data['userdata'] 		= $this->userdata;
 
 		$rand = array('0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f', 'f', 'g', 'h');
@@ -58,7 +58,7 @@ class Home extends AUTH_Controller {
 		}
 
 		$data['data_desa'] = json_encode($data_desa);
-		$data['data_harga'] = json_encode($data_tipe_produk);
+		$data['data_tipe_produk'] = json_encode($data_tipe_produk);
 
 		$data['page'] 			= "home";
 		$data['judul'] 			= "Beranda";
