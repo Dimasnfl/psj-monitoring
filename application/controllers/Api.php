@@ -105,7 +105,7 @@ class Api extends CI_Controller {
         $status = $this->M_user->insert_data($insert_data);
         
         if($status){
-            $insert_data['id'] = $status;
+            $insert_data['id'] = "$status";
             $insert_data['password'] = '';
             echo json_encode($this->success($insert_data));   
         }else{

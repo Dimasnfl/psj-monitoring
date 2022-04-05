@@ -10,9 +10,9 @@ class M_user extends CI_Model {
 
 	public function login($nik, $password){
 		$md5Password = md5($password);
-		$sql = "SELECT * FROM user WHERE password = '".$md5Password."' AND nik = '".$nik."'";
-		$data = $this->db->query($sql);
-		return $data->result();
+		$this->db->select("user.*")->from("user")->where("password", $md5Password)->where("nik",$nik);
+		$query = $this->db->get();
+		return $query->result();
 	}
 	public function set_access_token($id,$access_token){
 		$sql = "UPDATE user set access_token = '".$access_token."' WHERE id = ".$id."";
