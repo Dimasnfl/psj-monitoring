@@ -161,8 +161,8 @@ class Api extends CI_Controller {
     }
     //2.5 get dusun
     public function get_dusun(){
-        $this->load->model('M_Desa');
-        $data = $this->M_Desa->select_all();
+        $this->load->model('M_desa');
+        $data = $this->M_desa->select_all();
         if($data){
             echo json_encode($this->success($data));
         }else{
