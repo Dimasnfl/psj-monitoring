@@ -159,6 +159,17 @@ class Api extends CI_Controller {
         }
         
     }
+    //2.5 get dusun
+    public function get_dusun(){
+        $this->load->model('M_Desa');
+        $data = $this->M_Desa->select_all();
+        if($data){
+            echo json_encode($this->success($data));
+        }else{
+            echo json_encode($this->error(500, 'something went wrong'));
+        }
+
+    }
     //END API - APP DATA
 
     //API - 3. USER DATA
