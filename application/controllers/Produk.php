@@ -11,8 +11,8 @@ class Produk extends AUTH_Controller {
 		$data['userdata'] = $this->userdata;
 		$data['dataProduk'] = $this->M_produk->select_all();
 		$data['page'] = "Produk";
-		$data['judul'] = "Data Produk";
-		$data['deskripsi'] = "Manage Data Produk";
+		$data['judul'] = "Data E-Commodity";
+		$data['deskripsi'] = "Manage Data E-Commodity";
 		$data["alamat"] = "Alamat";
 
 		$this->template->views('produk/home', $data);

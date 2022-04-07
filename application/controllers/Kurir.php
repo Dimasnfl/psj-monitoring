@@ -11,7 +11,7 @@ class Kurir extends AUTH_Controller {
 		$data['userdata'] 	= $this->userdata;
 		$data['dataKurir'] 	= $this->M_kurir->select_all();
 
-		$data['page'] 		= "kurir";
+		$data['page'] 		= "Kurir";
 		$data['judul'] 		= "Data Kurir";
 		$data['deskripsi'] 	= "Manage Data Kurir";
 

@@ -40,7 +40,7 @@
         </a>
       </li>
 	  
-	  <li <?php if ($page == 'Tipe_produk') {echo 'class="active"';} ?>>
+      <li <?php if ($page == 'Tipe Produk') {echo 'class="active"';} ?>>
           <a href="<?php echo base_url('Tipe_produk'); ?>">
           <i class="fa fa-tags"></i>
           <span>Data Harga Produk</span>
@@ -48,7 +48,7 @@
       </li>
 	  
 	  <li <?php if ($page == 'Desa') {echo 'class="active"';} ?>>
-        <a href="<?php echo base_url('desa'); ?>">
+        <a href="<?php echo base_url('Desa'); ?>">
           <i class="fa fa-location-arrow"></i>
           <span>Data Dusun</span>
         </a>

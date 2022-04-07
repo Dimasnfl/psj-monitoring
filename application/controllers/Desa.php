@@ -11,9 +11,9 @@ class Desa extends AUTH_Controller {
 		$data['userdata'] 	= $this->userdata;
 		$data['dataDesa'] 	= $this->M_desa->select_all();
 
-		$data['page'] 		= "desa";
-		$data['judul'] 		= "Data Desa";
-		$data['deskripsi'] 	= "Manage Data Desa";
+		$data['page'] 		= "Desa";
+		$data['judul'] 		= "Data Dusun";
+		$data['deskripsi'] 	= "Manage Data Dusun";
 
 		$data['modal_tambah_desa'] = show_my_modal('modals/modal_tambah_desa', 'tambah-desa', $data);
 

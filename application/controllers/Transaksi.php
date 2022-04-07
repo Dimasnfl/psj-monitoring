@@ -20,7 +20,7 @@ class Transaksi extends AUTH_Controller {
 		// $data['dataProduk'] 	= $this->M_produk->select_all();
 		$data['dataStatus_transaksi'] 	= $this->M_status_transaksi->select_all();
 
-		$data['page'] 		= "transaksi";
+		$data['page'] 		= "Transaksi";
 		$data['judul'] 		= "Data transaksi";
 		$data['deskripsi'] 	= "Manage Data transaksi";
 

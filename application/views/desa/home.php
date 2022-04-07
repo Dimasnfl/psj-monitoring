@@ -17,7 +17,7 @@
       <thead>
         <tr>
           <th>No</th>
-          <th>Nama Desa</th>
+          <th>Nama Dusun</th>
           <th style="text-align: center;">Action</th>
         </tr>
       </thead>
