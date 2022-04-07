@@ -21,6 +21,8 @@
           <th>Foto</th>
           <th>No Telp</th>
           <th>Asal Dusun</th>
+          <th>Total Luas Lahan</th>
+
           <th style="text-align: center;">Action</th>
         </tr>
       </thead>

@@ -26,12 +26,11 @@ class Kurir extends AUTH_Controller {
 	}
 
 	public function prosesTambah() {
-		$this->form_validation->set_rules('nama', 'nama', 'trim|required');
-		$this->form_validation->set_rules('layanan', 'layanan', 'trim|required');
-		$this->form_validation->set_rules('jenis_kendaraan', 'jenis_kendaraan', 'trim|required');
-		$this->form_validation->set_rules('plat_no', 'plat_no', 'trim|required');
-		$this->form_validation->set_rules('no_telp', 'no_telp', 'trim|required');
-		$this->form_validation->set_rules('created_at', 'created_at', 'trim|required');
+		$this->form_validation->set_rules('nama', 'Nama Kurir', 'trim|required');
+		$this->form_validation->set_rules('jenis_kendaraan', 'Jenis Kendaraan', 'trim|required');
+		$this->form_validation->set_rules('plat_no', 'Plat Nomor Kendaraan', 'trim|required');
+		$this->form_validation->set_rules('no_telp', 'No.Telp Kurir', 'trim|required|numeric');
+		$this->form_validation->set_rules('created_at', 'Tanggal Pembuatan Data', 'trim|required');
 		$data 	= $this->input->post();
 		if ($this->form_validation->run() == TRUE) {
 			$result = $this->M_kurir->insert($data);
@@ -59,12 +58,11 @@ class Kurir extends AUTH_Controller {
 	}
 
 	public function prosesUpdate() {
-		$this->form_validation->set_rules('nama', 'nama', 'trim|required');
-		$this->form_validation->set_rules('layanan', 'layanan', 'trim|required');
-		$this->form_validation->set_rules('jenis_kendaraan', 'jenis_kendaraan', 'trim|required');
-		$this->form_validation->set_rules('plat_no', 'plat_no', 'trim|required');
-		$this->form_validation->set_rules('no_telp', 'no_telp', 'trim|required');
-		$this->form_validation->set_rules('updated_at', 'updated_at', 'trim|required');
+		$this->form_validation->set_rules('nama', 'Nama Kurir', 'trim|required');
+		$this->form_validation->set_rules('jenis_kendaraan', 'Jenis Kendaraan', 'trim|required');
+		$this->form_validation->set_rules('plat_no', 'Plat Nomor Kendaraan', 'trim|required');
+		$this->form_validation->set_rules('no_telp', 'No.Telp Kurir', 'trim|required|numeric');
+	    // $this->form_validation->set_rules('updated_at', 'Tanggal Update Data', 'trim|required');
 		$data 	= $this->input->post();
 		if ($this->form_validation->run() == TRUE) {
 			$result = $this->M_kurir->update($data);

@@ -5,7 +5,7 @@
 <div class="box">
   <div class="box-header">
     <div class="col-md-6" style="padding: 0;">
-      <button class="form-control btn btn-primary" data-toggle="modal" data-target="#tambah-tipe_produk"><i class="glyphicon glyphicon-plus-sign"></i> Tambah Data</button>
+      <button class="form-control btn btn-primary" data-toggle="modal" data-target="#tambah-tipe_produk"><i class="glyphicon glyphicon-plus-sign"></i>  Tambah Data E-Commodity Baru</button>
     </div>
     <div class="col-md-6">
         <a href="<?php echo base_url('Tipe_produk/export'); ?>" class="form-control btn btn-default"><i class="glyphicon glyphicon glyphicon-floppy-open"></i> Export Data Excel</a>

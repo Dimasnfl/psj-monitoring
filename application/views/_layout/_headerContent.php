@@ -22,7 +22,7 @@
 
 	  		if ($i == 0 && $i == (count($this->session->flashdata('segment'))-1)) {
 	  		?>
-				<li class="active"> Here </li>
+				<!-- <li class="active">  </li>here -->
 	  		<?php
 	  		}
 	  	}

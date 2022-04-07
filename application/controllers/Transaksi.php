@@ -7,7 +7,7 @@ class Transaksi extends AUTH_Controller {
 		$this->load->model('M_transaksi');
 		$this->load->model('M_kurir');
 		$this->load->model('M_user');
-		$this->load->model('M_produk');
+		// $this->load->model('M_produk');
 		$this->load->model('M_status_transaksi');
 
 	}
@@ -15,9 +15,9 @@ class Transaksi extends AUTH_Controller {
 	public function index() {
 		$data['userdata'] 	= $this->userdata;
 		$data['dataTransaksi'] 	= $this->M_transaksi->select_all();
-		$data['dataKurir'] 	= $this->M_kurir->select_all();
+	    $data['dataKurir'] 	= $this->M_kurir->select_all();
 		$data['dataUser'] 	= $this->M_user->select_all();
-		$data['dataProduk'] 	= $this->M_produk->select_all();
+		// $data['dataProduk'] 	= $this->M_produk->select_all();
 		$data['dataStatus_transaksi'] 	= $this->M_status_transaksi->select_all();
 
 		$data['page'] 		= "transaksi";
@@ -35,11 +35,16 @@ class Transaksi extends AUTH_Controller {
 	}
 
 	public function prosesTambah() {
-		$this->form_validation->set_rules('no_resi', 'no_resi', 'trim|required');
-		$this->form_validation->set_rules('tanggal_pengambilan', 'tanggal_pengambilan', 'trim|required');
-		$this->form_validation->set_rules('tanggal_diambil', 'tanggal_diambil', 'trim|required');
-		$this->form_validation->set_rules('biaya_angkut', 'biaya_angkut', 'trim|required');
-		$this->form_validation->set_rules('created_at', 'created_at', 'trim|required');
+		$this->form_validation->set_rules('no_resi', 'Nomor Resi', 'trim|required');
+		$this->form_validation->set_rules('tanggal_pengambilan', 'Tanggal Pengambilan', 'trim|required');
+		$this->form_validation->set_rules('tanggal_diambil', 'Tanggal Diambil', 'trim|required');
+		 $this->form_validation->set_rules('id_kurir', 'Kurir', 'trim|required');		
+		 $this->form_validation->set_rules('id_user', 'Petani', 'trim|required');	
+		$this->form_validation->set_rules('id_produk', 'Produk', 'trim|required');
+		$this->form_validation->set_rules('tanggal_sampai', 'Tanggal Sampai', 'trim|required');
+		$this->form_validation->set_rules('biaya_angkut', 'Jumlah Biaya Angkut', 'trim|required|numeric');
+		$this->form_validation->set_rules('id_status_transaksi', 'Status Transaksi', 'trim|required');
+		$this->form_validation->set_rules('created_at', 'Tanggal Data Dibuat', 'trim|required');
 
 		$data 	= $this->input->post();
 		if ($this->form_validation->run() == TRUE) {
@@ -68,15 +73,15 @@ class Transaksi extends AUTH_Controller {
 	}
 
 	public function prosesUpdate() {
-		$this->form_validation->set_rules('no_resi', 'no_resi', 'trim|required');
-		$this->form_validation->set_rules('tanggal_pengambilan', 'tanggal_pengambilan', 'trim|required');
-		$this->form_validation->set_rules('tanggal_diambil', 'tanggal_diambil', 'trim|required');
-		$this->form_validation->set_rules('id_kurir', 'id_kurir', 'trim|required');		
-		$this->form_validation->set_rules('id_user', 'id_user', 'trim|required');	
-		$this->form_validation->set_rules('id_produk', 'id_produk', 'trim|required');	
-		$this->form_validation->set_rules('tanggal_sampai', 'tanggal_sampai', 'trim|required');
-		$this->form_validation->set_rules('biaya_angkut', 'biaya_angkut', 'trim|required');
-		$this->form_validation->set_rules('id_status_transaksi', 'id_status_transaksi', 'trim|required');
+		$this->form_validation->set_rules('no_resi', 'Nomor Resi', 'trim|required');
+		$this->form_validation->set_rules('tanggal_pengambilan', 'Tanggal Pengambilan', 'trim|required');
+		$this->form_validation->set_rules('tanggal_diambil', 'Tanggal Diambil', 'trim|required');
+		$this->form_validation->set_rules('id_kurir', 'Kurir', 'trim|required');		
+		$this->form_validation->set_rules('id_user', 'User', 'trim|required');	
+		$this->form_validation->set_rules('id_produk', 'Produk', 'trim|required');	
+		$this->form_validation->set_rules('tanggal_sampai', 'Tanggal Sampai', 'trim|required');
+		$this->form_validation->set_rules('biaya_angkut', 'Jumlah Biaya Angkut', 'trim|required|numeric');
+		$this->form_validation->set_rules('id_status_transaksi', 'Status Transaksi', 'trim|required');
 
 		$data 	= $this->input->post();
 		if ($this->form_validation->run() == TRUE) {

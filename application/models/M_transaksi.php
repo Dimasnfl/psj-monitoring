@@ -5,7 +5,7 @@ class M_transaksi extends CI_Model {
 
 
 	public function select_all() {
-		 $this->db->select('transaksi.*, kurir.nama as kurir_nama, user.nama as user_nama, status_transaksi.nama as status_transaksi_nama');
+		 $this->db->select('transaksi.id, transaksi.no_resi, transaksi.tanggal_pengambilan, transaksi.tanggal_diambil, kurir.nama as nama_kurir, user.nama as nama_user, produk.id as id_produk, transaksi.tanggal_sampai, transaksi.biaya_angkut, status_transaksi.nama as nama_status');
 		 $this->db->from('transaksi');
 		 $this->db->order_by('id', 'desc');
 		 $this->db->join('kurir', 'kurir.id = transaksi.id_kurir');
@@ -28,7 +28,7 @@ class M_transaksi extends CI_Model {
 
 
 	public function insert($data) {
-		$sql = "INSERT INTO transaksi VALUES('','" .$data['no_resi'] ."','" .$data['tanggal_pengambilan'] ."','" .$data['tanggal_diambil'] ."','" .$data['tanggal_sampai'] ."','" .$data['biaya_angkut'] ."','','" .$data['created_at'] ."','')";
+		$sql = "INSERT INTO transaksi VALUES('','" .$data['no_resi'] ."','" .$data['tanggal_pengambilan'] ."','" .$data['tanggal_diambil'] ."','" .$data['nama_kurir'] ."','" .$data['nama_user'] ."','" .$data['id_produk'] ."','" .$data['tanggal_sampai'] ."','" .$data['biaya_angkut'] ."','" .$data['id_status_transaksi'] ."','" .$data['created_at'] ."','')";
 
 		$this->db->query($sql);
 

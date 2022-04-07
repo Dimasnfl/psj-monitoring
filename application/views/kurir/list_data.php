@@ -5,7 +5,6 @@
     <tr>
       <td><?php echo $no; ?></td>
       <td><?php echo $kurir->nama; ?></td>
-      <td><?php echo $kurir->layanan; ?></td>
       <td><?php echo $kurir->jenis_kendaraan; ?></td>
       <td><?php echo $kurir->plat_no; ?></td>
       <td><?php echo $kurir->no_telp; ?></td>

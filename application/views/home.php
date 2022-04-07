@@ -17,7 +17,7 @@
     <div class="small-box bg-green">
       <div class="inner">
         <h3><?php echo $jml_produk; ?></h3>
-        <p>Data Commodity</p>
+        <p>Data E-Commodity</p>
       </div>
       <div class="icon">
         <i class="ion ion-leaf"></i>
@@ -83,7 +83,7 @@
   <div class="col-lg-6 col-xs-12">
     <div class="box box-primary">
       <div class="box-header with-border">
-        <i class="fa fa-briefcase"></i>
+        <i class="fa fa-location-arrow"></i>
         <h3 class="box-title">Statistik <small>Data Dusun</small></h3>
 
         <div class="box-tools pull-right">
@@ -102,8 +102,8 @@
   <div class="col-lg-6 col-xs-12">
     <div class="box box-primary">
       <div class="box-header with-border">
-        <i class="fa fa-briefcase"></i>
-        <h3 class="box-title">Statistik <small>Data Commodity</small></h3>
+        <i class="fa fa-leaf"></i>
+        <h3 class="box-title">Statistik <small>Data E-Commodity</small></h3>
 
         <div class="box-tools pull-right">
           <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>

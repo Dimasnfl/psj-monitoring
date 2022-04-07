@@ -22,7 +22,7 @@ class M_kurir extends CI_Model {
 
 
 	public function insert($data) {
-		$sql = "INSERT INTO kurir VALUES('','" .$data['nama'] ."','" .$data['layanan'] ."','" .$data['jenis_kendaraan'] ."','" .$data['plat_no'] ."','" .$data['no_telp'] ."','" .$data['created_at'] ."')";
+		$sql = "INSERT INTO kurir VALUES('','" .$data['nama'] ."','" .$data['jenis_kendaraan'] ."','" .$data['plat_no'] ."','" .$data['no_telp'] ."','" .$data['created_at'] ."','')";
 
 		$this->db->query($sql);
 
@@ -36,7 +36,7 @@ class M_kurir extends CI_Model {
 	}
 
 	public function update($data) {
-		$sql = " UPDATE kurir SET nama='" .$data['nama'] ."',layanan='" .$data['layanan'] ."',jenis_kendaraan='" .$data['jenis_kendaraan'] ."',plat_no='" .$data['plat_no'] ."',no_telp='" .$data['no_telp'] ."',updated_at='" .$data['updated_at'] ."' WHERE id='" .$data['id'] ."'";
+		$sql = " UPDATE kurir SET nama='" .$data['nama'] ."',jenis_kendaraan='" .$data['jenis_kendaraan'] ."',plat_no='" .$data['plat_no'] ."',no_telp='" .$data['no_telp'] ."' WHERE id='" .$data['id'] ."'";
 
 		$this->db->query($sql);
 

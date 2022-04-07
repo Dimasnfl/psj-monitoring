@@ -8,45 +8,39 @@
 
     <div class="input-group form-group">
       <span class="input-group-addon" id="sizing-addon2">
-        <i class="glyphicon glyphicon-"></i>
+        <i class="glyphicon glyphicon-user"></i>
       </span>
-      <input type="text" class="form-control" placeholder="Masukkan Nama Kurir " name="nama" aria-describedby="sizing-addon2" value="<?php echo $dataKurir->nama; ?>">
+      <input type="text" class="form-control" placeholder="Nama Kurir " name="nama" aria-describedby="sizing-addon2" value="<?php echo $dataKurir->nama; ?>">
+    </div>
+
+
+    <div class="input-group form-group">
+      <span class="input-group-addon" id="sizing-addon2">
+        <i class="glyphicon glyphicon-plane"></i>
+      </span>
+      <input type="text" class="form-control" placeholder="Jenis Kendaraan " name="jenis_kendaraan" aria-describedby="sizing-addon2" value="<?php echo $dataKurir->jenis_kendaraan; ?>">
     </div>
 
     <div class="input-group form-group">
       <span class="input-group-addon" id="sizing-addon2">
-        <i class="glyphicon glyphicon-"></i>
+        <i class="glyphicon glyphicon-road"></i>
       </span>
-      <input type="text" class="form-control" placeholder="Masukkan Nama Layanan " name="layanan" aria-describedby="sizing-addon2" value="<?php echo $dataKurir->layanan; ?>">
+      <input type="text" class="form-control" placeholder="Plat Nomor Kendaraan" name="plat_no" aria-describedby="sizing-addon2" value="<?php echo $dataKurir->plat_no; ?>">
     </div>
 
     <div class="input-group form-group">
       <span class="input-group-addon" id="sizing-addon2">
-        <i class="glyphicon glyphicon-"></i>
+        <i class="glyphicon glyphicon-phone"></i>
       </span>
-      <input type="text" class="form-control" placeholder="Masukkan Nama Jenis Kendaraan " name="jenis_kendaraan" aria-describedby="sizing-addon2" value="<?php echo $dataKurir->jenis_kendaraan; ?>">
+      <input type="text" class="form-control" placeholder="No.Telp Kurir" name="no_telp" aria-describedby="sizing-addon2" value="<?php echo $dataKurir->no_telp; ?>">
     </div>
 
-    <div class="input-group form-group">
+    <!-- <div class="input-group form-group">
       <span class="input-group-addon" id="sizing-addon2">
         <i class="glyphicon glyphicon-"></i>
       </span>
-      <input type="text" class="form-control" placeholder="Masukkan Nomor Plat Kendaraan  " name="plat_no" aria-describedby="sizing-addon2" value="<?php echo $dataKurir->plat_no; ?>">
-    </div>
-
-    <div class="input-group form-group">
-      <span class="input-group-addon" id="sizing-addon2">
-        <i class="glyphicon glyphicon-"></i>
-      </span>
-      <input type="text" class="form-control" placeholder="Masukkan Nomor Telepon " name="no_telp" aria-describedby="sizing-addon2" value="<?php echo $dataKurir->no_telp; ?>">
-    </div>
-
-    <div class="input-group form-group">
-      <span class="input-group-addon" id="sizing-addon2">
-        <i class="glyphicon glyphicon-"></i>
-      </span>
-      <input type="date" class="form-control" placeholder="Masukkan Tanggal Data di Update " name="updated_at" aria-describedby="sizing-addon2" value="<?php echo $dataKurir->updated_at; ?>">
-    </div>
+      <input type="datetime-local" class="form-control" placeholder="Masukkan Tanggal Data di Update " name="updated_at" aria-describedby="sizing-addon2" value="<?php echo $dataKurir->updated_at; ?>">
+    </div> -->
 
     <div class="form-group">
       <div class="col-md-12">

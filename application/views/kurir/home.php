@@ -7,9 +7,9 @@
     <div class="col-md-6" style="padding: 0;">
         <button class="form-control btn btn-primary" data-toggle="modal" data-target="#tambah-kurir"><i class="glyphicon glyphicon-plus-sign"></i> Tambah Data</button>
     </div>
-    <div class="col-md-6">
+    <!-- <div class="col-md-6">
         <a href="<?php echo base_url('Kurir/export'); ?>" class="form-control btn btn-default"><i class="glyphicon glyphicon glyphicon-floppy-open"></i> Export Data Excel</a>
-    </div>
+    </div> -->
  </div>
   <!-- /.box-header -->
   <div class="box-body">
@@ -18,7 +18,6 @@
         <tr>
           <th>No</th>
           <th>Nama Kurir</th>
-          <th>Layanan</th>
           <th>Jenis Kendaraan</th>
           <th>Plat Nomor</th>
           <th>No. Telp</th>

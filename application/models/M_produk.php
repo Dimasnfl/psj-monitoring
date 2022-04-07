@@ -9,7 +9,7 @@ class M_produk extends CI_Model {
 	}
 
 	public function select_all() {
-		$this->db->select('produk.*, user.nama as user_nama, tipe_produk.nama as tipe_produk_nama, tipe_produk.harga as tipe_produk_harga, status_produk.nama as status_produk_nama');
+		$this->db->select('produk.id,user.nik as user_nik, user.nama as user_nama, tipe_produk.nama as tipe_produk_nama, produk.tgl_tanam, produk.tgl_panen, produk.berat_panen,  tipe_produk.harga as tipe_produk_harga, produk.luas_lahan, produk.alamat, status_produk.nama as status_produk_nama');
 		$this->db->from('produk');
 		$this->db->order_by('id', 'desc');
 		$this->db->join('user', 'user.id = produk.id_user');

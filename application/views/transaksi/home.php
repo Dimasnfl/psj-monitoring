@@ -41,7 +41,7 @@
   </div>
 </div>
 
-<?php echo $modal_tambah_transaksi; ?>
+<!-- <?php echo $modal_tambah_transaksi; ?> -->
 
 <div id="tempat-modal"></div>
 

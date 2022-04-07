@@ -6,45 +6,39 @@
   <form id="form-tambah-kurir" method="POST">
     <div class="input-group form-group">
       <span class="input-group-addon" id="sizing-addon2">
-        <i class="glyphicon glyphicon-"></i>
+        <i class="glyphicon glyphicon-user"></i>
       </span>
-      <input type="text" class="form-control" placeholder="Masukkan Nama Kurir" name="nama" aria-describedby="sizing-addon2">
+      <input type="text" class="form-control" placeholder="Nama Kurir" name="nama" aria-describedby="sizing-addon2">
     </div>
 
     <div class="input-group form-group">
       <span class="input-group-addon" id="sizing-addon2">
-        <i class="glyphicon glyphicon-"></i>
+        <i class="glyphicon glyphicon-plane"></i>
       </span>
-      <input type="text" class="form-control" placeholder="Masukkan Nama Layanan" name="layanan" aria-describedby="sizing-addon2">
+      <input type="text" class="form-control" placeholder="Jenis Kendaraan" name="jenis_kendaraan" aria-describedby="sizing-addon2">
     </div>
 
     <div class="input-group form-group">
       <span class="input-group-addon" id="sizing-addon2">
-        <i class="glyphicon glyphicon-"></i>
+        <i class="glyphicon glyphicon-road"></i>
       </span>
-      <input type="text" class="form-control" placeholder="Masukkan Nama Jenis Kendaraan" name="jenis_kendaraan" aria-describedby="sizing-addon2">
+      <input type="text" class="form-control" placeholder="Plat Nomor Kendaraan" name="plat_no" aria-describedby="sizing-addon2">
     </div>
 
     <div class="input-group form-group">
       <span class="input-group-addon" id="sizing-addon2">
-        <i class="glyphicon glyphicon-"></i>
+        <i class="glyphicon glyphicon-phone"></i>
       </span>
-      <input type="text" class="form-control" placeholder="Masukkan No Plat Kendaraan" name="plat_no" aria-describedby="sizing-addon2">
+      <input type="text" class="form-control" placeholder="No.Telp Kurir" name="no_telp" aria-describedby="sizing-addon2">
     </div>
 
-    <div class="input-group form-group">
+   <div class="input-group form-group">
       <span class="input-group-addon" id="sizing-addon2">
-        <i class="glyphicon glyphicon-"></i>
+        <i class="glyphicon glyphicon-calendar"></i>
       </span>
-      <input type="text" class="form-control" placeholder="Masukkan Nomor Telepon" name="no_telp" aria-describedby="sizing-addon2">
+      <input type="datetime-local" class="form-control" placeholder="Tanggal Data di Tambahkan " name="created_at" aria-describedby="sizing-addon2">
     </div>
 
-    <div class="input-group form-group">
-      <span class="input-group-addon" id="sizing-addon2">
-        <i class="glyphicon glyphicon-"></i>
-      </span>
-      <input type="date" class="form-control" placeholder="Masukkan Tanggal Memasukkan Data" name="created_at" aria-describedby="sizing-addon2">
-    </div>
     <div class="form-group">
       <div class="col-md-12">
           <button type="submit" class="form-control btn btn-primary"> <i class="glyphicon glyphicon-ok"></i> Tambah Data</button>

@@ -7,15 +7,16 @@
     <!-- <div class="col-md-6" style="padding: 0;">
         <button class="form-control btn btn-primary" data-toggle="modal" data-target="#tambah-produk"><i class="glyphicon glyphicon-plus-sign"></i> Tambah Data</button>
     </div> -->
-    <div class="col-md-18">
+    <!-- <div class="col-md-18">
         <a href="<?php echo base_url('Produk/export'); ?>" class="form-control btn btn-default"><i class="glyphicon glyphicon glyphicon-floppy-open"></i> Export Data Excel</a>
     </div>
-  </div>
+  </div> -->
   <!-- /.box-header -->
   <div class="box-body">
     <table id="list-data" class="table table-bordered table-striped">
       <thead>
         <tr>
+          <th>NIK</th>
           <th>Nama Petani</th>
           <th>Jenis Produk</th>
           <th>Tanggal Tanam</th>
@@ -25,7 +26,7 @@
           <th>Luas Lahan</th>         
           <th>Alamat</th>
           <th>Status</th>  
-          <!-- <th>Created_at</th> -->
+
           <th style="text-align: center;">Action</th>
         </tr>
       </thead>

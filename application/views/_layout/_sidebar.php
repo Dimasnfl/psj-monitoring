@@ -25,8 +25,7 @@
           <span>Home</span>
         </a>
       </li>
-    <br>
-      <li class="header">PETANI SEJAHTERA</li>
+
 	  <li <?php if ($page == 'User') {echo 'class="active"';} ?>>
           <a href="<?php echo base_url('User'); ?>">
           <i class="fa fa-user"></i>
@@ -37,7 +36,7 @@
 	  <li <?php if ($page == 'Produk') {echo 'class="active"';} ?>>
           <a href="<?php echo base_url('Produk'); ?>">
           <i class="fa fa-leaf"></i>
-          <span>Data Commodity</span>
+          <span>Data E-Commodity</span>
         </a>
       </li>
 	  

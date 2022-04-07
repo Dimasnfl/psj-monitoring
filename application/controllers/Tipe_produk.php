@@ -5,6 +5,7 @@ class Tipe_produk extends AUTH_Controller {
 	public function __construct() {
 		parent::__construct();
 		$this->load->model('M_tipe_produk');
+		
 	}
 
 	public function index() {
@@ -26,12 +27,10 @@ class Tipe_produk extends AUTH_Controller {
 	}
 
 	public function prosesTambah() {
+	    // $this->form_validation->set_rules('foto', 'foto', 'trim');
 		$this->form_validation->set_rules('nama', 'nama', 'trim|required');
 		$this->form_validation->set_rules('harga', 'harga', 'trim|required');
 		$this->form_validation->set_rules('tanggal', 'tanggal', 'trim|required');
-
-
-
 		$data 	= $this->input->post();
 		if ($this->form_validation->run() == TRUE) {
 			$result = $this->M_tipe_produk->insert($data);
@@ -61,6 +60,7 @@ class Tipe_produk extends AUTH_Controller {
 	}
 
 	public function prosesUpdate() {
+		// $this->form_validation->set_rules('foto', 'foto', 'trim');
 		$this->form_validation->set_rules('nama', 'nama', 'trim|required');
 		$this->form_validation->set_rules('harga', 'harga', 'trim|required');
 		

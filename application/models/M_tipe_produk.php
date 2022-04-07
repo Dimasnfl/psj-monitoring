@@ -3,9 +3,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class M_tipe_produk extends CI_Model {
 	public function select_all() {
-		$this->db->select('tipe_produk.*');
+		$this->db->select('*');
 		$this->db->from('tipe_produk');
 		$this->db->order_by('id', 'desc');
+		$this->db->where('terbaru', '1');
 		$query = $this->db->get();
 		return $query->result();
 	}
@@ -28,7 +29,7 @@ class M_tipe_produk extends CI_Model {
 	}
 
 	public function insert($data) {
-		$sql = "INSERT INTO tipe_produk VALUES('','" .$data['nama'] ."','" .$data['harga'] ."','" .$data['tanggal'] ."')";
+		$sql = "INSERT INTO tipe_produk VALUES('','','" .$data['nama'] ."','" .$data['harga'] ."','" .$data['tanggal'] ."','')";
 
 		$this->db->query($sql);
 
