@@ -3,7 +3,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class M_user extends CI_Model {
 	public function select_all_user() {
+		$this->db->select('user.*, desa.nama as desa_nama');
 		$this->db->from('user');
+		$this->db->order_by('nama', 'asc');
+		$this->db->join('desa', 'desa.id = user.id_desa');
 		$query = $this->db->get();
 		return $query->result();
 	}

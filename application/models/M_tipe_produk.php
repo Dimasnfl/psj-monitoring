@@ -2,8 +2,18 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class M_tipe_produk extends CI_Model {
+
 	public function select_all() {
 		$this->db->select('*');
+		$this->db->from('tipe_produk');
+		$this->db->order_by('id', 'desc');
+		$this->db->where('terbaru', '1');
+		$query = $this->db->get();
+		return $query->result();
+	}
+
+	public function select_all_tipe_produk() {
+		$this->db->select('tipe_produk.id, tipe_produk.nama, tipe_produk.harga, tipe_produk.tanggal');
 		$this->db->from('tipe_produk');
 		$this->db->order_by('id', 'desc');
 		$this->db->where('terbaru', '1');
