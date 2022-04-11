@@ -29,10 +29,12 @@ class M_user extends CI_Model {
 
 	
 	public function select_all() {
-		$this->db->select('user.*, desa.nama as desa_nama');
+		$this->db->select('user.*, desa.nama as desa_nama, SUM(produk.luas_lahan) as total_luas_lahan');
 		$this->db->from('user');
 		$this->db->order_by('id', 'desc');
 		$this->db->join('desa', 'desa.id = user.id_desa');
+		$this->db->join('produk','produk.id_user = user.id');
+		$this->db->group_by('produk.id_user');
 		$query = $this->db->get();
 		return $query->result();
 	}
