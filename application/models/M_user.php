@@ -28,19 +28,19 @@ class M_user extends CI_Model {
 	}
 
 	
-	public function select_all() {
-		$this->db->select('user.*, desa.nama as desa_nama, SUM(produk.luas_lahan) as total_luas_lahan');
-		$this->db->from('user');
-		$this->db->order_by('id', 'desc');
-		$this->db->join('desa', 'desa.id = user.id_desa');
-		$this->db->join('produk','produk.id_user = user.id');
-		$this->db->group_by('produk.id_user');
-		$query = $this->db->get();
-		return $query->result();
-	}
+	 public function select_all() {
+	 	$this->db->select('user.*, desa.nama as desa_nama, SUM(produk.luas_lahan) as total_luas_lahan');
+	 	$this->db->from('user');
+	 	$this->db->order_by('nama', 'asc');
+	 	$this->db->join('desa', 'desa.id = user.id_desa');
+	 	$this->db->join('produk','produk.id_user = user.id');
+	 	$this->db->group_by('produk.id_user');
+	 	$query = $this->db->get();
+	 	return $query->result();
+	 }
 
 	public function select_by_id($id) {
-		$sql = "SELECT user.id AS id_user, user.nik AS NIK_user, user.nama AS nama_user, user.id_desa, user.telp AS telp, desa.nama AS desa, 
+		$sql = "SELECT user.id AS id_user, user.nik, user.nama, desa.nama AS desa, user.id_desa, user.telp 
 		FROM user, desa
 		WHERE user.id_desa = desa.id AND user.id = '{$id}'";
 
@@ -67,6 +67,13 @@ class M_user extends CI_Model {
 		return $this->db->affected_rows();
 	}
 
+	public function update($data) {
+		$sql = "UPDATE user SET nik='" .$data['nik'] ."', nama='" .$data['nama'] ."', id_desa='" .$data['id_desa'] ."', telp='" .$data['telp'] ."' WHERE id='" .$data['id'] ."'";
+
+		$this->db->query($sql);
+
+		return $this->db->affected_rows();
+	}
 
 
 	public function insert($data) {
@@ -101,7 +108,13 @@ class M_user extends CI_Model {
 	}
 
 	public function total_rows() {
-		$data = $this->db->get('user');
+		$this->db->select('user.*, desa.nama as desa_nama, SUM(produk.luas_lahan) as total_luas_lahan');
+	 	$this->db->from('user');
+	 	$this->db->order_by('nama', 'asc');
+	 	$this->db->join('desa', 'desa.id = user.id_desa');
+	 	$this->db->join('produk','produk.id_user = user.id');
+	 	$this->db->group_by('produk.id_user');
+		$data = $this->db->get('');
 
 		return $data->num_rows();
 	}

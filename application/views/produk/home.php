@@ -16,6 +16,7 @@
     <table id="list-data" class="table table-bordered table-striped">
       <thead>
         <tr>
+          <th>No</th>
           <th>NIK</th>
           <th>Nama Petani</th>
           <th>Jenis Produk</th>

@@ -5,11 +5,17 @@ class Produk extends AUTH_Controller {
 	public function __construct() {
 		parent::__construct();
 		$this->load->model('M_produk');
+		$this->load->model('M_user');
+		$this->load->model('M_tipe_produk');
+		$this->load->model('M_status_produk');
+
 	}
 
 	public function index() {
 		$data['userdata'] = $this->userdata;
 		$data['dataProduk'] = $this->M_produk->select_all();
+		$data['dataUser'] = $this->M_user->select_all();
+		$data['dataTipe_produk'] = $this->M_tipe_produk->select_all();
 		$data['page'] = "Produk";
 		$data['judul'] = "Data E-Commodity";
 		$data['deskripsi'] = "Manage Data E-Commodity";
@@ -21,6 +27,47 @@ class Produk extends AUTH_Controller {
 	public function tampil() {
 		$data['dataProduk'] = $this->M_produk->select_all();
 		$this->load->view('produk/list_data', $data);
+	}
+
+
+	public function update() {
+		$id = trim($_POST['id']);
+
+		$data['dataProduk'] = $this->M_produk->select_by_id($id);
+		$data['dataUser'] = $this->M_user->select_all();
+		$data['dataTipe_produk'] = $this->M_tipe_produk->select_all();
+		$data['dataStatus_produk'] = $this->M_status_produk->select_all();
+		$data['userdata'] = $this->userdata;
+
+		echo show_my_modal('modals/modal_update_produk', 'update-produk', $data);
+	}
+
+	public function prosesUpdate() {
+		$this->form_validation->set_rules('id_user', 'Nama User', 'trim|required');
+		$this->form_validation->set_rules('berat_panen', 'Berat Panen', 'trim|required');
+		$this->form_validation->set_rules('luas_lahan', 'Luas Lahan', 'trim|required');
+		$this->form_validation->set_rules('id_tipe_produk', 'Nama Produk', 'trim|required');
+		$this->form_validation->set_rules('id_status_produk', 'Status', 'trim|required');	
+		$this->form_validation->set_rules('alamat', 'Alamat', 'trim|required');
+
+
+		$data = $this->input->post();
+		if ($this->form_validation->run() == TRUE) {
+			$result = $this->M_produk->update($data);
+
+			if ($result > 0) {
+				$out['status'] = '';
+				$out['msg'] = show_succ_msg('Data E-Commodity Berhasil diupdate', '20px');
+			} else {
+				$out['status'] = '';
+				$out['msg'] = show_succ_msg('Data E-Commodity Gagal diupdate', '20px');
+			}
+		} else {
+			$out['status'] = 'form';
+			$out['msg'] = show_err_msg(validation_errors());
+		}
+
+		echo json_encode($out);
 	}
 
 

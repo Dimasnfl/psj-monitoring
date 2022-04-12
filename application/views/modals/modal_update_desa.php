@@ -5,6 +5,7 @@
 
   <form id="form-update-desa" method="POST">
     <input type="hidden" name="id" value="<?php echo $dataDesa->id; ?>">
+    <label>Nama Dusun*</label>
     <div class="input-group form-group">
       <span class="input-group-addon" id="sizing-addon2">
         <i class="glyphicon glyphicon-home"></i>

@@ -6,6 +6,8 @@
   <form id="form-update-kurir" method="POST">
     <input type="hidden" name="id" value="<?php echo $dataKurir->id; ?>">
 
+
+    <label>Nama Kurir*</label>
     <div class="input-group form-group">
       <span class="input-group-addon" id="sizing-addon2">
         <i class="glyphicon glyphicon-user"></i>
@@ -13,7 +15,7 @@
       <input type="text" class="form-control" placeholder="Nama Kurir " name="nama" aria-describedby="sizing-addon2" value="<?php echo $dataKurir->nama; ?>">
     </div>
 
-
+    <label>Jenis Kendaraan*</label>
     <div class="input-group form-group">
       <span class="input-group-addon" id="sizing-addon2">
         <i class="glyphicon glyphicon-plane"></i>
@@ -21,6 +23,7 @@
       <input type="text" class="form-control" placeholder="Jenis Kendaraan " name="jenis_kendaraan" aria-describedby="sizing-addon2" value="<?php echo $dataKurir->jenis_kendaraan; ?>">
     </div>
 
+    <label>Plat Nomor Kendaraan*</label>
     <div class="input-group form-group">
       <span class="input-group-addon" id="sizing-addon2">
         <i class="glyphicon glyphicon-road"></i>
@@ -28,6 +31,7 @@
       <input type="text" class="form-control" placeholder="Plat Nomor Kendaraan" name="plat_no" aria-describedby="sizing-addon2" value="<?php echo $dataKurir->plat_no; ?>">
     </div>
 
+    <label>No.Telp Kurir*</label>
     <div class="input-group form-group">
       <span class="input-group-addon" id="sizing-addon2">
         <i class="glyphicon glyphicon-phone"></i>

@@ -76,7 +76,11 @@ class M_tipe_produk extends CI_Model {
 	}
 
 	public function total_rows() {
-		$data = $this->db->get('tipe_produk');
+		$this->db->select('*');
+		$this->db->from('tipe_produk');
+		$this->db->order_by('id', 'desc');
+		$this->db->where('terbaru', '1');
+		$data = $this->db->get('');
 
 		return $data->num_rows();
 	}

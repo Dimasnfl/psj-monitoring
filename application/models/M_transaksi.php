@@ -29,8 +29,9 @@ class M_transaksi extends CI_Model {
 
 
 	public function select_by_id($id) {
-		$sql = "SELECT * FROM transaksi WHERE id = '{$id}'";
-
+		$sql = "SELECT transaksi.id AS id_transaksi, transaksi.no_resi, transaksi.id_kurir, transaksi.id_user, transaksi.id_produk, transaksi.tanggal_sampai, transaksi.biaya_angkut, transaksi.id_status_transaksi, kurir.nama AS kurir, user.nama AS user, status_transaksi.nama AS status_transaksi 
+		FROM transaksi, user, produk, status_transaksi, kurir 
+		WHERE transaksi.id_kurir = kurir.id AND transaksi.id_user = user.id AND transaksi.id_status_transaksi = status_transaksi.id AND transaksi.id_produk = produk.id AND transaksi.id = '{$id}'";
 		$data = $this->db->query($sql);
 
 		return $data->row();
@@ -53,7 +54,7 @@ class M_transaksi extends CI_Model {
 	}
 
 	public function update($data) {
-		$sql = "UPDATE transaksi SET no_resi='" .$data['no_resi'] ."',tanggal_pengambilan='" .$data['tanggal_pengambilan'] ."',tanggal_diambil='" .$data['tanggal_diambil'] ."',id_kurir='" .$data['id_kurir'] ."',id_user='" .$data['id_user'] ."',id_produk='" .$data['id_produk'] ."',tanggal_sampai='" .$data['tanggal_sampai'] ."',biaya_angkut='" .$data['biaya_angkut'] ."',id_status_transaksi='" .$data['id_status_transaksi'] ."' WHERE id='" .$data['id'] ."'";
+		$sql = "UPDATE transaksi SET no_resi='" .$data['no_resi'] ."',id_kurir='" .$data['id_kurir'] ."',id_user='" .$data['id_user'] ."',tanggal_sampai='" .$data['tanggal_sampai'] ."',biaya_angkut='" .$data['biaya_angkut'] ."',id_status_transaksi='" .$data['id_status_transaksi'] ."' WHERE id='" .$data['id'] ."'";
 
 		$this->db->query($sql);
 

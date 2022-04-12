@@ -7,7 +7,7 @@ class Transaksi extends AUTH_Controller {
 		$this->load->model('M_transaksi');
 		$this->load->model('M_kurir');
 		$this->load->model('M_user');
-		// $this->load->model('M_produk');
+		$this->load->model('M_produk');
 		$this->load->model('M_status_transaksi');
 
 	}
@@ -17,7 +17,7 @@ class Transaksi extends AUTH_Controller {
 		$data['dataTransaksi'] 	= $this->M_transaksi->select_all();
 	    $data['dataKurir'] 	= $this->M_kurir->select_all();
 		$data['dataUser'] 	= $this->M_user->select_all();
-		// $data['dataProduk'] 	= $this->M_produk->select_all();
+	    $data['dataProduk'] 	= $this->M_produk->select_all();
 		$data['dataStatus_transaksi'] 	= $this->M_status_transaksi->select_all();
 
 		$data['page'] 		= "Transaksi";
@@ -66,19 +66,25 @@ class Transaksi extends AUTH_Controller {
 	}
 
 	public function update() {
-		$data['userdata'] 	= $this->userdata;
-		$id 				= trim($_POST['id']);
-		$data['dataTransaksi'] 	= $this->M_transaksi->select_by_id($id);
+		$id = trim($_POST['id']);
+
+		$data['dataTransaksi'] = $this->M_transaksi->select_by_id($id);
+		$data['dataUser'] = $this->M_user->select_all();
+		$data['dataProduk'] = $this->M_produk->select_all();
+		$data['dataStatus_transaksi'] = $this->M_status_transaksi->select_all();
+		$data['dataKurir'] = $this->M_kurir->select_all();
+		$data['userdata'] = $this->userdata;
+
 		echo show_my_modal('modals/modal_update_transaksi', 'update-transaksi', $data);
 	}
 
 	public function prosesUpdate() {
 		$this->form_validation->set_rules('no_resi', 'Nomor Resi', 'trim|required');
-		$this->form_validation->set_rules('tanggal_pengambilan', 'Tanggal Pengambilan', 'trim|required');
-		$this->form_validation->set_rules('tanggal_diambil', 'Tanggal Diambil', 'trim|required');
+		// $this->form_validation->set_rules('tanggal_pengambilan', 'Tanggal Pengambilan', 'trim|required');
+		// $this->form_validation->set_rules('tanggal_diambil', 'Tanggal Diambil', 'trim|required');
 		$this->form_validation->set_rules('id_kurir', 'Kurir', 'trim|required');		
 		$this->form_validation->set_rules('id_user', 'User', 'trim|required');	
-		$this->form_validation->set_rules('id_produk', 'Produk', 'trim|required');	
+		// $this->form_validation->set_rules('id_produk', 'Produk', 'trim|required');	
 		$this->form_validation->set_rules('tanggal_sampai', 'Tanggal Sampai', 'trim|required');
 		$this->form_validation->set_rules('biaya_angkut', 'Jumlah Biaya Angkut', 'trim|required|numeric');
 		$this->form_validation->set_rules('id_status_transaksi', 'Status Transaksi', 'trim|required');
@@ -89,10 +95,10 @@ class Transaksi extends AUTH_Controller {
 
 			if ($result > 0) {
 				$out['status'] = '';
-				$out['msg'] = show_succ_msg('Data transaksi Berhasil diupdate', '20px');
+				$out['msg'] = show_succ_msg('Data Transaksi Berhasil diupdate', '20px');
 			} else {
 				$out['status'] = '';
-				$out['msg'] = show_succ_msg('Data transaksi Gagal diupdate', '20px');
+				$out['msg'] = show_succ_msg('Data Transaksi Gagal diupdate', '20px');
 			}
 		} else {
 			$out['status'] = 'form';

@@ -8,7 +8,7 @@
       <td><?php echo $kurir->jenis_kendaraan; ?></td>
       <td><?php echo $kurir->plat_no; ?></td>
       <td><?php echo $kurir->no_telp; ?></td>
-      <td class="text-center" style="min-width:230px;">
+      <td class="text-center" style="min-width:100px;">
           <button class="btn btn-warning update-dataKurir" data-id="<?php echo $kurir->id; ?>"><i class="glyphicon glyphicon-edit"></i> </button>
           <button class="btn btn-danger konfirmasiHapus-kurir" data-id="<?php echo $kurir->id; ?>" data-toggle="modal" data-target="#konfirmasiHapus"><i class="glyphicon glyphicon-trash"></i> </button>
       </td>

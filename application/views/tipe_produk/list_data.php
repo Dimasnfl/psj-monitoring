@@ -9,7 +9,7 @@
       <td><h>Rp.<?php echo $tipe_produk->harga; ?>/kg</h></td>
       <td><?php echo $tipe_produk->tanggal; ?></td>
 
-      <td class="text-center" style="min-width:230px;">
+      <td class="text-center" style="min-width:100px;">
           <button class="btn btn-warning update-dataTipe_produk" data-id="<?php echo $tipe_produk->id; ?>"><i class="glyphicon glyphicon-edit"></i></button>
           <button class="btn btn-danger konfirmasiHapus-tipe_produk" data-id="<?php echo $tipe_produk->id; ?>" data-toggle="modal" data-target="#konfirmasiHapus"><i class="glyphicon glyphicon-trash"></i></button>
           <!-- <button class="btn btn-info detail-dataTipe_produk" data-id="<?php echo $tipe_produk->id; ?>"><i class="glyphicon glyphicon-info-sign"></i> Detail</button> -->

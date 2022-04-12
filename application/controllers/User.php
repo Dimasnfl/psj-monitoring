@@ -5,11 +5,13 @@ class User extends AUTH_Controller {
 	public function __construct() {
 		parent::__construct();
 		$this->load->model('M_user');
+		$this->load->model('M_desa');
 	}
 
 	public function index() {
 		$data['userdata'] = $this->userdata;
 		$data['dataUser'] = $this->M_user->select_all();
+		$data['dataDesa'] = $this->M_desa->select_all();
 		$data['page'] = "User";
 		$data['judul'] = "Data User";
 		$data['deskripsi'] = "Manage Data User";
@@ -23,6 +25,41 @@ class User extends AUTH_Controller {
 		$this->load->view('user/list_data', $data);
 	}
 
+	public function update() {
+		$id = trim($_POST['id']);
+
+		$data['dataUser'] = $this->M_user->select_by_id($id);
+		$data['dataDesa'] = $this->M_desa->select_all();
+		$data['userdata'] = $this->userdata;
+
+		echo show_my_modal('modals/modal_update_user', 'update-user', $data);
+	}
+
+	public function prosesUpdate() {
+		$this->form_validation->set_rules('nik', 'NIK Petani', 'trim|required');
+		$this->form_validation->set_rules('nama', 'Nama Petani', 'trim|required');
+		$this->form_validation->set_rules('id_desa', 'Asal Dusun', 'trim|required');
+		$this->form_validation->set_rules('telp', 'No.Telp Petani', 'trim|required');
+
+
+		$data = $this->input->post();
+		if ($this->form_validation->run() == TRUE) {
+			$result = $this->M_user->update($data);
+
+			if ($result > 0) {
+				$out['status'] = '';
+				$out['msg'] = show_succ_msg('Data Petani Berhasil diupdate', '20px');
+			} else {
+				$out['status'] = '';
+				$out['msg'] = show_succ_msg('Data Petani Gagal diupdate', '20px');
+			}
+		} else {
+			$out['status'] = 'form';
+			$out['msg'] = show_err_msg(validation_errors());
+		}
+
+		echo json_encode($out);
+	}
 
 	public function delete() {
 		$id = $_POST['id'];

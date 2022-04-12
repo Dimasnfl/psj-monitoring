@@ -1,7 +1,9 @@
 <?php
+  $no = 1;
   foreach ($dataProduk as $produk) {
     ?>
     <tr>
+    <td><?php echo $no; ?></td>
       <td><?php echo $produk->user_nik; ?></td>
       <td><?php echo $produk->user_nama; ?></td>
       <td><?php echo $produk->tipe_produk_nama; ?></td>
@@ -14,11 +16,13 @@
       <td><?php echo $produk->status_produk_nama; ?></td>
 
       <td class="text-center" style="min-width:50px;">
-        <button class="btn btn-danger konfirmasiHapus-produk" data-id="<?php echo $produk->id; ?>" data-toggle="modal" data-target="#konfirmasiHapus">
+      <button class="btn btn-warning update-dataProduk" data-id="<?php echo $produk->id; ?>"><i class="glyphicon glyphicon-edit"></i></button>
+        <!-- <button class="btn btn-danger konfirmasiHapus-produk" data-id="<?php echo $produk->id; ?>" data-toggle="modal" data-target="#konfirmasiHapus">
         <i class="glyphicon glyphicon-trash"></i>
-      </button>
+      </button> -->
       </td>
     </tr>
     <?php
+        $no++;
   }
 ?>
