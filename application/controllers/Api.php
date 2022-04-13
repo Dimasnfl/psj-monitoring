@@ -130,14 +130,32 @@ class Api extends CI_Controller {
     //2.2 get all available user produk
     public function produk(){
         if(!$this->validateAccessToken())return;
-        $data = $this->M_produk->select_by_user_id($this->user->id);
+        $data = $this->M_produk->select_produk_by_user_id($this->user->id);
+        echo json_encode($this->success($data));
+    }
+    //2.6 Get penjualan
+    public function penjualan(){
+        if(!$this->validateAccessToken())return;
+        $filterType = $this->input->get('filter_type');
+       
+        //sanity filter type
+        if($filterType != null){
+            foreach($filterType as $f){
+                if(($f == 3 || $f == 4 || $f == 5) == false){
+                    echo json_encode($this->error(500, 'filter only support 3,4,5'));
+                    return;
+                }
+            }
+        }
+        
+        $data = $this->M_produk->select_produk_penjualan_by_user_id($this->user->id,$filterType);
         echo json_encode($this->success($data));
     }
     //2.3 get all available produk status
     public function status_produk(){
         if(!$this->validateAccessToken())return;
 
-        $data =$this->M_tipe_produk->select_all();
+        $data =$this->M_status_produk->select_all();
         echo json_encode($this->success($data));
     }
     //2.4 create produk

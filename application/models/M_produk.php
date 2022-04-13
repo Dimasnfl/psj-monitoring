@@ -27,12 +27,40 @@ class M_produk extends CI_Model {
 	}
 
 	
-	public function select_by_user_id($id){
+	public function select_produk_by_user_id($id){
 		$this->db->select("produk.id,tipe_produk.foto as foto, tipe_produk.nama,user.telp, produk.tgl_panen, produk.tgl_tanam, tipe_produk.harga, status_produk.nama AS status,status_produk.id AS status_id, produk.luas_lahan, produk.berat_panen, produk.created_at, produk.updated_at" );
 		$this->db->from('produk');
 		$this->db->join('user','user.id = produk.id_user');
 		$this->db->join('tipe_produk','tipe_produk.id = produk.id_tipe_produk');
 		$this->db->join('status_produk', 'produk.id_status_produk = status_produk.id');
+		$this->db->where('produk.id_user', $id);
+		$this->db->where('id_status_produk',1);
+		$this->db->or_where('id_status_produk',2);
+		$this->db->order_by('updated_at','desc');
+		$query = $this->db->get();
+		return $query->result();
+	}
+
+	public function select_produk_penjualan_by_user_id($id,$filter=null){
+		$this->db->select("produk.id,tipe_produk.foto as foto, tipe_produk.nama,user.telp, produk.tgl_panen, produk.tgl_tanam, tipe_produk.harga, status_produk.nama AS status,status_produk.id AS status_id, produk.luas_lahan, produk.berat_panen, produk.created_at, produk.updated_at" );
+		$this->db->from('produk');
+		$this->db->join('user','user.id = produk.id_user');
+		$this->db->join('tipe_produk','tipe_produk.id = produk.id_tipe_produk');
+		$this->db->join('status_produk', 'produk.id_status_produk = status_produk.id');
+		$this->db->where('produk.id_user', $id);
+		if($filter != null){
+			for($i = 0;$i<count($filter); $i++){
+				if($i == 0){
+					$this->db->where('id_status_produk',$filter[$i]);
+				}else{
+					$this->db->or_where('id_status_produk', $filter[$i]);
+				}
+			}	
+		}else{
+			$this->db->where('id_status_produk',4);
+			$this->db->or_where('id_status_produk',5);
+			$this->db->or_where('id_status_produk',3);
+		}
 		$query = $this->db->get();
 		return $query->result();
 	}
