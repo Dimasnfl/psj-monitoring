@@ -23,6 +23,7 @@ class Tipe_produk extends AUTH_Controller {
 
 	public function tampil() {
 		$data['dataTipe_produk'] = $this->M_tipe_produk->select_all();
+		$data['dataHistoryProduk'] = $this->M_tipe_produk->select_all_history();
 		$this->load->view('tipe_produk/list_data', $data);
 	}
 

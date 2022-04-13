@@ -2,12 +2,21 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class M_tipe_produk extends CI_Model {
-
+	// protected $deletedField  = 'deleted_at';
+	
 	public function select_all() {
 		$this->db->select('*');
 		$this->db->from('tipe_produk');
 		$this->db->order_by('id', 'desc');
-		$this->db->where('terbaru', '1');
+		$this->db->order_by('parent_id','desc');
+		$this->db->where('deleted_at is NULL',NULL);
+		$this->db->where('terbaru',1);
+		$query = $this->db->get();
+		return $query->result();
+	}
+	public function select_all_history(){
+		$this->db->select("*");
+		$this->db->from('tipe_produk')->order_by('parent_id','desc')->where('terbaru',0);
 		$query = $this->db->get();
 		return $query->result();
 	}
@@ -53,17 +62,44 @@ class M_tipe_produk extends CI_Model {
 	}
 
 	public function update($data) {
-		$sql = "UPDATE tipe_produk SET nama='" .$data['nama'] ."',harga='" .$data['harga'] ."' WHERE id='" .$data['id'] ."'";
-
-		$this->db->query($sql);
+		//get related row
+		$currentData = $this->db->from('tipe_produk')->where('id',$data['id'])->get()->row();
+		//check that it is a master data (master data parent_id == null)
+		$parent_id = NULL;
+		if($currentData->parent_id == NULL){
+			//he is master data
+			$parent_id = $currentData->id;
+		}else{
+			$parent_id = $currentData->parent_id;
+		}
+		//update old data deleted_at.
+		$this->db->from('tipe_produk');
+		$this->db->where('id',$data['id']);
+		$this->db->set('deleted_at','NOW()',FALSE);
+		$this->db->set('terbaru',0);
+		$this->db->update('tipe_produk');
+		//create another row based on that master.
+		//create duplicate row
+		$this->db->set('tanggal','NOW()',FALSE);
+		$this->db->insert('tipe_produk',array(
+			'foto' => $currentData->foto,
+			'nama' => $currentData->nama,
+			'harga' => $data['harga'],
+			'terbaru' => 1,
+			'parent_id' => $parent_id
+		));
 
 		return $this->db->affected_rows();
 	}
-
+	//update to soft delete
 	public function delete($id) {
-		$sql = "DELETE FROM tipe_produk WHERE id='" .$id ."'";
+		// $sql = "DELETE FROM tipe_produk WHERE id='" .$id ."'";
+		$this->db->from('tipe_produk');
+		$this->db->where('id',$id);
+		$this->db->set('deleted_at','NOW()',FALSE);
+		$this->db->update('tipe_produk');
 
-		$this->db->query($sql);
+		// $this->db->query($sql);
 
 		return $this->db->affected_rows();
 	}
