@@ -15,6 +15,36 @@ class M_transaksi extends CI_Model {
 	   return $query->result();
    }
 
+   public function select_all_transaksi_by_user_id($user_id){
+	$this->db->select('transaksi.id,tipe_produk.nama as nama_produk,
+	transaksi.no_resi, transaksi.tanggal_pengambilan,
+	transaksi.tanggal_diambil,
+	kurir.nama as nama_kurir,
+	kurir.jenis_kendaraan as kendaraan,
+	kurir.plat_no as plat_nomor,
+	kurir.no_telp as no_telp_kurir,
+	user.telp as no_telp_user,
+	produk.berat_panen as berat,
+	produk.alamat as alamat,
+	produk.tgl_tanam as tgl_tanam,
+	produk.tgl_panen as tgl_panen,
+	user.nama as nama_user,
+	produk.id as id_produk,
+	transaksi.tanggal_sampai,
+	transaksi.biaya_angkut,
+	status_transaksi.nama as nama_status');
+	$this->db->from('transaksi');
+	$this->db->order_by('id', 'asc');
+	$this->db->join('kurir', 'kurir.id = transaksi.id_kurir');
+	$this->db->join('user', 'user.id = transaksi.id_user');
+	$this->db->join('produk', 'produk.id = transaksi.id_produk');
+	$this->db->join('tipe_produk','produk.id_tipe_produk = tipe_produk.id');
+	$this->db->join('status_transaksi', 'status_transaksi.id = transaksi.id_status_transaksi');		
+	$this->db->where('user.id',$user_id);
+	$query = $this->db->get();
+	return $query->result();
+   }
+
 	public function select_all() {
 		 $this->db->select('transaksi.id, transaksi.no_resi, transaksi.tanggal_pengambilan, transaksi.tanggal_diambil, kurir.nama as nama_kurir, user.nama as nama_user, produk.id as id_produk, transaksi.tanggal_sampai, transaksi.biaya_angkut, status_transaksi.nama as nama_status');
 		 $this->db->from('transaksi');
