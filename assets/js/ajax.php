@@ -202,6 +202,31 @@ function tampilUser() {
 		})
 	})
 
+	$(document).on('submit', '#form-penjemputan', function(e){
+		var data = $(this).serialize();
+
+		$.ajax({
+			method: 'POST',
+			url: '<?php echo base_url('Produk/prosesPenjemputan'); ?>',
+			data: data
+		})
+		.done(function(data) {
+			var out = jQuery.parseJSON(data);
+			tampilProduk();
+			if (out.status == 'form') {
+				$('.form-msg').html(out.msg);
+				effect_msg_form();
+			} else {
+				document.getElementById("form-penjemputan").reset();
+				$('#form-penjemputan').modal('hide');
+				$('.msg').html(out.msg);
+				effect_msg();
+			}
+		})
+		
+		e.preventDefault();
+	});
+
 	$('#form-tambah-produk').submit(function(e) {
 		var data = $(this).serialize();
 

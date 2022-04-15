@@ -1,15 +1,54 @@
 <div class="col-md-offset-1 col-md-10 col-md-offset-1 well">
   <div class="form-msg"></div>
   <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+  
   <h3 style="display:block; text-align:center;">Data penjemputan</h3>
-      <form method="POST" id="form-data-penjemputan">
+      <form method="POST" id="form-penjemputan" >
+
+      <h5>Data Penjemput</h5>
+        <label>Kurir*</label>
+        <div class="input-group form-group">
+          <span class="input-group-addon" id="sizing-addon2">
+            <i class="glyphicon glyphicon-leaf"></i>
+          </span>
+          <select name="id_kurir" class="form-control select2"  aria-describedby="sizing-addon2">
+            <?php
+            foreach ($dataKurir as $kurir) {
+              ?>
+              <option value="<?php echo $kurir->id; ?>"><?php echo "$kurir->nama - $kurir->jenis_kendaraan - $kurir->plat_no"; ?></option>
+              <?php
+            }
+            ?>
+          </select>
+        </div>
+
+        <div class="form-group"> <!-- Date input -->
+        <label class="control-label" for="date">Tanggal Penjemputan</label>
+        <input class="form-control" id="date" name="date" placeholder="MM/DD/YYY" type="text"/>
+      </div>
+      <label>Jam Penjemputan (hh:mm)*</label>
+        <div class="input-group form-group">
+          <span class="input-group-addon" id="sizing-addon2">
+            <i class="glyphicon glyphicon-grain"></i>
+          </span>
+          <input type="text" class="form-control" placeholder="-" name="jam_penjemputan" aria-describedby="sizing-addon2" placeholder="hh:mm">
+        </div>
+      
+      <label>Harga*</label>
+        <div class="input-group form-group">
+          <span class="input-group-addon" id="sizing-addon2">
+            <i class="glyphicon glyphicon-grain"></i>
+          </span>
+          <input type="number" class="form-control" placeholder="-" name="harga" aria-describedby="sizing-addon2" value="" placeholder="0">
+        </div>
+      <hr>
         <input type="hidden" name="id" value="<?php echo $dataProduk->id_produk; ?>">
         <label>Nama User*</label>
         <div class="input-group form-group">
           <span class="input-group-addon" id="sizing-addon2">
             <i class="glyphicon glyphicon-grain"></i>
           </span>
-          <input type="text" class="form-control" placeholder="-" name="berat_panen" aria-describedby="sizing-addon2" value="<?php echo $dataUser->nama; ?>" readonly>
+          <input type="text" class="form-control" placeholder="-" name="nama_user" aria-describedby="sizing-addon2" value="<?php echo $dataUser->nama; ?>" readonly>
         </div>
 
       <!-- <label>Nama Produk*</label>
@@ -24,7 +63,7 @@
           <span class="input-group-addon" id="sizing-addon2">
             <i class="glyphicon glyphicon-grain"></i>
           </span>
-          <input type="text" class="form-control" placeholder="-" name="berat_panen" aria-describedby="sizing-addon2" value="<?php echo $dataProduk->tipe_produk; ?>" readonly>
+          <input type="text" class="form-control" placeholder="-" name="nama_produk" aria-describedby="sizing-addon2" value="<?php echo $dataProduk->tipe_produk; ?>" readonly>
         </div>
 
         <label>Berat Panen*</label>
@@ -53,31 +92,11 @@
         </div>
 
         <hr>
-        <h5>Data Penjemputan</h5>
-        <label>Kurir*</label>
-        <div class="input-group form-group">
-          <span class="input-group-addon" id="sizing-addon2">
-            <i class="glyphicon glyphicon-leaf"></i>
-          </span>
-          <select name="id_tipe_produk" class="form-control select2"  aria-describedby="sizing-addon2">
-            <?php
-            foreach ($dataKurir as $kurir) {
-              ?>
-              <option value="<?php echo $kurir->id; ?>"><?php echo "$kurir->nama - $kurir->jenis_kendaraan - $kurir->plat_no"; ?></option>
-              <?php
-            }
-            ?>
-          </select>
-        </div>
-
-        <div class="form-group"> <!-- Date input -->
-        <label class="control-label" for="date">Tanggal Penjemputan</label>
-        <input class="form-control" id="date" name="date" placeholder="MM/DD/YYY" type="text"/>
-      </div>
+        
         
         <div class="form-group">
           <div class="col-md-12">
-              <button type="submit" class="form-control btn btn-primary"> <i class="glyphicon glyphicon-ok"></i> Lakukan Penjemputan</button>
+              <button class="form-control btn btn-primary"> <i class="glyphicon glyphicon-ok"></i> Lakukan Penjemputan</button>
           </div>
         </div>
       </form>
