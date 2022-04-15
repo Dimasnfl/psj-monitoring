@@ -26,12 +26,17 @@ class M_transaksi extends CI_Model {
 	user.telp as no_telp_user,
 	produk.berat_panen as berat,
 	produk.alamat as alamat,
+	tipe_produk.harga as harga,
 	produk.tgl_tanam as tgl_tanam,
 	produk.tgl_panen as tgl_panen,
 	user.nama as nama_user,
 	produk.id as id_produk,
 	transaksi.tanggal_sampai,
 	transaksi.biaya_angkut,
+	tipe_produk.foto as foto,
+	status_produk.nama as status_produk,
+	status_produk.id as status_produk_id,
+	status_transaksi.id as status_transaksi_id,
 	status_transaksi.nama as nama_status');
 	$this->db->from('transaksi');
 	$this->db->order_by('id', 'asc');
@@ -39,7 +44,8 @@ class M_transaksi extends CI_Model {
 	$this->db->join('user', 'user.id = transaksi.id_user');
 	$this->db->join('produk', 'produk.id = transaksi.id_produk');
 	$this->db->join('tipe_produk','produk.id_tipe_produk = tipe_produk.id');
-	$this->db->join('status_transaksi', 'status_transaksi.id = transaksi.id_status_transaksi');		
+	$this->db->join('status_transaksi', 'status_transaksi.id = transaksi.id_status_transaksi');
+	$this->db->join('status_produk', 'status_produk.id = produk.id_status_produk');		
 	$this->db->where('user.id',$user_id);
 	$query = $this->db->get();
 	return $query->result();
