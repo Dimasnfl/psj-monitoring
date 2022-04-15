@@ -12,6 +12,7 @@ class Api extends CI_Controller {
         $this->load->model('M_user');
         $this->load->model('M_produk');
         $this->load->model('M_status_produk');
+        $this->load->model('M_transaksi');
         header('Content-Type: application/json');
 	}
     /*
@@ -148,7 +149,7 @@ class Api extends CI_Controller {
             }
         }
         
-        $data = $this->M_produk->select_produk_penjualan_by_user_id($this->user->id,$filterType);
+        $data = $this->M_transaksi->select_all_transaksi_by_user_id($this->user->id);
         echo json_encode($this->success($data));
     }
     //2.3 get all available produk status
