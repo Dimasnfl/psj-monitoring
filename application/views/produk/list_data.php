@@ -13,13 +13,19 @@
       <td><h>Rp.<?php echo $produk->tipe_produk_harga; ?>/kg</h></td>
       <td><h><?php echo $produk->luas_lahan; ?> m2</h></td>
       <td><?php echo $produk->alamat; ?></td>
-      <td><?php echo $produk->status_produk_nama; ?></td>
+      <td><?php echo $produk->status_produk_nama; 
+     
+      ?></td>
 
-      <td class="text-center" style="min-width:50px;">
+      <td class="text-left" style="min-width:50px;">
       <button class="btn btn-warning update-dataProduk" data-id="<?php echo $produk->id; ?>"><i class="glyphicon glyphicon-edit"></i></button>
-        <!-- <button class="btn btn-danger konfirmasiHapus-produk" data-id="<?php echo $produk->id; ?>" data-toggle="modal" data-target="#konfirmasiHapus">
-        <i class="glyphicon glyphicon-trash"></i>
-      </button> -->
+      <?php  if($produk->status_produk_id == 3)
+      {
+        ?>
+         <button class="btn btn-success penjemputan" data-id="<?php echo $produk->id; ?>"><i class="glyphicon glyphicon-plane"></i></button>
+        <?php
+      }
+      ?>
       </td>
     </tr>
     <?php

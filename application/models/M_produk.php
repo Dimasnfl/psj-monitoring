@@ -9,7 +9,7 @@ class M_produk extends CI_Model {
 	}
 
 	public function select_all() {
-		$this->db->select('produk.id,user.nik as user_nik, user.nama as user_nama, tipe_produk.nama as tipe_produk_nama, produk.tgl_tanam, produk.tgl_panen, produk.berat_panen,  tipe_produk.harga as tipe_produk_harga, produk.luas_lahan, produk.alamat, status_produk.nama as status_produk_nama');
+		$this->db->select('produk.id,user.nik as user_nik, user.nama as user_nama,status_produk.id as status_produk_id , tipe_produk.nama as tipe_produk_nama, produk.tgl_tanam, produk.tgl_panen, produk.berat_panen,  tipe_produk.harga as tipe_produk_harga, produk.luas_lahan, produk.alamat, status_produk.nama as status_produk_nama');
 		$this->db->from('produk');
 		$this->db->order_by('id', 'desc');
 		$this->db->join('user', 'user.id = produk.id_user');
@@ -20,7 +20,17 @@ class M_produk extends CI_Model {
 	}
 
 	public function select_by_id($id) {
-		$sql = "SELECT produk.id AS id_produk, produk.id_user, produk.tgl_tanam AS tgl_tanam, produk.tgl_panen AS tgl_panen, produk.berat_panen AS berat_panen, produk.luas_lahan AS luas_lahan, produk.id_tipe_produk, produk.alamat AS alamat, produk.id_status_produk, produk.created_at, produk.updated_at, user.nama AS user, tipe_produk.nama AS tipe_produk, status_produk.nama AS status_produk FROM produk, user, tipe_produk, status_produk WHERE produk.id_user = user.id AND produk.id_tipe_produk = tipe_produk.id AND produk.id_status_produk = status_produk.id AND produk.id = '{$id}'";
+		$sql = "SELECT produk.id AS id_produk,
+		produk.id_user,
+		produk.tgl_tanam AS tgl_tanam, 
+		produk.tgl_panen AS tgl_panen, 
+		produk.berat_panen AS berat_panen,
+		produk.luas_lahan AS luas_lahan,
+		produk.id_tipe_produk, produk.alamat AS alamat,
+		produk.id_status_produk,
+		produk.created_at, produk.updated_at,
+		user.nama AS user, tipe_produk.nama AS tipe_produk, status_produk.nama AS status_produk FROM produk, user, 
+		tipe_produk, status_produk WHERE produk.id_user = user.id AND produk.id_tipe_produk = tipe_produk.id AND produk.id_status_produk = status_produk.id AND produk.id = '{$id}'";
 		$data = $this->db->query($sql);
 
 		return $data->row();

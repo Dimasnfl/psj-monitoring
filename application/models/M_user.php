@@ -40,7 +40,7 @@ class M_user extends CI_Model {
 	 }
 
 	public function select_by_id($id) {
-		$sql = "SELECT user.id AS id_user, user.nik, user.nama, desa.nama AS desa, user.id_desa, user.telp 
+		$sql = "SELECT user.id AS id_user, user.nik, user.nama as nama, desa.nama AS desa, user.id_desa, user.telp 
 		FROM user, desa
 		WHERE user.id_desa = desa.id AND user.id = '{$id}'";
 

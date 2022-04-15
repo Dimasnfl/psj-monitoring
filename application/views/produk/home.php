@@ -39,8 +39,10 @@
 </div>
 
 <!-- <?php echo $modal_tambah_produk; ?> -->
+<!-- <?php echo $modal_penjemputan; ?> -->
 
 <div id="tempat-modal"></div>
+<div id="tempat-modal2"></div>
 
 <?php show_my_confirm('konfirmasiHapus', 'hapus-dataProduk', 'Hapus Data Ini?', 'Ya, Hapus Data Ini'); ?>
 <?php

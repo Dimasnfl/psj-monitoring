@@ -7,7 +7,9 @@ class Produk extends AUTH_Controller {
 		$this->load->model('M_produk');
 		$this->load->model('M_user');
 		$this->load->model('M_tipe_produk');
+		$this->load->model('M_kurir');
 		$this->load->model('M_status_produk');
+		$this->load->model('M_transaksi');
 
 	}
 
@@ -41,6 +43,50 @@ class Produk extends AUTH_Controller {
 
 		echo show_my_modal('modals/modal_update_produk', 'update-produk', $data);
 	}
+
+	public function penjemputan(){
+		$id = trim($_POST['id']);
+		$produk = $this->M_produk->select_by_id($id);
+		$data['dataProduk'] = $produk;
+		$data['dataUser'] = $this->M_user->select_by_id($produk->id_user);
+		$data['dataTipe_produk'] = $this->M_tipe_produk->select_all();
+		$data['dataKurir'] = $this->M_kurir->select_all();
+		$data['dataStatus_produk'] = $this->M_status_produk->select_all();
+		$data['userdata'] = $this->userdata;
+
+		echo show_my_modal('modals/modal_penjemputan', 'penjemputan', $data);
+	}
+
+	public function prosesPenjemputan() {
+		$this->form_validation->set_rules('id', 'Nama User', 'trim|required');
+		$this->form_validation->set_rules('id_kurir', 'Berat Panen', 'trim|required');
+		$this->form_validation->set_rules('date','Tanggal Penjemputan','trim|required');
+		$this->form_validation->set_rules('harga','Harga','trim|required');
+		$this->form_validation->set_rules('jam_penjemputan','Jam Penjemputan', 'trim|required');
+
+		$data = $this->input->post();
+		if ($this->form_validation->run() == TRUE) {
+			$id_produk = $this->input->post('id');
+			$id_kurir = $this->input->post('id_kurir');
+			$date = $this->input->post('date');
+			$jam = $this->input->post('jam_penjemputan');
+			$harga = $this->input->post('harga');
+			$result = $this->M_transaksi->create_transaction($id_produk,$id_kurir,$date,$jam,$harga);
+			if ($result > 0) {
+				$out['status'] = '';
+				$out['msg'] = show_succ_msg('Data Penjemputan Berhasil dibuat', '20px');
+			} else {
+				$out['status'] = '';
+				$out['msg'] = show_succ_msg('Data Penjemputan Gagal dibuat', '20px');
+			}
+		} else {
+			$out['status'] = 'form';
+			$out['msg'] = show_err_msg(validation_errors());
+		}
+
+		echo json_encode($out);
+	}
+
 
 	public function prosesUpdate() {
 		$this->form_validation->set_rules('id_user', 'Nama User', 'trim|required');

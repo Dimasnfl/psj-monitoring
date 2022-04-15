@@ -73,6 +73,39 @@ class M_transaksi extends CI_Model {
 		return $data->row();
 	}
 
+	public function create_transaction($id_produk,$id_kurir,$tanggal,$jam,$biaya_angkut){
+		$this->load->helper('date');
+		$produk = $this->db->from('produk')->where('id',$id_produk)->get()->row();
+		$this->db->from('produk')->where('id',$id_produk)->set('id_status_produk',5)->update('produk');
+		$kurir = $this->db->from('kurir')->where('id',$id_kurir)->get()->row();
+		$dateAngkut = date_parse($tanggal);
+		//rumus no resi
+		//PSJ-TGL-BLN-THN-0ID_PRODUK0-0ID_KURIR0
+		
+		$tgl = new DateTime($tanggal);
+		$dateString = $tgl->format("Y-m-d $jam:00");
+		$noResi = "PSJ-$dateString-0$produk->id-0$kurir->id";
+
+		$insertData = array(
+			"no_resi" => $noResi,
+			"tanggal_pengambilan" => $dateString,
+			"id_kurir" => $kurir->id,
+			"id_user" => $produk->id_user,
+			"id_produk" => $produk->id,
+			"biaya_angkut" => $biaya_angkut,
+			"id_status_transaksi" => 1
+		);
+		$this->db->insert('transaksi',$insertData);
+
+		if($this->db->affected_rows()){
+			return true;
+		}else{
+			return false;
+		}
+
+
+	}
+
 
 
 	public function insert($data) {
