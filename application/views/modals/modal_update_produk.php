@@ -87,6 +87,10 @@
           <label for="siap_diambil">Siap Diambil</label>
             </span>
             <span class="input-group-addon">
+              <input type="radio" name="id_status_produk" value="5" id="siap_diambil" class="minimal" <?php if($dataProduk->id_status_produk == 5){echo "checked='checked'";} ?>> 
+          <label for="siap_diambil">Sedang Diambil</label>
+            </span>
+            <span class="input-group-addon">
               <input type="radio" name="id_status_produk" value="4" id="selesai_diambil" class="minimal" <?php if($dataProduk->id_status_produk == 4){echo "checked='checked'";} ?>> 
           <label for="selesai_diambil">Selesai</label>
             </span>

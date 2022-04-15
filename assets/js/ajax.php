@@ -188,6 +188,20 @@ function tampilUser() {
 		})
 	})
 
+	$(document).on("click", ".penjemputan", function() {
+		var id = $(this).attr("data-id");
+		
+		$.ajax({
+			method: "POST",
+			url: "<?php echo base_url('Produk/penjemputan'); ?>",
+			data: "id=" +id
+		})
+		.done(function(data) {
+			$('#tempat-modal').html(data);
+			$('#penjemputan').modal('show');
+		})
+	})
+
 	$('#form-tambah-produk').submit(function(e) {
 		var data = $(this).serialize();
 
