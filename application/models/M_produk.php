@@ -98,6 +98,13 @@ class M_produk extends CI_Model {
 
 		return $this->db->affected_rows();
 	}
+
+	public function update2($data){
+		$this->db->set($data);
+		$this->db->where('id',$data['id']);
+		$this->db->update('produk');
+		return $this->db->affected_rows();
+	}
 	
 	public function insert_data($data){
 		$this->db->insert('produk', $data);
