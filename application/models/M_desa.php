@@ -19,10 +19,11 @@ class M_desa extends CI_Model {
 		return $data->row();
 	}
 
-	public function select_by_petani($id) {
-		$sql = " SELECT petani.id AS id, petani.NIK AS NIK, petani.nama AS petani, petani.telp AS telp, desa.nama AS desa, petani.luas_lahan AS luas_lahan
-		FROM petani, desa 
-		WHERE petani.id_desa = desa.id AND petani.id_desa={$id}";
+	//detail
+	public function select_by_user($id) {
+		$sql = " SELECT user.id AS id, user.NIK AS NIK, user.nama AS user, user.telp AS telp, desa.nama AS desa 
+		FROM user, desa 
+		WHERE user.id_desa = desa.id AND user.id_desa={$id}";
 
 		$data = $this->db->query($sql);
 

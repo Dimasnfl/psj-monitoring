@@ -20,6 +20,17 @@ class M_kurir extends CI_Model {
 		return $data->row();
 	}
 
+	//detail
+	public function select_by_transaksi($id) {
+		$sql = " SELECT transaksi.id AS id, transaksi.no_resi, transaksi.tanggal_pengambilan, transaksi.tanggal_diambil, transaksi.id_kurir, transaksi.id_user, transaksi.id_produk, transaksi.id_status_transaksi, kurir.nama AS kurir, user.nama AS user, transaksi.tanggal_sampai, transaksi.biaya_angkut, status_transaksi.nama AS status_transaksi_nama 
+		FROM transaksi, kurir, user,  produk, status_transaksi  
+		WHERE transaksi.id_kurir = kurir.id AND transaksi.id_user = user.id AND transaksi.id_produk = produk.id AND transaksi.id_status_transaksi = status_transaksi.id AND transaksi.id_kurir={$id}";
+
+		$data = $this->db->query($sql);
+
+		return $data->result();
+	}
+
 
 	public function insert($data) {
 		$sql = "INSERT INTO kurir VALUES('','" .$data['nama'] ."','" .$data['jenis_kendaraan'] ."','" .$data['plat_no'] ."','" .$data['no_telp'] ."','" .$data['created_at'] ."','')";

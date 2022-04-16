@@ -88,6 +88,16 @@ class Produk extends AUTH_Controller {
 	}
 
 
+	  public function detail() {
+	  	$data['userdata'] 	= $this->userdata;
+
+	  	$id 				= trim($_POST['id']);
+	  	$data['produk'] = $this->M_produk->select_by_id($id);
+	  	echo show_my_modal('modals/modal_detail_produk', 'detail-produk', $data, 'lg');
+	  }
+
+
+
 	public function prosesUpdate() {
 		$this->form_validation->set_rules('id_user', 'Nama User', 'trim|required');
 		$this->form_validation->set_rules('berat_panen', 'Berat Panen', 'trim|required');

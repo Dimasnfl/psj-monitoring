@@ -48,6 +48,17 @@ class M_user extends CI_Model {
 
 		return $data->row();
 	}
+	
+	//detail
+	public function select_by_produk($id) {
+		$sql = " SELECT produk.id AS id, produk.id_user, user.nama AS user, produk.tgl_tanam, produk.tgl_panen, produk.berat_panen, produk.luas_lahan, produk.id_tipe_produk, tipe_produk.nama AS tipe_produk_nama, produk.alamat, produk.id_status_produk, status_produk.nama AS status_produk_nama 
+		FROM produk, user, status_produk, tipe_produk  
+		WHERE produk.id_user = user.id AND produk.id_tipe_produk = tipe_produk.id AND produk.id_status_produk = status_produk.id AND produk.id_user = {$id}";
+
+		$data = $this->db->query($sql);
+
+		return $data->result();
+	}
 
 
 	public function select_by_desa($id) {

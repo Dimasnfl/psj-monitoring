@@ -38,17 +38,21 @@ class M_tipe_produk extends CI_Model {
 		return $data->row();
 	}
 
-	public function select_by_produk($id) {
-		$sql = " SELECT produk.id AS id, produk.NIK AS NIK, produk.foto_produk AS foto_produk, produk.jenis_produk AS jenis_produk, produk.tgl_tanam AS tgl_tanam, produk.tgl_panen AS tgl_panen, produk.berat_panen AS berat_panen, tipe_produk.tipe_produk AS tipe_produk
-		FROM produk, tipe_produk, petani WHERE produk.NIK = petani.NIK AND produk.id_tipe_produk = tipe_produk.id AND produk.id_tipe_produk={$id}";
 
-		$data = $this->db->query($sql);
+	//detail
+	 public function select_by_produk($id) {
+	 	$sql = " SELECT produk.id AS id, produk.id_user, user.nik AS user_nik, user.nama AS user_nama, produk.tgl_tanam, produk.tgl_panen, produk.berat_panen, produk.luas_lahan, produk.id_tipe_produk, tipe_produk.nama AS tipe_produk, produk.alamat, produk.id_status_produk, status_produk.nama AS status_produk_nama 
+	 	FROM produk, user, status_produk, tipe_produk  
+	 	WHERE produk.id_user = user.id AND produk.id_tipe_produk = tipe_produk.id AND produk.id_status_produk = status_produk.id AND produk.id_tipe_produk = {$id}";
 
-		return $data->result();
-	}
+	 	$data = $this->db->query($sql);
+
+	 	return $data->result();
+	 }
+
 
 	public function insert($data) {
-		$sql = "INSERT INTO tipe_produk VALUES('','','" .$data['nama'] ."','" .$data['harga'] ."','" .$data['tanggal'] ."','','')";
+		$sql = "INSERT INTO tipe_produk VALUES('','','" .$data['nama'] ."','" .$data['harga'] ."','','1','" .$data['tanggal'] ."','','')";
 
 		$this->db->query($sql);
 

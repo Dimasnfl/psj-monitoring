@@ -16,7 +16,7 @@
       <span class="input-group-addon" id="sizing-addon2">
         <i class="glyphicon glyphicon-grain"></i>
       </span>
-      <input type="text" class="form-control" placeholder="Nama Produk" name="nama" aria-describedby="sizing-addon2" value="<?php echo $dataTipe_produk->nama; ?>">
+      <input type="text" class="form-control" placeholder="Nama Produk" name="nama" aria-describedby="sizing-addon2" value="<?php echo $dataTipe_produk->nama; ?>" readonly>
     </div>
 
     <label>Harga Produk*</label>

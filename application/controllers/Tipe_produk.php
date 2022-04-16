@@ -86,6 +86,21 @@ class Tipe_produk extends AUTH_Controller {
 		echo json_encode($out);
 	}
 
+
+	public function detail() {
+		$data['userdata'] 	= $this->userdata;
+
+		$id 				= trim($_POST['id']);
+		$data['tipe_produk'] = $this->M_tipe_produk->select_by_id($id);
+		$data['jumlahTipe_produk'] = $this->M_tipe_produk->total_rows();
+		$data['dataTipe_produk'] = $this->M_tipe_produk->select_by_produk($id);
+
+		echo show_my_modal('modals/modal_detail_tipe_produk', 'detail-tipe_produk', $data, 'lg');
+	}
+
+
+
+
 	public function delete() {
 		$id = $_POST['id'];
 		$result = $this->M_tipe_produk->delete($id);

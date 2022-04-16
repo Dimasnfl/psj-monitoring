@@ -1,14 +1,13 @@
 <div class="col-md-12 well">
   <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-  <h3 style="display:block; text-align:center;"><i class="fa fa-cart-plus"></i> List Petani Yang Menjual Produk <b><?php echo $tipe_produk->nama; ?></b></h3>
+  <h3 style="display:block; text-align:center;"><i class="fa fa-user"></i> List Produk Yang Didaftarkan Oleh <b><?php echo $user->nama; ?></b></h3>
 
   <div class="box box-body">
       <table id="tabel-detail" class="table table-bordered table-striped">
         <thead>
           <tr>
             <th>#</th>
-            <th>NIK</th>
-            <th>Nama Petani</th>
+            <th>Jenis Produk</th>
             <th>Tanggal Tanam</th>
             <th>Tanggal Panen</th>
             <th>Berat Panen</th>
@@ -19,22 +18,23 @@
         </thead>
         <tbody id="data-produk">
           <?php
-             $no = 1;
-            foreach ($dataTipe_produk as $produk) {
+            $no = 1;
+            foreach ($dataUser as $produk) {
               ?>
               <tr>
-                <td><?php echo $no; ?></td>
-                <td><?php echo $produk->user_nik; ?></td>
-                <td><?php echo $produk->user_nama; ?></td>
+                
+              <td><?php echo $no; ?></td>
+                <td><?php echo $produk->tipe_produk_nama; ?></td>
                 <td><?php echo $produk->tgl_tanam; ?></td>
                 <td><?php echo $produk->tgl_panen; ?></td>
                 <td><?php echo $produk->berat_panen; ?>kg</td>
                 <td><?php echo $produk->luas_lahan; ?>m2</td>
                 <td><?php echo $produk->alamat; ?></td>
                 <td><?php echo $produk->status_produk_nama; ?></td>
+
               </tr>
               <?php
-               $no++;
+                  $no++;
             }
           ?>
         </tbody>

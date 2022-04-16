@@ -1,36 +1,39 @@
 <div class="col-md-12 well">
   <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-  <h3 style="display:block; text-align:center;"><i class="fa fa-location-arrow"></i> List Petani Yang Berasal Dari Desa: <b><?php echo $desa->nama; ?></b></h3>
+  <h3 style="display:block; text-align:center;"><i class="fa fa-location-arrow"></i> List Petani Yang Berasal Dari Desa <b><?php echo $desa->nama; ?></b></h3>
 
   <div class="box box-body">
       <table id="tabel-detail" class="table table-bordered table-striped">
         <thead>
           <tr>
+            <th>#</th>
             <th>NIK</th>
-            <th>Nama</th>
+            <th>Nama Petani</th>
             <th>No Telp</th>
-            <th>Luas Lahan</th>
           </tr>
         </thead>
-        <tbody id="data-petani">
+        <tbody id="data-user">
           <?php
-            foreach ($dataDesa as $petani) {
+            $no = 1;
+            foreach ($dataDesa as $user) {
               ?>
               <tr>
-              <td><?php echo $petani->NIK; ?></td>
-              <td><?php echo $petani->petani; ?></td>
-              <td><?php echo $petani->telp; ?></td>
-              <td><?php echo $petani->luas_lahan; ?></td>
+                
+              <td><?php echo $no; ?></td>
+              <td><?php echo $user->NIK; ?></td>
+              <td><?php echo $user->user; ?></td>
+              <td><?php echo $user->telp; ?></td>
 
               </tr>
               <?php
+                  $no++;
             }
           ?>
         </tbody>
       </table>
   </div>
 
-  <div class="text-right">
+  <!-- <div class="text-right">
     <button class="btn btn-danger" data-dismiss="modal"> Close</button>
-  </div>
+  </div> -->
 </div>

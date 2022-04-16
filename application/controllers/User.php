@@ -61,6 +61,19 @@ class User extends AUTH_Controller {
 		echo json_encode($out);
 	}
 
+
+	public function detail() {
+		$data['userdata'] 	= $this->userdata;
+
+		$id 				= trim($_POST['id']);
+		$data['user'] = $this->M_user->select_by_id($id);
+		$data['jumlahUser'] = $this->M_user->total_rows();
+		$data['dataUser'] = $this->M_user->select_by_produk($id);
+
+		echo show_my_modal('modals/modal_detail_user', 'detail-user', $data, 'lg');
+	}
+
+
 	public function delete() {
 		$id = $_POST['id'];
 		$result = $this->M_user->delete($id);

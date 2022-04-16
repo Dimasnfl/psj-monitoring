@@ -19,7 +19,7 @@
       <li class="header">LIST MENU</li>
       <!-- Optionally, you can add icons to the links -->
 
-      <li <?php if ($page == 'home') {echo 'class="active"';} ?>>
+      <li <?php if ($page == 'Home') {echo 'class="active"';} ?>>
         <a href="<?php echo base_url('Home'); ?>">
           <i class="fa fa-home"></i>
           <span>Home</span>
@@ -47,7 +47,7 @@
         </a>
       </li>
 	  
-	  <li <?php if ($page == 'Desa') {echo 'class="active"';} ?>>
+	  <li <?php if ($page == 'Dusun') {echo 'class="active"';} ?>>
         <a href="<?php echo base_url('Desa'); ?>">
           <i class="fa fa-location-arrow"></i>
           <span>Data Dusun</span>
