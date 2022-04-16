@@ -189,6 +189,24 @@ class Api extends CI_Controller {
         }
 
     }
+
+    public function update_produk(){
+        if(!$this->validateAccessToken())return;
+        $insert_data = $this->input->post();
+        $produk = $this->M_produk->select_by_id($insert_data['id']);
+        unset($insert_data['access_token']);
+        if($produk->id_user != $this->user->id){
+            echo json_encode($this->error(502, 'you are not authorize to edit this produk'));
+        }else{
+            $success = $this->M_produk->update2($insert_data);
+            if($success){
+                echo json_encode($this->success($insert_data));
+            }else{
+                echo json_encode($this->error(500, 'something went wrong'));
+            }
+        }
+        
+    }
     //END API - APP DATA
 
     //API - 3. USER DATA
