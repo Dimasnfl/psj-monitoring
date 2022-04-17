@@ -3,7 +3,7 @@
 	  Halaman <?php echo @$judul; ?>
 	  <small><?php echo @$deskripsi; ?></small>
 	</h1>
-	<ol class="breadcrumb">
+	<!-- <ol class="breadcrumb">
 	  <?php
 	  	for ($i=0; $i<count($this->session->flashdata('segment')); $i++) { 
 	  		if ($i == 0) {
@@ -22,10 +22,10 @@
 
 	  		if ($i == 0 && $i == (count($this->session->flashdata('segment'))-1)) {
 	  		?>
-				<!-- <li class="active">  </li>here -->
+				 <li class="active">  </li>here
 	  		<?php
 	  		}
 	  	}
 	  ?>
-	</ol>
+	</ol> -->
 </section>

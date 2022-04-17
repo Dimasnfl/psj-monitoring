@@ -27,7 +27,6 @@
           <th>Luas Lahan</th>         
           <th>Alamat</th>
           <th>Status</th>  
-
           <th style="text-align: center;">Action</th>
         </tr>
       </thead>

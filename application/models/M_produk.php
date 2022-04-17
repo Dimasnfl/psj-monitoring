@@ -75,6 +75,9 @@ class M_produk extends CI_Model {
 		return $query->result();
 	}
 
+
+
+
 	public function select_by_tipe_produk($id) {
 		$sql = "SELECT COUNT(*) AS jml FROM produk WHERE id_tipe_produk = {$id}";
 

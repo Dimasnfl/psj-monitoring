@@ -4,7 +4,7 @@
 
 <div class="box">
   <div class="box-header">
-    <div class="col-md-2">
+    <div class="col-md-3">
         <a href="<?php echo base_url('User/export'); ?>" class="form-control btn btn-success"><i class="glyphicon glyphicon glyphicon-floppy-open"></i> Export Data Excel</a>
     </div>
   </div>

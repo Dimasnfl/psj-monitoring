@@ -90,10 +90,10 @@ class Desa extends AUTH_Controller {
 	public function detail() {
 		$data['userdata'] 	= $this->userdata;
 
-		$id_desa 				= trim($_POST['id']);
-		$data['desa'] = $this->M_desa->select_by_id($id_desa);
+		$id 				= trim($_POST['id']);
+		$data['desa'] = $this->M_desa->select_by_id($id);
 		$data['jumlahDesa'] = $this->M_desa->total_rows();
-		$data['dataDesa'] = $this->M_desa->select_by_petani($id_desa);
+		$data['dataDesa'] = $this->M_desa->select_by_user($id);
 
 		echo show_my_modal('modals/modal_detail_desa', 'detail-desa', $data, 'lg');
 	}

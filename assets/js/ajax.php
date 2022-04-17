@@ -107,6 +107,29 @@ function tampilUser() {
 		e.preventDefault();
 	});
 
+	$(document).on("click", ".detail-dataUser", function() {
+		var id = $(this).attr("data-id");
+		
+		$.ajax({
+			method: "POST",
+			url: "<?php echo base_url('User/detail'); ?>",
+			data: "id=" +id
+		})
+		.done(function(data) {
+			$('#tempat-modal').html(data);
+			$('#tabel-detail').dataTable({
+				  "paging": true,
+				  "lengthChange": false,
+				  "searching": true,
+				  "ordering": true,
+				  "info": true,
+				  "autoWidth": false
+				});
+			$('#detail-user').modal('show');
+		})
+	})
+
+
 	$(document).on('submit', '#form-update-user', function(e){
 		var data = $(this).serialize();
 
@@ -187,6 +210,30 @@ function tampilUser() {
 			$('#update-produk').modal('show');
 		})
 	})
+
+
+	  $(document).on("click", ".detail-dataProduk", function() {
+	  	var id = $(this).attr("data-id");
+		
+	  	$.ajax({
+	  		method: "POST",
+	  		url: "<?php echo base_url('Produk/detail'); ?>",
+	  		data: "id=" +id
+	  	})
+	  	.done(function(data) {
+	  		$('#tempat-modal').html(data);
+	  		$('#tabel-detail').dataTable({
+	  			  "paging": true,
+	  			  "lengthChange": false,
+	  			  "searching": true,
+	  			  "ordering": true,
+	  			  "info": true,
+	  			  "autoWidth": false
+	  			});
+	  		$('#detail-produk').modal('show');
+	  	})
+	  })
+
 
 	$(document).on("click", ".penjemputan", function() {
 		var id = $(this).attr("data-id");
@@ -732,7 +779,7 @@ function tampilTransaksi() {
 		})
 	})
 
-	$('#form-tambah-transaski').submit(function(e) {
+	$('#form-tambah-transaksi').submit(function(e) {
 		var data = $(this).serialize();
 
 		$.ajax({

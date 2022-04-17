@@ -12,7 +12,7 @@
           </span>
           <input type="text" class="form-control" placeholder="-" name="id_user" aria-describedby="sizing-addon2" value="<?php echo $dataProduk->id_user; ?>">
         </div> -->
-        <label>Nama User*</label>
+        <label>Nama Petani*</label>
         <div class="input-group form-group">
           <span class="input-group-addon" id="sizing-addon2">
             <i class="glyphicon glyphicon-user"></i>
@@ -44,7 +44,7 @@
             <?php
             foreach ($dataTipe_produk as $tipe_produk) {
               ?>
-              <option value="<?php echo $tipe_produk->id; ?>" <?php if($tipe_produk->id == $dataProduk->id_tipe_produk){echo "selected='selected'";} ?>><?php echo $tipe_produk->nama; ?></option>
+              <option value="<?php echo $tipe_produk->id; ?>" <?php if($tipe_produk->id == $dataProduk->id_tipe_produk){echo "selected='selected'";} ?>><?php echo "$tipe_produk->nama - $tipe_produk->harga"  ?></option>
               <?php
             }
             ?>
@@ -69,7 +69,7 @@
 
 
 
-        <label>Status*</label>
+        <!-- <label>Status*</label>
         <div class="input-group form-group" style="display: inline-block;">
           <span class="input-group-addon" id="sizing-addon2">
           <i class="glyphicon glyphicon-record"></i>
@@ -94,20 +94,14 @@
               <input type="radio" name="id_status_produk" value="4" id="selesai_diambil" class="minimal" <?php if($dataProduk->id_status_produk == 4){echo "checked='checked'";} ?>> 
           <label for="selesai_diambil">Selesai</label>
             </span>
-        </div>
-        <!-- <label>Status*</label>
-        <div class="input-group form-group">
-          <span class="input-group-addon" id="sizing-addon2">
-            <i class="glyphicon glyphicon-user"></i>
-          </span>
-          <input type="text" class="form-control" placeholder="-" name="id_status_produk" aria-describedby="sizing-addon2" value="<?php echo $dataProduk->id_status_produk; ?>">
         </div> -->
-        <!-- <label>Status*</label>
+
+        <label>Status*</label>
         <div class="input-group form-group">
           <span class="input-group-addon" id="sizing-addon2">
-            <i class="glyphicon glyphicon-home"></i>
+            <i class="glyphicon glyphicon-tags"></i>
           </span>
-          <select name="status_produk" class="form-control select2"  aria-describedby="sizing-addon2">
+          <select name="id_status_produk" class="form-control select2"  aria-describedby="sizing-addon2">
             <?php
             foreach ($dataStatus_produk as $status_produk) {
               ?>
@@ -116,7 +110,7 @@
             }
             ?>
           </select>
-        </div>  -->
+        </div>
 
         <label>Alamat*</label>
         <div class="input-group form-group">

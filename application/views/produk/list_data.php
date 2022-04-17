@@ -17,7 +17,8 @@
      
       ?></td>
 
-      <td class="text-left" style="min-width:50px;">
+      <td class="text-center" style="min-width:110px;">
+      <button class="btn btn-info detail-dataProduk" data-id="<?php echo $produk->id; ?>"><i class="glyphicon glyphicon-info-sign"></i> </button>
       <button class="btn btn-warning update-dataProduk" data-id="<?php echo $produk->id; ?>"><i class="glyphicon glyphicon-edit"></i></button>
       <?php  if($produk->status_produk_id == 3)
       {

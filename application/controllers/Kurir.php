@@ -96,10 +96,10 @@ class Kurir extends AUTH_Controller {
 	public function detail() {
 		$data['userdata'] 	= $this->userdata;
 
-		$id_kurir 				= trim($_POST['id']);
-		$data['kurir'] = $this->M_kurir->select_by_id($id_kurir);
+		$id 				= trim($_POST['id']);
+		$data['kurir'] = $this->M_kurir->select_by_id($id);
 		$data['jumlahKurir'] = $this->M_kurir->total_rows();
-		$data['dataKurir'] = $this->M_kurir->select_by_petani($id_kurir);
+		$data['dataKurir'] = $this->M_kurir->select_by_transaksi($id);
 
 		echo show_my_modal('modals/modal_detail_kurir', 'detail-kurir', $data, 'lg');
 	}
