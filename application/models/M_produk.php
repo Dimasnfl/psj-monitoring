@@ -38,7 +38,7 @@ class M_produk extends CI_Model {
 
 	
 	public function select_produk_by_user_id($id){
-		$this->db->select("produk.id,tipe_produk.foto as foto,produk.alamat as alamat ,tipe_produk.nama,user.telp, produk.tgl_panen, produk.tgl_tanam, tipe_produk.harga, status_produk.nama AS status,status_produk.id AS status_id, produk.luas_lahan, produk.berat_panen, produk.created_at, produk.updated_at" );
+		$this->db->select("produk.id,tipe_produk.foto as foto,produk.alamat as alamat,tipe_produk.id as id_tipe_produk,tipe_produk.nama,user.telp, produk.tgl_panen, produk.tgl_tanam, tipe_produk.harga, status_produk.nama AS status,status_produk.id AS status_id, produk.luas_lahan, produk.berat_panen, produk.created_at, produk.updated_at" );
 		$this->db->from('produk');
 		$this->db->join('user','user.id = produk.id_user');
 		$this->db->join('tipe_produk','tipe_produk.id = produk.id_tipe_produk');
