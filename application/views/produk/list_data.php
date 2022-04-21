@@ -1,16 +1,20 @@
 <?php
   $no = 1;
+  function rupiah ($harga) {
+		$hasil = 'Rp ' . number_format($harga, 2, ",", ".");
+		return $hasil;
+	}
   foreach ($dataProduk as $produk) {
     ?>
     <tr>
-    <td><?php echo $no; ?></td>
+    <td style="text-align: center;"><?php echo $no; ?></td>
       <td><?php echo $produk->user_nik; ?></td>
       <td><?php echo $produk->user_nama; ?></td>
       <td><?php echo $produk->tipe_produk_nama; ?></td>
       <td><?php echo $produk->tgl_tanam; ?></td>
       <td><?php echo $produk->tgl_panen; ?></td>
       <td><h><?php echo $produk->berat_panen; ?>kg</h></td>
-      <td><h>Rp.<?php echo $produk->tipe_produk_harga; ?>/kg</h></td>
+      <td><?php echo rupiah ($produk->tipe_produk_harga); ?></td>
       <td><h><?php echo $produk->luas_lahan; ?> m2</h></td>
       <td><?php echo $produk->alamat; ?></td>
       <td><?php echo $produk->status_produk_nama; 

@@ -23,7 +23,7 @@
           <th>Tanggal Tanam</th>
           <th>Tanggal Panen</th>
           <th>Berat Panen</th>
-          <th>Harga</th>
+          <th>Harga (/kg)</th>
           <th>Luas Lahan</th>         
           <th>Alamat</th>
           <th>Status</th>  

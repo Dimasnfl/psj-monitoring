@@ -1,14 +1,18 @@
 <?php
   $no = 1;
+  function rupiah ($harga) {
+		$hasil = 'Rp ' . number_format($harga, 2, ",", ".");
+		return $hasil;
+	}
   foreach ($dataTipe_produk as $tipe_produk) {
     ?>
     <tr>
-      <td><?php echo $no; ?></td>
+      <td style="text-align: center;"><?php echo $no; ?></td>
       <td><img src="https://www.afandiyusuf.com/siduda-monitoring/assets/thumbnail/<?php echo $tipe_produk->foto; ?>" width="150px" height="100px"></td>      
       <td><?php echo $tipe_produk->nama; ?></td>
       
     <td>
-      <h>Rp.<?php echo $tipe_produk->harga; ?>/kg</h>
+    <?php echo rupiah ($tipe_produk->harga); ?>
       <?php
       foreach($dataHistoryProduk as $historyProduk){
         //
@@ -28,7 +32,7 @@
         }
         if($realIdHistoryRow == $realIdMasterRow){
       ?>
-        <br/>Rp.<?php echo $historyProduk->harga ?>/kg
+        <br/><?php echo rupiah ($historyProduk->harga); ?>
       <?php
         }
       }

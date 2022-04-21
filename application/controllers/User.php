@@ -13,8 +13,8 @@ class User extends AUTH_Controller {
 		$data['dataUser'] = $this->M_user->select_all();
 		$data['dataDesa'] = $this->M_desa->select_all();
 		$data['page'] = "User";
-		$data['judul'] = "Data User";
-		$data['deskripsi'] = "Manage Data User";
+		$data['judul'] = "Data Petani";
+		$data['deskripsi'] = "Manage Data Petani";
 
 
 		$this->template->views('user/home', $data);

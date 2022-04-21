@@ -1,5 +1,9 @@
 <?php
   $no = 1;
+  function rupiah ($harga) {
+		$hasil = 'Rp ' . number_format($harga, 2, ",", ".");
+		return $hasil;
+	}
   foreach ($dataTransaksi as $transaksi) {
     ?>
     <tr>
@@ -11,7 +15,7 @@
       <td><?php echo $transaksi->nama_user; ?></td>
       <td><?php echo $transaksi->id_produk; ?></td>
       <td><?php echo $transaksi->tanggal_sampai; ?></td>
-      <td><h>Rp.<?php echo $transaksi->biaya_angkut; ?></h></td>
+      <td><?php echo rupiah ($transaksi->biaya_angkut); ?></td>
       <td><?php echo $transaksi->nama_status; ?></td>
       <td class="text-center" style="min-width:100px;">
           <button class="btn btn-warning update-dataTransaksi" data-id="<?php echo $transaksi->id; ?>"><i class="glyphicon glyphicon-edit"></i> </button>

@@ -24,14 +24,14 @@
 
         <div class="form-group"> <!-- Date input -->
         <label class="control-label" for="date">Tanggal Penjemputan</label>
-        <input class="form-control" id="date" name="date" placeholder="MM/DD/YYY" type="date"/>
+        <input class="form-control" id="date" name="date" placeholder="MM/DD/YYY" type="text"/>
       </div>
       <label>Jam Penjemputan (hh:mm)*</label>
         <div class="input-group form-group">
           <span class="input-group-addon" id="sizing-addon2">
             <i class="glyphicon glyphicon-time"></i>
           </span>
-          <input type="time" class="form-control" placeholder="-" name="jam_penjemputan" aria-describedby="sizing-addon2" placeholder="hh:mm">
+          <input type="time" class="form-control" name="jam_penjemputan" aria-describedby="sizing-addon2" placeholder="hh:mm">
         </div>
       
       <label>Harga*</label>
