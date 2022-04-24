@@ -18,6 +18,7 @@ class Produk extends AUTH_Controller {
 		$data['dataProduk'] = $this->M_produk->select_all();
 		$data['dataUser'] = $this->M_user->select_all();
 		$data['dataTipe_produk'] = $this->M_tipe_produk->select_all();
+		$data['dataStatus_produk'] = $this->M_status_produk->select_all();
 		$data['page'] = "Produk";
 		$data['judul'] = "Data E-Commodity";
 		$data['deskripsi'] = "Manage Data E-Commodity";
@@ -25,6 +26,8 @@ class Produk extends AUTH_Controller {
 
 		$this->template->views('produk/home', $data);
 	}
+
+
 
 	public function tampil() {
 		$data['dataProduk'] = $this->M_produk->select_all();

@@ -17,9 +17,7 @@
       <td><?php echo rupiah ($produk->tipe_produk_harga); ?></td>
       <td><h><?php echo $produk->luas_lahan; ?> m2</h></td>
       <td><?php echo $produk->alamat; ?></td>
-      <td><?php echo $produk->status_produk_nama; 
-     
-      ?></td>
+      <td><?php echo $produk->status_produk_nama; ?></td>
 
       <td class="text-center" style="min-width:110px;">
       <button class="btn btn-info detail-dataProduk" data-id="<?php echo $produk->id; ?>"><i class="glyphicon glyphicon-info-sign"></i> </button>

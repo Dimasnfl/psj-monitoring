@@ -9,15 +9,16 @@ class M_produk extends CI_Model {
 	}
 
 	public function select_all() {
-		$this->db->select('produk.id,user.nik as user_nik, user.nama as user_nama,status_produk.id as status_produk_id , tipe_produk.nama as tipe_produk_nama, produk.tgl_tanam, produk.tgl_panen, produk.berat_panen,  tipe_produk.harga as tipe_produk_harga, produk.luas_lahan, produk.alamat, status_produk.nama as status_produk_nama');
+		$this->db->select('produk.id,user.nik as user_nik, user.nama as user_nama,status_produk.id as status_produk_id , tipe_produk.nama as tipe_produk_nama, produk.tgl_tanam, produk.tgl_panen, produk.berat_panen,  tipe_produk.harga as tipe_produk_harga, produk.luas_lahan, produk.alamat, status_produk.nama as status_produk_nama, produk.id_status_produk, produk.created_at');
 		$this->db->from('produk');
-		$this->db->order_by('id', 'desc');
+		$this->db->order_by('created_at', 'desc');
 		$this->db->join('user', 'user.id = produk.id_user');
 		$this->db->join('tipe_produk', 'tipe_produk.id = produk.id_tipe_produk');
 		$this->db->join('status_produk', 'status_produk.id = produk.id_status_produk');
 		$query = $this->db->get();
 		return $query->result();
 	}
+
 
 	public function select_by_id($id) {
 		$sql = "SELECT produk.id AS id_produk,

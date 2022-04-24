@@ -4,13 +4,18 @@
 
 <div class="box">
   <div class="box-header">
-    <!-- <div class="col-md-6" style="padding: 0;">
-        <button class="form-control btn btn-primary" data-toggle="modal" data-target="#tambah-produk"><i class="glyphicon glyphicon-plus-sign"></i> Tambah Data</button>
-    </div> -->
-    <!-- <div class="col-md-18">
-        <a href="<?php echo base_url('Produk/export'); ?>" class="form-control btn btn-default"><i class="glyphicon glyphicon glyphicon-floppy-open"></i> Export Data Excel</a>
-    </div>
-  </div> -->
+      <div class="col-md-2">
+						<label>Pilih Status Produk</label>
+            <select name="" class="form-control" id="id_status_produk">
+            <option value="0"> -- Pilih Status -- </option>
+            <option value="1">Proses Tanam</option>
+						<option value="2">Panen</option>
+            <option value="3">Siap Diambil</option>
+            <option value="4">Selesai Diambil</option>
+            <option value="5">Sedang Diambil</option>
+          </select>		
+      </div>
+  </div>
   <!-- /.box-header -->
   <div class="box-body">
     <table id="list-data" class="table table-bordered table-striped">
@@ -49,3 +54,4 @@
   $data['url'] = 'Produk/import';
   echo show_my_modal('modals/modal_import', 'import-produk', $data);
 ?>
+
