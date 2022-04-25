@@ -76,7 +76,15 @@ class M_produk extends CI_Model {
 		return $query->result();
 	}
 
-
+	//filter status_produk
+	public function select_by_status($status_produk) {
+        $sql = "SELECT produk.id, user.nik as user_nik, user.nama as user_nama,status_produk.id as status_produk_id , tipe_produk.nama as tipe_produk_nama, produk.tgl_tanam, produk.tgl_panen, produk.berat_panen,  tipe_produk.harga as tipe_produk_harga, produk.luas_lahan, produk.alamat, status_produk.nama as status_produk_nama, produk.id_status_produk, produk.created_at 
+        FROM status_produk, user, produk, tipe_produk 
+        WHERE produk.id_status_produk = status_produk.id AND produk.id_user = user.id AND produk.id_tipe_produk = tipe_produk.id AND produk.id_status_produk = '{$status_produk}'";
+        $data = $this->db->query($sql);
+    
+        return $data->result();
+      }
 
 
 	public function select_by_tipe_produk($id) {
