@@ -87,6 +87,15 @@ class Api extends CI_Controller {
             $access_token = random_string('alnum',200);
             $this->M_user->set_access_token($user->id,$access_token);
             $user->access_token = $access_token;
+            
+            if($user->id_kurir == null){
+                $user->is_kurir = false;
+            }else{
+                $user->is_kurir = true;
+                $this->load->model("M_kurir");
+                $user->data_kurir = $this->M_kurir->select_by_id($user->id_kurir);
+            }
+            unset($user->id_kurir);
             echo json_encode($this->success($user));
         }else{
             $data = array(
