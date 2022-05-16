@@ -4,9 +4,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class M_transaksi extends CI_Model {
 
 	public function select_all_transaksi() {
-		$this->db->select('transaksi.id, transaksi.no_resi, transaksi.tanggal_pengambilan, transaksi.tanggal_diambil, kurir.nama as nama_kurir, user.nama as nama_user, produk.id as id_produk, transaksi.tanggal_sampai, transaksi.biaya_angkut, status_transaksi.nama as nama_status');
+		$this->db->select('transaksi.id, transaksi.no_resi, transaksi.tanggal_pengambilan, transaksi.tanggal_diambil, kurir.nama as nama_kurir, user.nama as nama_user, produk.id as id_produk, transaksi.tanggal_sampai, transaksi.biaya_angkut, status_transaksi.nama as nama_status, transaksi.created_at');
 		$this->db->from('transaksi');
-		$this->db->order_by('id', 'asc');
+		$this->db->order_by('created_at', 'desc');
 		$this->db->join('kurir', 'kurir.id = transaksi.id_kurir');
 		$this->db->join('user', 'user.id = transaksi.id_user');
 		$this->db->join('produk', 'produk.id = transaksi.id_produk');
@@ -83,7 +83,7 @@ class M_transaksi extends CI_Model {
 		//PSJ-TGL-BLN-THN-0ID_PRODUK0-0ID_KURIR0
 		
 		$tgl = new DateTime($tanggal);
-		$dateString = $tgl->format("Y-m-d $jam:00");
+		$dateString = $tgl->format("Y-m-d");//$jam:00
 		$noResi = "PSJ-$dateString-0$produk->id-0$kurir->id";
 
 		$insertData = array(

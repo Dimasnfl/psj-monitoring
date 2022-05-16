@@ -15,11 +15,11 @@
     </div>
 
     <!-- Sidebar Menu -->
-    <ul class="sidebar-menu">
+<ul class="sidebar-menu">
       <li class="header">LIST MENU</li>
       <!-- Optionally, you can add icons to the links -->
 
-      <li <?php if ($page == 'Home') {echo 'class="active"';} ?>>
+      <li <?php if ($page == 'home') {echo 'class="active"';} ?>>
         <a href="<?php echo base_url('Home'); ?>">
           <i class="fa fa-home"></i>
           <span>Home</span>
@@ -39,6 +39,56 @@
           <span>Data E-Commodity</span>
         </a>
       </li>
+    
+    <!-- <li <?php if ($page == '') {echo 'class=""';} ?>>
+      <a href="<?php echo base_url(''); ?>">
+      <i class="fa fa-leaf"></i> Data E-Commodity
+        <span class="pull-right-container">
+        <i class="fa fa-angle-left pull-right"></i>
+      </span>
+      </a>
+      <ul class="treeview-menu menu-open">
+          <li class="active">
+      <a href="">
+      <i class="fa fa-list"></i> Status Produk
+      <span class="pull-right-container">
+      <i class="fa fa-angle-left pull-right"></i>
+      </span>
+      </a>
+      <ul class="treeview-menu menu-open">
+      <li <?php if ($page == 'Produk1') {echo 'class="active"';} ?>>
+      <a href="<?php echo base_url('Produk1'); ?>">
+      <i class="fa fa-circle-o"></i> Proses Tanam
+      </a></li>
+      </ul>
+      <ul class="treeview-menu menu-open">
+      <li <?php if ($page == '') {echo 'class=""';} ?>>
+      <a href="<?php echo base_url(''); ?>">
+      <i class="fa fa-circle-o"></i> Panen
+      </a></li>
+      </ul>
+      <ul class="treeview-menu menu-open">
+      <li <?php if ($page == '') {echo 'class=""';} ?>>
+      <a href="<?php echo base_url(''); ?>">
+      <i class="fa fa-circle-o"></i> Siap Diambil
+      </a></li>
+      </ul>
+      <ul class="treeview-menu menu-open">
+      <li <?php if ($page == '') {echo 'class=""';} ?>>
+      <a href="<?php echo base_url(''); ?>">
+      <i class="fa fa-circle-o"></i> Sedang Diambil
+      </a></li>
+      </ul>
+      <ul class="treeview-menu menu-open">
+      <li <?php if ($page == '') {echo 'class=""';} ?>>
+      <a href="<?php echo base_url(''); ?>">
+      <i class="fa fa-circle-o"></i> Selesai Diambil
+      </a></li>
+      </ul>
+      </li>
+      </ul> -->
+
+
 	  
       <li <?php if ($page == 'Tipe Produk') {echo 'class="active"';} ?>>
           <a href="<?php echo base_url('Tipe_produk'); ?>">
@@ -47,7 +97,7 @@
         </a>
       </li>
 	  
-	  <li <?php if ($page == 'Dusun') {echo 'class="active"';} ?>>
+	  <li <?php if ($page == 'Desa') {echo 'class="active"';} ?>>
         <a href="<?php echo base_url('Desa'); ?>">
           <i class="fa fa-location-arrow"></i>
           <span>Data Dusun</span>
@@ -67,8 +117,10 @@
           <span>Data Transaksi</span>
         </a>
       </li> 
-    </ul>
-    <!-- /.sidebar-menu -->
+</ul>
+
+
+
   </section>
   <!-- /.sidebar -->
 </aside>

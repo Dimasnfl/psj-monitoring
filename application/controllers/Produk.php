@@ -18,6 +18,7 @@ class Produk extends AUTH_Controller {
 		$data['dataProduk'] = $this->M_produk->select_all();
 		$data['dataUser'] = $this->M_user->select_all();
 		$data['dataTipe_produk'] = $this->M_tipe_produk->select_all();
+		$data['dataStatus_produk'] = $this->M_status_produk->select_all();
 		$data['page'] = "Produk";
 		$data['judul'] = "Data E-Commodity";
 		$data['deskripsi'] = "Manage Data E-Commodity";
@@ -25,6 +26,8 @@ class Produk extends AUTH_Controller {
 
 		$this->template->views('produk/home', $data);
 	}
+
+
 
 	public function tampil() {
 		$data['dataProduk'] = $this->M_produk->select_all();
@@ -179,67 +182,124 @@ class Produk extends AUTH_Controller {
 		force_download('./assets/excel/Data produk.xlsx', NULL);
 	}
 
-	public function import() {
-		$this->form_validation->set_rules('excel', 'File', 'trim|required');
+	// public function import() {
+	// 	$this->form_validation->set_rules('excel', 'File', 'trim|required');
 
-		if ($_FILES['excel']['name'] == '') {
-			$this->session->set_flashdata('msg', 'File harus diisi');
-		} else {
-			$config['upload_path'] = './assets/excel/';
-			$config['allowed_types'] = 'xls|xlsx';
+	// 	if ($_FILES['excel']['name'] == '') {
+	// 		$this->session->set_flashdata('msg', 'File harus diisi');
+	// 	} else {
+	// 		$config['upload_path'] = './assets/excel/';
+	// 		$config['allowed_types'] = 'xls|xlsx';
 			
-			$this->load->library('upload', $config);
+	// 		$this->load->library('upload', $config);
 			
-			if ( ! $this->upload->do_upload('excel')){
-				$error = array('error' => $this->upload->display_errors());
-			}
-			else{
-				$data = $this->upload->data();
+	// 		if ( ! $this->upload->do_upload('excel')){
+	// 			$error = array('error' => $this->upload->display_errors());
+	// 		}
+	// 		else{
+	// 			$data = $this->upload->data();
 				
-				error_reporting(E_ALL);
-				date_default_timezone_set('Asia/Jakarta');
+	// 			error_reporting(E_ALL);
+	// 			date_default_timezone_set('Asia/Jakarta');
 
-				include './assets/phpexcel/Classes/PHPExcel/IOFactory.php';
+	// 			include './assets/phpexcel/Classes/PHPExcel/IOFactory.php';
 
-				$inputFileName = './assets/excel/' .$data['file_name'];
-				$objPHPExcel = PHPExcel_IOFactory::load($inputFileName);
-				$sheetData = $objPHPExcel->getActiveSheet()->toArray(null,true,true,true);
+	// 			$inputFileName = './assets/excel/' .$data['file_name'];
+	// 			$objPHPExcel = PHPExcel_IOFactory::load($inputFileName);
+	// 			$sheetData = $objPHPExcel->getActiveSheet()->toArray(null,true,true,true);
 
-				$index = 0;
-				foreach ($sheetData as $key => $value) {
-					if ($key != 1) {
-						$id = md5(DATE('ymdhms').rand());
-						$check = $this->M_produk->check_NIK($value['B']);
+	// 			$index = 0;
+	// 			foreach ($sheetData as $key => $value) {
+	// 				if ($key != 1) {
+	// 					$id = md5(DATE('ymdhms').rand());
+	// 					$check = $this->M_produk->check_NIK($value['B']);
 
-						if ($check != 1) {
-							$resultData[$index]['id'] = $id;
-							$resultData[$index]['NIK'] = ucwords($value['B']);
-							$resultData[$index]['foto_produk'] = $value['C'];
-							$resultData[$index]['jenis_produk'] = $value['D'];
-							$resultData[$index]['tgl_tanam'] = $value['E'];
-							$resultData[$index]['tgl_panen'] = $value['F'];
-							$resultData[$index]['berat_bersih'] = $value['G'];
-							$resultData[$index]['id_tipe_produk'] = $value['H'];
-						}
-					}
-					$index++;
-				}
+	// 					if ($check != 1) {
+	// 						$resultData[$index]['id'] = $id;
+	// 						$resultData[$index]['NIK'] = ucwords($value['B']);
+	// 						$resultData[$index]['foto_produk'] = $value['C'];
+	// 						$resultData[$index]['jenis_produk'] = $value['D'];
+	// 						$resultData[$index]['tgl_tanam'] = $value['E'];
+	// 						$resultData[$index]['tgl_panen'] = $value['F'];
+	// 						$resultData[$index]['berat_bersih'] = $value['G'];
+	// 						$resultData[$index]['id_tipe_produk'] = $value['H'];
+	// 					}
+	// 				}
+	// 				$index++;
+	// 			}
 
-				unlink('./assets/excel/' .$data['file_name']);
+	// 			unlink('./assets/excel/' .$data['file_name']);
 
-				if (count($resultData) != 0) {
-					$result = $this->M_produk->insert_batch($resultData);
-					if ($result > 0) {
-						$this->session->set_flashdata('msg', show_succ_msg('Data produk Berhasil diimport ke database'));
-						redirect('produk');
-					}
-				} else {
-					$this->session->set_flashdata('msg', show_msg('Data produk Gagal diimport ke database (Data Sudah terupdate)', 'warning', 'fa-warning'));
-					redirect('produk');
-				}
+	// 			if (count($resultData) != 0) {
+	// 				$result = $this->M_produk->insert_batch($resultData);
+	// 				if ($result > 0) {
+	// 					$this->session->set_flashdata('msg', show_succ_msg('Data produk Berhasil diimport ke database'));
+	// 					redirect('produk');
+	// 				}
+	// 			} else {
+	// 				$this->session->set_flashdata('msg', show_msg('Data produk Gagal diimport ke database (Data Sudah terupdate)', 'warning', 'fa-warning'));
+	// 				redirect('produk');
+	// 			}
 
-			}
+	// 		}
+	// 	}
+	// }
+	public function load_status()
+	{
+	  $status_produk = $_GET['id_status_produk'];
+	  if ($status_produk == 0) {
+		$data = $this->M_produk->select_all();
+  
+	  }
+	  else
+	  {
+		$data = $this->M_produk->select_by_status($status_produk);
+	  }
+	  if (!empty($data)) 
+	  {
+		  
+
+		function rupiah ($harga) {
+		  $hasil = 'Rp ' . number_format($harga, 2, ",", ".");
+		  return $hasil;
 		}
+		$no=1; foreach ($data as $row): ?>
+
+		<tr>
+    <td style="text-align: center;"><?php echo $no; ?></td>
+      <td><?php echo $row->user_nik; ?></td>
+      <td><?php echo $row->user_nama; ?></td>
+      <td><?php echo $row->tipe_produk_nama; ?></td>
+      <td><?php echo $row->tgl_tanam; ?></td>
+      <td><?php echo $row->tgl_panen; ?></td>
+      <td><h><?php echo $row->berat_panen; ?>kg</h></td>
+      <td><?php echo rupiah ($row->tipe_produk_harga); ?></td>
+      <td><h><?php echo $row->luas_lahan; ?> m2</h></td>
+      <td><?php echo $row->alamat; ?></td>
+      <td><?php echo $row->status_produk_nama; ?></td>
+
+      <td class="text-center" style="min-width:110px;">
+      <button class="btn btn-info detail-dataProduk" data-id="<?php echo $row->id; ?>"><i class="glyphicon glyphicon-info-sign"></i> </button>
+      <button class="btn btn-warning update-dataProduk" data-id="<?php echo $row->id; ?>"><i class="glyphicon glyphicon-edit"></i></button>
+      <?php  if($row->status_produk_id == 3)
+      {
+        ?>
+         <button class="btn btn-success penjemputan" data-id="<?php echo $row->id; ?>"><i class="glyphicon glyphicon-plane"></i></button>
+        <?php
+      }
+      ?>
+      </td>
+    </tr>
+
+		<?php endforeach ?> <?php
+	  }
+	  else
+	  {
+		?>
+		  <tr><td align="center">Tidak ada data</td></tr>
+		<?php
+	  }
+	  
 	}
 }
 

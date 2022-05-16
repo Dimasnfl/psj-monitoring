@@ -329,7 +329,6 @@ function tampilUser() {
 	$('#tambah-produk').on('hidden.bs.modal', function () {
 	  $('.form-msg').html('');
 	})
-
 	$('#update-produk').on('hidden.bs.modal', function () {
 	  $('.form-msg').html('');
 	})

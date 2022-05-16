@@ -7,6 +7,7 @@ class M_user extends CI_Model {
 		$this->db->from('user');
 		$this->db->order_by('nama', 'asc');
 		$this->db->join('desa', 'desa.id = user.id_desa');
+		$this->db->where('user.id_kurir IS NULL');
 		$query = $this->db->get();
 		return $query->result();
 	}
