@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>AdminCRUD | Log in</title>
+    <title>AdminSIDUDA | Log in</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.6 -->
@@ -17,13 +17,19 @@
     <!-- iCheck -->
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/plugins/iCheck/square/blue.css">
 
+
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+
   </head>
+  <div class="row">
+    <div class="col-md-11"><img class="profile-user-img" src="<?php echo base_url(); ?>assets/img/logo_kab.PNG"></div>
+    <div class="col-md-1"><img class="profile-user-img" src="<?php echo base_url(); ?>assets/img/LOG_KADIN.PNG" height="120px"></div>
+  </div>
   <body class="hold-transition login-page">
     <div class="login-box">
       <div class="login-logo">
@@ -76,8 +82,12 @@
       <?php
         echo show_err_msg($this->session->flashdata('error_msg'));
       ?>
-    </div>
-    
+
+    </div>   
+    <p style="text-align:center;">
+        Created By
+      </p>
+      <img class="profile-user-img img-responsive img-circle" src="<?php echo base_url(); ?>assets/img/logo_univ.PNG" alt="User profile picture"> 
 
     <!-- /.login-box -->
 
