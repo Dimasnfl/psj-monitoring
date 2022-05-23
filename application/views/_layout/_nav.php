@@ -21,8 +21,8 @@
             <img src="<?php echo base_url(); ?>assets/img/<?php echo $userdata->foto; ?>" class="img-circle" alt="User Image">
 
             <p>
-              <?php echo $userdata->nama; ?> - Admin
-              <small>Member since March. 2022</small>
+              <?php echo $userdata->nama; ?>
+              <small></small>
             </p>
           </li>
           <!-- Menu Footer-->

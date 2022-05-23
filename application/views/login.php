@@ -26,14 +26,17 @@
     <![endif]-->
 
   </head>
-  <div class="row">
-    <div class="col-md-11"><img class="profile-user-img" src="<?php echo base_url(); ?>assets/img/logo_kab.PNG"></div>
-    <div class="col-md-1"><img class="profile-user-img" src="<?php echo base_url(); ?>assets/img/LOG_KADIN.PNG" height="120px"></div>
-  </div>
+
   <body class="hold-transition login-page">
     <div class="login-box">
+      
       <div class="login-logo">
-        <a href="<?php echo base_url(); ?>assets/index2.html"><b>Admin</b>SIDUDA</a>
+        <div class="col-lg-12" align="center">
+          <a><img class="profile-user-img" src="<?php echo base_url(); ?>assets/img/logo/logo_kab.PNG" alt="Kabupaten Bandung"></a>
+          <a><img class="profile-user-img" src="<?php echo base_url(); ?>assets/img/logo/logo_univ.PNG" alt="Widyatama"></a> 
+          <a><img class="profile-user-img" src="<?php echo base_url(); ?>assets/img/logo/LOG_KADIN.PNG" alt="Kadin Kota Bandung" height="120px"></a>
+        </div>
+        <a href="<?php echo base_url(); ?>#"><b>Admin</b>SIDUDA</a>
       </div>
 
       <!-- /.login-logo -->
@@ -52,13 +55,13 @@
             <span class="glyphicon glyphicon-lock form-control-feedback"></span>
           </div>
           <div class="row">
-            <!-- <div class="col-xs-8">
+            <div class="col-xs-8">
               <div class="checkbox icheck">
                 <label>
                   <input type="checkbox"> Remember Me
                 </label>
               </div>
-            </div> -->
+            </div>
             <div class="col-xs-offset-4 col-xs-4">
               <button type="submit" class="btn btn-primary btn-block btn-flat">Sign In</button>
             </div>
@@ -84,10 +87,9 @@
       ?>
 
     </div>   
-    <p style="text-align:center;">
+    <!-- <p style="text-align:center;">
         Created By
-      </p>
-      <img class="profile-user-img img-responsive img-circle" src="<?php echo base_url(); ?>assets/img/logo_univ.PNG" alt="User profile picture"> 
+      </p> -->
 
     <!-- /.login-box -->
 
@@ -96,8 +98,8 @@
     <!-- Bootstrap 3.3.6 -->
     <script src="<?php echo base_url(); ?>assets/bootstrap/js/bootstrap.min.js"></script>
     <!-- iCheck -->
-    <!-- <script src="<?php echo base_url(); ?>assets/plugins/iCheck/icheck.min.js"></script> -->
-    <!-- <script>
+    <script src="<?php echo base_url(); ?>assets/plugins/iCheck/icheck.min.js"></script>
+    <script>
       $(function () {
         $('input').iCheck({
           checkboxClass: 'icheckbox_square-blue',
@@ -105,6 +107,6 @@
           increaseArea: '20%' // optional
         });
       });
-    </script> -->
+    </script>
   </body>
 </html>

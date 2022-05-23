@@ -165,5 +165,6 @@
   };
 
   pieChart.Doughnut(PieData, pieOptions);
+
 </script>
 

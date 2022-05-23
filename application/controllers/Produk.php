@@ -249,7 +249,6 @@ class Produk extends AUTH_Controller {
 	  $status_produk = $_GET['id_status_produk'];
 	  if ($status_produk == 0) {
 		$data = $this->M_produk->select_all();
-  
 	  }
 	  else
 	  {
@@ -257,16 +256,13 @@ class Produk extends AUTH_Controller {
 	  }
 	  if (!empty($data)) 
 	  {
-		  
-
 		function rupiah ($harga) {
 		  $hasil = 'Rp ' . number_format($harga, 2, ",", ".");
 		  return $hasil;
 		}
 		$no=1; foreach ($data as $row): ?>
-
 		<tr>
-    <td style="text-align: center;"><?php echo $no; ?></td>
+      <td style="text-align: center;"><?php echo $no; ?></td>
       <td><?php echo $row->user_nik; ?></td>
       <td><?php echo $row->user_nama; ?></td>
       <td><?php echo $row->tipe_produk_nama; ?></td>

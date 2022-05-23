@@ -5,7 +5,7 @@
 <div class="box">
   <div class="box-header">
   <div class="col-md-3">
-        <table class="table">
+
           <tr>
             <td>
               <label><b>Select Status Produk</b></label>
@@ -19,12 +19,12 @@
             </select>
             </td>
           </tr>
-        </table>
+
       </div>
   </div>
   <!-- /.box-header -->
-  <div class="box-body">
-    <table id="list-data" class="table table-bordered table-striped">
+  <div class="box-body table-responsive p-0">
+    <table id="list-data" class="table table-bordered table-hover">
       <thead>
         <tr>
           <th>No</th>
