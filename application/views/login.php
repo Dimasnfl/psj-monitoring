@@ -31,16 +31,22 @@
     <div class="login-box">
       
       <div class="login-logo">
-        <div class="col-lg-12" align="center">
-          <a><img class="profile-user-img" src="<?php echo base_url(); ?>assets/img/logo/logo_kab.PNG" alt="Kabupaten Bandung"></a>
-          <a><img class="profile-user-img" src="<?php echo base_url(); ?>assets/img/logo/logo_univ.PNG" alt="Widyatama"></a> 
-          <a><img class="profile-user-img" src="<?php echo base_url(); ?>assets/img/logo/LOG_KADIN.PNG" alt="Kadin Kota Bandung" height="120px"></a>
+        <div class="row">
+              <!-- <p class="login-box-msg" style="text-align:center;">
+        Supported By
+      </p> -->
+          <a><img class="" src="<?php echo base_url(); ?>assets/img/logo/logo_kab.PNG" alt="Kabupaten Bandung" height="125px"></a>
+          <a><img class="" src="<?php echo base_url(); ?>assets/img/logo/logo_univ.PNG" alt="Widyatama" height="125px"></a> 
+          <a><img class="" src="<?php echo base_url(); ?>assets/img/logo/LOG_KADIN.PNG" alt="Kadin Kota Bandung"  height="125px"></a>
         </div>
-        <a href="<?php echo base_url(); ?>#"><b>Admin</b>SIDUDA</a>
+        <!-- <a href="<?php echo base_url(); ?>#"><b>Admin</b>SIDUDA</a> -->
       </div>
 
       <!-- /.login-logo -->
       <div class="login-box-body">
+        <div class="login-logo">
+        <a href="<?php echo base_url(); ?>#"><b>Admin</b>SIDUDA</a>
+        </div>
         <p class="login-box-msg">
           Log in to start your session
         </p>
@@ -87,9 +93,6 @@
       ?>
 
     </div>   
-    <!-- <p style="text-align:center;">
-        Created By
-      </p> -->
 
     <!-- /.login-box -->
 

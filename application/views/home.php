@@ -1,6 +1,6 @@
 <div class="row">
 
-  <div class="col-lg-4 col-xs-3">
+  <div class="col-lg-4 col-xs-4">
     <div class="small-box bg-aqua">
       <div class="inner">
         <h3><?php echo $jml_user; ?></h3>
@@ -13,7 +13,7 @@
     </div>
   </div>
   
-  <div class="col-lg-4 col-xs-3">
+  <div class="col-lg-4 col-xs-4">
     <div class="small-box bg-green">
       <div class="inner">
         <h3><?php echo $jml_produk; ?></h3>
@@ -26,7 +26,7 @@
     </div>
   </div>
   
-  <div class="col-lg-4 col-xs-3">
+  <div class="col-lg-4 col-xs-4">
     <div class="small-box bg-yellow">
       <div class="inner">
         <h3><?php echo $jml_tipe_produk; ?></h3>
@@ -39,7 +39,7 @@
     </div>
  </div>
 
- <div class="col-lg-4 col-xs-3">
+ <div class="col-lg-4 col-xs-4">
     <div class="small-box bg-blue">
       <div class="inner">
         <h3><?php echo $jml_desa; ?></h3>
@@ -52,7 +52,7 @@
     </div>
  </div>
 
- <div class="col-lg-4 col-xs-3">
+ <div class="col-lg-4 col-xs-4">
     <div class="small-box bg-red">
       <div class="inner">
         <h3><?php echo $jml_kurir; ?></h3>
@@ -65,7 +65,7 @@
     </div>
  </div>
 
- <div class="col-lg-4 col-xs-3">
+ <div class="col-lg-4 col-xs-4">
     <div class="small-box bg-purple">
       <div class="inner">
         <h3><?php echo $jml_transaksi; ?></h3>
