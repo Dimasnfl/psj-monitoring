@@ -143,7 +143,7 @@ class Api extends CI_Controller {
         $data = $this->M_produk->select_produk_by_user_id($this->user->id);
         echo json_encode($this->success($data));
     }
-    //2.6 Get penjualan
+    //2.7 Get penjualan
     public function penjualan(){
         if(!$this->validateAccessToken())return;
         $filterType = $this->input->get('filter_type');
@@ -161,6 +161,18 @@ class Api extends CI_Controller {
         $data = $this->M_transaksi->select_all_transaksi_by_user_id($this->user->id);
         echo json_encode($this->success($data));
     }
+    //2.7A Get order by driver
+    public function driver_order(){
+        //validate access token
+        if(!$this->validateAccessToken())return;
+        
+
+        //get driver id
+        $data = $this->M_transaksi->get_driver_id_by_user_id($this->user->id);
+        echo $data;
+
+    }
+
     //2.3 get all available produk status
     public function status_produk(){
         if(!$this->validateAccessToken())return;
