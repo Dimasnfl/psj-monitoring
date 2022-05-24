@@ -39,6 +39,13 @@ class M_user extends CI_Model {
 	 	$query = $this->db->get();
 	 	return $query->result();
 	 }
+	 public function get_driver_id_by_user_id($user_id){
+		 $this->db->select('user.*');
+		 $this->db->from();
+		 $user = $this->row();
+		 return $user;
+
+	 }
 
 	public function select_by_id($id) {
 		$sql = "SELECT user.id AS id_user, user.nik, user.nama as nama, desa.nama AS desa, user.id_desa, user.telp 
