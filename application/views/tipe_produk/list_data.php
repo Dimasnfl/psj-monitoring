@@ -8,7 +8,7 @@
     ?>
     <tr>
       <td style="text-align: center;"><?php echo $no; ?></td>
-      <td><img src="https://www.afandiyusuf.com/siduda-monitoring/assets/thumbnail/<?php echo $tipe_produk->foto; ?>" width="150px" height="100px"></td>      
+      <td><img src="assets/thumbnail/<?php echo $tipe_produk->foto; ?>" width="150px" height="100px"></td>      
       <td><?php echo $tipe_produk->nama; ?></td>
       
     <td>
