@@ -41,9 +41,14 @@ class M_user extends CI_Model {
 	 }
 	 public function get_driver_id_by_user_id($user_id){
 		 $this->db->select('user.*');
-		 $this->db->from();
-		 $user = $this->row();
-		 return $user;
+		 $this->db->from('user');
+		 $this->db->where("user.id = $user_id");
+		 $user = $this->db->get();
+		 if($user->row()->id_kurir != null){
+		 	return $user->row()->id_kurir;
+		 }else{
+			 return "NOT_KURIR";
+		 }
 
 	 }
 

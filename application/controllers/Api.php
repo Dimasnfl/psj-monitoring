@@ -161,17 +161,61 @@ class Api extends CI_Controller {
         $data = $this->M_transaksi->select_all_transaksi_by_user_id($this->user->id);
         echo json_encode($this->success($data));
     }
-    //2.7A Get order by driver
-    public function driver_order(){
+    //2.7A Get order ready by driver
+    public function driver_order_ready(){
         //validate access token
         if(!$this->validateAccessToken())return;
         
 
         //get driver id
-        $data = $this->M_transaksi->get_driver_id_by_user_id($this->user->id);
-        echo $data;
-
+        $driver_id = $this->M_user->get_driver_id_by_user_id($this->user->id);
+        if($driver_id == "NOT_DRIVER"){
+            echo(json_encod($this->error(500,$data)));
+            return;
+        }else{
+            $data = $this->M_transaksi->select_all_transaksi_by_driver_id($driver_id,3);
+            echo json_encode($this->success($data));
+            return;
+        }
     }
+
+     //2.7B Get ongoing order by driver
+     public function driver_order_ongoing(){
+        //validate access token
+        if(!$this->validateAccessToken())return;
+        
+
+        //get driver id
+        $driver_id = $this->M_user->get_driver_id_by_user_id($this->user->id);
+        if($driver_id == "NOT_DRIVER"){
+            echo(json_encod($this->error(500,$data)));
+            return;
+        }else{
+            $data = $this->M_transaksi->select_all_transaksi_by_driver_id($driver_id,5);
+            echo json_encode($this->success($data));
+            return;
+        }
+    }
+
+    //2.7B Get ongoing order by driver
+    public function driver_order_finished(){
+        //validate access token
+        if(!$this->validateAccessToken())return;
+        
+
+        //get driver id
+        $driver_id = $this->M_user->get_driver_id_by_user_id($this->user->id);
+        if($driver_id == "NOT_DRIVER"){
+            echo(json_encod($this->error(500,$data)));
+            return;
+        }else{
+            $data = $this->M_transaksi->select_all_transaksi_by_driver_id($driver_id,4);
+            echo json_encode($this->success($data));
+            return;
+        }
+    }
+
+
 
     //2.3 get all available produk status
     public function status_produk(){
