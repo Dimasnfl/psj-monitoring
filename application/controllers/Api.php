@@ -173,7 +173,7 @@ class Api extends CI_Controller {
             echo(json_encod($this->error(500,$data)));
             return;
         }else{
-            $data = $this->M_transaksi->select_all_transaksi_by_driver_id($driver_id,[3]);
+            $data = $this->M_transaksi->select_all_transaksi_by_driver_id($driver_id,[6]);
             echo json_encode($this->success($data));
             return;
         }
