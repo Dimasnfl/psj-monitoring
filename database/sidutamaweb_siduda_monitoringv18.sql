@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 15, 2022 at 10:44 PM
+-- Generation Time: May 26, 2022 at 09:58 PM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 7.3.30
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `psj`
+-- Database: `sidutamaweb_siduda_monitoring`
 --
 
 -- --------------------------------------------------------
@@ -64,7 +64,8 @@ INSERT INTO `desa` (`id`, `nama`) VALUES
 (1, 'Cibereum'),
 (2, 'Cihawuk'),
 (3, 'Sukapura'),
-(4, 'Neglawangi');
+(4, 'Neglawangi'),
+(1011, 'cihampelas');
 
 -- --------------------------------------------------------
 
@@ -87,12 +88,52 @@ CREATE TABLE `kurir` (
 --
 
 INSERT INTO `kurir` (`id`, `nama`, `jenis_kendaraan`, `plat_no`, `no_telp`, `created_at`, `updated_at`) VALUES
-(2, 'Jajang ', 'Mobil pick up', 'A1994CF', '085913394293', '2022-03-31 09:37:59', NULL),
-(3, 'Rhadhiya Wiraga Sudrajat', 'Truk', 'D8971EF', '087821705143', '2022-03-31 09:50:14', NULL),
-(4, 'dimas ', 'motor', 'D 5643 BBC', '089722678223', '2022-03-31 10:37:04', NULL),
-(5, 'Aldi', 'Truck', 'D 5643 BBC', '089722678223', '2022-03-31 10:37:07', NULL),
-(6, 'Jeje', 'Pickup', 'Z 7823 KTL', '087238087263', '2022-03-31 10:40:08', NULL),
-(10, 'Dimas', 'Motor4', 'D 123 M', '08214912', '2022-04-07 05:15:00', '2022-04-07 05:15:31');
+(2, 'Kurir-1 Yusuf', 'Mobil pick up', 'A1994CF', '085913394293', '2022-03-31 09:37:59', '2022-05-26 19:57:20');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `notifications`
+--
+
+CREATE TABLE `notifications` (
+  `id` int(11) NOT NULL,
+  `from_id` int(11) DEFAULT NULL,
+  `to_id` int(11) DEFAULT NULL,
+  `type_id` tinyint(2) NOT NULL,
+  `description` varchar(100) NOT NULL,
+  `is_read` tinyint(2) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `deleted_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='Table too store notifications';
+
+--
+-- Dumping data for table `notifications`
+--
+
+INSERT INTO `notifications` (`id`, `from_id`, `to_id`, `type_id`, `description`, `is_read`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, 29, 1283, 1, 'Terdapat 1 tugas baru', 1, '2022-05-26 19:30:28', '2022-05-26 19:45:50', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `notification_type`
+--
+
+CREATE TABLE `notification_type` (
+  `id` tinyint(2) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `description` varchar(200) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `notification_type`
+--
+
+INSERT INTO `notification_type` (`id`, `name`, `description`) VALUES
+(1, 'order_baru', '(from transaksi_id, to kurir_id) - Notifikasi untuk order baru yang diberikan oleh driver\r\n'),
+(2, 'order_diterima', '(from kurir_id, to transaksi_id) - Notifikasi untuk order yang sudah diterima oleh driver\r\n');
 
 -- --------------------------------------------------------
 
@@ -120,22 +161,33 @@ CREATE TABLE `produk` (
 
 INSERT INTO `produk` (`id`, `id_user`, `tgl_tanam`, `tgl_panen`, `berat_panen`, `luas_lahan`, `id_tipe_produk`, `alamat`, `id_status_produk`, `created_at`, `updated_at`) VALUES
 (7, 1274, '2022-03-01', '2022-03-19', 50, 18, 16, 'KP.Sukasari', 1, '2022-03-31 08:54:25', NULL),
-(15, 1276, '2022-02-02', '2022-03-02', 35, 100, 3, 'Rancaekek', 4, '2022-03-31 10:59:35', NULL),
+(15, 1276, '2022-02-02', '2022-03-02', 35, 100, 45, 'Rancaekek', 3, '2022-03-31 10:59:35', '2022-05-26 19:56:58'),
 (14, 5, '2022-01-13', '2022-03-13', 20, 200, 16, 'Cibereum Rt 01/Rw 05', 3, '2022-03-31 10:54:55', NULL),
 (13, 4, '2022-04-16', '2022-05-16', 20, 100, 11, 'Cibiru ', 2, '2022-03-31 10:51:50', NULL),
-(12, 3, '2022-03-02', '2022-05-02', 40, 300, 10, 'Suka Pura', 3, '2022-03-31 10:46:58', '2022-04-15 20:42:16'),
+(12, 3, '2022-03-02', '2022-05-02', 40, 300, 10, 'Suka Pura', 5, '2022-03-31 10:46:58', '2022-05-26 19:27:10'),
 (16, 1274, '2022-01-12', '2022-03-02', 50, 10, 8, 'Suka sari', 4, '2022-03-31 11:08:07', NULL),
 (17, 3, '2022-03-01', '2022-05-09', 18, 30, 9, 'Ranca Manyar', 1, '2022-03-31 11:10:06', NULL),
 (18, 5, '2022-02-02', '2022-04-05', 10, 30, 6, 'Padalarang', 1, '2022-03-31 11:12:35', NULL),
 (19, 1, '2022-02-01', '2022-03-31', 25, 40, 8, 'Sapan', 5, '2022-03-31 11:15:08', '2022-04-15 20:43:47'),
 (21, 1274, '2022-01-12', '2022-03-12', 30, 40, 12, 'Baleendah', 4, '2022-03-31 11:18:20', NULL),
 (22, 4, '2022-01-05', '2022-03-31', 30, 70, 4, 'Cibeunying', 5, '2022-03-31 11:20:50', '2022-04-15 20:39:20'),
-(23, 1, '2022-03-31', '2022-04-30', 200, 1200, 3, 'fgfyeferfyrg', 1, '2022-03-31 14:24:32', NULL),
-(29, 1, '2022-04-24', '2022-08-17', 500, 1200, 8, 'sfsfxdf', 3, '2022-04-01 07:37:52', '2022-04-15 20:42:19'),
+(23, 1, '2022-03-31', '2022-04-30', 200, 1200, 43, 'fgfyeferfyrg', 3, '2022-03-31 14:24:32', '2022-05-26 19:57:02'),
+(29, 1, '2022-04-24', '2022-08-17', 500, 1200, 8, 'sfsfxdf', 5, '2022-04-01 07:37:52', '2022-04-15 20:49:03'),
 (25, 1, '2022-03-31', '2022-10-31', 2212, 1233, 3, 'same out us do the to the store he', 1, '2022-03-31 14:37:35', NULL),
-(27, 1, '2022-03-31', '2022-05-28', 1200, 1200, 4, 'jalan raya pinggir jalan', 3, '2022-03-31 15:39:24', '2022-04-15 20:42:13'),
-(28, 1, '2022-04-01', '2022-07-30', 500, 1200, 4, 'jalan joyoboyo', 1, '2022-03-31 17:40:33', NULL),
-(30, 1, '2022-04-01', '2022-04-30', 12000, 1000, 4, 'Ciparay', 1, '2022-04-01 08:23:57', NULL);
+(27, 1, '2022-03-31', '2022-05-28', 1200, 1200, 4, 'jalan raya pinggir jalan', 3, '2022-03-31 15:39:24', '2022-05-26 19:56:43'),
+(28, 1, '2022-04-01', '2022-07-30', 500, 1200, 4, 'jalan joyoboyo', 3, '2022-03-31 17:40:33', '2022-05-26 19:56:40'),
+(30, 1, '2022-04-01', '2022-04-30', 199, 1000, 42, 'Ciparay', 2, '2022-04-01 08:23:57', '2022-04-17 10:44:51'),
+(31, 1274, '2022-04-16', '2022-04-30', 550888, 56, 21, '', 1, '2022-04-16 06:35:01', NULL),
+(32, 1274, '2022-04-19', '2022-04-30', 12, 12, 10, 'asdadasd', 2, '2022-04-19 03:32:51', '2022-04-19 03:34:03'),
+(33, 1274, '2022-04-19', '2022-04-26', 100, 200, 21, 'sukapura', 1, '2022-04-19 03:43:28', NULL),
+(34, 1274, '2022-04-19', '2022-04-26', 50, 100, 10, 'wawawaw', 1, '2022-04-19 03:45:07', NULL),
+(35, 1277, '2022-05-01', '2022-05-21', 100, 1200, 8, 'sukapura 01', 3, '2022-05-08 12:47:15', '2022-05-26 19:56:36'),
+(36, 1280, '2022-05-19', '2022-06-19', 1, 1500, 12, 'Sukapura ', 1, '2022-05-19 08:48:33', NULL),
+(37, 1279, '2022-05-19', '2022-06-15', 30, 100, 12, 'jln ciparay', 3, '2022-05-19 10:32:11', '2022-05-19 10:34:14'),
+(38, 1279, '2022-05-19', '2022-06-18', 30, 100, 12, 'jln jalanan', 3, '2022-05-19 10:35:08', '2022-05-19 10:35:58'),
+(39, 1284, '2022-05-19', '2022-06-22', 20, 100, 45, 'jalanan', 3, '2022-05-19 10:52:56', '2022-05-19 10:54:48'),
+(40, 1284, '2022-05-19', '2022-06-15', 30, 100, 9, 'jalan sukapura', 3, '2022-05-19 11:04:15', '2022-05-19 11:05:26'),
+(41, 1274, '2022-05-19', '2022-06-20', 60, 260, 45, 'sukapura', 3, '2022-05-19 11:34:39', '2022-05-26 19:57:53');
 
 -- --------------------------------------------------------
 
@@ -216,7 +268,11 @@ INSERT INTO `tipe_produk` (`id`, `foto`, `nama`, `harga`, `created_at`, `terbaru
 (44, 'singkong.png', 'Singkong', 25000000, '2022-04-13', 0, '2022-04-13', 7, '2022-04-13 14:50:07'),
 (45, 'singkong.png', 'Singkong', 10000, '2022-04-13', 1, '2022-04-13', 7, NULL),
 (42, 'jagung.png', 'Jagung', 50000, '2022-04-13', 1, '2022-04-13', 4, NULL),
-(43, 'kubis.png', 'Kubis', 5000000, '2022-04-13', 1, '2022-04-13', 6, NULL);
+(43, 'kubis.png', 'Kubis', 5000000, '2022-04-13', 1, '2022-04-13', 6, NULL),
+(46, '', 'jagung', 50000, '0000-00-00', 1, '2022-05-19', 0, '0000-00-00 00:00:00'),
+(47, '', 'jagung', 50000, '0000-00-00', 1, '2022-05-19', 0, '0000-00-00 00:00:00'),
+(48, '', 'jagung', 50000, '0000-00-00', 1, '2022-05-19', 0, '0000-00-00 00:00:00'),
+(49, '', 'cabai', 70000, '0000-00-00', 1, '2022-05-19', 0, '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -239,17 +295,6 @@ CREATE TABLE `transaksi` (
   `updated_at` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp()
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
 
---
--- Dumping data for table `transaksi`
---
-
-INSERT INTO `transaksi` (`id`, `no_resi`, `tanggal_pengambilan`, `tanggal_diambil`, `id_kurir`, `id_user`, `id_produk`, `tanggal_sampai`, `biaya_angkut`, `id_status_transaksi`, `created_at`, `updated_at`) VALUES
-(1, 'JNE-SLD001', '2022-04-06 17:00:00', '2022-04-07 06:06:00', 2, 1274, 21, '2022-04-07 06:06:00', 50000, 4, '2022-03-31 08:57:33', '2022-04-15 20:24:30'),
-(2, 'JNAP-006146', '2022-04-07 06:02:00', '2022-04-07 06:02:00', 2, 1279, 14, '2022-04-07 06:02:00', 40000, 2, '2022-03-31 10:44:59', '2022-04-07 06:02:18'),
-(5, 'JP741796518', '2022-03-27 10:56:45', '2022-03-28 10:56:45', 5, 1, 17, '2022-03-31 10:56:45', 690000, 1, '2022-03-31 10:58:43', NULL),
-(9, 'JNE-902109', '2022-04-07 05:49:00', '2022-04-07 05:49:00', 3, 1279, 7, '2022-04-07 05:49:00', 20000, 2, '2022-04-07 04:12:47', '2022-04-07 06:03:35'),
-(18, 'PSJ-2022-04', '2022-04-29 10:00:00', NULL, 10, 1, 19, NULL, 50000, 1, '2022-04-15 20:43:47', NULL);
-
 -- --------------------------------------------------------
 
 --
@@ -265,24 +310,28 @@ CREATE TABLE `user` (
   `id_desa` int(11) NOT NULL,
   `foto` varchar(32) NOT NULL,
   `access_token` varchar(200) NOT NULL,
-  `pin` varchar(6) NOT NULL
+  `pin` varchar(6) NOT NULL,
+  `id_kurir` int(11) DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`id`, `nik`, `password`, `nama`, `telp`, `id_desa`, `foto`, `access_token`, `pin`) VALUES
-(1, '123456', '5f4dcc3b5aa765d61d8327deb882cf99', 'yusuf', '08563604240', 1, 'no', '6CJHrOR2tEODs6Gw7pWK5XtbOhrMI6ZVJaEm8iKlVH9FBXQN2KEPftj40cqyTemznYlixirYv9A8Lkvzoj8lGmQoDzuJM11dL3gWsePQrpF5q6c3UfPTOd7efkT2c7MXYQKwSc5sxYxu0wZtTBSoFEIA43vlhjauUy4n48gLGGbJfi3ySZk11B0vuIH2bICg90A5wbPq', '123456'),
-(3, '1234561', 'e10adc3949ba59abbe56e057f20f883e', 'yusuf_test', '085123123123', 1, 'user_photolc8bXo64Iy1234561Ht47g', 'VzqgmMIUjiukWRAaoHyrZCxOgxBL0MQ0n36R0WqNnjjplqTyyo5IBtnwEN47JaSCaqAPvgd2vvLe4AGdolZeSDv3sKIpukCLDkI7YVWbdwQu9sXZbYmNWKB2V7aETBHPMb6X9AEutXJJCG8UzVJURcweFTxTln0z2cdmEGf1KX6tifsF8QDROP846OFQ7eoDh51ihffk', ''),
-(4, '12345611', 'e10adc3949ba59abbe56e057f20f883e', 'yusuf_test', '085123123123', 1, 'user_photoCgtPaiQEG412345611mw0Q', 'vTvaffy4ST7nduM1RFYFMyCOJsRbTnBpNWQMc3IqVBj6OkLKdGih4JhZWvY4J8LmggVs15YEBwHbMrEAP41tdpOl85PtYBEcU3IXKfqN0zcHyDjGzzXhIkUN7AL7tVqqtrWvwFcuX0Q9Gea0oO9AHHU9WKi6niwkiCfRroZpIPsZShxTjG3ulpZC567KQ2PrFx2m1lbj', ''),
-(5, '123456112', 'e10adc3949ba59abbe56e057f20f883e', 'yusuf_test', '085123123123', 1, 'user_photof1XwTnCpuN123456112bnX', 'vrtOWwYDwQll1pByAbhiinvj4foPBuhDJozalcsFxdaPnCShzkfJKee4D5Mb4R9ueBKX82xagdepuSgpTCmw0SkrXhEI8dx7JmkHHkBHVfjKwayIgNKm6tLEMiG9DgUVCqAZjL6PLUycIsJGVANpUbF7Pq5Y8Q5Ebud9qM2yXRxFiOXOS2TsNsfN7TAWGCQYvQ1jq7rU', ''),
-(1274, '8881248051', '718b84c99141527de725aeb999ea897d', 'Irfan', '089543275929', 1, '', 'jTdQiyOUdt4aBPlOUiJtto0P8XXnsBkS6CoeqXHIRYYPbMEAtNbgVvjwLui5Q7QMmTZgExuxR2cSrg27qIeyo7CFkfLDrz8RU45vnF95EQIidanOP2NrhGUHb71VWy9mswMhhmfJyfZZHjTKgEzY2uaqe4kOG0C6WndAZJ4KuCIFDz1GHT39xel8fzlJhSNKVAV3jD1A', '123456'),
-(1276, '223452', 'c37fddfb7b3f538674c6e9a77e7bf486', 'Gilang Pratama Putra', '0895375455587', 2, '', 'tHZD8IrZwOypvdoOGrfCjqL47PBveeE5lJMRTJ6o0T48UReYW1LVF0G1QbUbnI5IT6gzKykJcNsVmNaWAE5zIQjYS7Hxa86rSclfcsudSKhN27pBdtJXWOl3afPuMPZi6fDKsv4pU3YB9jja5ni0xdKN9Ew2ADuTnwrWUFeQO3XCmFGBZbX1gCnY4vm97gzQtqAkkMyw', '223452'),
-(1277, '87673645', '163218e536c13ff2fc9a4d76e34be085', 'randy kurniawan', '08598583256', 3, '', 'jNdFWoCrB3Nkd5FIqVKAHvRPaqZV4dWcyDUTLIrUsMXKu3baU9Y0ick4EVxTShgtbc23iIjFCD0ByGsthAGmW2xsvZw2WlUKP2XXGIu1B1fPnptKYigO9aenrZoN9GwlZgJnxsJQRLO4HwSv7zh86Pn5HEBuXDoJYSOdCbeMqmj9FNekS3k8ETA6A11eo5m70ybuzj7D', '123456'),
-(1278, '572984864', '24775f4c046499d6494654258352495a', 'aiman abdul ', '08736873252', 4, '', '83KS2p1YHnxWMHpOIftZ0eziPgjYc0DraYWhNQPl17bCD6ddyTn1OtlxJ4c6pFfCgH3L5cu3oHIFZQylbAGEoNSgBzeYz2havj5sL2xEGOKELVJLUrpWAK6Uxg7Zl4XdwGv5nAdfmmkkMVIXfwb273RqTkjqzeTBX8yviwuBuShGC60RREiQ7SbFaViNUqVWKy4sUD9P', '123456'),
-(1279, '284775397', '7d49e40f4b3d8f68c19406a58303f826', 'dimas naufal', '028482752', 2, '', '', '123456'),
-(1280, '484982042', 'd52b1baf1bfd5fe68811707bf16e4a18', 'Rhadhiya Wiraga Sudrajat', '03858243', 4, '', '', '123456');
+INSERT INTO `user` (`id`, `nik`, `password`, `nama`, `telp`, `id_desa`, `foto`, `access_token`, `pin`, `id_kurir`) VALUES
+(1, '123456', '5f4dcc3b5aa765d61d8327deb882cf99', 'yusuf', '08563604240', 1, 'no', 'EFPYFKrv32aOJTlZx9Cmn85AfGSvB8P0pFz6AVWca3R8RTpD8yVwzlnoVE1xeQ9NGtWg4ajuNBDl07C6eLHrqnNUtQCkXks4dJywY45ddepMGomLMqJujYvNmsmfwZ5UeTI4DH6uibF1Ax9oktKbBx1L3Yyz22GXrOObSKV6sPLW7BhuQCiZl1MgqWiJUOaIg2pvqPAd', '123456', NULL),
+(3, '1234561', 'e10adc3949ba59abbe56e057f20f883e', 'yusuf_test', '085123123123', 1, 'user_photolc8bXo64Iy1234561Ht47g', 'VzqgmMIUjiukWRAaoHyrZCxOgxBL0MQ0n36R0WqNnjjplqTyyo5IBtnwEN47JaSCaqAPvgd2vvLe4AGdolZeSDv3sKIpukCLDkI7YVWbdwQu9sXZbYmNWKB2V7aETBHPMb6X9AEutXJJCG8UzVJURcweFTxTln0z2cdmEGf1KX6tifsF8QDROP846OFQ7eoDh51ihffk', '', NULL),
+(4, '12345611', 'e10adc3949ba59abbe56e057f20f883e', 'yusuf_test', '085123123123', 1, 'user_photoCgtPaiQEG412345611mw0Q', 'vTvaffy4ST7nduM1RFYFMyCOJsRbTnBpNWQMc3IqVBj6OkLKdGih4JhZWvY4J8LmggVs15YEBwHbMrEAP41tdpOl85PtYBEcU3IXKfqN0zcHyDjGzzXhIkUN7AL7tVqqtrWvwFcuX0Q9Gea0oO9AHHU9WKi6niwkiCfRroZpIPsZShxTjG3ulpZC567KQ2PrFx2m1lbj', '', NULL),
+(1284, '12345678910', 'd8578edf8458ce06fbc5bb76a58c5ca4', 'Rhadhiya wiraga', '08966666', 3, '', '8tDEioAllayx5bc0an4wNX8FbnDuQHW5enBXpDqyuljSNjP7LJMn33evleRtUxIzho0dfpKomr7JQdGsvVcF9qq79WKi0GMWBT1TtfKQiJSbOtNrsrYBHAEud5fruKNgILhvT81s1wE3V0Cp4P6hsYEGeC6634OggG1ziDZjB8xqM9IVkdwHU4kzc6kMOH2PkFFZ22Vh', '', NULL),
+(1274, '8881248051', '718b84c99141527de725aeb999ea897d', 'Irfan', '089543275929', 1, '', 'tzIqDlPfXG6yfn1apSIF52xzBpmGSK9TKW9iPLlZg6KHC2RGtHbV5zBoOr6QDHO2jYrGufUgv8gV7yriVTXCFIMW9AKeOQRNLo10hCare4U04k2I3ZRtqAJcuxwTSElDvyNBwVdeFn1hYkz4P3LXqD1qEbQManjJcLxZFChssAWNd40PlRmbY5s8imuN85ibyk73MJOT', '123456', NULL),
+(1276, '223452', 'c37fddfb7b3f538674c6e9a77e7bf486', 'Gilang Pratama Putra', '0895375455587', 2, '', 'mqqcdUHCPL6M1ET2gZbVRlsXRrSxtOI88c9Bdq3L1PHADYyacaCBcMTGYzA4B7JZDjKbb9iuoNXvmUjshyvFaZAYVGDFgfhFk1nnSx76jPQ5m2wBdkd72EunivGVr4wOQkxlIfDlX7O9yJKo8buEmpoVKQIviWNUtefGM3Epgt45CUe0rkZh0wY6q0R2LLPHQOT5z9sM', '223452', NULL),
+(1277, '87673645', '163218e536c13ff2fc9a4d76e34be085', 'randy kurniawan', '08598583256', 3, '', '5c9ogqvGCxHbGwdbWQ5YMeZ08PMu1uVlPUOD6KqPCMqqHgfbX2TiQVUwEhlOau3Dyo3fznNWoQTDhAGYjsSktr4wRIFxALzzlNU67n85p1otIRW8hXHUCmNLCR1A627s9ji6vdVFJS4vZgBkdI41zyPMk0us7JRm09ZlxxBJtkKTeIs9VhZrABmYFyOLS2KEjDXfnm2r', '123456', NULL),
+(1278, '572984864', '24775f4c046499d6494654258352495a', 'aiman abdul ', '08736873252', 4, '', 'lxCB970hNTZ0qytSylQRGvnFQwf0uuMdTUCPatzt6W8qf6VkuQ12MRWBbGqp1ekJ2dNRX1Fno9s6smb5HWaXE04AgiSsB4k7yHCl6ljzag5pvLhRAdOp9DoVVPMJkXTrEen3gL1cO3XVbH4cGeeUPJYiyImDIZrjowF5hBiufPLSWCmK9Gz4fSOjntEKDIED32wYdZUm', '123456', NULL),
+(1279, '284775397', '7d49e40f4b3d8f68c19406a58303f826', 'dimas naufal', '028482752', 2, '', '64OLcOqqrDZpoxZJ7gcfanMPJw6gECYkQr1PsQ9jHBbupe6UUymTRJQA27qj8V4MCwIRAK9oFfwDbdxbg0L1voTyrWPrkGMFNYaSsbzccZx3XOSupXdm9VBvhSlTd1jRGwA5tG3zNRqCQ0u6sI7Z2InlxE3tytezm9f8PiTl4J2uiU3aHtLLBYk7NHzakABWm5hEgedp', '123456', NULL),
+(1280, '484982042', 'd52b1baf1bfd5fe68811707bf16e4a18', 'Rhadhiya Wiraga Sudrajat', '03858243', 4, '', 'JDS7PacRMes7IOl9xHOvyWUPLfa4efdYlEhZ6q0OGoIcIexuQ1JZdtMmjpwKUIQzC2HwFqTXlmDA25y98l9VmaRpoXngot6BBKjyW5sHs7m90YJNhFJOLL1GK0nCGR5ZSCq6MjBMrnuQSx3pU038LrWqkPGpQifbhab6TkRgkbUAtW17iXx8EEbcZvBd4gDcnytgYPN3', '123456', NULL),
+(1282, '', 'd41d8cd98f00b204e9800998ecf8427e', '', '', 4, '', 'tJDL6LUY0hAb1R6aZ47SQouD2Cmd5FzWjIxXrsplgJEL6HsB5DGjGjxGtHAina69hYMygoJMKM1cCOEAqyPoce80P3XNxXuBTEpNywkSKKIOd1CihRmPc3BIr92WhSPVVYeFgi4eF8oblqZFWqaq28NuU7yGUA9l7mQbQz1CszfDvHMvSv2sun0ezmTTgnk3lxdvVVrT', '', NULL),
+(1283, 'kurir1', '5f4dcc3b5aa765d61d8327deb882cf99', 'kurir yusuf', '085123123123', 1, '', 'erxsVh7tYRe50GRPGfeQyg8ISJ2D6N5w9Y3lnQ0bfsoME8yhj8T4G5Mu6dL1DddqJMkcZiavNDmQT9sBBguq9DsK9mHiqNtFVvCTiZpCrXbYpFmAZ12dEWaWoAb67KKO4c3whUpZtE4APufOaBLCSHvzpUzS52JmhIW8zKjglXVyGOo37nw0VMERF1eLHix1jFcgxltC', '123456', 2),
+(1285, '987654321', 'd8578edf8458ce06fbc5bb76a58c5ca4', 'raya gantenk', '089273637', 1, '', 'u504TPmmCaGjWZ32ZUbfe5h2a4WMmrl0aycOW6pS9kOuEFbNW8UndytYoQJV7kdFwLUYCcXaPvbXAKRjAOqLhDTr8TN67E6tDMfccHNsBsfAz1rOLMuHgn7RVlGspe9QFK2XxxRUZstJtE8QA3Bw3YKzen8Bo5Fvg0moVEIHJ1G9zhSqz9wnhdw7GgPdqvpvjMDrJ156', '', NULL);
 
 --
 -- Indexes for dumped tables
@@ -304,6 +353,18 @@ ALTER TABLE `desa`
 -- Indexes for table `kurir`
 --
 ALTER TABLE `kurir`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `notifications`
+--
+ALTER TABLE `notifications`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `notification_type`
+--
+ALTER TABLE `notification_type`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -365,19 +426,31 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `desa`
 --
 ALTER TABLE `desa`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1011;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1012;
 
 --
 -- AUTO_INCREMENT for table `kurir`
 --
 ALTER TABLE `kurir`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+
+--
+-- AUTO_INCREMENT for table `notifications`
+--
+ALTER TABLE `notifications`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `notification_type`
+--
+ALTER TABLE `notification_type`
+  MODIFY `id` tinyint(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `produk`
 --
 ALTER TABLE `produk`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 
 --
 -- AUTO_INCREMENT for table `status_produk`
@@ -389,19 +462,19 @@ ALTER TABLE `status_produk`
 -- AUTO_INCREMENT for table `tipe_produk`
 --
 ALTER TABLE `tipe_produk`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
 
 --
 -- AUTO_INCREMENT for table `transaksi`
 --
 ALTER TABLE `transaksi`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1282;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1286;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
