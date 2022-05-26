@@ -173,7 +173,7 @@ class Api extends CI_Controller {
             echo(json_encod($this->error(500,$data)));
             return;
         }else{
-            $data = $this->M_transaksi->select_all_transaksi_by_driver_id($driver_id,3);
+            $data = $this->M_transaksi->select_all_transaksi_by_driver_id($driver_id,[3]);
             echo json_encode($this->success($data));
             return;
         }
@@ -191,7 +191,7 @@ class Api extends CI_Controller {
             echo(json_encod($this->error(500,$data)));
             return;
         }else{
-            $data = $this->M_transaksi->select_all_transaksi_by_driver_id($driver_id,5);
+            $data = $this->M_transaksi->select_all_transaksi_by_driver_id($driver_id,[7,5]);
             echo json_encode($this->success($data));
             return;
         }
@@ -209,7 +209,7 @@ class Api extends CI_Controller {
             echo(json_encod($this->error(500,$data)));
             return;
         }else{
-            $data = $this->M_transaksi->select_all_transaksi_by_driver_id($driver_id,4);
+            $data = $this->M_transaksi->select_all_transaksi_by_driver_id($driver_id,[4]);
             echo json_encode($this->success($data));
             return;
         }

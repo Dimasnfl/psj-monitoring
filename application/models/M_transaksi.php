@@ -83,7 +83,7 @@ class M_transaksi extends CI_Model {
 	$this->db->join('status_transaksi', 'status_transaksi.id = transaksi.id_status_transaksi');
 	$this->db->join('status_produk', 'status_produk.id = produk.id_status_produk');		
 	$this->db->where('transaksi.id_kurir',$id_kurir);
-	$this->db->where('produk.id_status_produk',$status_produk);
+	$this->db->where_in('produk.id_status_produk',$status_produk);
 	$query = $this->db->get();
 	return $query->result();
    }
