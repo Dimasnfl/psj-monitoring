@@ -81,9 +81,9 @@ class Desa extends AUTH_Controller {
 		$result = $this->M_desa->delete($id);
 		
 		if ($result > 0) {
-			echo show_succ_msg('Data desa Berhasil dihapus', '20px');
+			echo show_succ_msg('Data Desa Berhasil dihapus', '20px');
 		} else {
-			echo show_err_msg('Data desa Gagal dihapus', '20px');
+			echo show_err_msg('Data Desa Gagal dihapus', '20px');
 		}
 	}
 

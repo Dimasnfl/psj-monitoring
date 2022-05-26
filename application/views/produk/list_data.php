@@ -1,5 +1,5 @@
 <?php
-  $no = 1;
+
   function rupiah ($harga) {
 		$hasil = 'Rp ' . number_format($harga, 2, ",", ".");
 		return $hasil;
@@ -7,7 +7,7 @@
   foreach ($dataProduk as $row) {
     ?>
     <tr>
-    <td style="text-align: center;"><?php echo $no; ?></td>
+
       <td><?php echo $row->user_nik; ?></td>
       <td><?php echo $row->user_nama; ?></td>
       <td><?php echo $row->tipe_produk_nama; ?></td>
@@ -32,6 +32,5 @@
       </td>
     </tr>
     <?php
-        $no++;
   }
 ?>

@@ -16,7 +16,7 @@
     <table id="list-data" class="table table-bordered table-hover">
       <thead>
         <tr>
-          <th>No</th>
+
           <th>Nama Kurir</th>
           <th>Jenis Kendaraan</th>
           <th>Plat Nomor</th>

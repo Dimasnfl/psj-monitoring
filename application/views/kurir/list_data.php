@@ -3,7 +3,7 @@
   foreach ($dataKurir as $kurir) {
     ?>
     <tr>
-      <td><?php echo $no; ?></td>
+
       <td><?php echo $kurir->nama; ?></td>
       <td><?php echo $kurir->jenis_kendaraan; ?></td>
       <td><?php echo $kurir->plat_no; ?></td>

@@ -8,7 +8,9 @@
     ?>
     <tr>
       <td style="text-align: center;"><?php echo $no; ?></td>
-      <td><img src="assets/thumbnail/<?php echo $tipe_produk->foto; ?>" width="150px" height="100px"></td>      
+      <!-- <td><img src="assets/thumbnail/<?php echo $tipe_produk->foto; ?>" width="150px" height="100px"></td>    -->
+      <td><a href="<?=base_url().'assets/thumbnail/'.$tipe_produk->foto;?>" target="_blank"><img src="<?=base_url().'assets/thumbnail/'.$tipe_produk->foto;?>" width="150px" height="100px"></a></td>
+   
       <td><?php echo $tipe_produk->nama; ?></td>
       
     <td>

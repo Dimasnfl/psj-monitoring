@@ -1,15 +1,17 @@
+
 <div class="col-md-offset-1 col-md-10 col-md-offset-1 well">
   <div class="form-msg"></div>
   <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
   <h3 style="display:block; text-align:center;">Tambah Data Harga Produk</h3>
 <form id="form-tambah-tipe_produk" method="POST">
 
-    <!-- <div class="input-group form-group">
+<label>Foto Produk</label>
+ <div class="input-group form-group">
       <span class="input-group-addon" id="sizing-addon2">
         <i class="glyphicon glyphicon-grain"></i>
       </span>
       <input type="file" class="form-control" placeholder="Masukkan Foto Produk" name="foto" aria-describedby="sizing-addon2">
-    </div> -->
+    </div>
 
     <label>Nama Produk*</label>
     <div class="input-group form-group">
@@ -24,15 +26,7 @@
       <span class="input-group-addon" id="sizing-addon2">
         <i class="glyphicon glyphicon-shopping-cart"></i>
       </span>
-      <input type="text" class="form-control" placeholder="Masukkan Jumlah Harga Produk Per Kilo" name="harga" aria-describedby="sizing-addon2">
-    </div>
-
-    <label>Tanggal Data Dibuat*</label>
-    <div class="input-group form-group">
-      <span class="input-group-addon" id="sizing-addon2">
-        <i class="glyphicon glyphicon-calendar"></i>
-      </span>
-      <input type="date" class="form-control" placeholder="Masukkan Tanggal Saat Harga di Tambahkan" name="tanggal" aria-describedby="sizing-addon2">
+      <input type="number" class="form-control" placeholder="Masukkan Jumlah Harga Produk Per Kilo" name="harga" aria-describedby="sizing-addon2">
     </div>
 
     <div class="form-group">

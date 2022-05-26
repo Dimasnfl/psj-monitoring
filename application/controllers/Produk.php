@@ -135,9 +135,9 @@ class Produk extends AUTH_Controller {
 		$result = $this->M_produk->delete($id);
 
 		if ($result > 0) {
-			echo show_succ_msg('Data Produk Berhasil dihapus', '20px');
+			echo show_succ_msg('Data E-Commodity Berhasil dihapus', '20px');
 		} else {
-			echo show_err_msg('Data Produk Gagal dihapus', '20px');
+			echo show_err_msg('Data E-Commodity Gagal dihapus', '20px');
 		}
 	}
 
@@ -182,70 +182,7 @@ class Produk extends AUTH_Controller {
 		force_download('./assets/excel/Data produk.xlsx', NULL);
 	}
 
-	// public function import() {
-	// 	$this->form_validation->set_rules('excel', 'File', 'trim|required');
-
-	// 	if ($_FILES['excel']['name'] == '') {
-	// 		$this->session->set_flashdata('msg', 'File harus diisi');
-	// 	} else {
-	// 		$config['upload_path'] = './assets/excel/';
-	// 		$config['allowed_types'] = 'xls|xlsx';
-			
-	// 		$this->load->library('upload', $config);
-			
-	// 		if ( ! $this->upload->do_upload('excel')){
-	// 			$error = array('error' => $this->upload->display_errors());
-	// 		}
-	// 		else{
-	// 			$data = $this->upload->data();
-				
-	// 			error_reporting(E_ALL);
-	// 			date_default_timezone_set('Asia/Jakarta');
-
-	// 			include './assets/phpexcel/Classes/PHPExcel/IOFactory.php';
-
-	// 			$inputFileName = './assets/excel/' .$data['file_name'];
-	// 			$objPHPExcel = PHPExcel_IOFactory::load($inputFileName);
-	// 			$sheetData = $objPHPExcel->getActiveSheet()->toArray(null,true,true,true);
-
-	// 			$index = 0;
-	// 			foreach ($sheetData as $key => $value) {
-	// 				if ($key != 1) {
-	// 					$id = md5(DATE('ymdhms').rand());
-	// 					$check = $this->M_produk->check_NIK($value['B']);
-
-	// 					if ($check != 1) {
-	// 						$resultData[$index]['id'] = $id;
-	// 						$resultData[$index]['NIK'] = ucwords($value['B']);
-	// 						$resultData[$index]['foto_produk'] = $value['C'];
-	// 						$resultData[$index]['jenis_produk'] = $value['D'];
-	// 						$resultData[$index]['tgl_tanam'] = $value['E'];
-	// 						$resultData[$index]['tgl_panen'] = $value['F'];
-	// 						$resultData[$index]['berat_bersih'] = $value['G'];
-	// 						$resultData[$index]['id_tipe_produk'] = $value['H'];
-	// 					}
-	// 				}
-	// 				$index++;
-	// 			}
-
-	// 			unlink('./assets/excel/' .$data['file_name']);
-
-	// 			if (count($resultData) != 0) {
-	// 				$result = $this->M_produk->insert_batch($resultData);
-	// 				if ($result > 0) {
-	// 					$this->session->set_flashdata('msg', show_succ_msg('Data produk Berhasil diimport ke database'));
-	// 					redirect('produk');
-	// 				}
-	// 			} else {
-	// 				$this->session->set_flashdata('msg', show_msg('Data produk Gagal diimport ke database (Data Sudah terupdate)', 'warning', 'fa-warning'));
-	// 				redirect('produk');
-	// 			}
-
-	// 		}
-	// 	}
-	// }
-	public function load_status()
-	{
+	public function load_status(){
 	  $status_produk = $_GET['id_status_produk'];
 	  if ($status_produk == 0) {
 		$data = $this->M_produk->select_all();
@@ -260,9 +197,8 @@ class Produk extends AUTH_Controller {
 		  $hasil = 'Rp ' . number_format($harga, 2, ",", ".");
 		  return $hasil;
 		}
-		$no=1; foreach ($data as $row): ?>
+		 foreach ($data as $row): ?>
 		<tr>
-      <td style="text-align: center;"><?php echo $no; ?></td>
       <td><?php echo $row->user_nik; ?></td>
       <td><?php echo $row->user_nama; ?></td>
       <td><?php echo $row->tipe_produk_nama; ?></td>
@@ -288,12 +224,14 @@ class Produk extends AUTH_Controller {
     </tr>
 
 		<?php endforeach ?> <?php
+		
 	  }
 	  else
 	  {
 		?>
 		  <tr><td align="center">Tidak ada data</td></tr>
 		<?php
+		
 	  }
 	  
 	}

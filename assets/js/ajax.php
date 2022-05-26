@@ -529,8 +529,12 @@ function tampilUser() {
 
 		$.ajax({
 			method: 'POST',
-			url: '<?php echo base_url('Tipe_produk/prosesTambah'); ?>',
-			data: data
+			url: "<?php echo base_url('Tipe_produk/prosesTambah'); ?>",
+			data:new FormData(this),
+            processData:false,
+            contentType:false,
+            cache:false,
+            async:false,
 		})
 		.done(function(data) {
 			var out = jQuery.parseJSON(data);

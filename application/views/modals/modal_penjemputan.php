@@ -34,7 +34,7 @@
           <input type="time" class="form-control" name="jam_penjemputan" aria-describedby="sizing-addon2" placeholder="hh:mm">
         </div>
       
-      <label>Harga*</label>
+      <label>Harga Penjemputan*</label>
         <div class="input-group form-group">
           <span class="input-group-addon" id="sizing-addon2">
             <i class="glyphicon glyphicon-grain"></i>

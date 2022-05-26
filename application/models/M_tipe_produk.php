@@ -51,20 +51,6 @@ class M_tipe_produk extends CI_Model {
 	 }
 
 
-	public function insert($data) {
-		$sql = "INSERT INTO tipe_produk VALUES('','','" .$data['nama'] ."','" .$data['harga'] ."','','1','" .$data['tanggal'] ."','','')";
-
-		$this->db->query($sql);
-
-		return $this->db->affected_rows();
-	}
-
-	public function insert_batch($data) {
-		$this->db->insert_batch('tipe_produk', $data);
-		
-		return $this->db->affected_rows();
-	}
-
 	public function update($data) {
 		//get related row
 		$currentData = $this->db->from('tipe_produk')->where('id',$data['id'])->get()->row();
@@ -124,6 +110,16 @@ class M_tipe_produk extends CI_Model {
 
 		return $data->num_rows();
 	}
+
+	function create_product($data){
+		$insert_data['nama'] = $data['nama'];
+		$insert_data['harga'] = $data['harga'];
+		$insert_data['foto'] = $data['foto'];
+		$insert_data['terbaru'] = 1;
+
+		$query = $this->db->insert('tipe_produk', $insert_data);
+	}
+
 }
 
 /* End of file M_tipe_produk.php */

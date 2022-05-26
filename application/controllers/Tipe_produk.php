@@ -28,20 +28,33 @@ class Tipe_produk extends AUTH_Controller {
 	}
 
 	public function prosesTambah() {
-	    // $this->form_validation->set_rules('foto', 'foto', 'trim');
-		$this->form_validation->set_rules('nama', 'nama', 'trim|required');
-		$this->form_validation->set_rules('harga', 'harga', 'trim|required');
-		$this->form_validation->set_rules('tanggal', 'tanggal', 'trim|required');
-		$data 	= $this->input->post();
+		$this->form_validation->set_rules('nama', 'Nama Produk', 'trim|required');
+		$this->form_validation->set_rules('harga', 'Harga Produk', 'trim|required');
+		$data = $this->input->post();
 		if ($this->form_validation->run() == TRUE) {
-			$result = $this->M_tipe_produk->insert($data);
+			$data['nama'] = $this->input->post('nama', TRUE);
+			$data['harga'] = $this->input->post('harga', TRUE);
+			$data['terbaru'] = $this->input->post('terbaru', TRUE);
 
+			$config['upload_path']          = './assets/thumbnail/';
+			$config['allowed_types']        = 'jpg|png';
+			$config['encrypt_name'] 		= TRUE;
+
+			$this->load->library('upload', $config);
+
+			if (!$this->upload->do_upload('foto')){
+				$error = array('error' => $this->upload->display_errors());
+			}else{
+				$data_foto = $this->upload->data();
+				$data['foto'] = $data_foto['file_name'];
+			}
+			$result = $this->M_tipe_produk->create_product($data);
 			if ($result > 0) {
 				$out['status'] = '';
-				$out['msg'] = show_succ_msg('Data Tipe Produk Berhasil ditambahkan', '20px');
+				$out['msg'] = show_err_msg('Data Harga Produk Gagal dibuat', '20px');
 			} else {
 				$out['status'] = '';
-				$out['msg'] = show_err_msg('Data Tipe Produk Gagal ditambahkan', '20px');
+				$out['msg'] = show_succ_msg('Data Harga Produk Berhasil dibuat', '20px');
 			}
 		} else {
 			$out['status'] = 'form';
@@ -50,6 +63,49 @@ class Tipe_produk extends AUTH_Controller {
 
 		echo json_encode($out);
 	}
+
+
+// 	public function Tambah() {
+// 		$this->form_validation->set_rules('nama', 'Nama Produk', 'required');
+// 		$this->form_validation->set_rules('harga', 'Harga Produk', 'required');
+
+// 		$data = $this->input->post();
+// 		if ($this->form_validation->run() == TRUE) {
+// 			$data['nama'] = $this->input->post('nama', TRUE);
+// 			$data['harga'] = $this->input->post('harga', TRUE);
+// 			$data['terbaru'] = $this->input->post('terbaru', TRUE);
+
+			
+
+// 			$config['upload_path']          = './assets/thumbnail/';
+// 			$config['allowed_types']        = 'jpg|png';
+// 			$config['encrypt_name'] 		= TRUE;
+
+// 			$this->load->library('upload', $config);
+
+// 			if ( ! $this->upload->do_upload('foto')){
+// 				$error = array('error' => $this->upload->display_errors());
+// 			}else{
+// 				$data_foto = $this->upload->data();
+// 				$data['foto'] = $data_foto['file_name'];
+// 				// $this->M_tipe_produk->store_pic_data($data);
+// 				// redirect('tipe_produk');
+// 			}
+// 			$result = $this->M_tipe_produk->store_pic_data($data);
+// 			if ($result < 0) {
+// 				$this->session->set_flashdata('msg', show_err_msg('Data Harga Produk Gagal ditambahkan'));
+// 				redirect('tipe_produk');
+// 			} else {
+// 				$this->session->set_flashdata('msg', show_succ_msg('Data Harga Produk Berhasil ditambahkan'));
+// 				redirect('tipe_produk');
+// 			}
+// 		}else {
+// 			$this->session->set_flashdata('msg', show_err_msg(validation_errors()));
+// 			redirect('tipe_produk');
+// 	}
+
+// }
+
 
 	public function update() {
 		$data['userdata'] 	= $this->userdata;
@@ -73,10 +129,10 @@ class Tipe_produk extends AUTH_Controller {
 
 			if ($result > 0) {
 				$out['status'] = '';
-				$out['msg'] = show_succ_msg('Data Tipe Produk Berhasil diupdate', '20px');
+				$out['msg'] = show_succ_msg('Data Harga Produk Berhasil diupdate', '20px');
 			} else {
 				$out['status'] = '';
-				$out['msg'] = show_succ_msg('Data Tipe Produk Gagal diupdate', '20px');
+				$out['msg'] = show_succ_msg('Data Harga Produk Gagal diupdate', '20px');
 			}
 		} else {
 			$out['status'] = 'form';
@@ -106,9 +162,9 @@ class Tipe_produk extends AUTH_Controller {
 		$result = $this->M_tipe_produk->delete($id);
 		
 		if ($result > 0) {
-			echo show_succ_msg('Data Tipe Produk Berhasil dihapus', '20px');
+			echo show_succ_msg('Data Harga Produk Berhasil dihapus', '20px');
 		} else {
-			echo show_err_msg('Data Tipe Produk Gagal dihapus', '20px');
+			echo show_err_msg('Data Harga Produk Gagal dihapus', '20px');
 		}
 	}
 
@@ -183,61 +239,6 @@ class Tipe_produk extends AUTH_Controller {
 		$this->load->helper('download');
 		force_download('./assets/excel/Data Harga Produk.xlsx', NULL);
 	}
-
-	// public function import() {
-	// 	$this->form_validation->set_rules('excel', 'File', 'trim|required');
-
-	// 	if ($_FILES['excel']['name'] == '') {
-	// 		$this->session->set_flashdata('msg', 'File harus diisi');
-	// 	} else {
-	// 		$config['upload_path'] = './assets/excel/';
-	// 		$config['allowed_types'] = 'xls|xlsx';
-			
-	// 		$this->load->library('upload', $config);
-			
-	// 		if ( ! $this->upload->do_upload('excel')){
-	// 			$error = array('error' => $this->upload->display_errors());
-	// 		}
-	// 		else{
-	// 			$data = $this->upload->data();
-				
-	// 			error_reporting(E_ALL);
-	// 			date_default_timezone_set('Asia/Jakarta');
-
-	// 			include './assets/phpexcel/Classes/PHPExcel/IOFactory.php';
-
-	// 			$inputFileName = './assets/excel/' .$data['file_name'];
-	// 			$objPHPExcel = PHPExcel_IOFactory::load($inputFileName);
-	// 			$sheetData = $objPHPExcel->getActiveSheet()->toArray(null,true,true,true);
-
-	// 			$index = 0;
-	// 			foreach ($sheetData as $key => $value) {
-	// 				if ($key != 1) {
-	// 					$check = $this->M_tipe_produk->check_jenis_sayuran($value['B']);
-
-	// 					if ($check != 1) {
-	// 						$resultData[$index]['jenis_sayuran'] = ucwords($value['B']);
-	// 					}
-	// 				}
-	// 				$index++;
-	// 			}
-
-	// 			unlink('./assets/excel/' .$data['file_name']);
-
-	// 			if (count($resultData) != 0) {
-	// 				$result = $this->M_tipe_produk->insert_batch($resultData);
-	// 				if ($result > 0) {
-	// 					$this->session->set_flashdata('msg', show_succ_msg('Data tipe_produk Berhasil diimport ke database'));
-	// 					redirect('tipe_produk');
-	// 				}
-	// 			} else {
-	// 				$this->session->set_flashdata('msg', show_msg('Data tipe_produk Gagal diimport ke database (Data Sudah terupdate)', 'warning', 'fa-warning'));
-	// 				redirect('tipe_produk');
-	// 			}
-
-	// 		}
-	// 	}
-	// }
 }
 
 /* End of file Tipe_produk.php */

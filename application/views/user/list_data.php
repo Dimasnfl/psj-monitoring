@@ -3,7 +3,6 @@
   foreach ($dataUser as $user) {
     ?>
     <tr>
-      <td><?php echo $no; ?></td>
       <td><?php echo $user->nik; ?></td>
       <td><?php echo $user->nama; ?></td>
       <td><img src="<?php echo base_url(); ?>assets/img/<?php echo $user->foto; ?>" width="60px" height="60px"></td>   
