@@ -88,6 +88,16 @@ class M_transaksi extends CI_Model {
 	return $query->result();
    }
 
+   public function isForThisCurier($id_kurir,$id_transaction){
+	   return $this->db->from('transaksi')->where('id',$id_transaction)->where('id_kurir',$id_kurir)->get()->result();
+   }
+
+   public function confirm_transaction($id_transaction,$tanggal){
+		$this->db->from('transaksi')->where('id',$id_transaction)->set('tanggal_diambil',$tanggal)->set('id_status_transaksi',2)->update('transaksi');
+		$transaksi = $this->db->from('transaksi')->where('id',$id_transaction)->get()->row();
+		$this->db->from('produk')->where('id',$transaksi->id_produk)->set('id_status_produk',7)->update('produk');
+   }
+
 	public function select_all() {
 		 $this->db->select('transaksi.id, transaksi.no_resi, transaksi.tanggal_pengambilan, transaksi.tanggal_diambil, kurir.nama as nama_kurir, user.nama as nama_user, produk.id as id_produk, transaksi.tanggal_sampai, transaksi.biaya_angkut, status_transaksi.nama as nama_status');
 		 $this->db->from('transaksi');

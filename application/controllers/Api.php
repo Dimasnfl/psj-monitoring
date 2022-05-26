@@ -272,6 +272,22 @@ class Api extends CI_Controller {
         }
         
     }
+
+    // 2.8 KONFIRMASI ORDER
+    public function konfirmasi_order(){
+        if(!$this->validateAccessToken())return;
+        
+        //get id transaksi
+        $id_transaksi = $this->input->post('id_transaksi');
+        $tanggal = $this->input->post('tanggal_penjemputan');
+        $data = $this->M_transaksi->isForThisCurier($this->user->id_kurir,$id_transaksi);
+        if($data != null){
+            $this->M_transaksi->confirm_transaction($id_transaksi,$tanggal);
+            echo json_encode($this->success(200,'success'));
+        }else{
+            echo json_encode($this->error(500, 'This is not your transaction'));
+        }
+    }
     //END API - APP DATA
 
     //API - 3. USER DATA
