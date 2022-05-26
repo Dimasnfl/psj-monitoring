@@ -281,4 +281,19 @@ class Api extends CI_Controller {
     }
     
     //END API - 3. USER DATA
+
+    //API - 4. NOTIFICAITONS (this function is defined at the routes.php)
+    //API - 4.1 Get new order notifications
+    public function notification_new_order_get(){
+        if(!$this->validateAccessToken())return;
+        if($this->user->id_kurir == null){
+            echo json_encode($this->error(500, "you are not a driver"));
+            return;
+        }
+
+        //get new order notifications
+        $this->load->model('M_notifications');
+        $notifications = $this->M_notifications->get_new_order_notifications($this->user->id);
+        echo json_encode($this->success($notifications));
+    }
 }

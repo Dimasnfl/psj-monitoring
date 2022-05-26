@@ -135,7 +135,7 @@ class M_transaksi extends CI_Model {
 		$this->db->insert('transaksi',$insertData);
 
 		if($this->db->affected_rows()){
-			return true;
+			return $this->db->insert_id();
 		}else{
 			return false;
 		}

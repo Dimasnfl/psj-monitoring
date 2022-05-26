@@ -52,6 +52,19 @@ class M_user extends CI_Model {
 
 	 }
 
+	 public function get_user_id_by_kurir_id($kurir_id){
+		$this->db->select('user.*');
+		$this->db->from('user');
+		$this->db->where("user.id_kurir = $kurir_id");
+		$user = $this->db->get();
+		if($user->row()->id_kurir != null){
+			return $user->row()->id;
+		}else{
+			return "NOT_KURIR";
+		}
+
+	}
+
 	public function select_by_id($id) {
 		$sql = "SELECT user.id AS id_user, user.nik, user.nama as nama, desa.nama AS desa, user.id_desa, user.telp 
 		FROM user, desa
