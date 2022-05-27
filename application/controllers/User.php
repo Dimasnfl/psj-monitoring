@@ -79,9 +79,9 @@ class User extends AUTH_Controller {
 		$result = $this->M_user->delete($id);
 
 		if ($result > 0) {
-			echo show_succ_msg('Data User Berhasil dihapus', '20px');
+			echo show_succ_msg('Data Petani Berhasil dihapus', '20px');
 		} else {
-			echo show_err_msg('Data User Gagal dihapus', '20px');
+			echo show_err_msg('Data Petani Gagal dihapus', '20px');
 		}
 	}
 

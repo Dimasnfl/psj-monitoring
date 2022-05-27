@@ -30,8 +30,8 @@ class M_produk extends CI_Model {
 		produk.id_tipe_produk, produk.alamat AS alamat,
 		produk.id_status_produk,
 		produk.created_at, produk.updated_at,
-		user.nama AS user, tipe_produk.nama AS tipe_produk, status_produk.nama AS status_produk FROM produk, user, 
-		tipe_produk, status_produk WHERE produk.id_user = user.id AND produk.id_tipe_produk = tipe_produk.id AND produk.id_status_produk = status_produk.id AND produk.id = '{$id}'";
+		user.nama AS user, tipe_produk.nama AS tipe_produk, transaksi.tanggal_pengambilan as diambil ,status_produk.nama AS status_produk FROM produk, user, 
+		tipe_produk, status_produk, transaksi WHERE produk.id_user = user.id AND produk.id_tipe_produk = tipe_produk.id AND produk.id_status_produk = status_produk.id AND produk.id = '{$id}'";
 		$data = $this->db->query($sql);
 
 		return $data->row();

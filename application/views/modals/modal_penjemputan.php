@@ -43,7 +43,7 @@
         </div>
       <hr>
         <input type="hidden" name="id" value="<?php echo $dataProduk->id_produk; ?>">
-        <label>Nama User*</label>
+        <label>Nama Petani*</label>
         <div class="input-group form-group">
           <span class="input-group-addon" id="sizing-addon2">
             <i class="glyphicon glyphicon-grain"></i>
