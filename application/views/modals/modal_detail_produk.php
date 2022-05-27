@@ -51,8 +51,8 @@
       {
         ?>
       <tr>
-        <th style="">Diambil Pada</th>
-        <td><span><?php echo $produk->diambil; ?></span></td>
+        <th style="">Produk Diambil Pada</th>
+        <!-- <td><span><?php echo $produk->diambil; ?></span></td> -->
       </tr> <?php
       }
         ?>
