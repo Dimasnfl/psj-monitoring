@@ -18,7 +18,7 @@
       <td><?php echo rupiah ($transaksi->biaya_angkut); ?></td>
       <td><?php echo $transaksi->nama_status; ?></td>
       <td class="text-center" style="min-width:100px;">
-          <button class="btn btn-warning update-dataTransaksi" data-id="<?php echo $transaksi->id; ?>"><i class="glyphicon glyphicon-edit"></i> </button>
+          <!-- <button class="btn btn-warning update-dataTransaksi" data-id="<?php echo $transaksi->id; ?>"><i class="glyphicon glyphicon-edit"></i> </button> -->
           <button class="btn btn-danger konfirmasiHapus-transaksi" data-id="<?php echo $transaksi->id; ?>" data-toggle="modal" data-target="#konfirmasiHapus"><i class="glyphicon glyphicon-trash"></i> </button>
           <!-- <button class="btn btn-info detail-dataDesa" data-id="<?php echo $desa->id; ?>"><i class="glyphicon glyphicon-info-sign"></i> Detail</button> -->
       </td>

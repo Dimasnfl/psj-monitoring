@@ -21,7 +21,8 @@ class M_produk extends CI_Model {
 
 
 	public function select_by_id($id) {
-		$sql = "SELECT produk.id AS id_produk,
+		$sql = "
+		SELECT produk.id AS id_produk,
 		produk.id_user,
 		produk.tgl_tanam AS tgl_tanam, 
 		produk.tgl_panen AS tgl_panen, 
@@ -29,9 +30,16 @@ class M_produk extends CI_Model {
 		produk.luas_lahan AS luas_lahan,
 		produk.id_tipe_produk, produk.alamat AS alamat,
 		produk.id_status_produk,
+      	t.id as transaksi_id,
+        t.tanggal_pengambilan as transaksi_tanggal_pengambilan,
+        t.tanggal_diambil as transaksi_tanggal_diambil,
 		produk.created_at, produk.updated_at,
-		user.nama AS user, tipe_produk.nama AS tipe_produk ,status_produk.nama AS status_produk FROM produk, user, 
-		tipe_produk, status_produk WHERE produk.id_user = user.id AND produk.id_tipe_produk = tipe_produk.id AND produk.id_status_produk = status_produk.id AND produk.id = '{$id}'";
+		user.nama AS user, tipe_produk.nama AS tipe_produk ,status_produk.nama AS status_produk FROM
+        produk LEFT JOIN transaksi as t ON t.id_produk = produk.id 
+         LEFT JOIN user ON produk.id_user = user.id  
+		LEFT JOIN tipe_produk ON produk.id_tipe_produk = tipe_produk.id
+        LEFT JOIN status_produk ON produk.id_status_produk = status_produk.id
+        WHERE produk.id = $id";
 		$data = $this->db->query($sql);
 
 		return $data->row();

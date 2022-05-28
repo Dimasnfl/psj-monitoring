@@ -1,5 +1,4 @@
 <div class="col-md-offset-1 col-md-10 col-md-offset-1 well">
-  <div class="form-msg"></div>
   <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
   
   <h3 style="display:block; text-align:center;">Data penjemputan</h3>
@@ -93,6 +92,7 @@
 
         <hr>
         
+          <div class="form-msg"></div>
         
         <div class="form-group">
           <div class="col-md-12">

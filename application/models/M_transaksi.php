@@ -153,6 +153,18 @@ class M_transaksi extends CI_Model {
 
 	}
 
+	public function batal_transaksi($id){
+		$transaksi = $this->db->from('transaksi')->where('id', $id)->get()->row();
+		if($transaksi){
+			$id_produk = $transaksi->id_produk;
+			$this->db->from('transaksi')->where('id', $id)->set('id_status_transaksi', 3)->update('transaksi');
+			$this->db->from('produk')->where('id', $id_produk)->set('id_status_produk', 3)->update('produk');
+			return 'success';
+		}else{
+			return 'error';
+		}
+
+	}
 
 
 	public function insert($data) {

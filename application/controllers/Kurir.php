@@ -5,11 +5,13 @@ class Kurir extends AUTH_Controller {
 	public function __construct() {
 		parent::__construct();
 		$this->load->model('M_kurir');
+		$this->load->model('M_desa');
 	}
 
 	public function index() {
 		$data['userdata'] 	= $this->userdata;
 		$data['dataKurir'] 	= $this->M_kurir->select_all();
+		$data['dataDesa'] 	= $this->M_desa->select_all();
 
 		$data['page'] 		= "Kurir";
 		$data['judul'] 		= "Data Kurir";
@@ -26,6 +28,9 @@ class Kurir extends AUTH_Controller {
 	}
 
 	public function prosesTambah() {
+		$this->form_validation->set_rules('user_nik', 'NIK Kurir', 'trim|required');
+		$this->form_validation->set_rules('user_password', 'Password', 'trim|required');
+		$this->form_validation->set_rules('id_desa', 'Dusun', 'trim|required');
 		$this->form_validation->set_rules('nama', 'Nama Kurir', 'trim|required');
 		$this->form_validation->set_rules('jenis_kendaraan', 'Jenis Kendaraan', 'trim|required');
 		$this->form_validation->set_rules('plat_no', 'Plat Nomor Kendaraan', 'trim|required');

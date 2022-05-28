@@ -5,6 +5,40 @@
 
   <form id="form-tambah-kurir" method="POST">
 
+  <label>NIK Kurir*</label>
+   <div class="input-group form-group">
+      <span class="input-group-addon" id="sizing-addon2">
+        <i class="glyphicon glyphicon-calendar"></i>
+      </span>
+      <input type="number" class="form-control" placeholder="Masukkan NIK Kurir" name="user_nik" aria-describedby="sizing-addon2">
+    </div>
+
+    <label>Password*</label>
+   <div class="input-group form-group">
+      <span class="input-group-addon" id="sizing-addon2">
+        <i class="glyphicon glyphicon-calendar"></i>
+      </span>
+      <input type="text" class="form-control" placeholder="Masukkan Password " name="user_password" aria-describedby="sizing-addon2">
+    </div>
+
+    <label>Asal Dusun*</label>
+    <div class="input-group form-group">
+      <span class="input-group-addon" id="sizing-addon2">
+        <i class="glyphicon glyphicon-plane"></i>
+      </span>
+      <select name="id_desa" class="form-control select2" aria-describedby="sizing-addon2">
+        <?php
+        foreach ($dataDesa as $desa) {
+          ?>
+          <option value="<?php echo $desa->id; ?>">
+            <?php echo $desa->nama; ?>
+          </option>
+          <?php
+        }
+        ?>
+      </select>
+    </div>
+
   <label>Nama Kurir*</label>
     <div class="input-group form-group">
       <span class="input-group-addon" id="sizing-addon2">
@@ -44,6 +78,8 @@
       </span>
       <input type="datetime-local" class="form-control" placeholder="Tanggal Data di Tambahkan " name="created_at" aria-describedby="sizing-addon2">
     </div>
+
+    
 
     <div class="form-group">
       <div class="col-md-12">

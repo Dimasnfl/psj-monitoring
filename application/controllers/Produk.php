@@ -66,32 +66,50 @@ class Produk extends AUTH_Controller {
 		$this->form_validation->set_rules('date','Tanggal Penjemputan','trim|required');
 		$this->form_validation->set_rules('harga','Harga','trim|required');
 		$this->form_validation->set_rules('jam_penjemputan','Jam Penjemputan', 'trim|required');
-
-		$data = $this->input->post();
-		if ($this->form_validation->run() == TRUE) {
-			$id_produk = $this->input->post('id');
-			$id_kurir = $this->input->post('id_kurir');
-			$date = $this->input->post('date');
-			$jam = $this->input->post('jam_penjemputan');
-			$harga = $this->input->post('harga');
-			$transaction_id = $this->M_transaksi->create_transaction($id_produk,$id_kurir,$date,$jam,$harga);
-			if ($transaction_id > 0) {
-				//create notification
-				$this->load->model('M_notifications');
-				$user_kurir_id = $this->M_user->get_user_id_by_kurir_id($id_kurir);
-				$this->M_notifications->create($transaction_id,$user_kurir_id, 1, 'Terdapat 1 tugas baru');
-				$out['status'] = '';
-				$out['msg'] = show_succ_msg('Data Penjemputan Berhasil dibuat', '20px');
-			} else {
-				$out['status'] = '';
-				$out['msg'] = show_succ_msg('Data Penjemputan Gagal dibuat', '20px');
-			}
-		} else {
+		//min today
+		$date = new DateTime($this->input->post('date'));
+		$today = new DateTime();
+		if($date < $today){
 			$out['status'] = 'form';
-			$out['msg'] = show_err_msg(validation_errors());
-		}
+			$out['msg'] = show_err_msg('Tanggal harus lebih besar dari sekarang');
+			echo json_encode($out);
+		}else{
+			
+			$data = $this->input->post();
+			if ($this->form_validation->run() == TRUE) {
+				$id_produk = $this->input->post('id');
+				$produk = $this->M_produk->select_by_id($id_produk);
+				$tanggalPanen = new DateTime($produk->tgl_panen);
+				
+				if($date < $tanggalPanen){
+					$out['status'] = 'form';
+					$out['msg'] = show_err_msg('Tanggal harus lebih besar besar dari tanggal panen\n Tanggal panen adalah '.$tanggalPanen->format('Y-m-d H:i:s').'');
+				}else{
+					
+					$id_kurir = $this->input->post('id_kurir');
+					$date = $this->input->post('date');
+					$jam = $this->input->post('jam_penjemputan');
+					$harga = $this->input->post('harga');
+					$transaction_id = $this->M_transaksi->create_transaction($id_produk,$id_kurir,$date,$jam,$harga);
+					if ($transaction_id > 0) {
+						//create notification
+						$this->load->model('M_notifications');
+						$user_kurir_id = $this->M_user->get_user_id_by_kurir_id($id_kurir);
+						$this->M_notifications->create($transaction_id,$user_kurir_id, 1, 'Terdapat 1 tugas baru');
+						$out['status'] = '';
+						$out['msg'] = show_succ_msg('Data Penjemputan Berhasil dibuat', '20px');
+					} else {
+						$out['status'] = '';
+						$out['msg'] = show_succ_msg('Data Penjemputan Gagal dibuat', '20px');
+					}
+				}
+			} else {
+				$out['status'] = 'form';
+				$out['msg'] = show_err_msg(validation_errors());
+			}
 
-		echo json_encode($out);
+			echo json_encode($out);
+		}
 	}
 
 
@@ -100,6 +118,7 @@ class Produk extends AUTH_Controller {
 
 	  	$id 				= trim($_POST['id']);
 	  	$data['produk'] = $this->M_produk->select_by_id($id);
+		  var_dump($data['produk']);
 	  	echo show_my_modal('modals/modal_detail_produk', 'detail-produk', $data, 'lg');
 	  }
 

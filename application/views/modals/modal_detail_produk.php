@@ -52,7 +52,7 @@
         ?>
       <tr>
         <th style="">Produk Diambil Pada</th>
-        <!-- <td><span><?php echo $produk->diambil; ?></span></td> -->
+        <td><span><?php echo $produk->transaksi_tanggal_pengambilan; ?></span></td>
       </tr> <?php
       }
         ?>
