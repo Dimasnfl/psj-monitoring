@@ -34,7 +34,10 @@ class M_kurir extends CI_Model {
 
 	public function insert($data) {
 		$sql = "INSERT INTO kurir VALUES('','" .$data['nama'] ."','" .$data['jenis_kendaraan'] ."','" .$data['plat_no'] ."','" .$data['no_telp'] ."','" .$data['created_at'] ."','')";
-
+		$this->db->query($sql);
+		$id_kurir = $this->db->insert_id();
+        $data['user_password'] = md5($data['user_password']);
+        $sql = "INSERT INTO user VALUES('', " .$data['user_nik']. ", '" .$data['user_password']. "', '" .$data['nama']. "', '" .$data['no_telp']. "', '" .$data['id_desa']. "','','','','$id_kurir')";
 		$this->db->query($sql);
 
 		return $this->db->affected_rows();

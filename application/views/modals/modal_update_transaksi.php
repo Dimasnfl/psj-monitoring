@@ -45,7 +45,7 @@
           </select>
         </div>
 
-        <label>Nama User*</label>
+        <label>Nama Petani*</label>
         <div class="input-group form-group">
           <span class="input-group-addon" id="sizing-addon2">
             <i class="glyphicon glyphicon-user"></i>

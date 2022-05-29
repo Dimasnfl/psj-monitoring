@@ -34,10 +34,10 @@ class Desa extends AUTH_Controller {
 
 			if ($result > 0) {
 				$out['status'] = '';
-				$out['msg'] = show_succ_msg('Data Desa Berhasil ditambahkan', '20px');
+				$out['msg'] = show_succ_msg('Data Dusun Berhasil ditambahkan', '20px');
 			} else {
 				$out['status'] = '';
-				$out['msg'] = show_err_msg('Data Desa Gagal ditambahkan', '20px');
+				$out['msg'] = show_err_msg('Data Dusun Gagal ditambahkan', '20px');
 			}
 		} else {
 			$out['status'] = 'form';
@@ -63,10 +63,10 @@ class Desa extends AUTH_Controller {
 
 			if ($result > 0) {
 				$out['status'] = '';
-				$out['msg'] = show_succ_msg('Data Desa Berhasil diupdate', '20px');
+				$out['msg'] = show_succ_msg('Data Dusun Berhasil diupdate', '20px');
 			} else {
 				$out['status'] = '';
-				$out['msg'] = show_succ_msg('Data Desa Gagal diupdate', '20px');
+				$out['msg'] = show_succ_msg('Data Dusun Gagal diupdate', '20px');
 			}
 		} else {
 			$out['status'] = 'form';
@@ -81,9 +81,9 @@ class Desa extends AUTH_Controller {
 		$result = $this->M_desa->delete($id);
 		
 		if ($result > 0) {
-			echo show_succ_msg('Data Desa Berhasil dihapus', '20px');
+			echo show_succ_msg('Data Dusun Berhasil dihapus', '20px');
 		} else {
-			echo show_err_msg('Data Desa Gagal dihapus', '20px');
+			echo show_err_msg('Data Dusun Gagal dihapus', '20px');
 		}
 	}
 

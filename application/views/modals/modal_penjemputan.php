@@ -1,5 +1,4 @@
 <div class="col-md-offset-1 col-md-10 col-md-offset-1 well">
-  <div class="form-msg"></div>
   <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
   
   <h3 style="display:block; text-align:center;">Data penjemputan</h3>
@@ -22,10 +21,7 @@
           </select>
         </div>
 
-        <div class="form-group"> <!-- Date input -->
-        <label class="control-label" for="date">Tanggal Penjemputan</label>
-        <input class="form-control" id="date" name="date" placeholder="MM/DD/YYY" type="text"/>
-      </div>
+        
       <label>Jam Penjemputan (hh:mm)*</label>
         <div class="input-group form-group">
           <span class="input-group-addon" id="sizing-addon2">
@@ -33,7 +29,10 @@
           </span>
           <input type="time" class="form-control" name="jam_penjemputan" aria-describedby="sizing-addon2" placeholder="hh:mm">
         </div>
-      
+        <div class="form-group"> <!-- Date input -->
+        <label class="control-label" for="date">Tanggal Penjemputan</label>
+        <input class="form-control" id="date" name="date" placeholder="MM/DD/YYY" type="text"/>
+      </div>
       <label>Harga Penjemputan*</label>
         <div class="input-group form-group">
           <span class="input-group-addon" id="sizing-addon2">
@@ -43,7 +42,7 @@
         </div>
       <hr>
         <input type="hidden" name="id" value="<?php echo $dataProduk->id_produk; ?>">
-        <label>Nama User*</label>
+        <label>Nama Petani*</label>
         <div class="input-group form-group">
           <span class="input-group-addon" id="sizing-addon2">
             <i class="glyphicon glyphicon-grain"></i>
@@ -93,6 +92,7 @@
 
         <hr>
         
+          <div class="form-msg"></div>
         
         <div class="form-group">
           <div class="col-md-12">
@@ -104,6 +104,9 @@
 
 <script>
 $(document).ready(function(){
+  var d = new Date('<?php echo $dataProduk->tgl_panen;?>');
+  d.setDate(d.getDate() - 3);
+  console.log('<?php echo $dataProduk->tgl_panen;?>');
         var date_input=$('input[name="date"]'); //our date input has the name "date"
         var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
         date_input.datepicker({
@@ -111,6 +114,7 @@ $(document).ready(function(){
             container: container,
             todayHighlight: true,
             autoclose: true,
+            startDate: new Date
         })
     })
 

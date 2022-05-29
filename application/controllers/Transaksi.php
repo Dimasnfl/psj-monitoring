@@ -110,9 +110,9 @@ class Transaksi extends AUTH_Controller {
 
 	public function delete() {
 		$id = $_POST['id'];
-		$result = $this->M_transaksi->delete($id);
-		
-		if ($result > 0) {
+
+		$hasil = $this->M_transaksi->batal_transaksi($id); 
+		if ($hasil == 'success') {
 			echo show_succ_msg('Data transaksi Berhasil dihapus', '20px');
 		} else {
 			echo show_err_msg('Data transaksi Gagal dihapus', '20px');
