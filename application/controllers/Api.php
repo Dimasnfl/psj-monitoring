@@ -254,7 +254,7 @@ class Api extends CI_Controller {
         }
 
     }
-
+    //2.6 UPDATE PRODUK
     public function update_produk(){
         if(!$this->validateAccessToken())return;
         $insert_data = $this->input->post();
