@@ -170,7 +170,7 @@ class Api extends CI_Controller {
         //get driver id
         $driver_id = $this->M_user->get_driver_id_by_user_id($this->user->id);
         if($driver_id == "NOT_DRIVER"){
-            echo(json_encod($this->error(500,$data)));
+            echo(json_encode($this->error(500,'User bukan driver')));
             return;
         }else{
             $data = $this->M_transaksi->select_all_transaksi_by_driver_id($driver_id,[6]);
@@ -188,7 +188,7 @@ class Api extends CI_Controller {
         //get driver id
         $driver_id = $this->M_user->get_driver_id_by_user_id($this->user->id);
         if($driver_id == "NOT_DRIVER"){
-            echo(json_encod($this->error(500,$data)));
+            echo(json_encode($this->error(500,'user bukan driver')));
             return;
         }else{
             $data = $this->M_transaksi->select_all_transaksi_by_driver_id($driver_id,[7,5]);
@@ -206,7 +206,7 @@ class Api extends CI_Controller {
         //get driver id
         $driver_id = $this->M_user->get_driver_id_by_user_id($this->user->id);
         if($driver_id == "NOT_DRIVER"){
-            echo(json_encod($this->error(500,$data)));
+            echo(json_encode($this->error(500,'user bukan driver')));
             return;
         }else{
             $data = $this->M_transaksi->select_all_transaksi_by_driver_id($driver_id,[4]);
@@ -288,7 +288,57 @@ class Api extends CI_Controller {
             echo json_encode($this->error(500, 'This is not your transaction'));
         }
     }
+
+    //2.9 JEMPUT ORDER
+    public function jemput_order(){
+        if(!$this->validateAccessToken())return;
+        $id_transaksi = $this->input->post('id_transaksi');
+        $transaksi = $this->M_transaksi->isForThisCurier($this->user->id_kurir, $id_transaksi);
+        if($transaksi != null){
+            $this->M_transaksi->confirm_pickup($id_transaksi);
+            $produk = $this->M_produk->select_by_id($transaksi->id_produk);
+            $this->load->model('M_notifications');
+            $this->M_notifications->create($this->user->id, $transaksi->id_user, 3, "Kurir {$this->user->nama} sedang menjemput panen {$produk->tipe_produk} anda!");
+            echo json_encode($this->success(200,'success'));
+        }else{
+            echo json_encode($this->error(500, 'This is not your transaction'));
+        }
+    }
+
+    //3.0 batal jemput order
+    public function batal_jemput(){
+        if(!$this->validateAccessToken())return;
+        $id_transaksi = $this->input->post('id_transaksi');
+        $transaksi = $this->M_transaksi->isForThisCurier($this->user->id_kurir, $id_transaksi);
+        if($transaksi != null){
+            $this->M_transaksi->confirm_pickup($id_transaksi);
+            $produk = $this->M_produk->select_by_id($transaksi->id_produk);
+            
+            $this->load->model('M_notifications');
+            $this->M_notifications->create($this->user->id, $transaksi->id_user, 7, "Kurir {$this->user->nama} batal menjemput panen {$produk->tipe_produk} anda!");
+            echo json_encode($this->success(200,'success'));
+        }else{
+            echo json_encode($this->error(500, 'This is not your transaction'));
+        }
+    }
+
+    //4.0 batal jemput order
+    public function finish_order(){
+        if(!$this->validateAccessToken())return;
+        $id_transaksi = $this->input->post('id_transaksi');
+        $transaksi = $this->M_transaksi->isForThisCurier($this->user->id_kurir, $id_transaksi);
+        if($transaksi != null){
+            $this->M_transaksi->confirm_pickup($id_transaksi);
+            $produk = $this->M_produk->select_by_id($transaksi->id_produk);
+            $this->load->model('M_notifications');
+            $this->M_notifications->create($this->user->id, $transaksi->id_user, 4, "Kurir {$this->user->nama} selesai menjemput panen {$produk->tipe_produk} anda!, Segera konfirmasi penjemputan");
+            echo json_encode($this->success(200,'success'));
+        }else{
+            echo json_encode($this->error(500, 'This is not your transaction'));
+        }
+    }
     //END API - APP DATA
+
 
     //API - 3. USER DATA
     public function user(){

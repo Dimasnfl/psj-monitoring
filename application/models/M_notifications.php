@@ -11,7 +11,7 @@ class M_notifications extends CI_Model {
                 "description" => $description
             ]);
 	}
-
+    
     public function get_new_order_notifications($user_id){
         $this->db->from('notifications');
         $this->db->where('type_id',1);
