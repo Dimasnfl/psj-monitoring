@@ -362,4 +362,18 @@ class Api extends CI_Controller {
         $notifications = $this->M_notifications->get_new_order_notifications($this->user->id);
         echo json_encode($this->success($notifications));
     }
+    //API - 4.2 get new pickup notification (petani)
+    //api/notifications/petani/order-pickup
+    public function notification_order_pickup(){
+        if(!$this->validateAccessToken())return;
+        if($this->user->id_kurir != null){
+            echo json_encode($this->error(500, "you are not a petani"));
+            return;
+        }
+
+        //get new order notifications
+        $this->load->model('M_notifications');
+        $notifications = $this->M_notifications->get_new_pickup_notification($this->user->id);
+        echo json_encode($this->success($notifications));
+    }
 }

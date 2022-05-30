@@ -53,3 +53,4 @@ $route['default_controller'] = 'Auth';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 $route['api/notifications/new-order/get'] = 'Api/notification_new_order_get';
+$route['api/notifications/petani/order-pickup'] = 'Api/notification_order_pickup';
