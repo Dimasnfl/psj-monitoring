@@ -311,7 +311,7 @@ class Api extends CI_Controller {
         $id_transaksi = $this->input->post('id_transaksi');
         $transaksi = $this->M_transaksi->isForThisCurier($this->user->id_kurir, $id_transaksi);
         if($transaksi != null){
-            $this->M_transaksi->confirm_pickup($id_transaksi);
+            $this->M_transaksi->batal_transaksi($id_transaksi);
             $produk = $this->M_produk->select_by_id($transaksi->id_produk);
             
             $this->load->model('M_notifications');

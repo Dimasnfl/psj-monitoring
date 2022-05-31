@@ -26,6 +26,7 @@ class M_transaksi extends CI_Model {
 	user.telp as no_telp_user,
 	produk.berat_panen as berat,
 	produk.alamat as alamat,
+	produk.berat_asli as berat_asli,
 	tipe_produk.harga as harga,
 	produk.tgl_tanam as tgl_tanam,
 	produk.tgl_panen as tgl_panen,
