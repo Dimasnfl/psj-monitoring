@@ -305,7 +305,7 @@ class Api extends CI_Controller {
         }
     }
 
-    //3.0 batal jemput order
+    //2.10 batal jemput order
     public function batal_jemput(){
         if(!$this->validateAccessToken())return;
         $id_transaksi = $this->input->post('id_transaksi');
@@ -322,13 +322,13 @@ class Api extends CI_Controller {
         }
     }
 
-    //4.0 batal jemput order
+    //2.11 batal jemput order
     public function finish_order(){
         if(!$this->validateAccessToken())return;
         $id_transaksi = $this->input->post('id_transaksi');
         $transaksi = $this->M_transaksi->isForThisCurier($this->user->id_kurir, $id_transaksi);
         if($transaksi != null){
-            $this->M_transaksi->confirm_pickup($id_transaksi);
+            $this->M_transaksi->finish_order($id_transaksi);
             $produk = $this->M_produk->select_by_id($transaksi->id_produk);
             $this->load->model('M_notifications');
             $this->M_notifications->create($this->user->id, $transaksi->id_user, 4, "Kurir {$this->user->nama} selesai menjemput panen {$produk->tipe_produk} anda!, Segera konfirmasi penjemputan");

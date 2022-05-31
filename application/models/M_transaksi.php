@@ -38,6 +38,7 @@ class M_transaksi extends CI_Model {
 	status_produk.nama as status_produk,
 	status_produk.id as status_produk_id,
 	status_transaksi.id as status_transaksi_id,
+	transaksi.sudah_dikonfirmasi_petani as sudah_dikonfirmasi_petani,
 	status_transaksi.nama as nama_status');
 	$this->db->from('transaksi');
 	$this->db->order_by('id', 'asc');
@@ -74,6 +75,7 @@ class M_transaksi extends CI_Model {
 	status_produk.nama as status_produk,
 	status_produk.id as status_produk_id,
 	status_transaksi.id as status_transaksi_id,
+	transaksi.sudah_dikonfirmasi_petani as sudah_dikonfirmasi_petani,
 	status_transaksi.nama as nama_status');
 	$this->db->from('transaksi');
 	$this->db->order_by('id', 'asc');
@@ -102,6 +104,11 @@ class M_transaksi extends CI_Model {
    public function confirm_pickup($id_transaction){
 	   $transaksi = $this->db->from('transaksi')->where('id',$id_transaction)->get()->row();
 	   $this->db->where('id',$transaksi->id_produk)->set('id_status_produk',5)->update('produk');
+   }
+
+   public function finish_order($id_transaction){
+	$transaksi = $this->db->from('transaksi')->where('id',$id_transaction)->get()->row();
+	$this->db->where('id',$transaksi->id_produk)->set('id_status_produk',4)->update('produk');
    }
 
 	public function select_all() {
