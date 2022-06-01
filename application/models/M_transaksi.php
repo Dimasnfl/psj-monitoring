@@ -142,7 +142,7 @@ class M_transaksi extends CI_Model {
 	public function create_transaction($id_produk,$id_kurir,$tanggal,$jam,$biaya_angkut){
 		$this->load->helper('date');
 		$produk = $this->db->from('produk')->where('id',$id_produk)->get()->row();
-		$this->db->from('produk')->where('id',$id_produk)->set('id_status_produk',5)->update('produk');
+		$this->db->from('produk')->where('id',$id_produk)->set('id_status_produk',6)->update('produk');
 		$kurir = $this->db->from('kurir')->where('id',$id_kurir)->get()->row();
 		$dateAngkut = date_parse($tanggal);
 		//rumus no resi
