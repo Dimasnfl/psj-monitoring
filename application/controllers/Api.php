@@ -329,9 +329,20 @@ class Api extends CI_Controller {
         $transaksi = $this->M_transaksi->isForThisCurier($this->user->id_kurir, $id_transaksi);
         if($transaksi != null){
             $this->M_transaksi->finish_order($id_transaksi);
+            echo json_encode($this->success(200,'success'));
+        }else{
+            echo json_encode($this->error(500, 'This is not your transaction'));
+        }
+    }
+    //2.12 konfirmasi petani
+    public function petani_confirm_finish(){
+        if(!$this->validateAccessToken())return;
+        $id_transaksi = $this->input->post('id_transaksi');
+        $transaksi = $this->M_transaksi->isForThisUser($this->user->id, $id_transaksi);
+        if($transaksi != null){
+            $this->M_transaksi->confirm_finish_user($id_transaksi);
             $produk = $this->M_produk->select_by_id($transaksi->id_produk);
             $this->load->model('M_notifications');
-            $this->M_notifications->create($this->user->id, $transaksi->id_user, 4, "Kurir {$this->user->nama} selesai menjemput panen {$produk->tipe_produk} anda!, Segera konfirmasi penjemputan");
             echo json_encode($this->success(200,'success'));
         }else{
             echo json_encode($this->error(500, 'This is not your transaction'));
