@@ -324,13 +324,16 @@ class Api extends CI_Controller {
         }
     }
 
-    //2.11 batal jemput order
+    //2.11 finish jemput order
     public function finish_order(){
         if(!$this->validateAccessToken())return;
         $id_transaksi = $this->input->post('id_transaksi');
         $transaksi = $this->M_transaksi->isForThisCurier($this->user->id_kurir, $id_transaksi);
         if($transaksi != null){
             $this->M_transaksi->finish_order($id_transaksi);
+            $this->load->model('M_notifications');
+            $produk = $this->M_produk->select_by_id($transaksi->id_produk);
+            $this->M_notifications->sendNotificationsToUser($transaksi->id_user,"Kurir telah menyelesaikan penjemputan panen  {$produk->tipe_produk} anda!");
             echo json_encode($this->success(200,'success'));
         }else{
             echo json_encode($this->error(500, 'This is not your transaction'));
@@ -345,6 +348,8 @@ class Api extends CI_Controller {
             $this->M_transaksi->confirm_finish_user($id_transaksi);
             $produk = $this->M_produk->select_by_id($transaksi->id_produk);
             $this->load->model('M_notifications');
+            $kurir_user_id = $this->M_user->get_user_id_by_kurir_id($transaksi->id_kurir);
+            $this->M_notifications->sendNotificationsToUser($kurir_user_id,"Petani telah mengkonfirmasi penyelesaian jemputan anda!");
             echo json_encode($this->success(200,'success'));
         }else{
             echo json_encode($this->error(500, 'This is not your transaction'));

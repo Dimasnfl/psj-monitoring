@@ -61,7 +61,7 @@ class M_user extends CI_Model {
 		$this->db->from('user');
 		$this->db->where("user.id_kurir = $kurir_id");
 		$user = $this->db->get();
-		if($user->row()->id_kurir != null){
+		if($user){
 			return $user->row()->id;
 		}else{
 			return "NOT_KURIR";

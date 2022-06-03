@@ -26,12 +26,9 @@ class M_notifications extends CI_Model {
                 $message->en = $m;
                 $data = [
                     "app_id" => "4d8cd403-2a9e-48ae-a390-0b837a63012b",
-                    "included_player_ids" => [
+                    "include_player_ids" => [
                         $user->onesignal_id
                     ],
-                    'included_segments' => array(
-                        "Active Users", "Inactive Users"
-                    ),
                     "contents" => $message,
                     "name" => "Notifikasi Order Baru"
                 ];
