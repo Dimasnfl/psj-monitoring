@@ -40,8 +40,6 @@ class M_notifications extends CI_Model {
                 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
                 $result = curl_exec($ch);
                 curl_close($ch);
-
-                var_dump($result);
             }
         }
     }
