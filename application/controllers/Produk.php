@@ -96,7 +96,7 @@ class Produk extends AUTH_Controller {
 						$this->load->model('M_notifications');
 						$user_kurir_id = $this->M_user->get_user_id_by_kurir_id($id_kurir);
 						$this->load->model('M_notifications');
-						$this->M_notifications->sendNotificationsToUser($user_kurir_id,"Ada order baru!");
+						$this->M_notifications->sendNotificationsToUser($user_kurir_id,"Ada order baru dari KADIN");
 						$this->M_notifications->create($transaction_id,$user_kurir_id, 1, 'Terdapat 1 tugas baru');
 						$out['status'] = '';
 						$out['msg'] = show_succ_msg('Data Penjemputan Berhasil dibuat', '20px');
