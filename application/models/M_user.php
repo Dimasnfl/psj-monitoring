@@ -12,6 +12,10 @@ class M_user extends CI_Model {
 		return $query->result();
 	}
 
+	public function set_onesignal_id($user_id,$onesignal_id){
+		$this->db->set('onesignal_id',$onesignal_id)->where('id',$user_id)->update('user');
+	}
+
 	public function login($nik, $password){
 		$md5Password = md5($password);
 		$this->db->select("user.*")->from("user")->where("password", $md5Password)->where("nik",$nik);

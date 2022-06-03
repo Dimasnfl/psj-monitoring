@@ -387,4 +387,11 @@ class Api extends CI_Controller {
         $notifications = $this->M_notifications->get_new_pickup_notification($this->user->id);
         echo json_encode($this->success($notifications));
     }
+    //API - 4.3 set onesignal id
+    //api/notifications/set-id
+    public function set_user_id(){
+        if(!$this->validateAccessToken())return;
+        $this->M_user->set_onesignal_id($this->user->id,$this->input->post('onesignal_id'));
+        echo json_encode($this->success(null));
+    }
 }
