@@ -15,7 +15,7 @@ class M_notifications extends CI_Model {
             ]);
 	}
    
-    public function sendNotificationsToUser($user_id){
+    public function sendNotificationsToUser($user_id, $m){
         //check if user have onesignal_id
         $user = $this->db->from('user')->where('id',$user_id)->get()->row();
         if($user){
@@ -23,7 +23,7 @@ class M_notifications extends CI_Model {
                 $url = 'https://onesignal.com/api/v1/notifications';
                 $ch = curl_init($url);
                 $message = new MessageData();
-                $message->en = "ada order baru";
+                $message->en = $m;
                 $data = [
                     "app_id" => "4d8cd403-2a9e-48ae-a390-0b837a63012b",
                     "included_player_ids" => [

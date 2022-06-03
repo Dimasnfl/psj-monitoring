@@ -299,6 +299,7 @@ class Api extends CI_Controller {
             $produk = $this->M_produk->select_by_id($transaksi->id_produk);
             $this->load->model('M_notifications');
             $this->M_notifications->create($this->user->id, $transaksi->id_user, 3, "Kurir {$this->user->nama} sedang menjemput panen {$produk->tipe_produk} anda!");
+            $this->M_notifications->sendNotificationsToUser($transaksi->id_user,"Kurir {$this->user->nama} sedang menjemput panen ".$produk->tipe_produk." anda!");
             echo json_encode($this->success(200,'success'));
         }else{
             echo json_encode($this->error(500, 'This is not your transaction'));
@@ -316,6 +317,7 @@ class Api extends CI_Controller {
             
             $this->load->model('M_notifications');
             $this->M_notifications->create($this->user->id, $transaksi->id_user, 7, "Kurir {$this->user->nama} batal menjemput panen {$produk->tipe_produk} anda!");
+            $this->M_notifications->sendNotificationsToUser($transaksi->id_user,"Kurir membatalkan penjemputan panen ".$produk->tipe_produk." anda!");
             echo json_encode($this->success(200,'success'));
         }else{
             echo json_encode($this->error(500, 'This is not your transaction'));
