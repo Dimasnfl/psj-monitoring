@@ -29,8 +29,17 @@
         <?php
       }
       ?>
+      <?php
+        if($row->status_produk_id == 4 AND $row->id_status_transaksi == 2)
+      {
+        ?>
+         <button class="btn btn-secondary konfirmasi-produk" data-id="<?php echo $row->id; ?>" data-toggle="modal" data-target="#konfirmasiProduk"><i class="glyphicon glyphicon-ok"></i> </button>
+        <?php
+      }
+      ?>
       </td>
     </tr>
     <?php
   }
 ?>
+

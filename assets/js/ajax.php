@@ -178,24 +178,25 @@ function tampilUser() {
 	}
 
 	var id_produk;
-	$(document).on("click", ".konfirmasiHapus-produk", function() {
+	$(document).on("click", ".konfirmasi-produk", function() {
 		id_produk = $(this).attr("data-id");
 	})
-	$(document).on("click", ".hapus-dataProduk", function() {
+	$(document).on("click", ".konfirmasi-dataProduk", function() {
 		var id = id_produk;
 		
 		$.ajax({
 			method: "POST",
-			url: "<?php echo base_url('Produk/delete'); ?>",
+			url: "<?php echo base_url('Produk/konfirmasi'); ?>",
 			data: "id=" +id
 		})
 		.done(function(data) {
-			$('#konfirmasiHapus').modal('hide');
+			$('#konfirmasiProduk').modal('hide');
 			tampilProduk();
 			$('.msg').html(data);
 			effect_msg();
 		})
 	})
+
 
 	$(document).on("click", ".update-dataProduk", function() {
 		var id = $(this).attr("data-id");

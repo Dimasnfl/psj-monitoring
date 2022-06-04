@@ -53,7 +53,7 @@
 <div id="tempat-modal"></div>
 <div id="tempat-modal2"></div>
 
-<?php show_my_confirm('konfirmasiHapus', 'hapus-dataProduk', 'Hapus Data Ini?', 'Ya, Hapus Data Ini'); ?>
+<?php show_my_confirm('konfirmasiProduk', 'konfirmasi-dataProduk', 'Konfirmasi Data Ini?', 'Ya, Konfirmasi Data Ini'); ?>
 <?php
   $data['judul'] = 'Produk';
   $data['url'] = 'Produk/import';

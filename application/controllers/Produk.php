@@ -31,6 +31,8 @@ class Produk extends AUTH_Controller {
 
 	public function tampil() {
 		$data['dataProduk'] = $this->M_produk->select_all();
+		$data['dataTransaksi'] = $this->M_transaksi->select_all_transaksi();
+
 		$this->load->view('produk/list_data', $data);
 	}
 
@@ -165,6 +167,18 @@ class Produk extends AUTH_Controller {
 			echo show_err_msg('Data E-Commodity Gagal dihapus', '20px');
 		}
 	}
+
+	public function konfirmasi() {
+		$id = $_POST['id'];
+
+		$result = $this->M_produk->konfirmasi_produk($id); 
+		if ($result == 'success') {
+			echo show_succ_msg('Data E-Commodity Berhasil dikonfirmasi', '20px');
+		} else {
+			echo show_err_msg('Data E-Commodity Gagal dikonfirmasi', '20px');
+		}
+	}
+
 
 	public function export() {
 		error_reporting(E_ALL);
