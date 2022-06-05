@@ -15,8 +15,9 @@
     </div>
 
     <!-- Sidebar Menu -->
+
 <ul class="sidebar-menu">
-      <li class="header">LIST MENU</li>
+  <li class="header">LIST MENU</li>
       <!-- Optionally, you can add icons to the links -->
 
       <li <?php if ($page == 'home') {echo 'class="active"';} ?>>
@@ -40,56 +41,6 @@
         </a>
       </li>
     
-    <!-- <li <?php if ($page == '') {echo 'class=""';} ?>>
-      <a href="<?php echo base_url(''); ?>">
-      <i class="fa fa-leaf"></i> Data E-Commodity
-        <span class="pull-right-container">
-        <i class="fa fa-angle-left pull-right"></i>
-      </span>
-      </a>
-      <ul class="treeview-menu menu-open">
-          <li class="active">
-      <a href="">
-      <i class="fa fa-list"></i> Status Produk
-      <span class="pull-right-container">
-      <i class="fa fa-angle-left pull-right"></i>
-      </span>
-      </a>
-      <ul class="treeview-menu menu-open">
-      <li <?php if ($page == 'Produk1') {echo 'class="active"';} ?>>
-      <a href="<?php echo base_url('Produk1'); ?>">
-      <i class="fa fa-circle-o"></i> Proses Tanam
-      </a></li>
-      </ul>
-      <ul class="treeview-menu menu-open">
-      <li <?php if ($page == '') {echo 'class=""';} ?>>
-      <a href="<?php echo base_url(''); ?>">
-      <i class="fa fa-circle-o"></i> Panen
-      </a></li>
-      </ul>
-      <ul class="treeview-menu menu-open">
-      <li <?php if ($page == '') {echo 'class=""';} ?>>
-      <a href="<?php echo base_url(''); ?>">
-      <i class="fa fa-circle-o"></i> Siap Diambil
-      </a></li>
-      </ul>
-      <ul class="treeview-menu menu-open">
-      <li <?php if ($page == '') {echo 'class=""';} ?>>
-      <a href="<?php echo base_url(''); ?>">
-      <i class="fa fa-circle-o"></i> Sedang Diambil
-      </a></li>
-      </ul>
-      <ul class="treeview-menu menu-open">
-      <li <?php if ($page == '') {echo 'class=""';} ?>>
-      <a href="<?php echo base_url(''); ?>">
-      <i class="fa fa-circle-o"></i> Selesai Diambil
-      </a></li>
-      </ul>
-      </li>
-      </ul> -->
-
-
-	  
       <li <?php if ($page == 'Tipe Produk') {echo 'class="active"';} ?>>
           <a href="<?php echo base_url('Tipe_produk'); ?>">
           <i class="fa fa-tags"></i>
@@ -104,21 +55,30 @@
         </a>
       </li>
      
+      <?php if($this->session->userdata('level') == 1) { ?>
       <li <?php if ($page == 'Kurir') {echo 'class="active"';} ?>>
         <a href="<?php echo base_url('Kurir'); ?>">
           <i class="fa fa-car"></i>
           <span>Data Kurir</span>
         </a>
       </li>
-     
+
       <li <?php if ($page == 'Transaksi') {echo 'class="active"';} ?>>
         <a href="<?php echo base_url('Transaksi'); ?>">
           <i class="fa fa-shopping-cart"></i>
           <span>Data Transaksi</span>
         </a>
-      </li> 
-</ul>
+      </li>
+      <?php  } ?>
 
+<br>
+      <li <?php if ($page == 'logout') {echo 'class="active"';} ?>>
+        <a href="<?php echo base_url('auth/logout'); ?>">
+          <i class="glyphicon glyphicon-log-out"></i>
+          <span>Log Out</span>
+        </a>
+      </li>
+</ul>
 
 
   </section>

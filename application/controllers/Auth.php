@@ -17,6 +17,7 @@ class Auth extends CI_Controller {
 		}
 	}
 
+
 	public function login() {
 		$this->form_validation->set_rules('username', 'Username', 'required|min_length[4]|max_length[15]');
 		$this->form_validation->set_rules('password', 'Password', 'required');
@@ -33,7 +34,8 @@ class Auth extends CI_Controller {
 			} else {
 				$session = [
 					'userdata' => $data,
-					'status' => "Loged in"
+					'level' => $data->level,
+					'status' => "loged in"
 				];
 				$this->session->set_userdata($session);
 				redirect('Home');

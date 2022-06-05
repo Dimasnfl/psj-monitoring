@@ -7,8 +7,13 @@
 
         <h3 class="profile-username text-center"><?php echo $userdata->nama; ?></h3>
 
-        <p class="text-muted text-center">Web Developer</p>
-
+        <?php if($this->session->userdata('level') == 1) { ?>
+        <p class="text-muted text-center">Admin</p>
+        <?php } ?>
+        <?php if($this->session->userdata('level') != 1) { ?>
+        <p class="text-muted text-center">Guest</p>
+        <?php } ?>
+        
         <ul class="list-group list-group-unbordered">
           <li class="list-group-item">
             <b>Username</b> <a class="pull-right"><?php echo $userdata->username; ?></a>

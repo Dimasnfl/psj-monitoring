@@ -13,12 +13,13 @@
       <td><?php echo $row->tipe_produk_nama; ?></td>
       <td><?php echo $row->tgl_tanam; ?></td>
       <td><?php echo $row->tgl_panen; ?></td>
-      <td><h><?php echo $row->berat_panen; ?>kg</h></td>
+      <td><?php echo $row->berat_panen; ?> kg</td>
       <td><?php echo rupiah ($row->tipe_produk_harga); ?></td>
-      <td><h><?php echo $row->luas_lahan; ?> m2</h></td>
+      <td><?php echo $row->luas_lahan; ?> m<sup>2</sup></td>
       <td><?php echo $row->alamat; ?></td>
+      
+      <?php if($this->session->userdata('level') == 1) { ?>
       <td><?php echo $row->status_produk_nama; ?></td>
-
       <td class="text-center" style="min-width:110px;">
       <button class="btn btn-info detail-dataProduk" data-id="<?php echo $row->id; ?>"><i class="glyphicon glyphicon-info-sign"></i> </button>
       <button class="btn btn-warning update-dataProduk" data-id="<?php echo $row->id; ?>"><i class="glyphicon glyphicon-edit"></i></button>
@@ -38,6 +39,7 @@
       }
       ?>
       </td>
+      <?php } ?>
     </tr>
     <?php
   }

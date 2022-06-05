@@ -4,24 +4,32 @@
 
 <div class="box">
   <div class="box-header">
-  <div class="col-md-3">
+  <?php if($this->session->userdata('level') == 1) { ?>
+    <div class="col-md-3">
+            <tr>
+              <td>
+                <label><b>Select Status Produk</b></label>
+                <select name="" class="form-control" id="id_status_produk">
+                <option value="">Show All</option>
+                <option value="1">Proses Tanam</option>
+                <option value="2">Panen</option>
+                <option value="3">Siap Diambil</option>
+                <option value="4">Selesai Diambil</option>
+                <option value="5">Sedang Diambil</option>
+              </select>
+              </td>
+            </tr>
+    </div>
+    <?php } ?>
 
-          <tr>
-            <td>
-              <label><b>Select Status Produk</b></label>
-              <select name="" class="form-control" id="id_status_produk">
-              <option value="">Show All</option>
-              <option value="1">Proses Tanam</option>
-              <option value="2">Panen</option>
-              <option value="3">Siap Diambil</option>
-              <option value="4">Selesai Diambil</option>
-              <option value="5">Sedang Diambil</option>
-            </select>
-            </td>
-          </tr>
+    <?php if($this->session->userdata('level') != 1) { ?>
+    <div class="col-md-2">
+        <a href="<?php echo base_url('produk/export'); ?>" class="form-control btn-block btn-outline-success" style="text-align: center;" ><i class="glyphicon glyphicon glyphicon-floppy-open"></i> Export Data Excel</a>
+    </div>
+    <?php } ?>
 
-      </div>
   </div>
+  
   <!-- /.box-header -->
   <div class="box-body table-responsive p-0">
     <table id="list-data" class="table table-bordered table-hover">
@@ -36,8 +44,10 @@
           <th>Harga (/kg)</th>
           <th>Luas Lahan</th>         
           <th>Alamat</th>
+          <?php if($this->session->userdata('level') == 1) { ?>
           <th>Status</th>  
-          <th style="text-align: center;">Action</th>
+          <th style="text-align: center;">Action</th> 
+          <?php } ?>
         </tr>
       </thead>
       <tbody id="data-produk">

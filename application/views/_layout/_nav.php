@@ -22,7 +22,7 @@
 
             <p>
               <?php echo $userdata->nama; ?>
-              <small></small>
+              <small>2022 - <?php echo date('Y'); ?></small>
             </p>
           </li>
           <!-- Menu Footer-->

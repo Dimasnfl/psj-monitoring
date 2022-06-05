@@ -35,9 +35,9 @@
               <!-- <p class="login-box-msg" style="text-align:center;">
         Supported By
       </p> -->
-          <a><img class="" src="<?php echo base_url(); ?>assets/img/logo/logo_kab.png" alt="Kabupaten Bandung" height="125px"></a>
-          <a><img class="" src="<?php echo base_url(); ?>assets/img/logo/logo_univ.png" alt="Widyatama" height="125px"></a> 
-          <a><img class="" src="<?php echo base_url(); ?>assets/img/logo/LOG_KADIN.png" alt="Kadin Kota Bandung"  height="125px"></a>
+          <a><img class="" src="<?php echo base_url(); ?>assets/img/logo/logo_kab.png" alt="Kabupaten Bandung" height="110px"></a>
+          <a><img class="" src="<?php echo base_url(); ?>assets/img/logo/logo_univ.png" alt="Widyatama" height="110px"></a> 
+          <a><img class="" src="<?php echo base_url(); ?>assets/img/logo/LOG_KADIN.png" alt="Kadin Kota Bandung"  height="110px"></a>
         </div>
         <!-- <a href="<?php echo base_url(); ?>#"><b>Admin</b>SIDUDA</a> -->
       </div>

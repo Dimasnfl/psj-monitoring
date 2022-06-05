@@ -19,8 +19,9 @@
           <th>No Telp</th>
           <th>Asal Dusun</th>
           <th>Total Luas Lahan</th>
-
-          <th style="text-align: center;">Action</th>
+          <?php if($this->session->userdata('level') == 1) { ?>
+          <th style="text-align: center;">Action</th> 
+          <?php } ?>
         </tr>
       </thead>
       <tbody id="data-user">

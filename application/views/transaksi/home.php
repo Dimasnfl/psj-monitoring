@@ -22,8 +22,11 @@
           <th>ID Produk</th>
           <th>Tanggal Sampai</th>
           <th>Biaya Angkut</th>
+
+          <?php if($this->session->userdata('level') == 1) { ?>
           <th>Status</th>
           <th style="text-align: center;">Action</th>
+      <?php } ?>
         </tr>
       </thead>
       <tbody id="data-transaksi">
@@ -38,7 +41,7 @@
   </div>
 </div>
 
-<!-- <?php echo $modal_tambah_transaksi; ?> -->
+<?php echo $modal_tambah_transaksi; ?>
 
 <div id="tempat-modal"></div>
 

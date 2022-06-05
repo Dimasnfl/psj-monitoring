@@ -5,8 +5,10 @@
 <div class="box">
   <div class="box-header">
     <div class="col-md-2" style="padding: 0;">
+    <?php if($this->session->userdata('level') == 1) { ?>
         <button class="form-control btn btn-primary" data-toggle="modal" data-target="#tambah-desa"><i class="glyphicon glyphicon-plus-sign"></i> Tambah Data</button>
-    </div>
+      <?php } ?>
+      </div>
     <!-- <div class="col-md-6">
         <a href="<?php echo base_url('Desa/export'); ?>" class="form-control btn btn-default"><i class="glyphicon glyphicon glyphicon-floppy-open"></i> Export Data Excel</a>
     </div> -->
@@ -18,7 +20,9 @@
         <tr>
           <th>No</th>
           <th>Nama Dusun</th>
+          <?php if($this->session->userdata('level') == 1) { ?>
           <th style="text-align: center;">Action</th>
+\      <?php } ?>
         </tr>
       </thead>
       <tbody id="data-desa">

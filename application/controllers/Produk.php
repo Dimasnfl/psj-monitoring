@@ -186,39 +186,82 @@ class Produk extends AUTH_Controller {
 		include_once './assets/phpexcel/Classes/PHPExcel.php';
 		$objPHPExcel = new PHPExcel();
 
-		$data = $this->M_produk->select_all_produk();
+		$data = $this->M_produk->select_all();
 
 		$objPHPExcel = new PHPExcel(); 
 		$objPHPExcel->setActiveSheetIndex(0); 
 		$rowCount = 1; 
 
-		$objPHPExcel->getActiveSheet()->SetCellValue('A'.$rowCount, "ID");
+
+		$objPHPExcel->getActiveSheet()->SetCellValue('A'.$rowCount, "No.");
 		$objPHPExcel->getActiveSheet()->SetCellValue('B'.$rowCount, "NIK");
-		$objPHPExcel->getActiveSheet()->SetCellValue('C'.$rowCount, "Foto produk");
-		$objPHPExcel->getActiveSheet()->SetCellValue('D'.$rowCount, "Jenis produk");
+		$objPHPExcel->getActiveSheet()->SetCellValue('C'.$rowCount, "Nama Petani");
+		$objPHPExcel->getActiveSheet()->SetCellValue('D'.$rowCount, "Nama produk");
 		$objPHPExcel->getActiveSheet()->SetCellValue('E'.$rowCount, "Tanggal Tanam");
 		$objPHPExcel->getActiveSheet()->SetCellValue('F'.$rowCount, "Tanggal Panen");
-		$objPHPExcel->getActiveSheet()->SetCellValue('G'.$rowCount, "Berat Panen");
-		$objPHPExcel->getActiveSheet()->SetCellValue('H'.$rowCount, "ID tipe_produk");
+		$objPHPExcel->getActiveSheet()->SetCellValue('G'.$rowCount, "Berat Panen (/kg)");
+		$objPHPExcel->getActiveSheet()->SetCellValue('H'.$rowCount, "Luas Lahan (m2)");
+		$objPHPExcel->getActiveSheet()->SetCellValue('I'.$rowCount, "Alamat");
 		$rowCount++;
 
+
+		$column = 2;
 		foreach($data as $value){
-		    $objPHPExcel->getActiveSheet()->SetCellValue('A'.$rowCount, $value->id); 
-		    $objPHPExcel->getActiveSheet()->SetCellValue('B'.$rowCount, $value->NIK); 
-			$objPHPExcel->getActiveSheet()->SetCellValue('C'.$rowCount, $value->foto_produk); 
-		    $objPHPExcel->getActiveSheet()->SetCellValue('D'.$rowCount, $value->jenis_produk); 
-		    $objPHPExcel->getActiveSheet()->SetCellValue('E'.$rowCount, $value->tgl_tanam); 
-		    $objPHPExcel->getActiveSheet()->SetCellValue('F'.$rowCount, $value->tgl_panen); 
-		    $objPHPExcel->getActiveSheet()->SetCellValue('G'.$rowCount, $value->berat_panen); 
-			$objPHPExcel->getActiveSheet()->SetCellValue('H'.$rowCount, $value->id_tipe_produk); 
-		    $rowCount++; 
-		} 
+			$objPHPExcel->getActiveSheet()->SetCellValue('A'.$column, ($column-1));
+		    $objPHPExcel->getActiveSheet()->SetCellValueExplicit('B'.$column, $value->user_nik, PHPExcel_Cell_DataType::TYPE_STRING); 
+			$objPHPExcel->getActiveSheet()->SetCellValue('C'.$column, $value->user_nama); 
+		    $objPHPExcel->getActiveSheet()->SetCellValue('D'.$column, $value->tipe_produk_nama); 
+		    $objPHPExcel->getActiveSheet()->SetCellValue('E'.$column, $value->tgl_tanam); 
+		    $objPHPExcel->getActiveSheet()->SetCellValue('F'.$column, $value->tgl_panen); 
+		    $objPHPExcel->getActiveSheet()->SetCellValue('G'.$column, $value->berat_panen); 
+			$objPHPExcel->getActiveSheet()->SetCellValue('H'.$column, $value->luas_lahan); 
+			$objPHPExcel->getActiveSheet()->SetCellValue('I'.$column, $value->alamat); 
+		    $column++; 
+		}
+
+		//set autosize
+		$objPHPExcel->getActiveSheet()->getColumnDimension('A')->setAutoSize(true);
+		$objPHPExcel->getActiveSheet()->getColumnDimension('B')->setAutoSize(true);
+		$objPHPExcel->getActiveSheet()->getColumnDimension('C')->setAutoSize(true);
+		$objPHPExcel->getActiveSheet()->getColumnDimension('D')->setAutoSize(true);
+		$objPHPExcel->getActiveSheet()->getColumnDimension('E')->setAutoSize(true);
+		$objPHPExcel->getActiveSheet()->getColumnDimension('F')->setAutoSize(true);
+		$objPHPExcel->getActiveSheet()->getColumnDimension('G')->setAutoSize(true);
+		$objPHPExcel->getActiveSheet()->getColumnDimension('H')->setAutoSize(true);
+		$objPHPExcel->getActiveSheet()->getColumnDimension('I')->setAutoSize(true);
+
+		//style
+		$stil=array(
+            'alignment' => array(
+              'horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_CENTER,
+			),
+			'font'  => array(
+				'bold'  => true,
+				'color' => array('rgb' => '000000')
+			),
+			'fill' => array(
+				'type' => PHPExcel_Style_Fill::FILL_SOLID,
+				'color' => array('rgb' => '36FF94')
+			  )
+
+        );
+		$stay=array(
+		'borders' => array(
+			'allborders' => array(
+			  'style' => PHPExcel_Style_Border::BORDER_THIN,
+			  'color' => array('rgb' => '000000')
+			  
+			)
+			));
+        $objPHPExcel->getActiveSheet()->getStyle('A1:I1')->applyFromArray($stil);
+		$objPHPExcel->getActiveSheet()->getStyle('A1:I'.($column-1))->applyFromArray($stay);
+ 
 
 		$objWriter = new PHPExcel_Writer_Excel2007($objPHPExcel); 
-		$objWriter->save('./assets/excel/Data produk.xlsx'); 
+		$objWriter->save('./assets/excel/Data E-Commodity.xlsx'); 
 
 		$this->load->helper('download');
-		force_download('./assets/excel/Data produk.xlsx', NULL);
+		force_download('./assets/excel/Data E-Commodity.xlsx', NULL);
 	}
 
 	public function load_status(){

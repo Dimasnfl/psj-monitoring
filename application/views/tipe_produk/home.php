@@ -5,7 +5,10 @@
 <div class="box">
   <div class="box-header">
     <div class="col-md-3" style="padding: 0;">
+    <?php if($this->session->userdata('level') == 1) { ?>
       <button class="form-control btn btn-primary" data-toggle="modal" data-target="#tambah-tipe_produk"><i class="glyphicon glyphicon-plus-sign"></i>  Tambah Data E-Commodity Baru</button>
+
+      <?php } ?>
     </div>
     <!-- <div class="col-md-3">
         <a href="<?php echo base_url('Tipe_produk/export'); ?>" class="form-control btn btn-success"><i class="glyphicon glyphicon glyphicon-floppy-open"></i> Export Data Excel</a>
@@ -21,8 +24,9 @@
           <th>Jenis Produk</th>
           <th>Harga (/kg)</th>
           <th>Tanggal Harga Ditetapkan</th>
-
+          <?php if($this->session->userdata('level') == 1) { ?>
           <th style="text-align: center;">Action</th>
+      <?php } ?>
         </tr>
       </thead>
       <tbody id="data-tipe_produk">

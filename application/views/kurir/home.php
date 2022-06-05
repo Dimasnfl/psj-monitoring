@@ -5,7 +5,9 @@
 <div class="box">
   <div class="box-header">
     <div class="col-md-2" style="padding: 0;">
+    <?php if($this->session->userdata('level') == 1) { ?>
         <button class="form-control btn btn-primary" data-toggle="modal" data-target="#tambah-kurir"><i class="glyphicon glyphicon-plus-sign"></i> Tambah Data</button>
+      <?php } ?>
     </div>
     <!-- <div class="col-md-6">
         <a href="<?php echo base_url('Kurir/export'); ?>" class="form-control btn btn-default"><i class="glyphicon glyphicon glyphicon-floppy-open"></i> Export Data Excel</a>
@@ -21,7 +23,9 @@
           <th>Jenis Kendaraan</th>
           <th>Plat Nomor</th>
           <th>No. Telp</th>
+          <?php if($this->session->userdata('level') == 1) { ?>
           <th style="text-align: center;">Action</th>
+      <?php } ?>
         </tr>
       </thead>
       <tbody id="data-kurir">
