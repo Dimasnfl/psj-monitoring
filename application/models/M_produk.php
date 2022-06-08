@@ -57,6 +57,7 @@ class M_produk extends CI_Model {
 		->group_start()
 			->where('id_status_produk',1)
 			->or_where('id_status_produk',2)
+			->or_where('id_status_produk',3)
 		->group_end();
 		$this->db->order_by('updated_at','desc');
 		$query = $this->db->get();
