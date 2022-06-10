@@ -1,5 +1,6 @@
 <div class="row">
-
+  <!-- tampilan admin -->
+<?php if($this->session->userdata('level') == 1) { ?>
   <div class="col-lg-4 col-xs-4">
     <div class="small-box bg-aqua">
       <div class="inner">
@@ -77,7 +78,64 @@
       <a href="<?php echo base_url('Transaksi') ?>" class="small-box-footer">List Data <i class="fa fa-arrow-circle-right"></i></a>
     </div>
  </div>
- 
+ <?php } ?>
+
+<!-- tampilan guest -->
+ <?php if($this->session->userdata('level') != 1) { ?>
+  <div class="col-lg-6 col-xs-4">
+    <div class="small-box bg-aqua">
+      <div class="inner">
+        <h3><?php echo $jml_user; ?></h3>
+        <p>Data Petani</p>
+      </div>
+      <div class="icon">
+        <i class="ion ion-ios-contact"></i>
+      </div>
+      <a href="<?php echo base_url('User') ?>" class="small-box-footer">List Data <i class="fa fa-arrow-circle-right"></i></a>
+    </div>
+  </div>
+  
+  <div class="col-lg-6 col-xs-4">
+    <div class="small-box bg-green">
+      <div class="inner">
+        <h3><?php echo $jml_produk; ?></h3>
+        <p>Data E-Commodity</p>
+      </div>
+      <div class="icon">
+        <i class="ion ion-leaf"></i>
+      </div>
+      <a href="<?php echo base_url('Produk') ?>" class="small-box-footer">List Data <i class="fa fa-arrow-circle-right"></i></a>
+    </div>
+  </div>
+  
+  <div class="col-lg-6 col-xs-4">
+    <div class="small-box bg-yellow">
+      <div class="inner">
+        <h3><?php echo $jml_tipe_produk; ?></h3>
+        <p>Data Harga Produk</p>
+      </div>
+      <div class="icon">
+        <i class="ion ion-ios-pricetags"></i>
+      </div>
+      <a href="<?php echo base_url('Tipe_produk') ?>" class="small-box-footer">List Data <i class="fa fa-arrow-circle-right"></i></a>
+    </div>
+ </div>
+
+ <div class="col-lg-6 col-xs-4">
+    <div class="small-box bg-blue">
+      <div class="inner">
+        <h3><?php echo $jml_desa; ?></h3>
+        <p>Data Dusun</p>
+      </div>
+      <div class="icon">
+        <i class="ion ion-ios-navigate-outline"></i>
+      </div>
+      <a href="<?php echo base_url('Desa') ?>" class="small-box-footer">List Data <i class="fa fa-arrow-circle-right"></i></a>
+    </div>
+ </div>
+ <?php } ?>
+
+
   
   <!-- diagram desa -->
   <div class="col-lg-6 col-xs-12">
