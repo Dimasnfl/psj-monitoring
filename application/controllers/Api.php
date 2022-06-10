@@ -106,18 +106,75 @@ class Api extends CI_Controller {
             echo json_encode($data);
         }
     }
+    //1.2
     public function register(){
         $this->load->helper('string');
         $insert_data = $this->input->post();
         $insert_data['password'] = md5($insert_data['password']);
         $insert_data['access_token'] = random_string('alnum',200);
         $insert_data['foto'] = $this->process_foto('user_photo'.random_string('alnum',10).$insert_data['nik']);
-        $status = $this->M_user->insert_data($insert_data);
+        //check that nik is used.
+        $used = $this->M_user->get_user_by_nik($this->input->post('nik'));
+
+        if($used == true){
+            echo json_encode($this->error(500,'NIK Sudah pernah digunakan'));
+        }else{
+            $status = $this->M_user->insert_data($insert_data);
+            
+            if($status){
+                $insert_data['id'] = "$status";
+                $insert_data['password'] = '';
+                echo json_encode($this->success($insert_data));   
+            }else{
+                $data = array(
+                    "status"=> 'error',
+                    "code" => 500,
+                    "errorMessage" => 'login error'
+                );
+                echo json_encode($data);
+            }
+        }
         
-        if($status){
-            $insert_data['id'] = "$status";
-            $insert_data['password'] = '';
-            echo json_encode($this->success($insert_data));   
+    }
+
+    //1.3
+    public function get_pin(){
+        if(!$this->validateAccessToken())return;
+
+        $pin = $this->M_user->get_pin_by_id($this->user->id);
+        echo json_encode($this->success($pin));
+    }
+    //1.4
+    public function set_pin(){
+        if(!$this->validateAccessToken())return;
+        $pin = $this->input->post('pin');
+
+        $this->M_user->set_pin_by_id($this->user->id,$pin);
+        echo json_encode($this->success($pin));
+    }
+    //1.5 login via pin
+    public function pin_login(){
+        $this->load->helper('string');
+
+        $nik = $this->input->post("nik");
+        $pin = $this->input->post("pin");
+
+        $user = $this->M_user->pin_login($nik,$pin);
+        if($user){
+            $user = $user[0];
+            $access_token = random_string('alnum',200);
+            $this->M_user->set_access_token($user->id,$access_token);
+            $user->access_token = $access_token;
+            
+            if($user->id_kurir == null){
+                $user->is_kurir = false;
+            }else{
+                $user->is_kurir = true;
+                $this->load->model("M_kurir");
+                $user->data_kurir = $this->M_kurir->select_by_id($user->id_kurir);
+            }
+            unset($user->id_kurir);
+            echo json_encode($this->success($user));
         }else{
             $data = array(
                 "status"=> 'error',
@@ -127,6 +184,8 @@ class Api extends CI_Controller {
             echo json_encode($data);
         }
     }
+
+    
     //END API - 1. AUTH
     //API - 2. APP DATA
     //2.1 get all available harga

@@ -22,6 +22,12 @@ class M_user extends CI_Model {
 		$query = $this->db->get();
 		return $query->result();
 	}
+
+	public function pin_login($nik, $pin){
+		$this->db->select("user.*")->from("user")->where("pin", $pin)->where("nik",$nik);
+		$query = $this->db->get();
+		return $query->result();
+	}
 	public function set_access_token($id,$access_token){
 		$sql = "UPDATE user set access_token = '".$access_token."' WHERE id = ".$id."";
 		$this->db->query($sql);
@@ -133,6 +139,22 @@ class M_user extends CI_Model {
 		}else{
 			return false;
 		}
+	}
+
+	public function get_user_by_nik($nik){
+		$d = $this->db->from('user')->where('nik',$nik)->get()->row();
+		if($d){
+			return true;
+		}else{
+			return false;
+		}
+	}
+
+	public function get_pin_by_id($id){
+		return $this->db->from('user')->where('id',$id)->get()->row()->pin;
+	}
+	public function set_pin_by_id($id,$pin){
+		return $this->db->set('pin',$pin)->where('id',$id)->update('user');
 	}
 
 	public function insert_batch($data) {
