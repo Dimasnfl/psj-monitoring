@@ -117,7 +117,7 @@ class Api extends CI_Controller {
         $used = $this->M_user->get_user_by_nik($this->input->post('nik'));
 
         if($used == true){
-            echo json_encode($this->error(500,'NIK Sudah pernah digunakan'));
+            echo json_encode($this->error(500,'NIK Sudah pernah didaftarkan, gunakan nik lain atau hubungi kadin!'));
         }else{
             $status = $this->M_user->insert_data($insert_data);
             
