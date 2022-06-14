@@ -6,12 +6,14 @@ class Kurir extends AUTH_Controller {
 		parent::__construct();
 		$this->load->model('M_kurir');
 		$this->load->model('M_desa');
+		$this->load->model('M_mitra');
 	}
 
 	public function index() {
 		$data['userdata'] 	= $this->userdata;
 		$data['dataKurir'] 	= $this->M_kurir->select_all();
 		$data['dataDesa'] 	= $this->M_desa->select_all();
+		$data['dataMitra'] 	= $this->M_mitra->select_all();
 
 		$data['page'] 		= "Kurir";
 		$data['judul'] 		= "Data Kurir";
@@ -27,25 +29,66 @@ class Kurir extends AUTH_Controller {
 		$this->load->view('kurir/list_data', $data);
 	}
 
+	// public function prosesTambah() {
+	// 	$this->form_validation->set_rules('user_nik', 'NIK Kurir', 'trim|required');
+	// 	$this->form_validation->set_rules('user_password', 'Password', 'trim|required');
+	// 	$this->form_validation->set_rules('id_desa', 'Dusun', 'trim|required');
+	// 	$this->form_validation->set_rules('nama', 'Nama Kurir', 'trim|required');
+	// 	$this->form_validation->set_rules('jenis_kendaraan', 'Jenis Kendaraan', 'trim|required');
+	// 	$this->form_validation->set_rules('plat_no', 'Plat Nomor Kendaraan', 'trim|required');
+	// 	$this->form_validation->set_rules('no_telp', 'No.Telp Kurir', 'trim|required|numeric');
+	// 	$this->form_validation->set_rules('created_at', 'Tanggal Pembuatan Data', 'trim|required');
+	// 	$data 	= $this->input->post();
+	// 	if ($this->form_validation->run() == TRUE) {
+	// 		$result = $this->M_kurir->insert($data);
+
+	// 		if ($result > 0) {
+	// 			$out['status'] = '';
+	// 			$out['msg'] = show_succ_msg('Data Kurir Berhasil ditambahkan', '20px');
+	// 		} else {
+	// 			$out['status'] = '';
+	// 			$out['msg'] = show_err_msg('Data Kurir Gagal ditambahkan', '20px');
+	// 		}
+	// 	} else {
+	// 		$out['status'] = 'form';
+	// 		$out['msg'] = show_err_msg(validation_errors());
+	// 	}
+
+	// 	echo json_encode($out);
+	// }
+	function kapital ($plat_no) {
+		$hasil = strtoupper($plat_no);
+		return $hasil;
+	}
+
 	public function prosesTambah() {
-		$this->form_validation->set_rules('user_nik', 'NIK Kurir', 'trim|required');
-		$this->form_validation->set_rules('user_password', 'Password', 'trim|required');
+		$this->form_validation->set_rules('nik', 'NIK Kurir', 'trim|required');
+		$this->form_validation->set_rules('password', 'Password', 'trim|required');
 		$this->form_validation->set_rules('id_desa', 'Dusun', 'trim|required');
+		$this->form_validation->set_rules('id_mitra', 'Mitra', 'trim|required');
 		$this->form_validation->set_rules('nama', 'Nama Kurir', 'trim|required');
 		$this->form_validation->set_rules('jenis_kendaraan', 'Jenis Kendaraan', 'trim|required');
 		$this->form_validation->set_rules('plat_no', 'Plat Nomor Kendaraan', 'trim|required');
-		$this->form_validation->set_rules('no_telp', 'No.Telp Kurir', 'trim|required|numeric');
-		$this->form_validation->set_rules('created_at', 'Tanggal Pembuatan Data', 'trim|required');
+		$this->form_validation->set_rules('telp', 'No.Telp Kurir', 'trim|required|numeric|min_length[10]|max_length[15]');
 		$data 	= $this->input->post();
 		if ($this->form_validation->run() == TRUE) {
-			$result = $this->M_kurir->insert($data);
+			$data['nik'] = $this->input->post('nik');
+			$data['password'] = $this->input->post('password');
+			$data['id_desa'] = $this->input->post('id_desa');
+			$data['id_mitra'] = $this->input->post('id_mitra');
+			$data['nama'] = $this->input->post('nama');
+			$data['jenis_kendaraan'] = $this->input->post('jenis_kendaraan');
+			$data['plat_no'] = $this->input->post('plat_no');
+			$data['telp'] = $this->input->post('telp');
+
+			$result = $this->M_kurir->create_kurir($data);
 
 			if ($result > 0) {
 				$out['status'] = '';
-				$out['msg'] = show_succ_msg('Data Kurir Berhasil ditambahkan', '20px');
+				$out['msg'] = show_err_msg('Data Kurir Gagal ditambahkan', '20px');
 			} else {
 				$out['status'] = '';
-				$out['msg'] = show_err_msg('Data Kurir Gagal ditambahkan', '20px');
+				$out['msg'] = show_succ_msg('Data Kurir Berhasil ditambahkan', '20px');
 			}
 		} else {
 			$out['status'] = 'form';
@@ -66,7 +109,7 @@ class Kurir extends AUTH_Controller {
 		$this->form_validation->set_rules('nama', 'Nama Kurir', 'trim|required');
 		$this->form_validation->set_rules('jenis_kendaraan', 'Jenis Kendaraan', 'trim|required');
 		$this->form_validation->set_rules('plat_no', 'Plat Nomor Kendaraan', 'trim|required');
-		$this->form_validation->set_rules('no_telp', 'No.Telp Kurir', 'trim|required|numeric');
+		$this->form_validation->set_rules('telp', 'No.Telp Kurir', 'trim|required|numeric|min_length[10]|max_length[15]');
 	    // $this->form_validation->set_rules('updated_at', 'Tanggal Update Data', 'trim|required');
 		$data 	= $this->input->post();
 		if ($this->form_validation->run() == TRUE) {

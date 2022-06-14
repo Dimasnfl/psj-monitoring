@@ -2,9 +2,12 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class M_kurir extends CI_Model {
+	
 	public function select_all() {
-		$this->db->select('*');
+		$this->db->select('kurir.*, kurir.id, user.id_kurir, user.nik as nik, mitra.nama as mitra');
 		$this->db->from('kurir');
+		$this->db->join('user', 'user.id_kurir = kurir.id', 'left');
+		$this->db->join('mitra', 'mitra.id = kurir.id_mitra');
 		$this->db->order_by('id', 'desc');
 		$data = $this->db->get();
 
@@ -37,7 +40,7 @@ class M_kurir extends CI_Model {
 		$this->db->query($sql);
 		$id_kurir = $this->db->insert_id();
         $data['user_password'] = md5($data['user_password']);
-        $sql = "INSERT INTO user VALUES('', " .$data['user_nik']. ", '" .$data['user_password']. "', '" .$data['nama']. "', '" .$data['no_telp']. "', '" .$data['id_desa']. "','','','','$id_kurir')";
+        $sql = "INSERT INTO user VALUES('', " .$data['user_nik']. ", '" .$data['user_password']. "', '" .$data['nama']. "', '" .$data['no_telp']. "', '" .$data['id_desa']. "','','','','$id_kurir','')";
 		$this->db->query($sql);
 
 		return $this->db->affected_rows();
@@ -50,7 +53,8 @@ class M_kurir extends CI_Model {
 	}
 
 	public function update($data) {
-		$sql = " UPDATE kurir SET nama='" .$data['nama'] ."',jenis_kendaraan='" .$data['jenis_kendaraan'] ."',plat_no='" .$data['plat_no'] ."',no_telp='" .$data['no_telp'] ."' WHERE id='" .$data['id'] ."'";
+		$data['plat_no'] = strtoupper($data['plat_no']);
+		$sql = " UPDATE kurir SET nama='" .$data['nama'] ."',jenis_kendaraan='" .$data['jenis_kendaraan'] ."',plat_no='" .$data['plat_no'] ."',telp='" .$data['telp'] ."' WHERE id='" .$data['id'] ."'";
 
 		$this->db->query($sql);
 
@@ -77,6 +81,27 @@ class M_kurir extends CI_Model {
 		$data = $this->db->get('kurir');
 
 		return $data->num_rows();
+	}
+
+
+	function create_kurir($data){
+		$insert_kurir['nama'] = $data['nama'];
+		$insert_kurir['id_mitra'] = $data['id_mitra'];
+		$insert_kurir['jenis_kendaraan'] = $data['jenis_kendaraan'];
+		$insert_kurir['plat_no'] = strtoupper($data['plat_no']);
+		$insert_kurir['telp'] = $data['telp'];
+		$query = $this->db->insert('kurir', $insert_kurir);
+
+		$id_kurir = $this->db->insert_id();
+		$insert_user['password'] = md5($data['password']);
+		$insert_user['nik'] = $data['nik'];
+		$insert_user['nama'] = $data['nama'];
+		$insert_user['telp'] = $data['telp'];
+		$insert_user['id_desa'] = $data['id_desa'];
+		$insert_user['id_kurir'] = $id_kurir;
+		$query = $this->db->insert('user', $insert_user);
+
+
 	}
 }
 

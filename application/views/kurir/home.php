@@ -18,8 +18,9 @@
     <table id="list-data" class="table table-bordered table-hover">
       <thead>
         <tr>
-
+          <th>NIK</th>
           <th>Nama Kurir</th>
+          <th>Mitra</th>
           <th>Jenis Kendaraan</th>
           <th>Plat Nomor</th>
           <th>No. Telp</th>

@@ -22,7 +22,7 @@
           <th>Nama Dusun</th>
           <?php if($this->session->userdata('level') == 1) { ?>
           <th style="text-align: center;">Action</th>
-\      <?php } ?>
+      <?php } ?>
         </tr>
       </thead>
       <tbody id="data-desa">

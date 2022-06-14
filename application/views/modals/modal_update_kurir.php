@@ -36,7 +36,7 @@
       <span class="input-group-addon" id="sizing-addon2">
         <i class="glyphicon glyphicon-phone"></i>
       </span>
-      <input type="text" class="form-control" placeholder="No.Telp Kurir" name="no_telp" aria-describedby="sizing-addon2" value="<?php echo $dataKurir->no_telp; ?>">
+      <input type="text" class="form-control" placeholder="No.Telp Kurir" name="telp" aria-describedby="sizing-addon2" value="<?php echo $dataKurir->telp; ?>">
     </div>
 
     <!-- <div class="input-group form-group">

@@ -10,7 +10,7 @@
       <span class="input-group-addon" id="sizing-addon2">
         <i class="glyphicon glyphicon-calendar"></i>
       </span>
-      <input type="number" class="form-control" placeholder="Masukkan NIK Kurir" name="user_nik" aria-describedby="sizing-addon2">
+      <input type="number" class="form-control" placeholder="Masukkan NIK Kurir" name="nik" aria-describedby="sizing-addon2">
     </div>
 
     <label>Password*</label>
@@ -18,7 +18,7 @@
       <span class="input-group-addon" id="sizing-addon2">
         <i class="glyphicon glyphicon-calendar"></i>
       </span>
-      <input type="text" class="form-control" placeholder="Masukkan Password " name="user_password" aria-describedby="sizing-addon2">
+      <input type="text" class="form-control" placeholder="Masukkan Password " name="password" aria-describedby="sizing-addon2">
     </div>
 
     <label>Asal Dusun*</label>
@@ -39,6 +39,24 @@
       </select>
     </div>
 
+    <label>Mitra*</label>
+    <div class="input-group form-group">
+      <span class="input-group-addon" id="sizing-addon2">
+        <i class="glyphicon glyphicon-briefcase"></i>
+      </span>
+      <select name="id_mitra" class="form-control select2" aria-describedby="sizing-addon2">
+        <?php
+        foreach ($dataMitra as $mitra) {
+          ?>
+          <option value="<?php echo $mitra->id; ?>">
+            <?php echo $mitra->nama; ?>
+          </option>
+          <?php
+        }
+        ?>
+      </select>
+    </div>
+    
   <label>Nama Kurir*</label>
     <div class="input-group form-group">
       <span class="input-group-addon" id="sizing-addon2">
@@ -68,17 +86,8 @@
       <span class="input-group-addon" id="sizing-addon2">
         <i class="glyphicon glyphicon-phone"></i>
       </span>
-      <input type="text" class="form-control" placeholder="Masukkan No.Telp Kurir" name="no_telp" aria-describedby="sizing-addon2">
+      <input type="number" class="form-control" placeholder="Masukkan No.Telp Kurir" name="telp" aria-describedby="sizing-addon2">
     </div>
-
-    <label>Tanggal Data Dibuat*</label>
-   <div class="input-group form-group">
-      <span class="input-group-addon" id="sizing-addon2">
-        <i class="glyphicon glyphicon-calendar"></i>
-      </span>
-      <input type="datetime-local" class="form-control" placeholder="Tanggal Data di Tambahkan " name="created_at" aria-describedby="sizing-addon2">
-    </div>
-
     
 
     <div class="form-group">
