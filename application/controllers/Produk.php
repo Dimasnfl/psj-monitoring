@@ -311,7 +311,7 @@ class Produk extends AUTH_Controller {
 	  else
 	  {
 		?>
-		  <tr><td align="center">Tidak ada data</td></tr>
+		  <tr><td>Tidak ada data</td></tr>
 		<?php
 		
 	  }
