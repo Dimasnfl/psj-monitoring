@@ -67,6 +67,19 @@
  </div>
 
  <div class="col-lg-4 col-xs-4">
+    <div class="small-box bg-gray">
+      <div class="inner">
+        <h3><?php echo $jml_mitra; ?></h3>
+        <p>Data Mitra</p>
+      </div>
+      <div class="icon">
+        <i class="ion ion-briefcase"></i>
+      </div>
+      <a href="<?php echo base_url('Mitra') ?>" class="small-box-footer">List Data <i class="fa fa-arrow-circle-right"></i></a>
+    </div>
+  </div>
+
+ <div class="col-lg-4 col-xs-4">
     <div class="small-box bg-purple">
       <div class="inner">
         <h3><?php echo $jml_transaksi; ?></h3>
@@ -134,9 +147,9 @@
     </div>
  </div>
  <?php } ?>
+</div>
 
-
-  
+<div class="row">
   <!-- diagram desa -->
   <div class="col-lg-6 col-xs-12">
     <div class="box box-primary">

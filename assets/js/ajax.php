@@ -15,6 +15,7 @@
 		tampilTipe_produk();
 		tampilKurir();
 		tampilTransaksi();
+		tampilMitra();
 		<?php
 			if ($this->session->flashdata('msg') != '') {
 				echo "effect_msg();";
@@ -840,6 +841,133 @@ function tampilTransaksi() {
 	})
 
 	$('#update-transaksi').on('hidden.bs.modal', function () {
+	  $('.form-msg').html('');
+	})
+
+
+
+	//Mitra
+	function tampilMitra() {
+		$.get('<?php echo base_url('Mitra/tampil'); ?>', function(data) {
+			MyTable.fnDestroy();
+			$('#data-mitra').html(data);
+			refresh();
+		});
+	}
+
+	var id_mitra;
+	$(document).on("click", ".konfirmasiHapus-mitra", function() {
+		id_mitra = $(this).attr("data-id");
+	})
+	$(document).on("click", ".hapus-dataMitra", function() {
+		var id = id_mitra;
+		
+		$.ajax({
+			method: "POST",
+			url: "<?php echo base_url('Mitra/delete'); ?>",
+			data: "id=" +id
+		})
+		.done(function(data) {
+			$('#konfirmasiHapus').modal('hide');
+			tampilMitra();
+			$('.msg').html(data);
+			effect_msg();
+		})
+	})
+
+	$(document).on("click", ".update-dataMitra", function() {
+		var id = $(this).attr("data-id");
+		
+		$.ajax({
+			method: "POST",
+			url: "<?php echo base_url('Mitra/update'); ?>",
+			data: "id=" +id
+		})
+		.done(function(data) {
+			$('#tempat-modal').html(data);
+			$('#update-mitra').modal('show');
+		})
+	})
+
+	$(document).on("click", ".detail-dataMitra", function() {
+		var id = $(this).attr("data-id");
+		
+		$.ajax({
+			method: "POST",
+			url: "<?php echo base_url('Mitra/detail'); ?>",
+			data: "id=" +id
+		})
+		.done(function(data) {
+			$('#tempat-modal').html(data);
+			$('#tabel-detail').dataTable({
+				  "paging": true,
+				  "lengthChange": false,
+				  "searching": true,
+				  "ordering": true,
+				  "info": true,
+				  "autoWidth": false
+				});
+			$('#detail-mitra').modal('show');
+		})
+	})
+
+	$('#form-tambah-mitra').submit(function(e) {
+		var data = $(this).serialize();
+
+		$.ajax({
+			method: 'POST',
+			url: '<?php echo base_url('Mitra/prosesTambah'); ?>',
+			data: data
+		})
+		.done(function(data) {
+			var out = jQuery.parseJSON(data);
+
+			tampilMitra();
+			if (out.status == 'form') {
+				$('.form-msg').html(out.msg);
+				effect_msg_form();
+			} else {
+				document.getElementById("form-tambah-mitra").reset();
+				$('#tambah-mitra').modal('hide');
+				$('.msg').html(out.msg);
+				effect_msg();
+			}
+		})
+		
+		e.preventDefault();
+	});
+
+	$(document).on('submit', '#form-update-mitra', function(e){
+		var data = $(this).serialize();
+
+		$.ajax({
+			method: 'POST',
+			url: '<?php echo base_url('Mitra/prosesUpdate'); ?>',
+			data: data
+		})
+		.done(function(data) {
+			var out = jQuery.parseJSON(data);
+
+			tampilMitra();
+			if (out.status == 'form') {
+				$('.form-msg').html(out.msg);
+				effect_msg_form();
+			} else {
+				document.getElementById("form-update-mitra").reset();
+				$('#update-mitra').modal('hide');
+				$('.msg').html(out.msg);
+				effect_msg();
+			}
+		})
+		
+		e.preventDefault();
+	});
+
+	$('#tambah-mitra').on('hidden.bs.modal', function () {
+	  $('.form-msg').html('');
+	})
+
+	$('#update-mitra').on('hidden.bs.modal', function () {
 	  $('.form-msg').html('');
 	})
 

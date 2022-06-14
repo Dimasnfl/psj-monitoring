@@ -63,6 +63,13 @@
         </a>
       </li>
 
+      <li <?php if ($page == 'Mitra') {echo 'class="active"';} ?>>
+        <a href="<?php echo base_url('Mitra'); ?>">
+          <i class="fa fa-briefcase"></i>
+          <span>Data Mitra</span>
+        </a>
+      </li>
+
       <li <?php if ($page == 'Transaksi') {echo 'class="active"';} ?>>
         <a href="<?php echo base_url('Transaksi'); ?>">
           <i class="fa fa-shopping-cart"></i>

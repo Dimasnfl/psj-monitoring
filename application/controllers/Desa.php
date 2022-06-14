@@ -66,7 +66,7 @@ class Desa extends AUTH_Controller {
 				$out['msg'] = show_succ_msg('Data Dusun Berhasil diupdate', '20px');
 			} else {
 				$out['status'] = '';
-				$out['msg'] = show_succ_msg('Data Dusun Gagal diupdate', '20px');
+				$out['msg'] = show_err_msg('Data Dusun Gagal diupdate', '20px');
 			}
 		} else {
 			$out['status'] = 'form';
