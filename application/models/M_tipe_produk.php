@@ -104,7 +104,7 @@ class M_tipe_produk extends CI_Model {
 	public function total_rows() {
 		$this->db->select('*');
 		$this->db->from('tipe_produk');
-		$this->db->order_by('id', 'desc');
+		$this->db->where('deleted_at is NULL',NULL);
 		$this->db->where('terbaru', '1');
 		$data = $this->db->get('');
 
