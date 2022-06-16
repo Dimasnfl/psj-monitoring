@@ -89,14 +89,14 @@ class M_kurir extends CI_Model {
 		$insert_kurir['id_mitra'] = $data['id_mitra'];
 		$insert_kurir['jenis_kendaraan'] = $data['jenis_kendaraan'];
 		$insert_kurir['plat_no'] = strtoupper($data['plat_no']);
-		$insert_kurir['telp'] = $data['no_telp'];
+		$insert_kurir['no_telp'] = $data['no_telp'];
 		$query = $this->db->insert('kurir', $insert_kurir);
 
 		$id_kurir = $this->db->insert_id();
 		$insert_user['password'] = md5($data['password']);
 		$insert_user['nik'] = $data['nik'];
 		$insert_user['nama'] = $data['nama'];
-		$insert_user['no_telp'] = $data['no_telp'];
+		$insert_user['telp'] = $data['no_telp'];
 		$insert_user['id_desa'] = $data['id_desa'];
 		$insert_user['id_kurir'] = $id_kurir;
 		$query = $this->db->insert('user', $insert_user);
