@@ -12,7 +12,7 @@
       <td><?php echo $kurir->mitra; ?></td>
       <td><?php echo $kurir->jenis_kendaraan; ?></td>
       <td><?php echo strtoupper($kurir->plat_no); ?></td>
-      <td><?php echo $kurir->telp; ?></td>
+      <td><?php echo $kurir->no_telp; ?></td>
       <?php if($this->session->userdata('level') == 1) { ?>
       <td class="text-center" style="min-width:100px;">
           <button class="btn btn-info detail-dataKurir" data-id="<?php echo $kurir->id; ?>"><i class="glyphicon glyphicon-info-sign"></i> </button>
