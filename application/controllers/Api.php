@@ -5,7 +5,7 @@ class Api extends CI_Controller {
     public $token;
     public $user;
     //GANTI DENGAN ABSOLUTE LOCATION
-    private $uploaddir = '/home/afandiyu/domains/afandiyusuf.com/public_html/siduda-monitoring/assets/app_photo/';
+    private $uploaddir = '/home/sidutamaweb/public_html/administrator/assets/app_photo/';
 	public function __construct() {
 		parent::__construct();
         $this->load->model('M_tipe_produk');
