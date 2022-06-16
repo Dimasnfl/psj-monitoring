@@ -6,7 +6,8 @@
 		  "ordering": true,
 		  "info": true,
 		  "autoWidth": false
-		});
+    } );
+
 
 	window.onload = function() {
 		tampilUser();
@@ -29,14 +30,14 @@
 
 	function effect_msg_form() {
 		// $('.form-msg').hide();
-		$('.form-msg').show(1000);
-		setTimeout(function() { $('.form-msg').fadeOut(1000); }, 3000);
+		$('.form-msg').show(2000);
+		setTimeout(function() { $('.form-msg').fadeOut(2000); }, 3000);
 	}
 
 	function effect_msg() {
 		// $('.msg').hide();
-		$('.msg').show(1000);
-		setTimeout(function() { $('.msg').fadeOut(1000); }, 3000);
+		$('.msg').show(2000);
+		setTimeout(function() { $('.msg').fadeOut(2000); }, 3000);
 	}
 
 //User
@@ -251,31 +252,7 @@ function tampilUser() {
 		})
 	})
 
-	$(document).on('submit', '#form-penjemputan', function(e){
-		var data = $(this).serialize();
-
-		$.ajax({
-			method: 'POST',
-			url: '<?php echo base_url('Produk/prosesPenjemputan'); ?>',
-			data: data
-		})
-		.done(function(data) {
-			var out = jQuery.parseJSON(data);
-			tampilProduk();
-			if (out.status == 'form') {
-				$('.form-msg').html(out.msg);
-				effect_msg_form();
-			} else {
-				document.getElementById("form-penjemputan").reset();
-				$('#form-penjemputan').modal('hide');
-				$('.msg').html(out.msg);
-				effect_msg();
-			}
-		})
-		
-		e.preventDefault();
-	});
-
+	
 	$('#form-tambah-produk').submit(function(e) {
 		var data = $(this).serialize();
 
@@ -328,10 +305,39 @@ function tampilUser() {
 		e.preventDefault();
 	});
 
+	$(document).on('submit', '#form-penjemputan', function(e){
+		var data = $(this).serialize();
+
+		$.ajax({
+			method: 'POST',
+			url: '<?php echo base_url('Produk/prosesPenjemputan'); ?>',
+			data: data
+		})
+		.done(function(data) {
+			var out = jQuery.parseJSON(data);
+
+			tampilProduk();
+			if (out.status == 'form') {
+				$('.form-msg').html(out.msg);
+				effect_msg_form();
+			} else {
+				document.getElementById("form-penjemputan").reset();
+				$('#penjemputan').modal('hide');
+				$('.msg').html(out.msg);
+				effect_msg();
+			}
+		})
+		
+		e.preventDefault();
+	});
+
 	$('#tambah-produk').on('hidden.bs.modal', function () {
 	  $('.form-msg').html('');
 	})
 	$('#update-produk').on('hidden.bs.modal', function () {
+	  $('.form-msg').html('');
+	})
+	$('#penjemputan').on('hidden.bs.modal', function () {
 	  $('.form-msg').html('');
 	})
 
@@ -925,7 +931,7 @@ function tampilTransaksi() {
 			tampilMitra();
 			if (out.status == 'form') {
 				$('.form-msg').html(out.msg);
-				effect_msg_form();
+				effect_msg_form();pe
 			} else {
 				document.getElementById("form-tambah-mitra").reset();
 				$('#tambah-mitra').modal('hide');

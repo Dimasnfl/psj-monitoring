@@ -50,14 +50,15 @@ class Produk extends AUTH_Controller {
 	}
 
 	public function penjemputan(){
-		$id = trim($_POST['id']);
+		$data['userdata'] = $this->userdata;
+		$id 			  = trim($_POST['id']);
 		$produk = $this->M_produk->select_by_id($id);
 		$data['dataProduk'] = $produk;
 		$data['dataUser'] = $this->M_user->select_by_id($produk->id_user);
 		$data['dataTipe_produk'] = $this->M_tipe_produk->select_all();
 		$data['dataKurir'] = $this->M_kurir->select_all();
 		$data['dataStatus_produk'] = $this->M_status_produk->select_all();
-		$data['userdata'] = $this->userdata;
+
 
 		echo show_my_modal('modals/modal_penjemputan', 'penjemputan', $data);
 	}
