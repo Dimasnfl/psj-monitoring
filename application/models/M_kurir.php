@@ -54,7 +54,7 @@ class M_kurir extends CI_Model {
 
 	public function update($data) {
 		$data['plat_no'] = strtoupper($data['plat_no']);
-		$sql = " UPDATE kurir SET nama='" .$data['nama'] ."',jenis_kendaraan='" .$data['jenis_kendaraan'] ."',plat_no='" .$data['plat_no'] ."',telp='" .$data['telp'] ."' WHERE id='" .$data['id'] ."'";
+		$sql = " UPDATE kurir SET nama='" .$data['nama'] ."',jenis_kendaraan='" .$data['jenis_kendaraan'] ."',plat_no='" .$data['plat_no'] ."',telp='" .$data['no_telp'] ."' WHERE id='" .$data['id'] ."'";
 
 		$this->db->query($sql);
 
@@ -89,14 +89,14 @@ class M_kurir extends CI_Model {
 		$insert_kurir['id_mitra'] = $data['id_mitra'];
 		$insert_kurir['jenis_kendaraan'] = $data['jenis_kendaraan'];
 		$insert_kurir['plat_no'] = strtoupper($data['plat_no']);
-		$insert_kurir['telp'] = $data['telp'];
+		$insert_kurir['telp'] = $data['no_telp'];
 		$query = $this->db->insert('kurir', $insert_kurir);
 
 		$id_kurir = $this->db->insert_id();
 		$insert_user['password'] = md5($data['password']);
 		$insert_user['nik'] = $data['nik'];
 		$insert_user['nama'] = $data['nama'];
-		$insert_user['telp'] = $data['telp'];
+		$insert_user['telp'] = $data['no_telp'];
 		$insert_user['id_desa'] = $data['id_desa'];
 		$insert_user['id_kurir'] = $id_kurir;
 		$query = $this->db->insert('user', $insert_user);
