@@ -69,7 +69,7 @@ class Kurir extends AUTH_Controller {
 		$this->form_validation->set_rules('nama', 'Nama Kurir', 'trim|required');
 		$this->form_validation->set_rules('jenis_kendaraan', 'Jenis Kendaraan', 'trim|required');
 		$this->form_validation->set_rules('plat_no', 'Plat Nomor Kendaraan', 'trim|required');
-		$this->form_validation->set_rules('telp', 'No.Telp Kurir', 'trim|required|numeric|min_length[10]|max_length[15]');
+		$this->form_validation->set_rules('no_telp', 'No.Telp Kurir', 'trim|required|numeric|min_length[10]|max_length[15]');
 		$data 	= $this->input->post();
 		if ($this->form_validation->run() == TRUE) {
 			$data['nik'] = $this->input->post('nik');
@@ -79,7 +79,7 @@ class Kurir extends AUTH_Controller {
 			$data['nama'] = $this->input->post('nama');
 			$data['jenis_kendaraan'] = $this->input->post('jenis_kendaraan');
 			$data['plat_no'] = $this->input->post('plat_no');
-			$data['telp'] = $this->input->post('telp');
+			$data['no_telp'] = $this->input->post('no_telp');
 
 			$result = $this->M_kurir->create_kurir($data);
 
@@ -109,7 +109,7 @@ class Kurir extends AUTH_Controller {
 		$this->form_validation->set_rules('nama', 'Nama Kurir', 'trim|required');
 		$this->form_validation->set_rules('jenis_kendaraan', 'Jenis Kendaraan', 'trim|required');
 		$this->form_validation->set_rules('plat_no', 'Plat Nomor Kendaraan', 'trim|required');
-		$this->form_validation->set_rules('telp', 'No.Telp Kurir', 'trim|required|numeric|min_length[10]|max_length[15]');
+		$this->form_validation->set_rules('no_telp', 'No.Telp Kurir', 'trim|required|numeric|min_length[10]|max_length[15]');
 	    // $this->form_validation->set_rules('updated_at', 'Tanggal Update Data', 'trim|required');
 		$data 	= $this->input->post();
 		if ($this->form_validation->run() == TRUE) {
