@@ -179,7 +179,8 @@ class M_produk extends CI_Model {
 		$produk = $this->db->from('produk')->where('id', $id)->get()->row();
 		if($produk){
 			$id_p = $produk->id;
-			$this->db->from('transaksi')->where('id_produk', $id_p)->set('id_status_transaksi', 3)->update('transaksi');
+			$this->db->from('transaksi')->where('id_produk', $id_p)->set('id_status_transaksi', 4)->update('transaksi');
+			$this->db->from('produk')->where('id', $id)->set('id_status_produk', 7)->update('produk');
 			return 'success';
 		}else{
 			return 'error';
