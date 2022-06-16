@@ -8,42 +8,42 @@
   <table class="table table-bordered no-margin">
     <tbody>
       <tr>
-        <th style="">Nama Petani</th>
+        <th>Nama Petani</th>
         <td><span><?php echo $produk->user; ?></span></td>
       </tr>
 
       <tr>
-        <th style="">Nama Produk</th>
+        <th>Nama Produk</th>
         <td><span><?php echo $produk->tipe_produk; ?></span></td>
       </tr>
 
       <tr>
-        <th style="">Tanggal Tanam</th>
+        <th>Tanggal Tanam</th>
         <td><span><?php echo $produk->tgl_tanam; ?></span></td>
       </tr>
 
       <tr>
-        <th style="">Tanggal Panen</th>
+        <th>Tanggal Panen</th>
         <td><span><?php echo $produk->tgl_panen; ?></span></td>
       </tr>
 
       <tr>
-        <th style="">Berat Panen</th>
+        <th>Berat Panen</th>
         <td><span><?php echo $produk->berat_panen; ?> kg</span></td>
       </tr>
 
       <tr>
-        <th style="">Luas Lahan</th>
+        <th>Luas Lahan</th>
         <td><span><?php echo $produk->luas_lahan; ?> m2</span></td>
       </tr>
 
       <tr>
-       <th style="">Alamat</th>
+       <th>Alamat</th>
        <td><span><?php echo $produk->alamat; ?></span></td>
       </tr>
 
       <tr>
-        <th style="">Status Produk Saat Ini</th>
+        <th>Status Produk Saat Ini</th>
         <td><span><?php echo $produk->status_produk; ?></span></td>
       </tr>
 
@@ -51,7 +51,7 @@
       {
         ?>
       <tr>
-        <th style="">Produk Diambil Pada</th>
+        <th>Produk Diambil Pada</th>
         <td><span><?php echo $produk->transaksi_tanggal_pengambilan; ?></span></td>
       </tr> <?php
       }
