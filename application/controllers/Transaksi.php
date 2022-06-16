@@ -13,13 +13,26 @@ class Transaksi extends AUTH_Controller {
 	}
 
 	public function index() {
-		$data['userdata'] 	= $this->userdata;
-		$data['dataTransaksi'] 	= $this->M_transaksi->select_all();
-	    $data['dataKurir'] 	= $this->M_kurir->select_all();
-		$data['dataUser'] 	= $this->M_user->select_all();
-	    $data['dataProduk'] 	= $this->M_produk->select_all();
-		$data['dataStatus_transaksi'] 	= $this->M_status_transaksi->select_all();
+		$tgl_awal = $this->input->get('tgl_awal'); // Ambil data tgl_awal sesuai input (kalau tidak ada set kosong)
+        $tgl_akhir = $this->input->get('tgl_akhir'); // Ambil data tgl_awal sesuai input (kalau tidak ada set kosong)
 
+        if(empty($tgl_awal) or empty($tgl_akhir)){ // Cek jika tgl_awal atau tgl_akhir kosong, maka :
+            $data['dataTransaksi'] = $this->M_transaksi->select_all();  // Panggil fungsi select_all yang ada di M_transaksi
+            $data['url_cetak']  = 'transaksi/cetak';
+            $data['label']  = 'Semua Data Transaksi';
+        }else{ // Jika terisi
+            $data['dataTransaksi'] = $this->M_transaksi->view_by_date($tgl_awal, $tgl_akhir);
+			$data['url_cetak'] = 'transaksi/cetak?tgl_awal='.$tgl_awal.'&tgl_akhir='.$tgl_akhir;
+            $tgl_awal = date('d-m-Y', strtotime($tgl_awal)); // Ubah format tanggal jadi dd-mm-yyyy
+            $tgl_akhir = date('d-m-Y', strtotime($tgl_akhir)); // Ubah format tanggal jadi dd-mm-yyyy
+            $data['label'] = 'Periode Tanggal '.$tgl_awal.' s/d '.$tgl_akhir;
+        }
+		// $data['dataTransaksi'] 	= $this->M_transaksi->select_all();
+	    // $data['dataKurir'] 	= $this->M_kurir->select_all();
+		// $data['dataUser'] 	= $this->M_user->select_all();
+	    // $data['dataProduk'] 	= $this->M_produk->select_all();
+		// $data['dataStatus_transaksi'] 	= $this->M_status_transaksi->select_all();
+		$data['userdata'] 	= $this->userdata;
 		$data['page'] 		= "Transaksi";
 		$data['judul'] 		= "Data transaksi";
 		$data['deskripsi'] 	= "Manage Data transaksi";
@@ -29,10 +42,39 @@ class Transaksi extends AUTH_Controller {
 		$this->template->views('transaksi/home', $data);
 	}
 
+	public function cetak(){
+		$tgl_awal = $this->input->get('tgl_awal'); // Ambil data tgl_awal sesuai input (kalau tidak ada set kosong)
+        $tgl_akhir = $this->input->get('tgl_akhir'); // Ambil data tgl_awal sesuai input (kalau tidak ada set kosong)
+
+        if(empty($tgl_awal) or empty($tgl_akhir)){ // Cek jika tgl_awal atau tgl_akhir kosong, maka :
+            $data['dataTransaksi']  = $this->M_transaksi->select_all();  // Panggil fungsi select_all yang ada di M_transaksi
+            $label = 'Semua Data Transaksi';
+        }else{ // Jika terisi
+            $data['dataTransaksi']  = $this->M_transaksi->view_by_date($tgl_awal, $tgl_akhir);  // Panggil fungsi view_by_date yang ada di M_transaksi
+            $tgl_awal = date('d-m-Y', strtotime($tgl_awal)); // Ubah format tanggal jadi dd-mm-yyyy
+            $tgl_akhir = date('d-m-Y', strtotime($tgl_akhir)); // Ubah format tanggal jadi dd-mm-yyyy
+            $label = 'Periode Tanggal '.$tgl_awal.' s/d '.$tgl_akhir;
+        }
+
+        $data['label'] = $label;
+
+		ob_start();
+		$this->load->view('print', $data);
+		$html = ob_get_contents();
+        ob_end_clean();
+
+		require './assets/html2pdf/autoload.php'; // Load plugin html2pdfnya
+
+		$pdf = new Spipu\Html2Pdf\Html2Pdf('L','A4','en');  // Settingan PDFnya
+		$pdf->WriteHTML($html);
+		$pdf->Output('Data Transaksi.pdf', 'D');
+	}
+
 	public function tampil() {
 		$data['dataTransaksi'] = $this->M_transaksi->select_all();
 		$this->load->view('transaksi/list_data', $data);
 	}
+
 
 	public function prosesTambah() {
 		$this->form_validation->set_rules('no_resi', 'Nomor Resi', 'trim|required');
@@ -113,9 +155,9 @@ class Transaksi extends AUTH_Controller {
 
 		$hasil = $this->M_transaksi->batal_transaksi($id); 
 		if ($hasil == 'success') {
-			echo show_succ_msg('Data transaksi Berhasil dihapus', '20px');
+			echo show_succ_msg('Data transaksi Berhasil dibatalkan', '20px');
 		} else {
-			echo show_err_msg('Data transaksi Gagal dihapus', '20px');
+			echo show_err_msg('Data transaksi Gagal dibatalkan', '20px');
 		}
 	}
 
