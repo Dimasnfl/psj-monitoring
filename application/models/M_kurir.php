@@ -96,7 +96,7 @@ class M_kurir extends CI_Model {
 		$insert_user['password'] = md5($data['password']);
 		$insert_user['nik'] = $data['nik'];
 		$insert_user['nama'] = $data['nama'];
-		$insert_user['telp'] = $data['no_telp'];
+		$insert_user['no_telp'] = $data['no_telp'];
 		$insert_user['id_desa'] = $data['id_desa'];
 		$insert_user['id_kurir'] = $id_kurir;
 		$query = $this->db->insert('user', $insert_user);
