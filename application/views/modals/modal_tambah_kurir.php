@@ -86,7 +86,7 @@
       <span class="input-group-addon" id="sizing-addon2">
         <i class="glyphicon glyphicon-phone"></i>
       </span>
-      <input type="number" class="form-control" placeholder="Masukkan No.Telp Kurir" name="telp" aria-describedby="sizing-addon2">
+      <input type="number" class="form-control" placeholder="Masukkan No.Telp Kurir" name="no_telp" aria-describedby="sizing-addon2">
     </div>
     
 
