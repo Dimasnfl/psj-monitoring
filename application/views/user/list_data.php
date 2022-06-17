@@ -5,7 +5,7 @@
     <tr>
       <td><?php echo $user->nik; ?></td>
       <td><?php echo $user->nama; ?></td>
-      <td><img src="<?php base_url().'https://sidutama.web.id/administrator/assets/app_photo/'.$user->foto;?>" width="60px" height="60px"></td>   
+      <td><a href="<?php base_url().'https://sidutama.web.id/administrator/assets/app_photo/'.$user->foto;?>" target="_blank" width="60px" height="60px"><img src="<?=base_url().'assets/app_photo/'.$user->foto;?>" width="60px" height="60px""></a></td>
       <td><?php echo $user->telp; ?></td>
       <td><?php echo $user->desa_nama; ?></td>
       <td><?php echo $user->total_luas_lahan; ?> m<sup>2</sup></td>     
