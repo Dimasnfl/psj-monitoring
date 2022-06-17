@@ -94,11 +94,15 @@
         
           <div class="form-msg"></div>
         
-        <div class="form-group">
+        <div class="form-group" >
           <div class="col-md-12">
-              <button class="form-control btn btn-primary"> <i class="glyphicon glyphicon-ok"></i> Lakukan Penjemputan</button>
+              <button id="submit-button" class="form-control btn btn-primary" style="display:block"> <i class="glyphicon glyphicon-ok"></i> Lakukan Penjemputan</button>
+              <div id="loading-text" style="display:none">
+                Mohon Tunggu
+              </div>
           </div>
         </div>
+       
       </form>
 </div>
 

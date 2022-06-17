@@ -307,13 +307,17 @@ function tampilUser() {
 
 	$(document).on('submit', '#form-penjemputan', function(e){
 		var data = $(this).serialize();
-
+		$("#submit-button").css('display','none');
+		$("#loading-text").css('display','block');
 		$.ajax({
 			method: 'POST',
 			url: '<?php echo base_url('Produk/prosesPenjemputan'); ?>',
 			data: data
 		})
 		.done(function(data) {
+			$("#submit-button").css('display','block');
+			$("#loading-text").css('display','none');
+
 			var out = jQuery.parseJSON(data);
 
 			tampilProduk();
