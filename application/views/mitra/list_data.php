@@ -8,8 +8,8 @@
     ?>
     <tr>
       <td><?php echo $no; ?></td>
-      <td><?php echo $mitra->nama; ?></td>
       <td><?php echo strtoupper($mitra->kode); ?></td>
+      <td><?php echo $mitra->nama; ?></td>
       <td><?php echo $mitra->telp; ?></td>
       <td><?php echo $mitra->alamat; ?></td>
 
