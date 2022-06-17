@@ -19,8 +19,8 @@
       <thead>
         <tr>
           <th>No</th>
-          <th>Nama Mitra</th>
           <th>Kode Mitra</th>
+          <th>Nama Mitra</th>
           <th>No. Telp</th>
           <th>Alamat</th>
           <?php if($this->session->userdata('level') == 1) { ?>
