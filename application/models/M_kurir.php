@@ -63,9 +63,8 @@ class M_kurir extends CI_Model {
 
 
 	public function delete($id) {
-		$sql = "DELETE FROM kurir WHERE id='" .$id ."'";
-
-		$this->db->query($sql);
+		$this->db->delete('kurir', array('id' => $id)); 
+		$this->db->delete('user', array('id_kurir' => $id));
 
 		return $this->db->affected_rows();
 	}
