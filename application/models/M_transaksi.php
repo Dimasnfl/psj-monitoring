@@ -147,13 +147,14 @@ class M_transaksi extends CI_Model {
 		$this->db->from('produk')->where('id',$id_produk)->set('id_status_produk',6)->update('produk');
 		$kurir = $this->db->from('kurir')->where('id',$id_kurir)->get()->row();
 		$dateAngkut = date_parse($tanggal);
+		$numdata = $this->db->from('transaksi')->where('id_kurir',$id_kurir)->where('id_produk',$id_produk)->get()->num_rows() + 1;
 		//rumus no resi
-		//PSJ-TGL-BLN-THN-0ID_PRODUK0-0ID_KURIR0
+		//PSJ-TAHUN-BLN-TGL-0ID_PRODUK0-0ID_KURIR-00{total transaksi berdasarkan id_produk}
 		
 		$tgl = new DateTime($tanggal);
 		$dateString = $tgl->format("Y-m-d $jam:00");//$jam:00
-		$dateResi = $tgl->format("Y-m-d $jam");
-		$noResi = "PSJ-$dateResi-0$produk->id-0$kurir->id";
+		$dateResi = $tgl->format("Y-m-d");
+		$noResi = "PSJ-$dateResi-0$produk->id-0$kurir->id-0$numdata";
 
 		$insertData = array(
 			"no_resi" => $noResi,
