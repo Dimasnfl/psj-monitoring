@@ -1,7 +1,7 @@
 <div class="col-md-offset-1 col-md-10 col-md-offset-1 well">
   <div class="form-msg"></div>
   <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-  <h3 style="display:block; text-align:center;">Update Data Kurir</h3>
+  <h3 style="display:block; text-align:center;">Update Data Mitra</h3>
 
   <form id="form-update-kurir" method="POST">
     <input type="hidden" name="id" value="<?php echo $dataKurir->id; ?>">
@@ -36,8 +36,24 @@
       <span class="input-group-addon" id="sizing-addon2">
         <i class="glyphicon glyphicon-phone"></i>
       </span>
-      <input type="text" class="form-control" placeholder="No.Telp Kurir" name="telp" aria-describedby="sizing-addon2" value="<?php echo $dataKurir->telp; ?>">
+      <input type="text" class="form-control" placeholder="No.Telp Kurir" name="no_telp" aria-describedby="sizing-addon2" value="<?php echo $dataKurir->no_telp; ?>">
     </div>
+
+    <label>Mitra*</label>
+        <div class="input-group form-group">
+          <span class="input-group-addon" id="sizing-addon2">
+            <i class="glyphicon glyphicon-tags"></i>
+          </span>
+          <select name="id_mitra" class="form-control select2"  aria-describedby="sizing-addon2">
+            <?php
+            foreach ($dataMitra as $mitra) {
+              ?>
+              <option value="<?php echo $mitra->id; ?>" <?php if($mitra->id == $dataKurir->id_mitra){echo "selected='selected'";} ?>><?php echo $mitra->nama; ?></option>
+              <?php
+            }
+            ?>
+          </select>
+        </div>
 
     <!-- <div class="input-group form-group">
       <span class="input-group-addon" id="sizing-addon2">

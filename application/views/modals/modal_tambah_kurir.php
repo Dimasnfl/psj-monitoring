@@ -21,23 +21,6 @@
       <input type="text" class="form-control" placeholder="Masukkan Password " name="password" aria-describedby="sizing-addon2">
     </div>
 
-    <label>Asal Dusun*</label>
-    <div class="input-group form-group">
-      <span class="input-group-addon" id="sizing-addon2">
-        <i class="glyphicon glyphicon-plane"></i>
-      </span>
-      <select name="id_desa" class="form-control select2" aria-describedby="sizing-addon2">
-        <?php
-        foreach ($dataDesa as $desa) {
-          ?>
-          <option value="<?php echo $desa->id; ?>">
-            <?php echo $desa->nama; ?>
-          </option>
-          <?php
-        }
-        ?>
-      </select>
-    </div>
 
     <label>Mitra*</label>
     <div class="input-group form-group">
