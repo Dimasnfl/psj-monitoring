@@ -179,26 +179,6 @@ function tampilUser() {
 		});
 	}
 
-	var id_produk;
-	$(document).on("click", ".konfirmasi-produk", function() {
-		id_produk = $(this).attr("data-id");
-	})
-	$(document).on("click", ".konfirmasi-dataProduk", function() {
-		var id = id_produk;
-		
-		$.ajax({
-			method: "POST",
-			url: "<?php echo base_url('Produk/konfirmasi'); ?>",
-			data: "id=" +id
-		})
-		.done(function(data) {
-			$('#konfirmasiProduk').modal('hide');
-			tampilProduk();
-			$('.msg').html(data);
-			effect_msg();
-		})
-	})
-
 
 	$(document).on("click", ".update-dataProduk", function() {
 		var id = $(this).attr("data-id");
@@ -757,6 +737,27 @@ function tampilTransaksi() {
 			effect_msg();
 		})
 	})
+
+	var id_transaksi;
+	$(document).on("click", ".konfirmasi-transaksi", function() {
+		id_transaksi = $(this).attr("data-id");
+	})
+	$(document).on("click", ".konfirmasi-dataTransaksi", function() {
+		var id = id_transaksi;
+		
+		$.ajax({
+			method: "POST",
+			url: "<?php echo base_url('Transaksi/konfirmasi'); ?>",
+			data: "id=" +id
+		})
+		.done(function(data) {
+			$('#konfirmasiTransaksi').modal('hide');
+			tampilTransaksi();
+			$('.msg').html(data);
+			effect_msg();
+		})
+	})
+
 
 	$(document).on("click", ".update-dataTransaksi", function() {
 		var id = $(this).attr("data-id");

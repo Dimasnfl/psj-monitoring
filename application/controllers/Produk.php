@@ -67,7 +67,7 @@ class Produk extends AUTH_Controller {
 		$this->form_validation->set_rules('id', 'Nama User', 'trim|required');
 		$this->form_validation->set_rules('id_kurir', 'Id Kurir', 'trim|required');
 		$this->form_validation->set_rules('date','Tanggal Penjemputan','trim|required');
-		$this->form_validation->set_rules('harga','Harga','trim|required');
+		$this->form_validation->set_rules('harga','Harga','trim|required|numeric');
 		$this->form_validation->set_rules('jam_penjemputan','Jam Penjemputan', 'trim|required');
 		//min today
 		$date = new DateTime($this->input->post('date'));
@@ -166,17 +166,6 @@ class Produk extends AUTH_Controller {
 			echo show_succ_msg('Data E-Commodity Berhasil dihapus', '20px');
 		} else {
 			echo show_err_msg('Data E-Commodity Gagal dihapus', '20px');
-		}
-	}
-
-	public function konfirmasi() {
-		$id = $_POST['id'];
-
-		$result = $this->M_produk->konfirmasi_produk($id); 
-		if ($result == 'success') {
-			echo show_succ_msg('Data E-Commodity Berhasil dikonfirmasi', '20px');
-		} else {
-			echo show_err_msg('Data E-Commodity Gagal dikonfirmasi', '20px');
 		}
 	}
 

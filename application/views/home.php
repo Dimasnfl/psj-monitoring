@@ -155,7 +155,7 @@
     <div class="box box-primary">
       <div class="box-header with-border">
         <i class="fa fa-location-arrow"></i>
-        <h3 class="box-title">Statistik <small>Data Dusun</small></h3>
+        <h3 class="box-title">Statistik Dusun Petani<small> (Data Dusun)</small></h3>
 
         <div class="box-tools pull-right">
           <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
@@ -174,7 +174,7 @@
     <div class="box box-primary">
       <div class="box-header with-border">
         <i class="fa fa-leaf"></i>
-        <h3 class="box-title">Statistik <small>Data E-Commodity</small></h3>
+        <h3 class="box-title">Statistik Produk Yang Terdaftar<small> (Data E-Commodity)</small></h3>
 
         <div class="box-tools pull-right">
           <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>

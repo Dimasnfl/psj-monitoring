@@ -62,7 +62,7 @@ class Kurir extends AUTH_Controller {
 	}
 
 	public function prosesTambah() {
-		$this->form_validation->set_rules('nik', 'NIK Kurir', 'trim|required');
+		$this->form_validation->set_rules('nik', 'NIK Kurir', 'trim|required|numeric|min_length[16]|max_length[16]|is_unique[user.nik]');
 		$this->form_validation->set_rules('password', 'Password', 'trim|required');
 		$this->form_validation->set_rules('id_mitra', 'Mitra', 'trim|required');
 		$this->form_validation->set_rules('nama', 'Nama Kurir', 'trim|required');

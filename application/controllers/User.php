@@ -36,7 +36,7 @@ class User extends AUTH_Controller {
 	}
 
 	public function prosesUpdate() {
-		$this->form_validation->set_rules('nik', 'NIK Petani', 'trim|required');
+		$this->form_validation->set_rules('nik', 'NIK Petani', 'trim|required|is_unique[user.nik]');
 		$this->form_validation->set_rules('nama', 'Nama Petani', 'trim|required');
 		$this->form_validation->set_rules('id_desa', 'Asal Dusun', 'trim|required');
 		$this->form_validation->set_rules('telp', 'No.Telp Petani', 'trim|required');

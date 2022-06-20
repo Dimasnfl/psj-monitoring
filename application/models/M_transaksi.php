@@ -120,7 +120,7 @@ class M_transaksi extends CI_Model {
    }
 
 	public function select_all() {
-		 $this->db->select('transaksi.id, transaksi.no_resi, transaksi.tanggal_pengambilan, transaksi.tanggal_diambil, kurir.nama as nama_kurir, user.nama as nama_user, produk.id as id_produk, transaksi.tanggal_sampai, transaksi.biaya_angkut, status_transaksi.id as id_status_transaksi, status_transaksi.nama as nama_status');
+		 $this->db->select('transaksi.id, transaksi.no_resi, transaksi.tanggal_pengambilan, transaksi.tanggal_diambil, kurir.nama as nama_kurir, user.nama as nama_user, produk.id as id_produk, produk.id_status_produk as status_produk_id, transaksi.tanggal_sampai, transaksi.biaya_angkut, status_transaksi.id as id_status_transaksi, status_transaksi.nama as nama_status, , transaksi.id_produk, transaksi.id_status_transaksi, transaksi.sudah_dikonfirmasi_petani');
 		 $this->db->from('transaksi');
 		 $this->db->order_by('id', 'desc');
 		 $this->db->join('kurir', 'kurir.id = transaksi.id_kurir');
@@ -152,7 +152,7 @@ class M_transaksi extends CI_Model {
 		
 		$tgl = new DateTime($tanggal);
 		$dateString = $tgl->format("Y-m-d $jam:00");//$jam:00
-		$dateResi = $tgl->format("Y-m-d");//$jam:00
+		$dateResi = $tgl->format("Y-m-d $jam");
 		$noResi = "PSJ-$dateResi-0$produk->id-0$kurir->id";
 
 		$insertData = array(
@@ -236,17 +236,30 @@ class M_transaksi extends CI_Model {
 	  public function view_by_date($tgl_awal, $tgl_akhir){
         $tgl_awal = $this->db->escape($tgl_awal);
         $tgl_akhir = $this->db->escape($tgl_akhir);
-        $this->db->select('transaksi.id, transaksi.no_resi, transaksi.tanggal_pengambilan, transaksi.tanggal_diambil, kurir.nama as nama_kurir, user.nama as nama_user, produk.id as id_produk, transaksi.tanggal_sampai, transaksi.biaya_angkut, status_transaksi.id as id_status_transaksi, status_transaksi.nama as nama_status');
-        $this->db->from('transaksi');
-        $this->db->order_by('id', 'desc');
-        $this->db->join('kurir', 'kurir.id = transaksi.id_kurir');
-        $this->db->join('user', 'user.id = transaksi.id_user');
-        $this->db->join('produk', 'produk.id = transaksi.id_produk');
-        $this->db->join('status_transaksi', 'status_transaksi.id = transaksi.id_status_transaksi');		
-        $this->db->where('DATE(tanggal_pengambilan) BETWEEN '.$tgl_awal.' AND '.$tgl_akhir); // Tambahkan where tanggal nya
+		$this->db->select('transaksi.id, transaksi.no_resi, transaksi.tanggal_pengambilan, transaksi.tanggal_diambil, kurir.nama as nama_kurir, user.nama as nama_user, produk.id as id_produk, produk.id_status_produk as status_produk_id, transaksi.tanggal_sampai, transaksi.biaya_angkut, status_transaksi.id as id_status_transaksi, status_transaksi.nama as nama_status, , transaksi.id_produk, transaksi.id_status_transaksi, transaksi.sudah_dikonfirmasi_petani');
+		$this->db->from('transaksi');
+		$this->db->order_by('id', 'desc');
+		$this->db->join('kurir', 'kurir.id = transaksi.id_kurir');
+		$this->db->join('user', 'user.id = transaksi.id_user');
+		$this->db->join('produk', 'produk.id = transaksi.id_produk');
+		$this->db->join('status_transaksi', 'status_transaksi.id = transaksi.id_status_transaksi');	
+
+		$this->db->where('DATE(tanggal_pengambilan) BETWEEN '.$tgl_awal.' AND '.$tgl_akhir); // Tambahkan where tanggal nya
 
         $query = $this->db->get();
         return $query->result();// Tampilkan data transaksi sesuai tanggal yang diinput oleh user pada filter
+	}
+	
+	public function konfirmasi_transaksi($id){
+		$transaksi = $this->db->from('transaksi')->where('id', $id)->get()->row();
+		if($transaksi){
+			$id_produk = $transaksi->id_produk;
+			$this->db->from('transaksi')->where('id_produk', $id_produk)->set('id_status_transaksi', 4)->update('transaksi');
+			return 'success';
+		}else{
+			return 'error';
+		}
+
 	}
   
 }
