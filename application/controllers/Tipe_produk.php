@@ -29,7 +29,7 @@ class Tipe_produk extends AUTH_Controller {
 
 	public function prosesTambah() {
 		$this->form_validation->set_rules('nama', 'Nama Produk', 'trim|required');
-		$this->form_validation->set_rules('harga', 'Harga Produk', 'trim|required');
+		$this->form_validation->set_rules('harga', 'Harga Produk', 'trim|required|numeric');
 		$data = $this->input->post();
 		if ($this->form_validation->run() == TRUE) {
 			$data['nama'] = $this->input->post('nama', TRUE);

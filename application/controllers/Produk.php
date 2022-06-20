@@ -67,7 +67,7 @@ class Produk extends AUTH_Controller {
 		$this->form_validation->set_rules('id', 'Nama User', 'trim|required');
 		$this->form_validation->set_rules('id_kurir', 'Id Kurir', 'trim|required');
 		$this->form_validation->set_rules('date','Tanggal Penjemputan','trim|required');
-		$this->form_validation->set_rules('harga','Harga','trim|required');
+		$this->form_validation->set_rules('harga','Harga','trim|required|numeric');
 		$this->form_validation->set_rules('jam_penjemputan','Jam Penjemputan', 'trim|required');
 		//min today
 		$date = new DateTime($this->input->post('date'));

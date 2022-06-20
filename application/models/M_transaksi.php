@@ -152,7 +152,7 @@ class M_transaksi extends CI_Model {
 		
 		$tgl = new DateTime($tanggal);
 		$dateString = $tgl->format("Y-m-d $jam:00");//$jam:00
-		$dateResi = $tgl->format("Y-m-d");//$jam:00
+		$dateResi = $tgl->format("Y-m-d $jam");
 		$noResi = "PSJ-$dateResi-0$produk->id-0$kurir->id";
 
 		$insertData = array(
