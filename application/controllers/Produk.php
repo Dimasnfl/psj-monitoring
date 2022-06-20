@@ -169,17 +169,6 @@ class Produk extends AUTH_Controller {
 		}
 	}
 
-	public function konfirmasi() {
-		$id = $_POST['id'];
-
-		$result = $this->M_produk->konfirmasi_produk($id); 
-		if ($result == 'success') {
-			echo show_succ_msg('Data E-Commodity Berhasil dikonfirmasi', '20px');
-		} else {
-			echo show_err_msg('Data E-Commodity Gagal dikonfirmasi', '20px');
-		}
-	}
-
 
 	public function export() {
 		error_reporting(E_ALL);

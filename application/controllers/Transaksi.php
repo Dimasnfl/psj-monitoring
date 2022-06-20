@@ -167,94 +167,104 @@ class Transaksi extends AUTH_Controller {
 
 	
 
-	public function export() {
-		error_reporting(E_ALL);
+	// public function export() {
+	// 	error_reporting(E_ALL);
     
-		include_once './assets/phpexcel/Classes/PHPExcel.php';
-		$objPHPExcel = new PHPExcel();
+	// 	include_once './assets/phpexcel/Classes/PHPExcel.php';
+	// 	$objPHPExcel = new PHPExcel();
 
-		$data = $this->M_transaksi->select_all_transaksi();
+	// 	$data = $this->M_transaksi->select_all_transaksi();
 
-		$objPHPExcel = new PHPExcel(); 
-		$objPHPExcel->setActiveSheetIndex(0); 
-		$rowCount = 1; //judul
-		$objPHPExcel->getActiveSheet()->SetCellValue('A'.$rowCount, "No.");
-		$objPHPExcel->getActiveSheet()->SetCellValue('B'.$rowCount, "ID");
-		$objPHPExcel->getActiveSheet()->SetCellValue('C'.$rowCount, "No. Resi");
-		$objPHPExcel->getActiveSheet()->SetCellValue('D'.$rowCount, "Tanggal Pengambilan");
-		$objPHPExcel->getActiveSheet()->SetCellValue('E'.$rowCount, "Tanggal Diambil");
-		$objPHPExcel->getActiveSheet()->SetCellValue('F'.$rowCount, "Nama Kurir");
-		$objPHPExcel->getActiveSheet()->SetCellValue('G'.$rowCount, "Nama User");
-		$objPHPExcel->getActiveSheet()->SetCellValue('H'.$rowCount, "ID Produk");
-		$objPHPExcel->getActiveSheet()->SetCellValue('I'.$rowCount, "Tanggal Sampai");
-		$objPHPExcel->getActiveSheet()->SetCellValue('J'.$rowCount, "Biaya Angkut");
-		$objPHPExcel->getActiveSheet()->SetCellValue('K'.$rowCount, "Status");
-		$rowCount++;
+	// 	$objPHPExcel = new PHPExcel(); 
+	// 	$objPHPExcel->setActiveSheetIndex(0); 
+	// 	$rowCount = 1; //judul
+	// 	$objPHPExcel->getActiveSheet()->SetCellValue('A'.$rowCount, "No.");
+	// 	$objPHPExcel->getActiveSheet()->SetCellValue('B'.$rowCount, "ID");
+	// 	$objPHPExcel->getActiveSheet()->SetCellValue('C'.$rowCount, "No. Resi");
+	// 	$objPHPExcel->getActiveSheet()->SetCellValue('D'.$rowCount, "Tanggal Pengambilan");
+	// 	$objPHPExcel->getActiveSheet()->SetCellValue('E'.$rowCount, "Tanggal Diambil");
+	// 	$objPHPExcel->getActiveSheet()->SetCellValue('F'.$rowCount, "Nama Kurir");
+	// 	$objPHPExcel->getActiveSheet()->SetCellValue('G'.$rowCount, "Nama User");
+	// 	$objPHPExcel->getActiveSheet()->SetCellValue('H'.$rowCount, "ID Produk");
+	// 	$objPHPExcel->getActiveSheet()->SetCellValue('I'.$rowCount, "Tanggal Sampai");
+	// 	$objPHPExcel->getActiveSheet()->SetCellValue('J'.$rowCount, "Biaya Angkut");
+	// 	$objPHPExcel->getActiveSheet()->SetCellValue('K'.$rowCount, "Status");
+	// 	$rowCount++;
 
-		$column = 2;//untuk kolom start
-		foreach($data as $value){
-			$objPHPExcel->getActiveSheet()->SetCellValue('A'.$column, ($column-1));
-		    $objPHPExcel->getActiveSheet()->SetCellValue('B'.$column, $value->id); 
-		    $objPHPExcel->getActiveSheet()->setCellValueExplicit('C'.$column, $value->no_resi, PHPExcel_Cell_DataType::TYPE_STRING);
-			$objPHPExcel->getActiveSheet()->SetCellValue('D'.$column, $value->tanggal_pengambilan); 
-		    $objPHPExcel->getActiveSheet()->setCellValue('E'.$column, $value->tanggal_diambil);
-		    $objPHPExcel->getActiveSheet()->SetCellValue('F'.$column, $value->nama_kurir); 
-		    $objPHPExcel->getActiveSheet()->SetCellValue('G'.$column, $value->nama_user);
-			$objPHPExcel->getActiveSheet()->SetCellValue('H'.$column, $value->id_produk);  
-			$objPHPExcel->getActiveSheet()->SetCellValue('I'.$column, $value->tanggal_sampai);  
-			$objPHPExcel->getActiveSheet()->SetCellValue('J'.$column, $value->biaya_angkut);  
-			$objPHPExcel->getActiveSheet()->SetCellValue('K'.$column, $value->nama_status);    
-		    $column++; 
-		} 
+	// 	$column = 2;//untuk kolom start
+	// 	foreach($data as $value){
+	// 		$objPHPExcel->getActiveSheet()->SetCellValue('A'.$column, ($column-1));
+	// 	    $objPHPExcel->getActiveSheet()->SetCellValue('B'.$column, $value->id); 
+	// 	    $objPHPExcel->getActiveSheet()->setCellValueExplicit('C'.$column, $value->no_resi, PHPExcel_Cell_DataType::TYPE_STRING);
+	// 		$objPHPExcel->getActiveSheet()->SetCellValue('D'.$column, $value->tanggal_pengambilan); 
+	// 	    $objPHPExcel->getActiveSheet()->setCellValue('E'.$column, $value->tanggal_diambil);
+	// 	    $objPHPExcel->getActiveSheet()->SetCellValue('F'.$column, $value->nama_kurir); 
+	// 	    $objPHPExcel->getActiveSheet()->SetCellValue('G'.$column, $value->nama_user);
+	// 		$objPHPExcel->getActiveSheet()->SetCellValue('H'.$column, $value->id_produk);  
+	// 		$objPHPExcel->getActiveSheet()->SetCellValue('I'.$column, $value->tanggal_sampai);  
+	// 		$objPHPExcel->getActiveSheet()->SetCellValue('J'.$column, $value->biaya_angkut);  
+	// 		$objPHPExcel->getActiveSheet()->SetCellValue('K'.$column, $value->nama_status);    
+	// 	    $column++; 
+	// 	} 
 
-		//set autosize
-		$objPHPExcel->getActiveSheet()->getColumnDimension('A')->setAutoSize(true);
-		$objPHPExcel->getActiveSheet()->getColumnDimension('B')->setAutoSize(true);
-		$objPHPExcel->getActiveSheet()->getColumnDimension('C')->setAutoSize(true);
-		$objPHPExcel->getActiveSheet()->getColumnDimension('D')->setAutoSize(true);
-		$objPHPExcel->getActiveSheet()->getColumnDimension('E')->setAutoSize(true);
-		$objPHPExcel->getActiveSheet()->getColumnDimension('F')->setAutoSize(true);
-		$objPHPExcel->getActiveSheet()->getColumnDimension('G')->setAutoSize(true);
-		$objPHPExcel->getActiveSheet()->getColumnDimension('H')->setAutoSize(true);
-		$objPHPExcel->getActiveSheet()->getColumnDimension('I')->setAutoSize(true);
-		$objPHPExcel->getActiveSheet()->getColumnDimension('J')->setAutoSize(true);
-		$objPHPExcel->getActiveSheet()->getColumnDimension('K')->setAutoSize(true);
+	// 	//set autosize
+	// 	$objPHPExcel->getActiveSheet()->getColumnDimension('A')->setAutoSize(true);
+	// 	$objPHPExcel->getActiveSheet()->getColumnDimension('B')->setAutoSize(true);
+	// 	$objPHPExcel->getActiveSheet()->getColumnDimension('C')->setAutoSize(true);
+	// 	$objPHPExcel->getActiveSheet()->getColumnDimension('D')->setAutoSize(true);
+	// 	$objPHPExcel->getActiveSheet()->getColumnDimension('E')->setAutoSize(true);
+	// 	$objPHPExcel->getActiveSheet()->getColumnDimension('F')->setAutoSize(true);
+	// 	$objPHPExcel->getActiveSheet()->getColumnDimension('G')->setAutoSize(true);
+	// 	$objPHPExcel->getActiveSheet()->getColumnDimension('H')->setAutoSize(true);
+	// 	$objPHPExcel->getActiveSheet()->getColumnDimension('I')->setAutoSize(true);
+	// 	$objPHPExcel->getActiveSheet()->getColumnDimension('J')->setAutoSize(true);
+	// 	$objPHPExcel->getActiveSheet()->getColumnDimension('K')->setAutoSize(true);
 
-		//style
-		$stil=array(
-            'alignment' => array(
-              'horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_CENTER,
-			),
-			'font'  => array(
-				'bold'  => true,
-				'color' => array('rgb' => '000000')
-			),
-			'fill' => array(
-				'type' => PHPExcel_Style_Fill::FILL_SOLID,
-				'color' => array('rgb' => '36FF94')
-			  )
+	// 	//style
+	// 	$stil=array(
+    //         'alignment' => array(
+    //           'horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_CENTER,
+	// 		),
+	// 		'font'  => array(
+	// 			'bold'  => true,
+	// 			'color' => array('rgb' => '000000')
+	// 		),
+	// 		'fill' => array(
+	// 			'type' => PHPExcel_Style_Fill::FILL_SOLID,
+	// 			'color' => array('rgb' => '36FF94')
+	// 		  )
 
-        );
-		$stay=array(
-		'borders' => array(
-			'allborders' => array(
-			  'style' => PHPExcel_Style_Border::BORDER_THIN,
-			  'color' => array('rgb' => '000000')
+    //     );
+	// 	$stay=array(
+	// 	'borders' => array(
+	// 		'allborders' => array(
+	// 		  'style' => PHPExcel_Style_Border::BORDER_THIN,
+	// 		  'color' => array('rgb' => '000000')
 			  
-			)
-			));
-        $objPHPExcel->getActiveSheet()->getStyle('A1:K1')->applyFromArray($stil);
-		$objPHPExcel->getActiveSheet()->getStyle('A1:K'.($column-1))->applyFromArray($stay);
+	// 		)
+	// 		));
+    //     $objPHPExcel->getActiveSheet()->getStyle('A1:K1')->applyFromArray($stil);
+	// 	$objPHPExcel->getActiveSheet()->getStyle('A1:K'.($column-1))->applyFromArray($stay);
 
 		
-		//save as .xlsx
-		$objWriter = new PHPExcel_Writer_Excel2007($objPHPExcel); 
-		$objWriter->save('./assets/excel/Data Transaksi.xlsx'); 
+	// 	//save as .xlsx
+	// 	$objWriter = new PHPExcel_Writer_Excel2007($objPHPExcel); 
+	// 	$objWriter->save('./assets/excel/Data Transaksi.xlsx'); 
 
-		$this->load->helper('download');
-		force_download('./assets/excel/Data Transaksi.xlsx', NULL);
+	// 	$this->load->helper('download');
+	// 	force_download('./assets/excel/Data Transaksi.xlsx', NULL);
+	// }
+
+	public function konfirmasi() {
+		$id = $_POST['id'];
+
+		$result = $this->M_transaksi->konfirmasi_transaksi($id); 
+		if ($result == 'success') {
+			echo show_succ_msg('Data Transaksi Berhasil dikonfirmasi', '20px');
+		} else {
+			echo show_err_msg('Data Transaksi Gagal dikonfirmasi', '20px');
+		}
 	}
-
 }
 
 /* End of file transaksi.php */

@@ -9,13 +9,13 @@ class M_produk extends CI_Model {
 	}
 
 	public function select_all() {
-		$this->db->select('produk.id,user.nik as user_nik, user.nama as user_nama,status_produk.id as status_produk_id , tipe_produk.nama as tipe_produk_nama, produk.tgl_tanam, produk.tgl_panen, produk.berat_panen,  tipe_produk.harga as tipe_produk_harga, produk.luas_lahan, produk.alamat, status_produk.nama as status_produk_nama, produk.id_status_produk, produk.created_at, transaksi.id_produk, transaksi.id_status_transaksi, transaksi.sudah_dikonfirmasi_petani');
+		$this->db->select('produk.id,user.nik as user_nik, user.nama as user_nama,status_produk.id as status_produk_id , tipe_produk.nama as tipe_produk_nama, produk.tgl_tanam, produk.tgl_panen, produk.berat_panen,  tipe_produk.harga as tipe_produk_harga, produk.luas_lahan, produk.alamat, status_produk.nama as status_produk_nama, produk.id_status_produk, produk.created_at, produk.updated_at');
 		$this->db->from('produk');
+		$this->db->order_by('updated_at', 'desc');
 		$this->db->order_by('created_at', 'desc');
 		$this->db->join('user', 'user.id = produk.id_user');
 		$this->db->join('tipe_produk', 'tipe_produk.id = produk.id_tipe_produk');
 		$this->db->join('status_produk', 'status_produk.id = produk.id_status_produk');
-		$this->db->join('transaksi', 'transaksi.id_produk = produk.id', 'left');
 		$query = $this->db->get();
 		return $query->result();
 	}
@@ -175,17 +175,7 @@ class M_produk extends CI_Model {
 		return $data->num_rows();
 	}
 
-	public function konfirmasi_produk($id){
-		$produk = $this->db->from('produk')->where('id', $id)->get()->row();
-		if($produk){
-			$id_p = $produk->id;
-			$this->db->from('transaksi')->where('id_produk', $id_p)->set('id_status_transaksi', 4)->update('transaksi');
-			return 'success';
-		}else{
-			return 'error';
-		}
 
-	}
 }
 
 /* End of file M_produk.php */

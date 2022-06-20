@@ -94,8 +94,17 @@
       }
         ?>
 
+    <?php
+        if($transaksi->status_produk_id == 4 AND $transaksi->id_status_transaksi == 2 AND $transaksi->sudah_dikonfirmasi_petani == 1) 
+      {
+        ?>
+         <button class="btn btn-secondary konfirmasi-transaksi" data-id="<?php echo $transaksi->id; ?>" data-toggle="modal" data-target="#konfirmasiTransaksi"><i class="glyphicon glyphicon-ok"></i> </button>
+        <?php
+      }
+      ?>
 
-          <!-- <button class="btn btn-info detail-dataDesa" data-id="<?php echo $desa->id; ?>"><i class="glyphicon glyphicon-info-sign"></i> Detail</button> -->
+
+          <!-- <button class="btn btn-info detail-dataDesa" data-id="<?php echo $transaksi->id; ?>"><i class="glyphicon glyphicon-info-sign"></i> Detail</button> -->
       </td>
       <?php } ?>
     </tr>
@@ -113,7 +122,9 @@
 
 <div id="tempat-modal"></div>
 
-<?php show_my_confirm('konfirmasiHapus', 'hapus-dataTransaksi', 'Hapus Data Ini?', 'Ya, Hapus Data Ini'); ?>
+<?php show_my_confirm('konfirmasiHapus', 'hapus-dataTransaksi', 'Batalkan Transaksi Ini?', 'Ya, Batalkan Transaksi Ini'); ?>
+<?php show_my_confirm('konfirmasiTransaksi', 'konfirmasi-dataTransaksi', 'Konfirmasi Transaksi Ini?', 'Ya, Konfirmasi Transaksi Ini'); ?>
+
 <?php
 $data['judul'] = 'Transaksi';
 $data['url'] = 'Transaksi/import';
