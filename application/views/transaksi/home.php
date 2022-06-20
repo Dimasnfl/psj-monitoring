@@ -82,6 +82,8 @@
       <?php if($this->session->userdata('level') == 1) { ?>
       <td><?php echo $transaksi->nama_status; ?></td>
       <td class="text-center" style="min-width:100px;">
+      <!-- <a href="transaksi/cethak" data-id="<?php echo $transaksi->id; ?>" ><button class="btn btn-secondary"><i class="fa fa-file-pdf-o"></i></button></a> -->
+
           <!-- <button class="btn btn-warning update-dataTransaksi" data-id="<?php echo $transaksi->id; ?>"><i class="glyphicon glyphicon-edit"></i> </button> -->
           <?php
         if($transaksi->id_status_transaksi != 3 AND $transaksi->id_status_transaksi != 4)

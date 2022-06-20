@@ -30,14 +30,14 @@
 
 	function effect_msg_form() {
 		// $('.form-msg').hide();
-		$('.form-msg').show(2000);
-		setTimeout(function() { $('.form-msg').fadeOut(2000); }, 3000);
+		$('.form-msg').show(1000);
+		setTimeout(function() { $('.form-msg').fadeOut(1000); }, 3000);
 	}
 
 	function effect_msg() {
 		// $('.msg').hide();
-		$('.msg').show(2000);
-		setTimeout(function() { $('.msg').fadeOut(2000); }, 3000);
+		$('.msg').show(1000);
+		setTimeout(function() { $('.msg').fadeOut(1000); }, 3000);
 	}
 
 //User

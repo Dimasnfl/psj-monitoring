@@ -54,7 +54,7 @@ class M_kurir extends CI_Model {
 
 	public function update($data) {
 		$data['plat_no'] = strtoupper($data['plat_no']);
-		$sql = " UPDATE kurir SET nama='" .$data['nama'] ."',jenis_kendaraan='" .$data['jenis_kendaraan'] ."',plat_no='" .$data['plat_no'] ."',telp='" .$data['no_telp'] ."' WHERE id='" .$data['id'] ."'";
+		$sql = " UPDATE kurir SET nama='" .$data['nama'] ."',jenis_kendaraan='" .$data['jenis_kendaraan'] ."',plat_no='" .$data['plat_no'] ."',no_telp='" .$data['no_telp'] ."',id_mitra='" .$data['id_mitra'] ."' WHERE id='" .$data['id'] ."'";
 
 		$this->db->query($sql);
 
@@ -96,7 +96,6 @@ class M_kurir extends CI_Model {
 		$insert_user['nik'] = $data['nik'];
 		$insert_user['nama'] = $data['nama'];
 		$insert_user['telp'] = $data['no_telp'];
-		$insert_user['id_desa'] = $data['id_desa'];
 		$insert_user['id_kurir'] = $id_kurir;
 		$query = $this->db->insert('user', $insert_user);
 

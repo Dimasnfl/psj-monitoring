@@ -37,7 +37,7 @@ class Tipe_produk extends AUTH_Controller {
 			$data['terbaru'] = $this->input->post('terbaru', TRUE);
 
 			$config['upload_path']          = './assets/thumbnail/';
-			$config['allowed_types']        = 'jpg|png';
+			$config['allowed_types']        = 'jpg|png|jpeg';
 			$config['encrypt_name'] 		= TRUE;
 
 			$this->load->library('upload', $config);
