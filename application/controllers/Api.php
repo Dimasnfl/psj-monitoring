@@ -250,7 +250,7 @@ class Api extends CI_Controller {
             echo(json_encode($this->error(500,'user bukan driver')));
             return;
         }else{
-            $data = $this->M_transaksi->select_all_transaksi_by_driver_id($driver_id,[7,5]);
+            $data = $this->M_transaksi->get_new_order_notifications($driver_id,[7,5]);
             echo json_encode($this->success($data));
             return;
         }
@@ -436,8 +436,17 @@ class Api extends CI_Controller {
 
         //get new order notifications
         $this->load->model('M_notifications');
-        $notifications = $this->M_notifications->get_new_order_notifications($this->user->id);
-        echo json_encode($this->success($notifications));
+        $new_order_notifications = $this->M_notifications->get_new_order_notifications($this->user->id);
+        $string_notification = "";
+        if(count($new_order_notifications)>0){
+            $total_notification = count($new_order_notifications);
+            $string_notification = " Kamu memiliki $total_notification order baru!";
+        } 
+        if($string_notification != ""){
+            echo json_encode($this->success($string_notification)));
+        }else{
+            echo json_encode($this->error(404,"tidak ada notifikasi"));
+        }
     }
     //API - 4.2 get new pickup notification (petani)
     //api/notifications/petani/order-pickup
@@ -451,7 +460,13 @@ class Api extends CI_Controller {
         //get new order notifications
         $this->load->model('M_notifications');
         $notifications = $this->M_notifications->get_new_pickup_notification($this->user->id);
-        echo json_encode($this->success($notifications));
+        $total_order_pickup = count($notifications);
+        if($total_order_pickup > 0){
+            $stringData = "$total_order_pickup panen kamu sedang diambil!";
+            echo json_encode($this->success($stringData));
+        }else{
+            echo json_encode($this->error(404, "tidak ada notifikasi baru"));
+        }
     }
     //API - 4.3 set onesignal id
     //api/notifications/set-id
