@@ -157,7 +157,10 @@ class Transaksi extends AUTH_Controller {
 		$hasil = $this->M_transaksi->batal_transaksi($id); 
 		
 		if ($hasil == 'success') {
+			$this->load->model('M_notifications');
 			$transaksi = $this->M_transaksi->select_by_id($id);
+			$user_id_kurir = $this->M_user->get_user_id_by_kurir_id($transaksi->id_kurir);
+			$this->M_notifications->create($this->userdata->id,$user_id_kurir,3,"Transaksi {$transaksi->no_resi} dibatalkan oleh kurir");
 			$this->M_logs->create($this->M_logs->BATAL_TRANSAKSI,"Transaksi dengan No Resi:{$transaksi->no_resi} diBatalkan oleh Admin:{$this->userdata->id}, Nama:{$this->userdata->nama}");
 			echo show_succ_msg('Data transaksi Berhasil dibatalkan', '20px');
 		} else {
