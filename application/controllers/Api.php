@@ -408,7 +408,9 @@ class Api extends CI_Controller {
             $produk = $this->M_produk->select_by_id($transaksi->id_produk);
             $this->load->model('M_notifications');
             $kurir_user_id = $this->M_user->get_user_id_by_kurir_id($transaksi->id_kurir);
+            $this->M_notifications->create($id_transaksi,$kurir_user_id,4,"Telah dikonfirmasi petani");
             $this->M_notifications->sendNotificationsToUser($kurir_user_id,"Petani telah mengkonfirmasi penyelesaian jemputan anda!");
+            
             echo json_encode($this->success(200,'success'));
         }else{
             echo json_encode($this->error(500, 'This is not your transaction'));
@@ -436,18 +438,21 @@ class Api extends CI_Controller {
 
         //get new order notifications
         $this->load->model('M_notifications');
-        $new_order_notifications = $this->M_notifications->get_new_order_notifications($this->user->id);
+        $total_new_order_notifications = $this->M_notifications->get_notificaitons(null,$this->user->id,1);
         $string_notification = "";
-        if(count($new_order_notifications)>0){
-            $total_notification = count($new_order_notifications);
-            $string_notification = "\nKamu memiliki $total_notification order baru!";
+        if($total_new_order_notifications > 0){
+            $string_notification = "\nKamu memiliki $total_new_order_notifications order baru!";
+        } 
+        $total_cancel_notifications = $this->M_notifications->get_notificaitons(null,$this->user->id,3);
+        if($total_cancel_notifications>0){
+            $string_notification .= "\nAda $$total_cancel_notifications order yang dibatalkan kadin!";
         } 
 
-        $canceled_order_notifcations = $this->M_notifications->get_cancel_order_notifications($this->user->id);
-        if(count($canceled_order_notifcations)>0){
-            $total_notification = count($canceled_order_notifcations);
-            $string_notification .= "\nAda $total_notification order yang dibatalkan kadin!";
+        $total_confirmed_order = $this->M_notifications->get_notificaitons(null,$this->user->id,4);
+        if($total_confirmed_order>0){
+            $string_notification .= "\nAda $$total_confirmed_order order yang telah dikonfirmasi petani!";
         } 
+
         if($string_notification != ""){
             echo json_encode($this->success($string_notification));
         }else{

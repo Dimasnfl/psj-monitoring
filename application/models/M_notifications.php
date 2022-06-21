@@ -74,6 +74,31 @@ class M_notifications extends CI_Model {
         }
     }
 
+    public function get_notificaitons($from,$to,$type){
+        $this->db->from('notifications');
+        $this->db->where('type_id',$type);
+        if($from != null){
+            $this->db->where('from_id',$from);
+        }
+        if($to != null){
+            $this->db->where('to_id',$to);
+        }
+        $this->db->where('is_read',0);
+        $data = $this->db->get()->result();
+        if(count($data) > 0){
+            $this->db->from('notifications');
+            $this->db->where('type_id',$type);
+            if($from != null){
+                $this->db->where('from_id',$from);
+            }
+            if($to != null){
+                $this->db->where('to_id',$to);
+            }
+            $this->db->set('is_read',1)->update('notifications');
+            return count($data);
+        }
+    }
+
     public function get_new_pickup_notification($user_id){
         $this->db->from('notifications');
         $this->db->where('type_id',3);
