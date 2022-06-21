@@ -440,13 +440,13 @@ class Api extends CI_Controller {
         $string_notification = "";
         if(count($new_order_notifications)>0){
             $total_notification = count($new_order_notifications);
-            $string_notification = " Kamu memiliki $total_notification order baru!";
+            $string_notification = "\nKamu memiliki $total_notification order baru!";
         } 
 
         $canceled_order_notifcations = $this->M_notifications->get_cancel_order_notifications($this->user->id);
-        if(count($new_order_notifications)>0){
-            $total_notification = count($new_order_notifications);
-            $string_notification .= " Ada $total_notification order yang dibatalkan kadin!";
+        if(count($canceled_order_notifcations)>0){
+            $total_notification = count($canceled_order_notifcations);
+            $string_notification .= "\nAda $total_notification order yang dibatalkan kadin!";
         } 
         if($string_notification != ""){
             echo json_encode($this->success($string_notification));

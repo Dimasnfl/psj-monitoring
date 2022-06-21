@@ -100,8 +100,9 @@ class Produk extends AUTH_Controller {
 						$this->load->model('M_notifications');
 						$user_kurir_id = $this->M_user->get_user_id_by_kurir_id($id_kurir);
 						$this->load->model('M_notifications');
-						$this->M_notifications->sendNotificationsToUser($user_kurir_id,"Ada order baru dari KADIN");
 						$this->M_notifications->create($transaction_id,$user_kurir_id, 1, 'Terdapat 1 tugas baru');
+						$this->M_notifications->sendNotificationsToUser($user_kurir_id,"Ada order baru dari KADIN");
+						
 
 						//logs admin
 						$this->M_logs->create($this->M_logs->JEMPUT_KURIR,"Data E-Commodity dengan ID:{$produk->id_produk} diJemput oleh Kurir dengan ID:{$id_kurir}, dan diKonfirmasi oleh Admin:{$this->userdata->id}, Nama:{$this->userdata->nama}");
