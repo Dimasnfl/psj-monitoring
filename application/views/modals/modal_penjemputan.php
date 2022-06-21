@@ -8,7 +8,7 @@
         <label>Kurir*</label>
         <div class="input-group form-group">
           <span class="input-group-addon" id="sizing-addon2">
-            <i class="glyphicon glyphicon-leaf"></i>
+            <i class="glyphicon glyphicon-user"></i>
           </span>
           <select name="id_kurir" class="form-control select2"  aria-describedby="sizing-addon2">
             <?php
@@ -30,17 +30,19 @@
           <input type="time" class="form-control" name="jam_penjemputan" aria-describedby="sizing-addon2" placeholder="hh:mm">
         </div>
         <div class="form-group"> <!-- Date input -->
-        <label class="control-label" for="date">Tanggal Penjemputan</label>
+        <label class="control-label" for="date">Tanggal Penjemputan*</label>
         <input class="form-control" id="date" name="date" placeholder="MM/DD/YYY" type="text"/>
       </div>
       <label>Harga Penjemputan*</label>
         <div class="input-group form-group">
           <span class="input-group-addon" id="sizing-addon2">
-            <i class="glyphicon glyphicon-grain"></i>
+            <i class="glyphicon glyphicon-usd"></i>
           </span>
           <input type="number" class="form-control" placeholder="-" name="harga" aria-describedby="sizing-addon2" value="" placeholder="0">
         </div>
       <hr>
+      
+      <h5>Data Produk Petani</h5>
         <input type="hidden" name="id" value="<?php echo $dataProduk->id_produk; ?>">
         <label>Nama Petani*</label>
         <div class="input-group form-group">
@@ -60,12 +62,12 @@
         <label>Nama Produk*</label>
         <div class="input-group form-group">
           <span class="input-group-addon" id="sizing-addon2">
-            <i class="glyphicon glyphicon-grain"></i>
+            <i class="glyphicon glyphicon-user"></i>
           </span>
           <input type="text" class="form-control" placeholder="-" name="nama_produk" aria-describedby="sizing-addon2" value="<?php echo $dataProduk->tipe_produk; ?>" readonly>
         </div>
 
-        <label>Berat Panen*</label>
+        <label>Berat Panen (kg)*</label>
         <div class="input-group form-group">
           <span class="input-group-addon" id="sizing-addon2">
             <i class="glyphicon glyphicon-grain"></i>
@@ -73,7 +75,15 @@
           <input type="number" class="form-control" placeholder="-" name="berat_panen" aria-describedby="sizing-addon2" value="<?php echo $dataProduk->berat_panen; ?>" readonly>
         </div>
 
-        <label>Luas Lahan*</label>
+        <label>Berat Asli (kg)*</label>
+        <div class="input-group form-group">
+          <span class="input-group-addon" id="sizing-addon2">
+            <i class="glyphicon glyphicon-grain"></i>
+          </span>
+          <input type="number" class="form-control" placeholder="-" name="berat_panen" aria-describedby="sizing-addon2" value="<?php echo $dataProduk->berat_asli; ?>" readonly>
+        </div>
+
+        <label>Luas Lahan (m2)*</label>
         <div class="input-group form-group">
           <span class="input-group-addon" id="sizing-addon2">
             <i class="glyphicon glyphicon-tree-deciduous"></i>
