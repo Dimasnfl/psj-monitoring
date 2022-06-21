@@ -8,10 +8,10 @@
     <table id="list-data" class="table table-bordered table-hover">
       <thead>
         <tr>
-          <th>No</th>
-          <th>Nama Operasi</th>
+          <th style='width: 30px;'>No</th>
+          <th style='width: 170px;'>Penggunaan Operasi</th>
           <th>Deskripsi</th>
-          <th>Pada Tanggal</th>
+          <th style='width: 50px;'>Pada Tanggal</th>
         </tr>
       </thead>
       <tbody id="data-logs">
