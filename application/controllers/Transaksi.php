@@ -9,6 +9,7 @@ class Transaksi extends AUTH_Controller {
 		$this->load->model('M_user');
 		$this->load->model('M_produk');
 		$this->load->model('M_status_transaksi');
+		$this->load->model('M_logs');
 
 	}
 
@@ -154,14 +155,27 @@ class Transaksi extends AUTH_Controller {
 		$id = $_POST['id'];
 
 		$hasil = $this->M_transaksi->batal_transaksi($id); 
-		$this->load->model('M_logs');
 		
 		if ($hasil == 'success') {
 			$transaksi = $this->M_transaksi->select_by_id($id);
-			$this->M_logs->create($this->M_logs->BATAL_TRANSAKSI,"Transaksi dengan no resi {$transaksi->no_resi} dibatalkan oleh id: {$this->userdata->id}, nama:{$this->userdata->nama}");
+			$this->M_logs->create($this->M_logs->BATAL_TRANSAKSI,"Transaksi dengan No Resi:{$transaksi->no_resi} diBatalkan oleh Admin:{$this->userdata->id}, Nama:{$this->userdata->nama}");
 			echo show_succ_msg('Data transaksi Berhasil dibatalkan', '20px');
 		} else {
 			echo show_err_msg('Data transaksi Gagal dibatalkan', '20px');
+		}
+	}
+
+	public function konfirmasi() {
+		$id = $_POST['id'];
+
+		$result = $this->M_transaksi->konfirmasi_transaksi($id); 
+
+		if ($result == 'success') {
+			$transaksi = $this->M_transaksi->select_by_id($id);
+			$this->M_logs->create($this->M_logs->KONFIRMASI_TRANSAKSI,"Transaksi dengan No Resi:{$transaksi->no_resi} diKonfirmasi oleh Admin:{$this->userdata->id}, Nama:{$this->userdata->nama}");
+			echo show_succ_msg('Data Transaksi Berhasil dikonfirmasi', '20px');
+		} else {
+			echo show_err_msg('Data Transaksi Gagal dikonfirmasi', '20px');
 		}
 	}
 
@@ -255,16 +269,7 @@ class Transaksi extends AUTH_Controller {
 	// 	force_download('./assets/excel/Data Transaksi.xlsx', NULL);
 	// }
 
-	public function konfirmasi() {
-		$id = $_POST['id'];
 
-		$result = $this->M_transaksi->konfirmasi_transaksi($id); 
-		if ($result == 'success') {
-			echo show_succ_msg('Data Transaksi Berhasil dikonfirmasi', '20px');
-		} else {
-			echo show_err_msg('Data Transaksi Gagal dikonfirmasi', '20px');
-		}
-	}
 }
 
 /* End of file transaksi.php */

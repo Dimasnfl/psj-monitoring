@@ -6,6 +6,8 @@ class User extends AUTH_Controller {
 		parent::__construct();
 		$this->load->model('M_user');
 		$this->load->model('M_desa');
+		$this->load->model('M_logs');
+
 	}
 
 	public function index() {
@@ -36,22 +38,24 @@ class User extends AUTH_Controller {
 	}
 
 	public function prosesUpdate() {
-		$this->form_validation->set_rules('nik', 'NIK Petani', 'trim|required|is_unique[user.nik]');
+		$this->form_validation->set_rules('nik', 'NIK Petani', 'trim|required|numeric|min_length[16]|max_length[16]');
 		$this->form_validation->set_rules('nama', 'Nama Petani', 'trim|required');
 		$this->form_validation->set_rules('id_desa', 'Asal Dusun', 'trim|required');
 		$this->form_validation->set_rules('telp', 'No.Telp Petani', 'trim|required');
 
-
+		$id 				= trim($_POST['id']);
 		$data = $this->input->post();
 		if ($this->form_validation->run() == TRUE) {
 			$result = $this->M_user->update($data);
 
 			if ($result > 0) {
+				
 				$out['status'] = '';
+				$this->M_logs->create($this->M_logs->UPDATE_PETANI,"Data Petani Telah diUpdate oleh Admin:{$this->userdata->id}, Nama:{$this->userdata->nama}");
 				$out['msg'] = show_succ_msg('Data Petani Berhasil diupdate', '20px');
 			} else {
 				$out['status'] = '';
-				$out['msg'] = show_succ_msg('Data Petani Gagal diupdate', '20px');
+				$out['msg'] = show_err_msg('Data Petani Gagal diupdate', '20px');
 			}
 		} else {
 			$out['status'] = 'form';
@@ -79,6 +83,7 @@ class User extends AUTH_Controller {
 		$result = $this->M_user->delete($id);
 
 		if ($result > 0) {
+			$this->M_logs->create($this->M_logs->HAPUS_PETANI,"Data Petani Telah diHapus oleh Admin:{$this->userdata->id}, Nama:{$this->userdata->nama}");
 			echo show_succ_msg('Data Petani Berhasil dihapus', '20px');
 		} else {
 			echo show_err_msg('Data Petani Gagal dihapus', '20px');

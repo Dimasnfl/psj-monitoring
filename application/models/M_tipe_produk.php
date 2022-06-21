@@ -38,6 +38,13 @@ class M_tipe_produk extends CI_Model {
 		return $data->row();
 	}
 
+	public function select_by_nama($nama) {
+		$sql = "SELECT * FROM tipe_produk WHERE nama = '{$nama}'";
+
+		$data = $this->db->query($sql);
+
+		return $data->row();
+	}
 
 	//detail
 	 public function select_by_produk($id) {

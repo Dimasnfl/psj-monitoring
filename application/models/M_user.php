@@ -123,14 +123,7 @@ class M_user extends CI_Model {
 	}
 
 
-	public function insert($data) {
-		$id = md5(DATE('ymdhms').rand());
-		$sql = "INSERT INTO user VALUES('{$NIK}','" .$data['nama'] ."','" .$data['telp'] ."'," .$data['desa'] ."," .$data['foto'] .",1)";
 
-		$this->db->query($sql);
-
-		return $this->db->affected_rows();
-	}
 	public function insert_data($data){
 		$this->db->insert('user',$data);
 		

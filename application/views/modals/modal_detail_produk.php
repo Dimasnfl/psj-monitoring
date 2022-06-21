@@ -33,6 +33,11 @@
       </tr>
 
       <tr>
+        <th>Berat Asli</th>
+        <td><span><?php echo $produk->berat_asli; ?> kg</span></td>
+      </tr>
+
+      <tr>
         <th>Luas Lahan</th>
         <td><span><?php echo $produk->luas_lahan; ?> m2</span></td>
       </tr>

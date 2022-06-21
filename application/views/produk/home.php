@@ -41,6 +41,7 @@
           <th>Tanggal Tanam</th>
           <th>Tanggal Panen</th>
           <th>Berat Panen</th>
+          <th>Berat Asli</th>
           <th>Harga (/kg)</th>
           <th>Luas Lahan</th>         
           <th>Alamat</th>

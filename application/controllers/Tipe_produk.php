@@ -5,6 +5,7 @@ class Tipe_produk extends AUTH_Controller {
 	public function __construct() {
 		parent::__construct();
 		$this->load->model('M_tipe_produk');
+		$this->load->model('M_logs');
 		
 	}
 
@@ -53,7 +54,9 @@ class Tipe_produk extends AUTH_Controller {
 				$out['status'] = '';
 				$out['msg'] = show_err_msg('Data Harga Produk Gagal dibuat', '20px');
 			} else {
+				
 				$out['status'] = '';
+				$this->M_logs->create($this->M_logs->ADD_PRODUK,"1 Data Harga Produk Telah diTambahkan oleh Admin:{$this->userdata->id}, Nama:{$this->userdata->nama}");
 				$out['msg'] = show_succ_msg('Data Harga Produk Berhasil dibuat', '20px');
 			}
 		} else {
@@ -122,13 +125,15 @@ class Tipe_produk extends AUTH_Controller {
 		$this->form_validation->set_rules('harga', 'harga', 'trim|required');
 		
 
-
+		$nama 				= trim($_POST['nama']);
 		$data 	= $this->input->post();
 		if ($this->form_validation->run() == TRUE) {
 			$result = $this->M_tipe_produk->update($data);
 
 			if ($result > 0) {
 				$out['status'] = '';
+				$tipe_produk = $this->M_tipe_produk->select_by_nama($nama);
+				$this->M_logs->create($this->M_logs->UPDATE_PRODUK,"Data Harga Produk Jenis:{$tipe_produk->nama} diUpdate oleh Admin:{$this->userdata->id}, Nama:{$this->userdata->nama}");
 				$out['msg'] = show_succ_msg('Data Harga Produk Berhasil diupdate', '20px');
 			} else {
 				$out['status'] = '';
@@ -160,8 +165,10 @@ class Tipe_produk extends AUTH_Controller {
 	public function delete() {
 		$id = $_POST['id'];
 		$result = $this->M_tipe_produk->delete($id);
-		
+
 		if ($result > 0) {
+			$tipe_produk = $this->M_tipe_produk->select_by_id($id);
+			$this->M_logs->create($this->M_logs->HAPUS_PRODUK,"Data Harga Produk dengan ID:{$tipe_produk->id} diHapus oleh Admin:{$this->userdata->id}, Nama:{$this->userdata->nama}");
 			echo show_succ_msg('Data Harga Produk Berhasil dihapus', '20px');
 		} else {
 			echo show_err_msg('Data Harga Produk Gagal dihapus', '20px');

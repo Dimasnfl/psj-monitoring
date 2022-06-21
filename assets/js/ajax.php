@@ -17,6 +17,7 @@
 		tampilKurir();
 		tampilTransaksi();
 		tampilMitra();
+		tampilLogs();
 		<?php
 			if ($this->session->flashdata('msg') != '') {
 				echo "effect_msg();";
@@ -981,6 +982,18 @@ function tampilTransaksi() {
 	$('#update-mitra').on('hidden.bs.modal', function () {
 	  $('.form-msg').html('');
 	})
+
+
+
+	//Logs
+	function tampilLogs() {
+		$.get('<?php echo base_url('Logs/tampil'); ?>', function(data) {
+			MyTable.fnDestroy();
+			$('#data-logs').html(data);
+			refresh();
+		});
+	}
+
 
 
 </script>

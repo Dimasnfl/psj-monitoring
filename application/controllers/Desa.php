@@ -5,6 +5,8 @@ class Desa extends AUTH_Controller {
 	public function __construct() {
 		parent::__construct();
 		$this->load->model('M_desa');
+		$this->load->model('M_logs');
+
 	}
 
 	public function index() {
@@ -33,6 +35,7 @@ class Desa extends AUTH_Controller {
 			$result = $this->M_desa->insert($data);
 
 			if ($result > 0) {
+				$this->M_logs->create($this->M_logs->ADD_DUSUN,"1 Data Dusun diTambahkan oleh Admin:{$this->userdata->id}, Nama:{$this->userdata->nama}");
 				$out['status'] = '';
 				$out['msg'] = show_succ_msg('Data Dusun Berhasil ditambahkan', '20px');
 			} else {
@@ -57,11 +60,14 @@ class Desa extends AUTH_Controller {
 	public function prosesUpdate() {
 		$this->form_validation->set_rules('desa', 'desa', 'trim|required');
 
+		$id 				= trim($_POST['id']);
 		$data 	= $this->input->post();
 		if ($this->form_validation->run() == TRUE) {
 			$result = $this->M_desa->update($data);
 
 			if ($result > 0) {
+				$desa = $this->M_desa->select_by_id($id);
+				$this->M_logs->create($this->M_logs->UPDATE_DUSUN,"Dusun dengan ID:{$desa->id} diUpdate oleh Admin:{$this->userdata->id}, Nama:{$this->userdata->nama}");
 				$out['status'] = '';
 				$out['msg'] = show_succ_msg('Data Dusun Berhasil diupdate', '20px');
 			} else {
@@ -79,8 +85,10 @@ class Desa extends AUTH_Controller {
 	public function delete() {
 		$id = $_POST['id'];
 		$result = $this->M_desa->delete($id);
-		
+
 		if ($result > 0) {
+			$desa = $this->M_desa->select_by_id($id);
+			$this->M_logs->create($this->M_logs->HAPUS_DUSUN,"1 Data Dusun Telah diHapus oleh Admin:{$this->userdata->id}, Nama:{$this->userdata->nama}");
 			echo show_succ_msg('Data Dusun Berhasil dihapus', '20px');
 		} else {
 			echo show_err_msg('Data Dusun Gagal dihapus', '20px');
