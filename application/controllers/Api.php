@@ -357,7 +357,7 @@ class Api extends CI_Controller {
             $this->M_transaksi->confirm_pickup($id_transaksi);
             $produk = $this->M_produk->select_by_id($transaksi->id_produk);
             $this->load->model('M_notifications');
-            $this->M_notifications->create($this->user->id, $transaksi->id_user, 3, "Kurir {$this->user->nama} sedang menjemput panen {$produk->tipe_produk} anda!");
+            $this->M_notifications->create($this->user->id, $transaksi->id_user, 6, "Kurir {$this->user->nama} sedang menjemput panen {$produk->tipe_produk} anda!");
             $this->M_notifications->sendNotificationsToUser($transaksi->id_user,"Kurir {$this->user->nama} sedang menjemput panen ".$produk->tipe_produk." anda!");
             echo json_encode($this->success(200,'success'));
         }else{
@@ -392,7 +392,9 @@ class Api extends CI_Controller {
             $this->M_transaksi->finish_order($id_transaksi);
             $this->load->model('M_notifications');
             $produk = $this->M_produk->select_by_id($transaksi->id_produk);
+            $this->M_notifications->create($transaksi->id,$transaksi->id_user,5, "Pesanan sudah diselesaikan");
             $this->M_notifications->sendNotificationsToUser($transaksi->id_user,"Kurir telah menyelesaikan penjemputan panen  {$produk->tipe_produk} anda!");
+            
             echo json_encode($this->success(200,'success'));
         }else{
             echo json_encode($this->error(500, 'This is not your transaction'));
@@ -470,13 +472,30 @@ class Api extends CI_Controller {
 
         //get new order notifications
         $this->load->model('M_notifications');
-        $notifications = $this->M_notifications->get_new_pickup_notification($this->user->id);
-        $total_order_pickup = count($notifications);
-        if($total_order_pickup > 0){
-            $stringData = "$total_order_pickup panen kamu sedang diambil!";
-            echo json_encode($this->success($stringData));
+
+        //get batal jemput kurir
+        $total = $this->M_notifications->get_notificaitons(null,$this->user->id,7);
+        $string_notification = "";
+        if($total > 0){
+            $string_notification = "\n Ada $total panen kamu yang batal dijemput kurir!";
+        } 
+
+        $total = $this->M_notifications->get_notificaitons(null,$this->user->id,6);
+        $string_notification = "";
+        if($total > 0){
+            $string_notification = "\n Kurir sedang menjemput $total panen kamu!";
+        }
+
+        $total = $this->M_notifications->get_notificaitons(null,$this->user->id,5);
+        $string_notification = "";
+        if($total > 0){
+            $string_notification = "\n Penjemputan sudah selesai, segera konfirmasi pengambilan!";
+        } 
+
+        if($string_notification != ""){
+            echo json_encode($this->success($string_notification));
         }else{
-            echo json_encode($this->error(404, "tidak ada notifikasi baru"));
+            echo json_encode($this->error(404,"tidak ada notifikasi"));
         }
     }
     //API - 4.3 set onesignal id
