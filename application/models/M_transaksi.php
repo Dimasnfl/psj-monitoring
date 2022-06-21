@@ -172,8 +172,6 @@ class M_transaksi extends CI_Model {
 		}else{
 			return false;
 		}
-
-
 	}
 
 	public function batal_transaksi($id){
@@ -260,7 +258,14 @@ class M_transaksi extends CI_Model {
 		}else{
 			return 'error';
 		}
+	}
 
+	public function select_by_produk($id) {
+		$sql = "SELECT COUNT(*) AS jml FROM transaksi WHERE id_status_transaksi = 4 AND id_produk = {$id}";
+
+		$data = $this->db->query($sql);
+
+		return $data->row();
 	}
   
 }

@@ -177,6 +177,15 @@ class M_produk extends CI_Model {
 	}
 
 
+	public function sum_produk() {
+		$this->db->select_sum('berat_panen', 'jumlah_berat');
+		$this->db->select_sum('luas_lahan', 'jumlah_lahan');
+		$this->db->from('produk');
+		return $this->db->get('')->row();
+
+	}
+
+
 }
 
 /* End of file M_produk.php */
