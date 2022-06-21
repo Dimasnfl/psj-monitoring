@@ -7,6 +7,7 @@ class Kurir extends AUTH_Controller {
 		$this->load->model('M_kurir');
 		$this->load->model('M_desa');
 		$this->load->model('M_mitra');
+		$this->load->model('M_logs');
 	}
 
 	public function index() {
@@ -69,6 +70,8 @@ class Kurir extends AUTH_Controller {
 		$this->form_validation->set_rules('jenis_kendaraan', 'Jenis Kendaraan', 'trim|required');
 		$this->form_validation->set_rules('plat_no', 'Plat Nomor Kendaraan', 'trim|required');
 		$this->form_validation->set_rules('no_telp', 'No.Telp Kurir', 'trim|required|numeric|min_length[10]|max_length[15]');
+
+
 		$data 	= $this->input->post();
 		if ($this->form_validation->run() == TRUE) {
 			$data['nik'] = $this->input->post('nik');
@@ -86,6 +89,7 @@ class Kurir extends AUTH_Controller {
 				$out['status'] = '';
 				$out['msg'] = show_err_msg('Data Kurir Gagal ditambahkan', '20px');
 			} else {
+				$this->M_logs->create($this->M_logs->ADD_KURIR,"1 Data Kurir Telah diTambahkan oleh Admin:{$this->userdata->id}, Nama:{$this->userdata->nama}");
 				$out['status'] = '';
 				$out['msg'] = show_succ_msg('Data Kurir Berhasil ditambahkan', '20px');
 			}
@@ -113,11 +117,15 @@ class Kurir extends AUTH_Controller {
 		$this->form_validation->set_rules('no_telp', 'No.Telp Kurir', 'trim|required|numeric|min_length[10]|max_length[15]');
 		$this->form_validation->set_rules('id_mitra', 'Nama Mitra', 'trim|required');
 	    // $this->form_validation->set_rules('updated_at', 'Tanggal Update Data', 'trim|required');
+		$id 				= trim($_POST['id']);
+
 		$data 	= $this->input->post();
 		if ($this->form_validation->run() == TRUE) {
 			$result = $this->M_kurir->update($data);
 
 			if ($result > 0) {
+				$kurir = $this->M_kurir->select_by_id($id);
+				$this->M_logs->create($this->M_logs->UPDATE_KURIR,"Data Kurir dengan ID:{$kurir->id} diUpdate oleh Admin:{$this->userdata->id}, Nama:{$this->userdata->nama}");
 				$out['status'] = '';
 				$out['msg'] = show_succ_msg('Data Kurir Berhasil diupdate', '20px');
 			} else {
@@ -137,6 +145,7 @@ class Kurir extends AUTH_Controller {
 		$result = $this->M_kurir->delete($id);
 		
 		if ($result > 0) {
+			$this->M_logs->create($this->M_logs->HAPUS_KURIR,"1 Data Kurir Telah diHapus oleh Admin:{$this->userdata->id}, Nama:{$this->userdata->nama}");
 			echo show_succ_msg('Data Kurir Berhasil dihapus', '20px');
 		} else {
 			echo show_err_msg('Data Kurir Gagal dihapus', '20px');

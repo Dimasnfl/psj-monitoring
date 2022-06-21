@@ -79,6 +79,12 @@
       <?php  } ?>
 
 <br>
+      <li <?php if ($page == 'Logs') {echo 'class="active"';} ?>>
+        <a href="<?php echo base_url('Logs'); ?>">
+          <i class="fa fa-history"></i>
+          <span>Data Riwayat Admin</span>
+        </a>
+      </li>
       <li <?php if ($page == 'logout') {echo 'class="active"';} ?>>
         <a href="<?php echo base_url('auth/logout'); ?>">
           <i class="glyphicon glyphicon-log-out"></i>

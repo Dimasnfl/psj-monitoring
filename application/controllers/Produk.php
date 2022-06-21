@@ -10,6 +10,7 @@ class Produk extends AUTH_Controller {
 		$this->load->model('M_kurir');
 		$this->load->model('M_status_produk');
 		$this->load->model('M_transaksi');
+		$this->load->model('M_logs');
 
 	}
 
@@ -101,11 +102,14 @@ class Produk extends AUTH_Controller {
 						$this->load->model('M_notifications');
 						$this->M_notifications->sendNotificationsToUser($user_kurir_id,"Ada order baru dari KADIN");
 						$this->M_notifications->create($transaction_id,$user_kurir_id, 1, 'Terdapat 1 tugas baru');
+
+						//logs admin
+						$this->M_logs->create($this->M_logs->JEMPUT_KURIR,"Data E-Commodity dengan ID:{$produk->id_produk} diJemput oleh Kurir dengan ID:{$id_kurir}, dan diKonfirmasi oleh Admin:{$this->userdata->id}, Nama:{$this->userdata->nama}");
 						$out['status'] = '';
-						$out['msg'] = show_succ_msg('Data Penjemputan Berhasil dibuat', '20px');
+						$out['msg'] = show_succ_msg('Data E-Commodity Berhasil diJemput', '20px');
 					} else {
 						$out['status'] = '';
-						$out['msg'] = show_succ_msg('Data Penjemputan Gagal dibuat', '20px');
+						$out['msg'] = show_succ_msg('Data E-Commodity Gagal diJemput', '20px');
 					}
 				}
 			} else {
