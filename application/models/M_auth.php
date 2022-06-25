@@ -16,6 +16,7 @@ class M_auth extends CI_Model {
 			return false;
 		}
 	}
+
 }
 
 /* End of file M_auth.php */

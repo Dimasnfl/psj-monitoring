@@ -10,7 +10,10 @@
         <?php if($this->session->userdata('level') == 1) { ?>
         <p class="text-muted text-center">Admin</p>
         <?php } ?>
-        <?php if($this->session->userdata('level') != 1) { ?>
+        <?php if($this->session->userdata('level') == 2) { ?>
+        <p class="text-muted text-center">Operator</p>
+        <?php } ?>
+        <?php if($this->session->userdata('level') == 3) { ?>
         <p class="text-muted text-center">Guest</p>
         <?php } ?>
         

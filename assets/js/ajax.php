@@ -18,6 +18,7 @@
 		tampilTransaksi();
 		tampilMitra();
 		tampilLogs();
+		tampilAdmin();
 		<?php
 			if ($this->session->flashdata('msg') != '') {
 				echo "effect_msg();";
@@ -676,6 +677,7 @@ function tampilKurir() {
 		e.preventDefault();
 	});
 
+
 	$(document).on('submit', '#form-update-kurir', function(e){
 		var data = $(this).serialize();
 
@@ -993,6 +995,114 @@ function tampilTransaksi() {
 			refresh();
 		});
 	}
+
+
+	//Admin
+	function tampilAdmin() {
+		$.get('<?php echo base_url('Admin/tampil'); ?>', function(data) {
+			MyTable.fnDestroy();
+			$('#data-admin').html(data);
+			refresh();
+		});
+	}
+
+	var id_admin;
+	$(document).on("click", ".konfirmasiHapus-admin", function() {
+		id_admin = $(this).attr("data-id");
+	})
+	$(document).on("click", ".hapus-dataAdmin", function() {
+		var id = id_admin;
+		
+		$.ajax({
+			method: "POST",
+			url: "<?php echo base_url('Admin/delete'); ?>",
+			data: "id=" +id
+		})
+		.done(function(data) {
+			$('#konfirmasiHapus').modal('hide');
+			tampilAdmin();
+			$('.msg').html(data);
+			effect_msg();
+		})
+	})
+
+	
+	$(document).on("click", ".update-dataAdmin", function() {
+		var id = $(this).attr("data-id");
+		
+		$.ajax({
+			method: "POST",
+			url: "<?php echo base_url('Admin/update'); ?>",
+			data: "id=" +id
+		})
+		.done(function(data) {
+			$('#tempat-modal').html(data);
+			$('#update-admin').modal('show');
+		})
+	})
+
+
+	$('#form-tambah-admin').submit(function(e) {
+		var data = $(this).serialize();
+
+		$.ajax({
+			method: 'POST',
+			url: '<?php echo base_url('Admin/prosesTambah'); ?>',
+			data: data
+		})
+		.done(function(data) {
+			var out = jQuery.parseJSON(data);
+
+			tampilAdmin();
+			if (out.status == 'form') {
+				$('.form-msg').html(out.msg);
+				effect_msg_form();pe
+			} else {
+				document.getElementById("form-tambah-admin").reset();
+				$('#tambah-admin').modal('hide');
+				$('.msg').html(out.msg);
+				effect_msg();
+			}
+		})
+		
+		e.preventDefault();
+	});
+
+
+
+	$(document).on('submit', '#form-update-admin', function(e){
+		var data = $(this).serialize();
+
+		$.ajax({
+			method: 'POST',
+			url: '<?php echo base_url('Admin/prosesUpdate'); ?>',
+			data: data
+		})
+		.done(function(data) {
+			var out = jQuery.parseJSON(data);
+
+			tampilAdmin();
+			if (out.status == 'form') {
+				$('.form-msg').html(out.msg);
+				effect_msg_form();
+			} else {
+				document.getElementById("form-update-admin").reset();
+				$('#update-admin').modal('hide');
+				$('.msg').html(out.msg);
+				effect_msg();
+			}
+		})
+		
+		e.preventDefault();
+	});
+
+	$('#tambah-admin').on('hidden.bs.modal', function () {
+	  $('.form-msg').html('');
+	})
+	$('#update-admin').on('hidden.bs.modal', function () {
+	  $('.form-msg').html('');
+	})
+
 
 
 

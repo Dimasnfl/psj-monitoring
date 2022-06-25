@@ -18,7 +18,7 @@
       <td><?php echo $row->luas_lahan; ?> m<sup>2</sup></td>
       <td><?php echo $row->alamat; ?></td>
 
-      <?php if($this->session->userdata('level') == 1) { ?>
+      <?php if($this->session->userdata('level') != 3) { ?>
       <td><?php echo $row->status_produk_nama; ?></td>
       <td class="text-center" style="min-width:110px;">
 

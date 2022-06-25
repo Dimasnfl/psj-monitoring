@@ -93,8 +93,41 @@
     </div>
   <?php } ?>
 
+
+ <!-- tampilan operator -->
+ <?php if ($this->session->userdata('level') == 2) { ?>
+
+    <div class="col-lg-4 col-xs-4">
+      <div class="small-box bg-green">
+        <div class="inner">
+          <h3><?php echo $jml_produk; ?></h3>
+          <p>Data E-Commodity</p>
+        </div>
+        <div class="icon">
+          <i class="ion ion-leaf"></i>
+        </div>
+        <a href="<?php echo base_url('Produk') ?>" class="small-box-footer">List Data <i class="fa fa-arrow-circle-right"></i></a>
+      </div>
+    </div>
+
+
+    <div class="col-lg-4 col-xs-4">
+      <div class="small-box bg-purple">
+        <div class="inner">
+          <h3><?php echo $jml_transaksi; ?></h3>
+          <p>Data Transaksi</p>
+        </div>
+        <div class="icon">
+          <i class="ion ion-ios-cart"></i>
+        </div>
+        <a href="<?php echo base_url('Transaksi') ?>" class="small-box-footer">List Data <i class="fa fa-arrow-circle-right"></i></a>
+      </div>
+    </div>
+  <?php } ?>
+
+
   <!-- tampilan guest -->
-  <?php if ($this->session->userdata('level') != 1) { ?>
+  <?php if ($this->session->userdata('level') == 3) { ?>
     <div class="col-lg-6 col-xs-4">
       <div class="small-box bg-aqua">
         <div class="inner">

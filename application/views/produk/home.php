@@ -4,7 +4,7 @@
 
 <div class="box">
   <div class="box-header">
-  <?php if($this->session->userdata('level') == 1) { ?>
+  <?php if($this->session->userdata('level') != 3) { ?>
     <div class="col-md-3">
             <tr>
               <td>
@@ -24,8 +24,9 @@
             </tr>
     </div>
     <?php } ?>
+    
 
-    <?php if($this->session->userdata('level') != 1) { ?>
+    <?php if($this->session->userdata('level') == 3) { ?>
     <div class="col-md-2">
         <a href="<?php echo base_url('produk/export'); ?>" class="form-control btn-block btn-outline-success" style="text-align: center;" ><i class="glyphicon glyphicon glyphicon-floppy-open"></i> Export Data Excel</a>
     </div>
@@ -48,7 +49,7 @@
           <th>Harga (/kg)</th>
           <th>Luas Lahan</th>         
           <th>Alamat</th>
-          <?php if($this->session->userdata('level') == 1) { ?>
+          <?php if($this->session->userdata('level') != 3) { ?>
           <th>Status</th>  
           <th style="text-align: center;">Action</th> 
           <?php } ?>
