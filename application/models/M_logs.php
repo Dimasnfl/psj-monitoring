@@ -24,6 +24,12 @@ class M_logs extends CI_Model {
     public $HAPUS_KURIR = "operasi_hapus_data_kurir";//
     public $ADD_KURIR = "operasi_tambah_data_kurir";//
 
+    //on Admin ---------------
+    public $HAPUS_ADMIN = "operasi_hapus_data_admin";//
+    public $ADD_ADMIN = "operasi_tambah_data_admin";//
+    public $UPDATE_ADMIN = "operasi_update_profil_admin";//
+    public $UBAH_ADMIN = "operasi_update_data_admin";
+
     //on Dusun ----------
     public $UPDATE_DUSUN = "operasi_update_data_dusun";
     public $HAPUS_DUSUN = "operasi_hapus_data_dusun";//

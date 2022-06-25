@@ -98,7 +98,7 @@ class M_user extends CI_Model {
 
 
 	public function select_by_desa($id) {
-		$sql = "SELECT COUNT(*) AS jml FROM user WHERE id_desa = {$id}";
+		$sql = "SELECT COUNT(*) AS jml FROM user WHERE id_kurir is NULL AND id_desa = {$id}";
 
 		$data = $this->db->query($sql);
 

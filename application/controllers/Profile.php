@@ -5,6 +5,7 @@ class Profile extends AUTH_Controller {
 	public function __construct() {
 		parent::__construct();
 		$this->load->model('M_admin');
+		$this->load->model('M_logs');
 	}
 
 	public function index() {
@@ -39,6 +40,7 @@ class Profile extends AUTH_Controller {
 			$result = $this->M_admin->update($data, $id);
 			if ($result > 0) {
 				$this->updateProfil();
+				$this->M_logs->create($this->M_logs->UPDATE_ADMIN,"Profil Admin{$this->userdata->id}, Nama:{$this->userdata->nama} Telah diUpdate");
 				$this->session->set_flashdata('msg', show_succ_msg('Data Profile Berhasil diubah'));
 				redirect('Profile');
 			} else {
@@ -70,6 +72,7 @@ class Profile extends AUTH_Controller {
 					$result = $this->M_admin->update($data, $id);
 					if ($result > 0) {
 						$this->updateProfil();
+						$this->M_logs->create($this->M_logs->UPDATE_ADMIN,"Password Admin{$this->userdata->id}, Nama:{$this->userdata->nama} Telah diUpdate");
 						$this->session->set_flashdata('msg', show_succ_msg('Password Berhasil diubah'));
 						redirect('Profile');
 					} else {
