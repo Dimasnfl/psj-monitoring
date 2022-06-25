@@ -16,6 +16,9 @@
                 <option value="3">Siap Diambil</option>
                 <option value="4">Selesai Diambil</option>
                 <option value="5">Sedang Diambil</option>
+                <option value="6">Sudah Ditugaskan</option>
+                <option value="7">Sudah Dikonfirmasi</option>
+
               </select>
               </td>
             </tr>
