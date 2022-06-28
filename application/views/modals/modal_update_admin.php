@@ -37,13 +37,9 @@
             <i class="glyphicon glyphicon-list"></i>
           </span>
           <select name="level" class="form-control select2"  aria-describedby="sizing-addon2">
-            <?php
-            foreach ($dataLevel as $level) {
-              ?>
-              <option value="<?php echo $level->id; ?>" <?php if($level->id == $dataAdmin->level){echo "selected='selected'";} ?>><?php echo $level->nama; ?></option>
-              <?php
-            }
-            ?>
+          <option value="">- Pilih Level -</option>
+          <option value="2">Operator</option>
+          <option value="3">Guest</option>
           </select>
         </div>
 

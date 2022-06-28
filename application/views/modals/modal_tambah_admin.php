@@ -35,15 +35,8 @@
       </span>
       <select name="level" class="form-control select2" aria-describedby="sizing-addon2">
       <option value="" readonly>--- Pilih Level ---</option>
-        <?php
-        foreach ($dataLevel as $level) {
-          ?>
-          <option value="<?php echo $level->id; ?>">
-            <?php echo $level->nama; ?>
-          </option>
-          <?php
-        }
-        ?>
+      <option value="2">Operator</option>
+      <option value="3">Guest</option>
       </select>
     </div>
 

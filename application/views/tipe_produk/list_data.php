@@ -74,7 +74,7 @@
 
     <?php if($this->session->userdata('level') == 1) { ?>
       <td class="text-center" style="min-width:150px;">
-          <button class="btn btn-info detail-dataTipe_produk" data-id="<?php echo $tipe_produk->id; ?>"><i class="glyphicon glyphicon-info-sign"></i> </button>
+          <!-- <button class="btn btn-info detail-dataTipe_produk" data-id="<?php echo $tipe_produk->id; ?>"><i class="glyphicon glyphicon-info-sign"></i> </button> -->
           <button class="btn btn-warning update-dataTipe_produk" data-id="<?php echo $tipe_produk->id; ?>"><i class="glyphicon glyphicon-edit"></i></button>
           <button class="btn btn-danger konfirmasiHapus-tipe_produk" data-id="<?php echo $tipe_produk->id; ?>" data-toggle="modal" data-target="#konfirmasiHapus"><i class="glyphicon glyphicon-trash"></i></button>
       </td>
