@@ -119,16 +119,23 @@ class M_transaksi extends CI_Model {
 		$this->db->where('id',$id_transaction)->set('sudah_dikonfirmasi_petani',1)->update('transaksi');
    }
 
+
 	public function select_all() {
-		 $this->db->select('transaksi.id, transaksi.no_resi, transaksi.tanggal_pengambilan, transaksi.tanggal_diambil, kurir.nama as nama_kurir, user.nama as nama_user, produk.id as id_produk, produk.id_status_produk as status_produk_id, transaksi.tanggal_sampai, transaksi.biaya_angkut, status_transaksi.id as id_status_transaksi, status_transaksi.nama as nama_status, , transaksi.id_produk, transaksi.id_status_transaksi, transaksi.sudah_dikonfirmasi_petani');
+		 $this->db->select('transaksi.id, transaksi.no_resi, transaksi.tanggal_pengambilan, transaksi.tanggal_diambil, transaksi.tanggal_sampai, transaksi.biaya_angkut, transaksi.id_produk, transaksi.id_status_transaksi, transaksi.sudah_dikonfirmasi_petani, 
+		 kurir.nama as nama_kurir, 
+		 user.nama as nama_user, 
+		 produk.id as id_produk, produk.id_status_produk as status_produk_id, 
+		 status_transaksi.id as id_status_transaksi, status_transaksi.nama as nama_status, 
+		 tipe_produk.nama as nama_produk');
 		 $this->db->from('transaksi');
 		 $this->db->order_by('id', 'desc');
 		 $this->db->join('kurir', 'kurir.id = transaksi.id_kurir');
 		 $this->db->join('user', 'user.id = transaksi.id_user');
 		 $this->db->join('produk', 'produk.id = transaksi.id_produk');
+		 $this->db->join('tipe_produk','produk.id_tipe_produk = tipe_produk.id');
 		 $this->db->join('status_transaksi', 'status_transaksi.id = transaksi.id_status_transaksi');		
-		$query = $this->db->get();
-		return $query->result();
+		 $query = $this->db->get();
+		 return $query->result();
 	}
 
 
@@ -232,21 +239,72 @@ class M_transaksi extends CI_Model {
 	}
 	  
 
-	  public function view_by_date($tgl_awal, $tgl_akhir){
+	  public function view_by_all($tgl_awal, $tgl_akhir, $nama_produk){
         $tgl_awal = $this->db->escape($tgl_awal);
         $tgl_akhir = $this->db->escape($tgl_akhir);
-		$this->db->select('transaksi.id, transaksi.no_resi, transaksi.tanggal_pengambilan, transaksi.tanggal_diambil, kurir.nama as nama_kurir, user.nama as nama_user, produk.id as id_produk, produk.id_status_produk as status_produk_id, transaksi.tanggal_sampai, transaksi.biaya_angkut, status_transaksi.id as id_status_transaksi, status_transaksi.nama as nama_status, , transaksi.id_produk, transaksi.id_status_transaksi, transaksi.sudah_dikonfirmasi_petani');
+		$this->db->select('transaksi.id, transaksi.no_resi, transaksi.tanggal_pengambilan, transaksi.tanggal_diambil, transaksi.tanggal_sampai, transaksi.biaya_angkut, transaksi.id_produk, transaksi.id_status_transaksi, transaksi.sudah_dikonfirmasi_petani, 
+		kurir.nama as nama_kurir, 
+		user.nama as nama_user, 
+		produk.id as id_produk, produk.id_status_produk as status_produk_id, 
+		status_transaksi.id as id_status_transaksi, status_transaksi.nama as nama_status, 
+		tipe_produk.nama as nama_produk');
 		$this->db->from('transaksi');
 		$this->db->order_by('id', 'desc');
 		$this->db->join('kurir', 'kurir.id = transaksi.id_kurir');
 		$this->db->join('user', 'user.id = transaksi.id_user');
 		$this->db->join('produk', 'produk.id = transaksi.id_produk');
-		$this->db->join('status_transaksi', 'status_transaksi.id = transaksi.id_status_transaksi');	
+		$this->db->join('tipe_produk','produk.id_tipe_produk = tipe_produk.id');
+		$this->db->join('status_transaksi', 'status_transaksi.id = transaksi.id_status_transaksi');
 
-		$this->db->where('DATE(tanggal_pengambilan) BETWEEN '.$tgl_awal.' AND '.$tgl_akhir); // Tambahkan where tanggal nya
 
+		$this->db->where('DATE(tanggal_pengambilan) BETWEEN '.$tgl_awal.' AND '.$tgl_akhir);
+		$this->db->where('tipe_produk.nama', $nama_produk);
         $query = $this->db->get();
-        return $query->result();// Tampilkan data transaksi sesuai tanggal yang diinput oleh user pada filter
+        return $query->result();
+	}
+
+	public function view_by_produk($nama_produk){
+
+		$this->db->select('transaksi.id, transaksi.no_resi, transaksi.tanggal_pengambilan, transaksi.tanggal_diambil, transaksi.tanggal_sampai, transaksi.biaya_angkut, transaksi.id_produk, transaksi.id_status_transaksi, transaksi.sudah_dikonfirmasi_petani, 
+		kurir.nama as nama_kurir, 
+		user.nama as nama_user, 
+		produk.id as id_produk, produk.id_status_produk as status_produk_id, 
+		status_transaksi.id as id_status_transaksi, status_transaksi.nama as nama_status, 
+		tipe_produk.id as id_tipe_produk, tipe_produk.nama as nama_produk');
+		$this->db->from('transaksi');
+		$this->db->order_by('id', 'desc');
+		$this->db->join('kurir', 'kurir.id = transaksi.id_kurir');
+		$this->db->join('user', 'user.id = transaksi.id_user');
+		$this->db->join('produk', 'produk.id = transaksi.id_produk');
+		$this->db->join('tipe_produk','produk.id_tipe_produk = tipe_produk.id');
+		$this->db->join('status_transaksi', 'status_transaksi.id = transaksi.id_status_transaksi');
+
+		$this->db->where('tipe_produk.nama', $nama_produk);
+        $query = $this->db->get();
+        return $query->result();
+	}
+
+	public function view_by_date($tgl_awal, $tgl_akhir){
+        $tgl_awal = $this->db->escape($tgl_awal);
+        $tgl_akhir = $this->db->escape($tgl_akhir);
+		$this->db->select('transaksi.id, transaksi.no_resi, transaksi.tanggal_pengambilan, transaksi.tanggal_diambil, transaksi.tanggal_sampai, transaksi.biaya_angkut, transaksi.id_produk, transaksi.id_status_transaksi, transaksi.sudah_dikonfirmasi_petani, 
+		kurir.nama as nama_kurir, 
+		user.nama as nama_user, 
+		produk.id as id_produk, produk.id_status_produk as status_produk_id, 
+		status_transaksi.id as id_status_transaksi, status_transaksi.nama as nama_status, 
+		tipe_produk.nama as nama_produk');
+		$this->db->from('transaksi');
+		$this->db->order_by('id', 'desc');
+		$this->db->join('kurir', 'kurir.id = transaksi.id_kurir');
+		$this->db->join('user', 'user.id = transaksi.id_user');
+		$this->db->join('produk', 'produk.id = transaksi.id_produk');
+		$this->db->join('tipe_produk','produk.id_tipe_produk = tipe_produk.id');
+		$this->db->join('status_transaksi', 'status_transaksi.id = transaksi.id_status_transaksi');
+
+
+		$this->db->where('DATE(tanggal_pengambilan) BETWEEN '.$tgl_awal.' AND '.$tgl_akhir);
+        $query = $this->db->get();
+        return $query->result();
 	}
 	
 	public function konfirmasi_transaksi($id){

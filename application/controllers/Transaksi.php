@@ -10,24 +10,75 @@ class Transaksi extends AUTH_Controller {
 		$this->load->model('M_produk');
 		$this->load->model('M_status_transaksi');
 		$this->load->model('M_logs');
+		$this->load->model('M_tipe_produk');
 
 	}
 
 	public function index() {
-		$tgl_awal = $this->input->get('tgl_awal'); // Ambil data tgl_awal sesuai input (kalau tidak ada set kosong)
-        $tgl_akhir = $this->input->get('tgl_akhir'); // Ambil data tgl_awal sesuai input (kalau tidak ada set kosong)
-
-        if(empty($tgl_awal) or empty($tgl_akhir)){ // Cek jika tgl_awal atau tgl_akhir kosong, maka :
-            $data['dataTransaksi'] = $this->M_transaksi->select_all();  // Panggil fungsi select_all yang ada di M_transaksi
-            $data['url_cetak']  = 'transaksi/cetak';
-            $data['label']  = 'Semua Data Transaksi';
-        }else{ // Jika terisi
-            $data['dataTransaksi'] = $this->M_transaksi->view_by_date($tgl_awal, $tgl_akhir);
-			$data['url_cetak'] = 'transaksi/cetak?tgl_awal='.$tgl_awal.'&tgl_akhir='.$tgl_akhir;
-            $tgl_awal = date('d-m-Y', strtotime($tgl_awal)); // Ubah format tanggal jadi dd-mm-yyyy
-            $tgl_akhir = date('d-m-Y', strtotime($tgl_akhir)); // Ubah format tanggal jadi dd-mm-yyyy
+		$tgl_awal = $this->input->get('tgl_awal'); 
+        $tgl_akhir = $this->input->get('tgl_akhir');
+		$nama_produk = $this->input->get('nama_produk'); 
+		
+		if(!empty($tgl_awal) or !empty($tgl_akhir) or !empty($nama_produk)){
+			$data['dataTransaksi'] = $this->M_transaksi->view_by_all($tgl_awal, $tgl_akhir, $nama_produk);
+			$data['dataTipe_produk'] = $this->M_tipe_produk->select_all();
+            $tgl_awal = date('d-m-Y', strtotime($tgl_awal)); 
+            $tgl_akhir = date('d-m-Y', strtotime($tgl_akhir)); 
             $data['label'] = 'Periode Tanggal '.$tgl_awal.' s/d '.$tgl_akhir;
-        }
+			$data['label1']  = $nama_produk;
+			$data['url_cetak']  = 'transaksi/cetak';
+
+
+		}elseif(empty($tgl_awal) and empty($tgl_akhir) and !empty($nama_produk)){
+			$data['dataTransaksi'] = $this->M_transaksi->view_by_produk($nama_produk);
+			$data['dataTipe_produk'] = $this->M_tipe_produk->select_all();
+            $data['label'] = 'Semua Periode';
+			$data['label1']  = $nama_produk;
+			$data['url_cetak']  = 'transaksi/cetak';
+
+
+		}elseif(!empty($tgl_awal) and !empty($tgl_akhir) and empty($nama_produk)) {
+			$data['dataTransaksi'] = $this->M_transaksi->view_by_date($tgl_awal, $tgl_akhir);
+			$data['dataTipe_produk'] = $this->M_tipe_produk->select_all();
+            $tgl_awal = date('d-m-Y', strtotime($tgl_awal)); 
+            $tgl_akhir = date('d-m-Y', strtotime($tgl_akhir)); 
+            $data['label'] = 'Periode Tanggal '.$tgl_awal.' s/d '.$tgl_akhir;
+			$data['label1']  = 'Semua Jenis Produk';
+			$data['url_cetak']  = 'transaksi/cetak';
+
+	
+		}elseif(empty($tgl_awal) or empty($tgl_akhir) and empty($nama_produk)){
+            $data['dataTransaksi'] = $this->M_transaksi->select_all(); 
+			$data['dataTipe_produk'] = $this->M_tipe_produk->select_all();
+            $data['label']  = 'Semua Periode';
+			$data['label1']  = 'Semua Jenis Produk';
+			$data['url_cetak']  = 'transaksi/cetak';
+
+		}else{			
+			echo "data tidak ada";
+		}
+		
+		
+
+		
+        // if(empty($tgl_awal) or empty($tgl_akhir) and empty($nama_produk)){ // Cek jika tgl_awal atau tgl_akhir kosong, maka :
+        //     $data['dataTransaksi'] = $this->M_transaksi->select_all();  // Panggil fungsi select_all yang ada di M_transaksi
+		// 	$data['dataTipe_produk'] = $this->M_tipe_produk->select_all();
+        //     $data['url_cetak']  = 'transaksi/cetak';
+        //     $data['label']  = 'Semua Periode';
+		// 	$data['label1']  = 'Semua Jenis Produk';
+		// }else{			
+		// 	$data['dataTransaksi'] = $this->M_transaksi->view_by_all($tgl_awal, $tgl_akhir, $nama_produk);
+		// 	$data['dataTipe_produk'] = $this->M_tipe_produk->select_all();
+		// 	$data['url_cetak'] = 'transaksi/cetak?tgl_awal='.$tgl_awal.'&tgl_akhir='.$tgl_akhir.'&nama_produk='.$nama_produk;
+        //     $tgl_awal = date('d-m-Y', strtotime($tgl_awal)); // Ubah format tanggal jadi dd-mm-yyyy
+        //     $tgl_akhir = date('d-m-Y', strtotime($tgl_akhir)); // Ubah format tanggal jadi dd-mm-yyyy
+        //     $data['label'] = 'Periode Tanggal '.$tgl_awal.' s/d '.$tgl_akhir;
+		// 	$data['label1']  = $nama_produk;
+
+		// }
+
+
 		// $data['dataTransaksi'] 	= $this->M_transaksi->select_all();
 	    // $data['dataKurir'] 	= $this->M_kurir->select_all();
 		// $data['dataUser'] 	= $this->M_user->select_all();
@@ -49,7 +100,8 @@ class Transaksi extends AUTH_Controller {
 
         if(empty($tgl_awal) or empty($tgl_akhir)){ // Cek jika tgl_awal atau tgl_akhir kosong, maka :
             $data['dataTransaksi']  = $this->M_transaksi->select_all();  // Panggil fungsi select_all yang ada di M_transaksi
-            $label = 'Semua Data Transaksi';
+            $label = 'Semua Periode';
+
         }else{ // Jika terisi
             $data['dataTransaksi']  = $this->M_transaksi->view_by_date($tgl_awal, $tgl_akhir);  // Panggil fungsi view_by_date yang ada di M_transaksi
             $tgl_awal = date('d-m-Y', strtotime($tgl_awal)); // Ubah format tanggal jadi dd-mm-yyyy
@@ -182,95 +234,6 @@ class Transaksi extends AUTH_Controller {
 		}
 	}
 
-	
-
-	// public function export() {
-	// 	error_reporting(E_ALL);
-    
-	// 	include_once './assets/phpexcel/Classes/PHPExcel.php';
-	// 	$objPHPExcel = new PHPExcel();
-
-	// 	$data = $this->M_transaksi->select_all_transaksi();
-
-	// 	$objPHPExcel = new PHPExcel(); 
-	// 	$objPHPExcel->setActiveSheetIndex(0); 
-	// 	$rowCount = 1; //judul
-	// 	$objPHPExcel->getActiveSheet()->SetCellValue('A'.$rowCount, "No.");
-	// 	$objPHPExcel->getActiveSheet()->SetCellValue('B'.$rowCount, "ID");
-	// 	$objPHPExcel->getActiveSheet()->SetCellValue('C'.$rowCount, "No. Resi");
-	// 	$objPHPExcel->getActiveSheet()->SetCellValue('D'.$rowCount, "Tanggal Pengambilan");
-	// 	$objPHPExcel->getActiveSheet()->SetCellValue('E'.$rowCount, "Tanggal Diambil");
-	// 	$objPHPExcel->getActiveSheet()->SetCellValue('F'.$rowCount, "Nama Kurir");
-	// 	$objPHPExcel->getActiveSheet()->SetCellValue('G'.$rowCount, "Nama User");
-	// 	$objPHPExcel->getActiveSheet()->SetCellValue('H'.$rowCount, "ID Produk");
-	// 	$objPHPExcel->getActiveSheet()->SetCellValue('I'.$rowCount, "Tanggal Sampai");
-	// 	$objPHPExcel->getActiveSheet()->SetCellValue('J'.$rowCount, "Biaya Angkut");
-	// 	$objPHPExcel->getActiveSheet()->SetCellValue('K'.$rowCount, "Status");
-	// 	$rowCount++;
-
-	// 	$column = 2;//untuk kolom start
-	// 	foreach($data as $value){
-	// 		$objPHPExcel->getActiveSheet()->SetCellValue('A'.$column, ($column-1));
-	// 	    $objPHPExcel->getActiveSheet()->SetCellValue('B'.$column, $value->id); 
-	// 	    $objPHPExcel->getActiveSheet()->setCellValueExplicit('C'.$column, $value->no_resi, PHPExcel_Cell_DataType::TYPE_STRING);
-	// 		$objPHPExcel->getActiveSheet()->SetCellValue('D'.$column, $value->tanggal_pengambilan); 
-	// 	    $objPHPExcel->getActiveSheet()->setCellValue('E'.$column, $value->tanggal_diambil);
-	// 	    $objPHPExcel->getActiveSheet()->SetCellValue('F'.$column, $value->nama_kurir); 
-	// 	    $objPHPExcel->getActiveSheet()->SetCellValue('G'.$column, $value->nama_user);
-	// 		$objPHPExcel->getActiveSheet()->SetCellValue('H'.$column, $value->id_produk);  
-	// 		$objPHPExcel->getActiveSheet()->SetCellValue('I'.$column, $value->tanggal_sampai);  
-	// 		$objPHPExcel->getActiveSheet()->SetCellValue('J'.$column, $value->biaya_angkut);  
-	// 		$objPHPExcel->getActiveSheet()->SetCellValue('K'.$column, $value->nama_status);    
-	// 	    $column++; 
-	// 	} 
-
-	// 	//set autosize
-	// 	$objPHPExcel->getActiveSheet()->getColumnDimension('A')->setAutoSize(true);
-	// 	$objPHPExcel->getActiveSheet()->getColumnDimension('B')->setAutoSize(true);
-	// 	$objPHPExcel->getActiveSheet()->getColumnDimension('C')->setAutoSize(true);
-	// 	$objPHPExcel->getActiveSheet()->getColumnDimension('D')->setAutoSize(true);
-	// 	$objPHPExcel->getActiveSheet()->getColumnDimension('E')->setAutoSize(true);
-	// 	$objPHPExcel->getActiveSheet()->getColumnDimension('F')->setAutoSize(true);
-	// 	$objPHPExcel->getActiveSheet()->getColumnDimension('G')->setAutoSize(true);
-	// 	$objPHPExcel->getActiveSheet()->getColumnDimension('H')->setAutoSize(true);
-	// 	$objPHPExcel->getActiveSheet()->getColumnDimension('I')->setAutoSize(true);
-	// 	$objPHPExcel->getActiveSheet()->getColumnDimension('J')->setAutoSize(true);
-	// 	$objPHPExcel->getActiveSheet()->getColumnDimension('K')->setAutoSize(true);
-
-	// 	//style
-	// 	$stil=array(
-    //         'alignment' => array(
-    //           'horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_CENTER,
-	// 		),
-	// 		'font'  => array(
-	// 			'bold'  => true,
-	// 			'color' => array('rgb' => '000000')
-	// 		),
-	// 		'fill' => array(
-	// 			'type' => PHPExcel_Style_Fill::FILL_SOLID,
-	// 			'color' => array('rgb' => '36FF94')
-	// 		  )
-
-    //     );
-	// 	$stay=array(
-	// 	'borders' => array(
-	// 		'allborders' => array(
-	// 		  'style' => PHPExcel_Style_Border::BORDER_THIN,
-	// 		  'color' => array('rgb' => '000000')
-			  
-	// 		)
-	// 		));
-    //     $objPHPExcel->getActiveSheet()->getStyle('A1:K1')->applyFromArray($stil);
-	// 	$objPHPExcel->getActiveSheet()->getStyle('A1:K'.($column-1))->applyFromArray($stay);
-
-		
-	// 	//save as .xlsx
-	// 	$objWriter = new PHPExcel_Writer_Excel2007($objPHPExcel); 
-	// 	$objWriter->save('./assets/excel/Data Transaksi.xlsx'); 
-
-	// 	$this->load->helper('download');
-	// 	force_download('./assets/excel/Data Transaksi.xlsx', NULL);
-	// }
 
 
 }

@@ -7,33 +7,47 @@
   <div class="box-header">
     <form method="get" action="<?php echo base_url('transaksi') ?>">
       <div class="row">
-        <div class="col-sm-6 col-md-5">
+        <div class="col-sm-6 col-md-6">
           <div class="form-group">
-            <label>Cetak Laporan :</label> <?php echo $label ?>
+            <label>Cetak Laporan :</label> <?php echo $label ?> 
+            <label>Produk:</label> <?php echo $label1 ?>
             <div class="input-group">
               <input type="text" name="tgl_awal" value="<?= @$_GET['tgl_awal'] ?>" class="form-control tgl_awal" placeholder="Tanggal Awal" autocomplete="off">
               <span class="input-group-addon">s/d</span>
               <input type="text" name="tgl_akhir" value="<?= @$_GET['tgl_akhir'] ?>" class="form-control tgl_awal" placeholder="Tanggal Akhir" autocomplete="off">
+              <span class="input-group-addon">Jenis</span>
+              <select name="nama_produk" value="<?= @$_GET['nama_produk'] ?>" class="form-control nama_produk">
+              <option value="">-Pilih Jenis-</option>
+        <?php
+        foreach ($dataTipe_produk as $tipe) {
+          ?>
+          <option value="<?php echo $tipe->nama; ?>">
+            <?php echo $tipe->nama; ?>
+          </option>
+          <?php
+        }
+        ?>
+        </select>
             </div>
           </div>
         </div>
-        <div style="margin-top: 25px;">
-          <button type="submit" name="filter" value="true" class="btn-sm btn-primary">SET PERIODE</button>
+            <div class="col-sm-6 col-md-6" style="margin-top: 25px;">
+            <button type="submit" name="filter" value="true" class="btn-sm btn-primary">SET FILTER</button>
           <?php
           if (isset($_GET['filter'])) // Jika user mengisi filter tanggal, maka munculkan tombol untuk reset filter
             echo '<a href="' . base_url('transaksi') . '" class="btn-sm btn-default">RESET</a>';
           ?>
-        </div>
+            </div>
+
+          </div>
+          <a href="<?php echo $url_cetak ?>" class="btn-sm btn-danger">CETAK PDF<i class="fa fa-file-pdf-o"></i></a>
 
       </div>
-
 
     </form>
 
 
-    <div style="margin-bottom: 20px;">
-      <a href="<?php echo $url_cetak ?>" class="btn-sm btn-danger">CETAK PDF<i class="fa fa-file-pdf-o"></i></a>
-    </div>
+
 
 
     <!-- /.box-header -->
@@ -47,6 +61,7 @@
             <th>Tanggal Diambil</th>
             <th>Nama Kurir</th>
             <th>Nama Petani</th>
+            <th>Nama Produk</th>
             <th>ID Produk</th>
             <th>Tanggal Sampai</th>
             <th>Biaya Angkut</th>
@@ -75,6 +90,7 @@
               <td><?php echo $transaksi->tanggal_diambil; ?></td>
               <td><?php echo $transaksi->nama_kurir; ?></td>
               <td><?php echo $transaksi->nama_user; ?></td>
+              <td><?php echo $transaksi->nama_produk; ?></td>
               <td><?php echo $transaksi->id_produk; ?></td>
               <td><?php echo $transaksi->tanggal_sampai; ?></td>
               <td><?php echo rupiah($transaksi->biaya_angkut); ?></td>
