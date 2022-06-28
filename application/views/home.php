@@ -252,10 +252,39 @@
           <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
         </div>
       </div>
+      <div class="row">
+      <form method="get" action="<?php echo base_url('home') ?>">
+  <div class="col-sm-6 col-md-6">
+
+    <select type="text" name="tipe_produk_nama" value="<?= @$_GET['tipe_produk_nama'] ?>" class="form-control tipe_produk_nama">
+              <option value="">-Pilih Jenis-</option>
+        <?php
+        foreach ($dataTipe_produk as $tipe) {
+          ?>
+          <option value="<?php echo $tipe->nama; ?>">
+            <?php echo $tipe->nama; ?>
+          </option>
+          <?php
+        }
+        ?>
+        </select>
+        <label style="margin-left: 5px">Jenis Dipilih :</label> <?php echo $label ?> 
+  </div>
+        <div style="margin-top: 0px;">
+          <button type="submit" name="filter" value="true" class="btn-sm btn-primary">SET FILTER</button>
+          <?php
+          if (isset($_GET['filter'])) // Jika user mengisi filter tanggal, maka munculkan tombol untuk reset filter
+            echo '<a href="' . base_url('home') . '" class="btn-sm btn-default">RESET</a>';
+          ?>
+        </div>
+        </div>
+      </form>
+
       <div class="box-body table-responsive p-0">
-        <table class="table table-striped table-valign-middle">
+      <table class="table table-bordered table-striped">
           <thead>
             <tr>
+              <th>Nama Petani</th>
               <th>Jenis Produk</th>
               <th>Berat Panen</th>
               <th>Luas Lahan</th>
@@ -266,6 +295,7 @@
             foreach ($dataProduk as $row) {
             ?>
               <tr>
+                <td><?php echo $row->user_nama;?></td>
                 <td><?php echo $row->tipe_produk_nama; ?></td>
                 <td><?php echo $row->berat_panen; ?> kg</td>
                 <td><?php echo $row->luas_lahan; ?> m<sup>2</sup></td>
@@ -276,7 +306,7 @@
           </tbody>
 
           <tr style="font-weight:bold;">
-            <td>Jumlah :</td>
+            <td colspan='2'>Jumlah :</td>
             <td><?php echo $dataSum->jumlah_berat; ?> kg</td>
             <td><?php echo $dataSum->jumlah_lahan; ?> m<sup>2</sup></td>
           </tr>

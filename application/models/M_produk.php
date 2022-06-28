@@ -20,6 +20,19 @@ class M_produk extends CI_Model {
 		return $query->result();
 	}
 
+	public function select_all_tipe_produk($tipe_produk_nama) {
+		$this->db->select('produk.id,user.nik as user_nik, user.nama as user_nama,status_produk.id as status_produk_id , tipe_produk.nama as tipe_produk_nama, produk.tgl_tanam, produk.tgl_panen, produk.berat_panen,  tipe_produk.harga as tipe_produk_harga, produk.luas_lahan, produk.alamat, status_produk.nama as status_produk_nama, produk.id_status_produk, produk.created_at, produk.updated_at, produk.berat_asli');
+		$this->db->from('produk');
+		$this->db->order_by('updated_at', 'desc');
+		$this->db->order_by('created_at', 'desc');
+		$this->db->join('user', 'user.id = produk.id_user');
+		$this->db->join('tipe_produk', 'tipe_produk.id = produk.id_tipe_produk');
+		$this->db->join('status_produk', 'status_produk.id = produk.id_status_produk');
+		$this->db->where('tipe_produk.nama', $tipe_produk_nama);
+		$query = $this->db->get();
+		return $query->result();
+	}
+
 
 	public function select_by_id($id) {
 		$sql = "
@@ -181,6 +194,22 @@ class M_produk extends CI_Model {
 		$this->db->select_sum('berat_panen', 'jumlah_berat');
 		$this->db->select_sum('luas_lahan', 'jumlah_lahan');
 		$this->db->from('produk');
+		return $this->db->get('')->row();
+
+	}
+
+	public function sum_tipe($tipe_produk_nama) {
+		$this->db->select_sum('berat_panen', 'jumlah_berat');
+		$this->db->select_sum('luas_lahan', 'jumlah_lahan');
+		$this->db->select('produk.id,user.nik as user_nik, user.nama as user_nama,status_produk.id as status_produk_id , tipe_produk.nama as tipe_produk_nama, produk.tgl_tanam, produk.tgl_panen, produk.berat_panen,  tipe_produk.harga as tipe_produk_harga, produk.luas_lahan, produk.alamat, status_produk.nama as status_produk_nama, produk.id_status_produk, produk.created_at, produk.updated_at, produk.berat_asli');
+		$this->db->from('produk');
+		$this->db->order_by('updated_at', 'desc');
+		$this->db->order_by('created_at', 'desc');
+		$this->db->join('user', 'user.id = produk.id_user');
+		$this->db->join('tipe_produk', 'tipe_produk.id = produk.id_tipe_produk');
+		$this->db->join('status_produk', 'status_produk.id = produk.id_status_produk');
+		$this->db->where('tipe_produk.nama', $tipe_produk_nama);
+
 		return $this->db->get('')->row();
 
 	}

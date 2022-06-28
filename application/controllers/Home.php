@@ -17,6 +17,25 @@ class Home extends AUTH_Controller
 
 	public function index()
 	{
+
+		$tipe_produk_nama = $this->input->get('tipe_produk_nama');
+		if(empty($tipe_produk_nama)){
+			$data['dataProduk'] = $this->M_produk->select_all();
+			$data['dataSum'] = $this->M_produk->sum_produk();
+			$data['dataTipe_produk'] = $this->M_tipe_produk->select_all();
+			$data['label']  = 'Semua Jenis Produk';
+
+		}else{
+			$data['dataProduk'] = $this->M_produk->select_all_tipe_produk($tipe_produk_nama);
+			$data['dataSum'] = $this->M_produk->sum_tipe($tipe_produk_nama);
+			$data['dataTipe_produk'] = $this->M_tipe_produk->select_all();
+			$data['label']  = $tipe_produk_nama;
+
+		}
+
+
+
+	
 		$data['jml_user'] 	= $this->M_user->total_rows();
 		$data['jml_produk'] 	= $this->M_produk->total_rows();
 		$data['jml_tipe_produk'] 	= $this->M_tipe_produk->total_rows();
@@ -24,8 +43,7 @@ class Home extends AUTH_Controller
 		$data['jml_kurir'] 	= $this->M_kurir->total_rows();
 		$data['jml_transaksi'] 	= $this->M_transaksi->total_rows();
 		$data['jml_mitra'] 	= $this->M_mitra->total_rows();
-		$data['dataProduk'] = $this->M_produk->select_all();
-		$data['dataSum'] = $this->M_produk->sum_produk();
+
 
 		$data['userdata'] 		= $this->userdata;
 

@@ -1,7 +1,7 @@
 <div class="col-md-offset-1 col-md-10 col-md-offset-1 well">
   <div class="form-msg"></div>
   <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-  <h3 style="display:block; text-align:center;">Update Data Dusun</h3>
+  <h3 style="display:block; text-align:center;">Update Data Mitra</h3>
 
   <form id="form-update-mitra" method="POST">
     <input type="hidden" name="id" value="<?php echo $dataMitra->id; ?>">
