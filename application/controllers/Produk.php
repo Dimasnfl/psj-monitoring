@@ -261,7 +261,7 @@ class Produk extends AUTH_Controller {
 
 	public function load_status(){
 	  $status_produk = $_GET['id_status_produk'];
-	  if ($status_produk == 0) {
+	  if (empty($status_produk)) {
 		$data = $this->M_produk->select_all();
 	  }
 	  else

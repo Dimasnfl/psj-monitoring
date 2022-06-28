@@ -17,7 +17,6 @@ class Transaksi extends AUTH_Controller {
 	public function index() {
 		$tgl_awal = $this->input->get('tgl_awal'); 
         $tgl_akhir = $this->input->get('tgl_akhir');
-		$nama_produk = $this->input->get('nama_produk'); 
 		
 		// if(!empty($tgl_awal) or !empty($tgl_akhir) or !empty($nama_produk)){
 		// 	$data['dataTransaksi'] = $this->M_transaksi->view_by_all($tgl_awal, $tgl_akhir, $nama_produk);
@@ -61,20 +60,19 @@ class Transaksi extends AUTH_Controller {
 		
 
 		
-        if(empty($tgl_awal) or empty($tgl_akhir) and empty($nama_produk)){ // Cek jika tgl_awal atau tgl_akhir kosong, maka :
+        if(empty($tgl_awal) or empty($tgl_akhir)){ // Cek jika tgl_awal atau tgl_akhir kosong, maka :
             $data['dataTransaksi'] = $this->M_transaksi->select_all();  // Panggil fungsi select_all yang ada di M_transaksi
 			$data['dataTipe_produk'] = $this->M_tipe_produk->select_all();
             $data['url_cetak']  = 'transaksi/cetak';
             $data['label']  = 'Semua Periode';
-			$data['label1']  = 'Semua Jenis Produk';
 		}else{			
-			$data['dataTransaksi'] = $this->M_transaksi->view_by_all($tgl_awal, $tgl_akhir, $nama_produk);
+			$data['dataTransaksi'] = $this->M_transaksi->view_by_date($tgl_awal, $tgl_akhir);
 			$data['dataTipe_produk'] = $this->M_tipe_produk->select_all();
-			$data['url_cetak'] = 'transaksi/cetak?tgl_awal='.$tgl_awal.'&tgl_akhir='.$tgl_akhir.'&nama_produk='.$nama_produk;
+			$data['url_cetak'] = 'transaksi/cetak?tgl_awal='.$tgl_awal.'&tgl_akhir='.$tgl_akhir;
             $tgl_awal = date('d-m-Y', strtotime($tgl_awal)); // Ubah format tanggal jadi dd-mm-yyyy
             $tgl_akhir = date('d-m-Y', strtotime($tgl_akhir)); // Ubah format tanggal jadi dd-mm-yyyy
             $data['label'] = 'Periode Tanggal '.$tgl_awal.' s/d '.$tgl_akhir;
-			$data['label1']  = $nama_produk;
+			// $data['label1']  = $nama_produk;
 
 		}
 
@@ -97,38 +95,38 @@ class Transaksi extends AUTH_Controller {
 	public function cetak(){
 		$tgl_awal = $this->input->get('tgl_awal'); // Ambil data tgl_awal sesuai input (kalau tidak ada set kosong)
         $tgl_akhir = $this->input->get('tgl_akhir'); // Ambil data tgl_awal sesuai input (kalau tidak ada set kosong)
-		$nama_produk = $this->input->get('nama_produk'); 
+		// $nama_produk = $this->input->get('nama_produk'); 
 
-        // if(empty($tgl_awal) or empty($tgl_akhir)){ // Cek jika tgl_awal atau tgl_akhir kosong, maka :
-        //     $data['dataTransaksi']  = $this->M_transaksi->select_all();  // Panggil fungsi select_all yang ada di M_transaksi
-        //     $label = 'Semua Periode';
+        if(empty($tgl_awal) or empty($tgl_akhir)){ // Cek jika tgl_awal atau tgl_akhir kosong, maka :
+            $data['dataTransaksi']  = $this->M_transaksi->select_all();  // Panggil fungsi select_all yang ada di M_transaksi
+            $label = 'Semua Periode';
 
-        // }else{ // Jika terisi
-        //     $data['dataTransaksi']  = $this->M_transaksi->view_by_date($tgl_awal, $tgl_akhir);  // Panggil fungsi view_by_date yang ada di M_transaksi
-        //     $tgl_awal = date('d-m-Y', strtotime($tgl_awal)); // Ubah format tanggal jadi dd-mm-yyyy
-        //     $tgl_akhir = date('d-m-Y', strtotime($tgl_akhir)); // Ubah format tanggal jadi dd-mm-yyyy
-        //     $label = 'Periode Tanggal '.$tgl_awal.' s/d '.$tgl_akhir.'&nama_produk='.$nama_produk;
-        // }
-
-		if(empty($tgl_awal) or empty($tgl_akhir) and empty($nama_produk)){ // Cek jika tgl_awal atau tgl_akhir kosong, maka :
-            $data['dataTransaksi'] = $this->M_transaksi->select_all();  // Panggil fungsi select_all yang ada di M_transaksi
-			$data['dataTipe_produk'] = $this->M_tipe_produk->select_all();
-            $data['url_cetak']  = 'transaksi/cetak';
-            $data['label']  = 'Semua Periode';
-			$data['label1']  = 'Semua Jenis Produk';
-		}else{			
-			$data['dataTransaksi'] = $this->M_transaksi->view_by_all($tgl_awal, $tgl_akhir, $nama_produk);
-			$data['dataTipe_produk'] = $this->M_tipe_produk->select_all();
-			$data['url_cetak'] = 'transaksi/cetak?tgl_awal='.$tgl_awal.'&tgl_akhir='.$tgl_akhir.'&nama_produk='.$nama_produk;
+        }else{ // Jika terisi
+            $data['dataTransaksi']  = $this->M_transaksi->view_by_date($tgl_awal, $tgl_akhir);  // Panggil fungsi view_by_date yang ada di M_transaksi
             $tgl_awal = date('d-m-Y', strtotime($tgl_awal)); // Ubah format tanggal jadi dd-mm-yyyy
             $tgl_akhir = date('d-m-Y', strtotime($tgl_akhir)); // Ubah format tanggal jadi dd-mm-yyyy
             $label = 'Periode Tanggal '.$tgl_awal.' s/d '.$tgl_akhir;
-			$label1  = $nama_produk;
+        }
 
-		}
+		// if(empty($tgl_awal) or empty($tgl_akhir) and empty($nama_produk)){ // Cek jika tgl_awal atau tgl_akhir kosong, maka :
+        //     $data['dataTransaksi'] = $this->M_transaksi->select_all();  // Panggil fungsi select_all yang ada di M_transaksi
+		// 	$data['dataTipe_produk'] = $this->M_tipe_produk->select_all();
+        //     $data['url_cetak']  = 'transaksi/cetak';
+        //     $data['label']  = 'Semua Periode';
+		// 	$data['label1']  = 'Semua Jenis Produk';
+		// }else{			
+		// 	$data['dataTransaksi'] = $this->M_transaksi->view_by_all($tgl_awal, $tgl_akhir, $nama_produk);
+		// 	$data['dataTipe_produk'] = $this->M_tipe_produk->select_all();
+		// 	$data['url_cetak'] = 'transaksi/cetak?tgl_awal='.$tgl_awal.'&tgl_akhir='.$tgl_akhir.'&nama_produk='.$nama_produk;
+        //     $tgl_awal = date('d-m-Y', strtotime($tgl_awal)); // Ubah format tanggal jadi dd-mm-yyyy
+        //     $tgl_akhir = date('d-m-Y', strtotime($tgl_akhir)); // Ubah format tanggal jadi dd-mm-yyyy
+        //     $label = 'Periode Tanggal '.$tgl_awal.' s/d '.$tgl_akhir;
+		// 	$label1  = $nama_produk;
+
+		// }
 
         $data['label'] = $label;
-		$data['label1'] = $label1;
+		// $data['label1'] = $label1;
 
 
 		ob_start();
@@ -255,6 +253,72 @@ class Transaksi extends AUTH_Controller {
 	}
 
 
+	public function load_status(){
+		$tipe_produk = $_GET['nama_produk'];
+		if (empty($tipe_produk)) {
+		  $data = $this->M_transaksi->select_all();
+		}
+		else
+		{
+		  $data = $this->M_transaksi->select_by_tipe($tipe_produk);
+		}
+		if (!empty($data)) 
+		{
+			$no = 1;
+
+			function rupiah($harga)
+			{
+			  $hasil = 'Rp ' . number_format($harga, 2, ",", ".");
+			  return $hasil;
+			}
+			foreach ($data as $transaksi) {
+			?>
+			  <tr>
+				<td><?php echo $no; ?></td>
+				<td><?php echo $transaksi->no_resi; ?></td>
+				<td><?php echo $transaksi->tanggal_pengambilan; ?></td>
+				<td><?php echo $transaksi->tanggal_diambil; ?></td>
+				<td><?php echo $transaksi->nama_kurir; ?></td>
+				<td><?php echo $transaksi->nama_user; ?></td>
+				<td><?php echo $transaksi->nama_produk; ?></td>
+				<td><?php echo $transaksi->id_produk; ?></td>
+				<td><?php echo $transaksi->tanggal_sampai; ?></td>
+				<td><?php echo rupiah($transaksi->biaya_angkut); ?></td>
+  
+				<?php if ($this->session->userdata('level') != 3) { ?>
+				  <td><?php echo $transaksi->nama_status; ?></td>
+				  <td class="text-center" style="min-width:100px;">
+					<!-- <a href="transaksi/cethak" data-id="<?php echo $transaksi->id; ?>" ><button class="btn btn-secondary"><i class="fa fa-file-pdf-o"></i></button></a> -->
+  
+					<!-- <button class="btn btn-warning update-dataTransaksi" data-id="<?php echo $transaksi->id; ?>"><i class="glyphicon glyphicon-edit"></i> </button> -->
+					<?php
+					if ($transaksi->id_status_transaksi != 3 and $transaksi->id_status_transaksi != 4) {
+					?>
+					  <button class="btn btn-danger konfirmasiHapus-transaksi" data-id="<?php echo $transaksi->id; ?>" data-toggle="modal" data-target="#konfirmasiHapus"><i class="glyphicon glyphicon-ban-circle"></i> </button>
+					<?php
+					}
+					?>
+  
+					<?php
+					if ($transaksi->status_produk_id == 4 and $transaksi->id_status_transaksi == 2 and $transaksi->sudah_dikonfirmasi_petani == 1) {
+					?>
+					  <button class="btn btn-secondary konfirmasi-transaksi" data-id="<?php echo $transaksi->id; ?>" data-toggle="modal" data-target="#konfirmasiTransaksi"><i class="glyphicon glyphicon-ok"></i> </button>
+					<?php
+					}
+					?>
+  
+  
+					<!-- <button class="btn btn-info detail-dataDesa" data-id="<?php echo $transaksi->id; ?>"><i class="glyphicon glyphicon-info-sign"></i> Detail</button> -->
+				  </td>
+				<?php } ?>
+			  </tr>
+			<?php
+			  $no++;
+			}
+  }else{
+	  echo "DATA TIDAK ADA";
+  }
+  }
 
 }
 

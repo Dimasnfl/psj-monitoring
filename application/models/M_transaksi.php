@@ -263,26 +263,6 @@ class M_transaksi extends CI_Model {
         return $query->result();
 	}
 
-	public function view_by_produk($nama_produk){
-
-		$this->db->select('transaksi.id, transaksi.no_resi, transaksi.tanggal_pengambilan, transaksi.tanggal_diambil, transaksi.tanggal_sampai, transaksi.biaya_angkut, transaksi.id_produk, transaksi.id_status_transaksi, transaksi.sudah_dikonfirmasi_petani, 
-		kurir.nama as nama_kurir, 
-		user.nama as nama_user, 
-		produk.id as id_produk, produk.id_status_produk as status_produk_id, 
-		status_transaksi.id as id_status_transaksi, status_transaksi.nama as nama_status, 
-		tipe_produk.id as id_tipe_produk, tipe_produk.nama as nama_produk');
-		$this->db->from('transaksi');
-		$this->db->order_by('id', 'desc');
-		$this->db->join('kurir', 'kurir.id = transaksi.id_kurir');
-		$this->db->join('user', 'user.id = transaksi.id_user');
-		$this->db->join('produk', 'produk.id = transaksi.id_produk');
-		$this->db->join('tipe_produk','produk.id_tipe_produk = tipe_produk.id');
-		$this->db->join('status_transaksi', 'status_transaksi.id = transaksi.id_status_transaksi');
-
-		$this->db->where('tipe_produk.nama', $nama_produk);
-        $query = $this->db->get();
-        return $query->result();
-	}
 
 	public function view_by_date($tgl_awal, $tgl_akhir){
         $tgl_awal = $this->db->escape($tgl_awal);
@@ -306,6 +286,29 @@ class M_transaksi extends CI_Model {
         $query = $this->db->get();
         return $query->result();
 	}
+
+
+		public function select_by_tipe($tipe_produk){
+			
+		$this->db->select('transaksi.id, transaksi.no_resi, transaksi.tanggal_pengambilan, transaksi.tanggal_diambil, transaksi.tanggal_sampai, transaksi.biaya_angkut, transaksi.id_produk, transaksi.id_status_transaksi, transaksi.sudah_dikonfirmasi_petani, 
+		kurir.nama as nama_kurir, 
+		user.nama as nama_user, 
+		produk.id as id_produk, produk.id_status_produk as status_produk_id, 
+		status_transaksi.id as id_status_transaksi, status_transaksi.nama as nama_status, 
+		tipe_produk.id as id_tipe_produk, tipe_produk.nama as nama_produk');
+		$this->db->from('transaksi');
+		$this->db->order_by('id', 'desc');
+		$this->db->join('kurir', 'kurir.id = transaksi.id_kurir');
+		$this->db->join('user', 'user.id = transaksi.id_user');
+		$this->db->join('produk', 'produk.id = transaksi.id_produk');
+		$this->db->join('tipe_produk','produk.id_tipe_produk = tipe_produk.id');
+		$this->db->join('status_transaksi', 'status_transaksi.id = transaksi.id_status_transaksi');
+
+		$this->db->where('tipe_produk.nama', $tipe_produk);
+        $query = $this->db->get();
+        return $query->result();
+		}
+
 	
 	public function konfirmasi_transaksi($id){
 		$transaksi = $this->db->from('transaksi')->where('id', $id)->get()->row();
