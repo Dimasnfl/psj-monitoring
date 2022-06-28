@@ -45,13 +45,13 @@ foreach ($dataTransaksi as $transaksi) {
     $tanggal_sampai = date('d-m-Y', strtotime($transaksi->tanggal_sampai));
     ?>
     <tr>
-      <td style='width: 150px;'><?php echo $transaksi->no_resi; ?></td>
-      <td style='width: 100px;'><?php echo $transaksi->tanggal_pengambilan; ?></td>
-      <td style='width: 100px;'><?php echo $transaksi->tanggal_diambil; ?></td>
+      <td style='width: 200px;'><?php echo $transaksi->no_resi; ?></td>
+      <td style='width: 70px;'><?php echo $transaksi->tanggal_pengambilan; ?></td>
+      <td style='width: 70px;'><?php echo $transaksi->tanggal_diambil; ?></td>
       <td style='width: 120px;'><?php echo $transaksi->nama_kurir; ?></td>
       <td style='width: 120px;'><?php echo $transaksi->nama_user; ?></td>
       <td style='width: 30px; text-align:center;'><?php echo $transaksi->id_produk; ?></td>
-      <td style='width: 100px;'><?php echo $transaksi->tanggal_sampai; ?></td>
+      <td style='width: 70px;'><?php echo $transaksi->tanggal_sampai; ?></td>
       <td style='width: 150px;'><?php echo rupiah ($transaksi->biaya_angkut); ?></td>
     </tr>
     <?php

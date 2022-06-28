@@ -19,64 +19,64 @@ class Transaksi extends AUTH_Controller {
         $tgl_akhir = $this->input->get('tgl_akhir');
 		$nama_produk = $this->input->get('nama_produk'); 
 		
-		if(!empty($tgl_awal) or !empty($tgl_akhir) or !empty($nama_produk)){
-			$data['dataTransaksi'] = $this->M_transaksi->view_by_all($tgl_awal, $tgl_akhir, $nama_produk);
-			$data['dataTipe_produk'] = $this->M_tipe_produk->select_all();
-            $tgl_awal = date('d-m-Y', strtotime($tgl_awal)); 
-            $tgl_akhir = date('d-m-Y', strtotime($tgl_akhir)); 
-            $data['label'] = 'Periode Tanggal '.$tgl_awal.' s/d '.$tgl_akhir;
-			$data['label1']  = $nama_produk;
-			$data['url_cetak']  = 'transaksi/cetak';
-
-
-		}elseif(empty($tgl_awal) and empty($tgl_akhir) and !empty($nama_produk)){
-			$data['dataTransaksi'] = $this->M_transaksi->view_by_produk($nama_produk);
-			$data['dataTipe_produk'] = $this->M_tipe_produk->select_all();
-            $data['label'] = 'Semua Periode';
-			$data['label1']  = $nama_produk;
-			$data['url_cetak']  = 'transaksi/cetak';
-
-
-		}elseif(!empty($tgl_awal) and !empty($tgl_akhir) and empty($nama_produk)) {
-			$data['dataTransaksi'] = $this->M_transaksi->view_by_date($tgl_awal, $tgl_akhir);
-			$data['dataTipe_produk'] = $this->M_tipe_produk->select_all();
-            $tgl_awal = date('d-m-Y', strtotime($tgl_awal)); 
-            $tgl_akhir = date('d-m-Y', strtotime($tgl_akhir)); 
-            $data['label'] = 'Periode Tanggal '.$tgl_awal.' s/d '.$tgl_akhir;
-			$data['label1']  = 'Semua Jenis Produk';
-			$data['url_cetak']  = 'transaksi/cetak';
-
-	
-		}elseif(empty($tgl_awal) or empty($tgl_akhir) and empty($nama_produk)){
-            $data['dataTransaksi'] = $this->M_transaksi->select_all(); 
-			$data['dataTipe_produk'] = $this->M_tipe_produk->select_all();
-            $data['label']  = 'Semua Periode';
-			$data['label1']  = 'Semua Jenis Produk';
-			$data['url_cetak']  = 'transaksi/cetak';
-
-		}else{			
-			echo "data tidak ada";
-		}
-		
-		
-
-		
-        // if(empty($tgl_awal) or empty($tgl_akhir) and empty($nama_produk)){ // Cek jika tgl_awal atau tgl_akhir kosong, maka :
-        //     $data['dataTransaksi'] = $this->M_transaksi->select_all();  // Panggil fungsi select_all yang ada di M_transaksi
-		// 	$data['dataTipe_produk'] = $this->M_tipe_produk->select_all();
-        //     $data['url_cetak']  = 'transaksi/cetak';
-        //     $data['label']  = 'Semua Periode';
-		// 	$data['label1']  = 'Semua Jenis Produk';
-		// }else{			
+		// if(!empty($tgl_awal) or !empty($tgl_akhir) or !empty($nama_produk)){
 		// 	$data['dataTransaksi'] = $this->M_transaksi->view_by_all($tgl_awal, $tgl_akhir, $nama_produk);
 		// 	$data['dataTipe_produk'] = $this->M_tipe_produk->select_all();
-		// 	$data['url_cetak'] = 'transaksi/cetak?tgl_awal='.$tgl_awal.'&tgl_akhir='.$tgl_akhir.'&nama_produk='.$nama_produk;
-        //     $tgl_awal = date('d-m-Y', strtotime($tgl_awal)); // Ubah format tanggal jadi dd-mm-yyyy
-        //     $tgl_akhir = date('d-m-Y', strtotime($tgl_akhir)); // Ubah format tanggal jadi dd-mm-yyyy
+        //     $tgl_awal = date('d-m-Y', strtotime($tgl_awal)); 
+        //     $tgl_akhir = date('d-m-Y', strtotime($tgl_akhir)); 
         //     $data['label'] = 'Periode Tanggal '.$tgl_awal.' s/d '.$tgl_akhir;
 		// 	$data['label1']  = $nama_produk;
+		// 	$data['url_cetak']  = $data['url_cetak'] = 'transaksi/cetak?tgl_awal='.$tgl_awal.'&tgl_akhir='.$tgl_akhir.'&nama_produk='.$nama_produk;
 
+
+		// }elseif(empty($tgl_awal) and empty($tgl_akhir) and !empty($nama_produk)){
+		// 	$data['dataTransaksi'] = $this->M_transaksi->view_by_produk($nama_produk);
+		// 	$data['dataTipe_produk'] = $this->M_tipe_produk->select_all();
+        //     $data['label'] = 'Semua Periode';
+		// 	$data['label1']  = $nama_produk;
+		// 	$data['url_cetak']  = $data['url_cetak'] = 'transaksi/cetak?tgl_awal='.$tgl_awal.'&tgl_akhir='.$tgl_akhir.'&nama_produk='.$nama_produk;
+
+
+		// }elseif(!empty($tgl_awal) and !empty($tgl_akhir) and empty($nama_produk)) {
+		// 	$data['dataTransaksi'] = $this->M_transaksi->view_by_date($tgl_awal, $tgl_akhir);
+		// 	$data['dataTipe_produk'] = $this->M_tipe_produk->select_all();
+        //     $tgl_awal = date('d-m-Y', strtotime($tgl_awal)); 
+        //     $tgl_akhir = date('d-m-Y', strtotime($tgl_akhir)); 
+        //     $data['label'] = 'Periode Tanggal '.$tgl_awal.' s/d '.$tgl_akhir;
+		// 	$data['label1']  = 'Semua Jenis Produk';
+		// 	$data['url_cetak']  = $data['url_cetak'] = 'transaksi/cetak?tgl_awal='.$tgl_awal.'&tgl_akhir='.$tgl_akhir.'&nama_produk='.$nama_produk;
+
+	
+		// }elseif(empty($tgl_awal) or empty($tgl_akhir) and empty($nama_produk)){
+        //     $data['dataTransaksi'] = $this->M_transaksi->select_all(); 
+		// 	$data['dataTipe_produk'] = $this->M_tipe_produk->select_all();
+        //     $data['label']  = 'Semua Periode';
+		// 	$data['label1']  = 'Semua Jenis Produk';
+		// 	$data['url_cetak']  = $data['url_cetak'] = 'transaksi/cetak?tgl_awal='.$tgl_awal.'&tgl_akhir='.$tgl_akhir.'&nama_produk='.$nama_produk;
+
+		// }else{			
+		// 	echo "data tidak ada";
 		// }
+		
+		
+
+		
+        if(empty($tgl_awal) or empty($tgl_akhir) and empty($nama_produk)){ // Cek jika tgl_awal atau tgl_akhir kosong, maka :
+            $data['dataTransaksi'] = $this->M_transaksi->select_all();  // Panggil fungsi select_all yang ada di M_transaksi
+			$data['dataTipe_produk'] = $this->M_tipe_produk->select_all();
+            $data['url_cetak']  = 'transaksi/cetak';
+            $data['label']  = 'Semua Periode';
+			$data['label1']  = 'Semua Jenis Produk';
+		}else{			
+			$data['dataTransaksi'] = $this->M_transaksi->view_by_all($tgl_awal, $tgl_akhir, $nama_produk);
+			$data['dataTipe_produk'] = $this->M_tipe_produk->select_all();
+			$data['url_cetak'] = 'transaksi/cetak?tgl_awal='.$tgl_awal.'&tgl_akhir='.$tgl_akhir.'&nama_produk='.$nama_produk;
+            $tgl_awal = date('d-m-Y', strtotime($tgl_awal)); // Ubah format tanggal jadi dd-mm-yyyy
+            $tgl_akhir = date('d-m-Y', strtotime($tgl_akhir)); // Ubah format tanggal jadi dd-mm-yyyy
+            $data['label'] = 'Periode Tanggal '.$tgl_awal.' s/d '.$tgl_akhir;
+			$data['label1']  = $nama_produk;
+
+		}
 
 
 		// $data['dataTransaksi'] 	= $this->M_transaksi->select_all();
@@ -97,19 +97,39 @@ class Transaksi extends AUTH_Controller {
 	public function cetak(){
 		$tgl_awal = $this->input->get('tgl_awal'); // Ambil data tgl_awal sesuai input (kalau tidak ada set kosong)
         $tgl_akhir = $this->input->get('tgl_akhir'); // Ambil data tgl_awal sesuai input (kalau tidak ada set kosong)
+		$nama_produk = $this->input->get('nama_produk'); 
 
-        if(empty($tgl_awal) or empty($tgl_akhir)){ // Cek jika tgl_awal atau tgl_akhir kosong, maka :
-            $data['dataTransaksi']  = $this->M_transaksi->select_all();  // Panggil fungsi select_all yang ada di M_transaksi
-            $label = 'Semua Periode';
+        // if(empty($tgl_awal) or empty($tgl_akhir)){ // Cek jika tgl_awal atau tgl_akhir kosong, maka :
+        //     $data['dataTransaksi']  = $this->M_transaksi->select_all();  // Panggil fungsi select_all yang ada di M_transaksi
+        //     $label = 'Semua Periode';
 
-        }else{ // Jika terisi
-            $data['dataTransaksi']  = $this->M_transaksi->view_by_date($tgl_awal, $tgl_akhir);  // Panggil fungsi view_by_date yang ada di M_transaksi
+        // }else{ // Jika terisi
+        //     $data['dataTransaksi']  = $this->M_transaksi->view_by_date($tgl_awal, $tgl_akhir);  // Panggil fungsi view_by_date yang ada di M_transaksi
+        //     $tgl_awal = date('d-m-Y', strtotime($tgl_awal)); // Ubah format tanggal jadi dd-mm-yyyy
+        //     $tgl_akhir = date('d-m-Y', strtotime($tgl_akhir)); // Ubah format tanggal jadi dd-mm-yyyy
+        //     $label = 'Periode Tanggal '.$tgl_awal.' s/d '.$tgl_akhir.'&nama_produk='.$nama_produk;
+        // }
+
+		if(empty($tgl_awal) or empty($tgl_akhir) and empty($nama_produk)){ // Cek jika tgl_awal atau tgl_akhir kosong, maka :
+            $data['dataTransaksi'] = $this->M_transaksi->select_all();  // Panggil fungsi select_all yang ada di M_transaksi
+			$data['dataTipe_produk'] = $this->M_tipe_produk->select_all();
+            $data['url_cetak']  = 'transaksi/cetak';
+            $data['label']  = 'Semua Periode';
+			$data['label1']  = 'Semua Jenis Produk';
+		}else{			
+			$data['dataTransaksi'] = $this->M_transaksi->view_by_all($tgl_awal, $tgl_akhir, $nama_produk);
+			$data['dataTipe_produk'] = $this->M_tipe_produk->select_all();
+			$data['url_cetak'] = 'transaksi/cetak?tgl_awal='.$tgl_awal.'&tgl_akhir='.$tgl_akhir.'&nama_produk='.$nama_produk;
             $tgl_awal = date('d-m-Y', strtotime($tgl_awal)); // Ubah format tanggal jadi dd-mm-yyyy
             $tgl_akhir = date('d-m-Y', strtotime($tgl_akhir)); // Ubah format tanggal jadi dd-mm-yyyy
             $label = 'Periode Tanggal '.$tgl_awal.' s/d '.$tgl_akhir;
-        }
+			$label1  = $nama_produk;
+
+		}
 
         $data['label'] = $label;
+		$data['label1'] = $label1;
+
 
 		ob_start();
 		$this->load->view('print', $data);
@@ -118,7 +138,7 @@ class Transaksi extends AUTH_Controller {
 
 		require './assets/html2pdf/autoload.php'; // Load plugin html2pdfnya
 
-		$pdf = new Spipu\Html2Pdf\Html2Pdf('L','A4','en');  // Settingan PDFnya
+		$pdf = new Spipu\Html2Pdf\Html2Pdf('L','A3','en');  // Settingan PDFnya
 		$pdf->WriteHTML($html);
 		$pdf->Output('Data Transaksi.pdf', 'D');
 	}
