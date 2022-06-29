@@ -477,25 +477,22 @@ class Api extends CI_Controller {
         $total = $this->M_notifications->get_notificaitons(null,$this->user->id,7);
         $string_notification = "";
         if($total > 0){
-            $string_notification = "\n Ada $total panen kamu yang batal dijemput kurir!";
+            $string_notification .= "\n Ada $total panen kamu yang batal dijemput kurir!";
         } 
 
         $total = $this->M_notifications->get_notificaitons(null,$this->user->id,6);
-        $string_notification = "";
         if($total > 0){
-            $string_notification = "\n Kurir sedang menjemput $total panen kamu!";
+            $string_notification .= "\n Kurir sedang menjemput $total panen kamu!";
         }
 
         $total = $this->M_notifications->get_notificaitons(null,$this->user->id,8);
-        $string_notification = "";
         if($total > 0){
-            $string_notification = "\n Kadin sudah menugaskan kurir untuk menjemput $total panen kamu!";
+            $string_notification .= "\n Kadin sudah menugaskan kurir untuk menjemput $total panen kamu!";
         }
 
         $total = $this->M_notifications->get_notificaitons(null,$this->user->id,5);
-        $string_notification = "";
         if($total > 0){
-            $string_notification = "\n Penjemputan sudah selesai, segera konfirmasi pengambilan!";
+            $string_notification .= "\n Penjemputan sudah selesai, segera konfirmasi pengambilan!";
         } 
 
         if($string_notification != ""){
