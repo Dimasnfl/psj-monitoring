@@ -194,6 +194,19 @@ class M_transaksi extends CI_Model {
 
 	}
 
+	public function batal_jemput($id){
+		$transaksi = $this->db->from('transaksi')->where('id', $id)->get()->row();
+		if($transaksi){
+			$id_produk = $transaksi->id_produk;
+			$this->db->from('transaksi')->where('id', $id)->set('id_status_transaksi', 2)->update('transaksi');
+			$this->db->from('produk')->where('id', $id_produk)->set('id_status_produk', 7)->update('produk');
+			return 'success';
+		}else{
+			return 'error';
+		}
+
+	}
+
 
 	public function insert($data) {
 		$sql = "INSERT INTO transaksi VALUES('','" .$data['no_resi'] ."','" .$data['tanggal_pengambilan'] ."','" .$data['tanggal_diambil'] ."','" .$data['nama_kurir'] ."','" .$data['nama_user'] ."','" .$data['id_produk'] ."','" .$data['tanggal_sampai'] ."','" .$data['biaya_angkut'] ."','" .$data['id_status_transaksi'] ."','" .$data['created_at'] ."','')";
