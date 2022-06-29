@@ -323,16 +323,21 @@ class M_transaksi extends CI_Model {
 		}
 
 	
-	public function konfirmasi_transaksi($id){
-		$transaksi = $this->db->from('transaksi')->where('id', $id)->get()->row();
-		if($transaksi){
-			$id_produk = $transaksi->id_produk;
-			$this->db->from('transaksi')->where('id_produk', $id_produk)->set('id_status_transaksi', 4)->update('transaksi');
-			return 'success';
-		}else{
-			return 'error';
+		public function konfirmasi_transaksi($id){
+			$this->load->helper('date');
+			date_default_timezone_set("Asia/Jakarta");
+			$now = date('Y-m-d H:i:s');
+			$transaksi = $this->db->from('transaksi')->where('id', $id)->get()->row();
+			if($transaksi){
+				$id_produk = $transaksi->id_produk;
+				$this->db->from('transaksi')->where('id_produk', $id_produk)->set('id_status_transaksi', 4)->update('transaksi');
+				$this->db->from('transaksi')->where('id', $id)->set('tanggal_sampai', $now)->update('transaksi');
+	
+				return 'success';
+			}else{
+				return 'error';
+			}
 		}
-	}
 
 	public function select_by_produk($id) {
 		$sql = "SELECT COUNT(*) AS jml FROM transaksi WHERE id_status_transaksi = 4 AND id_produk = {$id}";
