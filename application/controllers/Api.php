@@ -486,6 +486,12 @@ class Api extends CI_Controller {
             $string_notification = "\n Kurir sedang menjemput $total panen kamu!";
         }
 
+        $total = $this->M_notifications->get_notificaitons(null,$this->user->id,8);
+        $string_notification = "";
+        if($total > 0){
+            $string_notification = "\n Kadin sudah menugaskan kurir untuk menjemput $total panen kamu!";
+        }
+
         $total = $this->M_notifications->get_notificaitons(null,$this->user->id,5);
         $string_notification = "";
         if($total > 0){
