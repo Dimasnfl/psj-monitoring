@@ -447,12 +447,12 @@ class Api extends CI_Controller {
         } 
         $total_cancel_notifications = $this->M_notifications->get_notificaitons(null,$this->user->id,3);
         if($total_cancel_notifications>0){
-            $string_notification .= "\nAda $$total_cancel_notifications order yang dibatalkan kadin!";
+            $string_notification .= "\nAda $total_cancel_notifications order yang dibatalkan kadin!";
         } 
 
         $total_confirmed_order = $this->M_notifications->get_notificaitons(null,$this->user->id,4);
         if($total_confirmed_order>0){
-            $string_notification .= "\nAda $$total_confirmed_order order yang telah dikonfirmasi petani!";
+            $string_notification .= "\nAda $total_confirmed_order order yang telah dikonfirmasi petani!";
         } 
 
         if($string_notification != ""){
