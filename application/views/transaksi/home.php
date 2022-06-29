@@ -1,6 +1,7 @@
 <div class="msg" style="display:none;">
   <?php echo @$this->session->flashdata('msg'); ?>
 </div>
+<?php if ($this->session->userdata('level') != 3) { ?>
 
 <div class="box">
 
@@ -154,6 +155,7 @@
     </table>
   </div>
 </div>
+<?php } ?>
 
 
 <?php echo $modal_tambah_transaksi; ?>

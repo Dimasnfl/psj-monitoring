@@ -316,7 +316,9 @@ class Transaksi extends AUTH_Controller {
 			  $no++;
 			}
   }else{
-	  echo "DATA TIDAK ADA";
+	?>
+	  <tr><td align="center">Tidak ada data</td></tr>
+	<?php
   }
   }
 

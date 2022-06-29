@@ -1,4 +1,5 @@
 
+<?php if($this->session->userdata('level') != 3) { ?>
 
 <div class="box">
   <div class="box-header">
@@ -20,3 +21,4 @@
     </table>
   </div>
 </div>
+<?php } ?>

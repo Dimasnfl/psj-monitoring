@@ -1,7 +1,7 @@
 <div class="msg" style="display:none;">
   <?php echo @$this->session->flashdata('msg'); ?>
 </div>
-
+<?php if($this->session->userdata('level') != 2) { ?>
 <div class="box">
   <div class="box-header">
     <!-- <div class="col-md-3">
@@ -30,6 +30,7 @@
     </table>
   </div>
 </div>
+<?php } ?>
 
 <!-- <?php echo $modal_tambah_user; ?> -->
 
