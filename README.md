@@ -3,9 +3,6 @@
 Fitur : 
   1. CRUD with Ajax
   2. Datatable
-  3. Export dan Import ke Excel
-  4. Chart
+  3. Chart
   
-Akun Login :
-  1. username : psjtera
-     password : psjtera
+
