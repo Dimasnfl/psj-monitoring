@@ -1,8 +1,4 @@
-# AdminLTE-CRUD-With-Codeigniter
+# DESCRIPTION :
 
-Fitur : 
-  1. CRUD with Ajax
-  2. Datatable
-  3. Chart
-  
+Aplikasi untuk monitoring data dari aplikasi (android) Petani Sejahtera
 
